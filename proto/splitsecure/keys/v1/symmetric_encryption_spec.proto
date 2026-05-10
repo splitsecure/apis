@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "splitsecure/keys/v1/aes.proto";
+
+message SymmetricEncryptionSpec {
+  oneof union {
+    AES aes = 1;
+  }
+}

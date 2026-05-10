@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/proposals/v1/proposal_status.proto";
+
+message ProposalMetadata {
+  // SHA3-512 hash of the execution context bottle's authenticated data
+  bytes proposal_id = 1;
+  ProposalStatus status = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+  int32 current_step = 5;
+  bytes initiator_enclave_id = 6;
+  repeated bytes team_ids = 7;
+  // Stable URI for this proposal, suitable for URL routing.
+  string flow_id = 8;
+  // Mirror of the expire_at timestamp sealed inside the proposal's
+  // ExecutionContext. Surfaced for cleanup sweepers and UI listing; the
+  // sealed value remains authoritative for execute-time enforcement.
+  google.protobuf.Timestamp expire_at = 9;
+}

@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+// CoordinationServiceExtra carries side-channel info the coordination
+// service attaches to an enclave response on its way back to the
+// caller. Separate from the enclave's own response payload because the
+// coordination service (not the enclave) produces these signals.
+// Extension point: add new oneof variants as new signals are
+// introduced.
+message CoordinationServiceExtra {
+  oneof union {
+    NewProposalCreated new_proposal_created = 1;
+  }
+
+  // NewProposalCreated reports that the coordination service auto-
+  // published a proposal from this reply.
+  message NewProposalCreated {
+    // Base64url-encoded SHA3-512 of the proposal's execution-context
+    // bottle.
+    string proposal_flow_id = 1;
+  }
+}

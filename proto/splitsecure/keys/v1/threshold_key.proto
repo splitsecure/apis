@@ -1,0 +1,23 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "splitsecure/keys/v1/derived_key.proto";
+import "splitsecure/keys/v1/spec.proto";
+
+// ThresholdKey and WrappedKey must live in the same file: WrappedKey's
+// wrapping_key field is a ThresholdKey, and ThresholdKey's oneof carries
+// a WrappedKey. Proto3 cannot express that across two files (cyclic).
+message ThresholdKey {
+  oneof union {
+    DerivedKey derived_key = 1;
+    WrappedKey wrapped_key = 2;
+  }
+}
+
+// WrappedKey is a key that has been wrapped by
+// a derived key.
+message WrappedKey {
+  ThresholdKey wrapping_key = 1;
+  Spec spec = 2;
+  bytes wrapped_data = 3;
+}

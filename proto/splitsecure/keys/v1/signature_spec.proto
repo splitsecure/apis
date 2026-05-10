@@ -1,0 +1,18 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "splitsecure/keys/v1/ecdsa.proto";
+import "splitsecure/keys/v1/eddsa.proto";
+import "splitsecure/keys/v1/mldsa.proto";
+import "splitsecure/keys/v1/rsa.proto";
+import "splitsecure/keys/v1/slhdsa.proto";
+
+message SignatureSpec {
+  oneof union {
+    ECDSA ecdsa = 1;
+    EDDSA eddsa = 2;
+    MLDSA mldsa = 3; // FIPS 204
+    RSA rsa = 4;
+    SLHDSA slhdsa = 5; // FIPS 205
+  }
+}

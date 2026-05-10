@@ -1,0 +1,15 @@
+syntax = "proto3";
+package splitsecure.delegationgraph.v1;
+
+import "splitsecure/delegationgraph/v1/delegation_edge.proto";
+
+message Graph {
+  repeated Item items = 1;
+
+  message Item {
+    oneof union {
+      bytes identity = 1;
+      DelegationEdge delegation = 2;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+// GenerateDeleteSAML2ServiceProviderProposalRequest assembles the
+// payload for deleting a SAML2 SP. The server parses resource_s2r
+// to derive the owning team and the target record.
+message GenerateDeleteSAML2ServiceProviderProposalRequest {
+  Base base = 1;
+  message Base {
+    // resource_s2r is the s2r URI of the SAML2 SP to delete. Kind must
+    // be "saml2sp". The team and resource ids are derived from it.
+    string resource_s2r = 1;
+
+    string justification = 2;
+  }
+}

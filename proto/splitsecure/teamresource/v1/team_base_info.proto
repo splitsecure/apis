@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.teamresource.v1;
+
+// TeamBaseInfo carries fields that persist across team rotations.
+message TeamBaseInfo {
+  // serialized splitsecure.delegationgraph.v1.IdentityVertex
+  bytes identity = 1;
+
+  // missing_piece_checksum is SHA3-512 hash of the missing piece.
+  // When present (64 bytes), the team uses the missing piece security feature:
+  // the backend stores a per-team 64-byte random value that must be combined
+  // with threshold-recovered secrets to derive the final root keys.
+  // Empty when the team does not use this feature.
+  // This persists through all team rotations (per-team, not per-version).
+  bytes missing_piece_checksum = 2;
+}

@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.delegationgraph.v1;
+
+message RevocationInfo {
+  // service_base is the service to check revocation against.
+  string service_base = 1;
+}

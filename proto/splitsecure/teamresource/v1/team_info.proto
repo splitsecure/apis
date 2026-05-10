@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.teamresource.v1;
+
+import "splitsecure/teamresource/v1/team_base_info.proto";
+import "splitsecure/teamresource/v1/team_version_info.proto";
+
+message TeamInfo {
+  TeamBaseInfo base = 1;
+  TeamVersionInfo version = 2;
+}

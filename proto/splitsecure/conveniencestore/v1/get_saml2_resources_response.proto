@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/conveniencestore/v1/saml2_resource_record.proto";
+
+message GetSAML2ResourcesResponse {
+  // resources maps each found record's resource_s2r to the record.
+  // Keys absent from the map mean the record was not found, the
+  // caller is unauthorized on its owning team, the s2r was malformed,
+  // or the minting proposal has not yet completed.
+  map<string, SAML2ResourceRecord> resources = 1;
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.audit_observation_receipt.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/graphsigned/v1/graphsigned.proto";
+
+message AuditObservationReceipt {
+  splitsecure.graphsigned.v1.GraphSigned graph_signed = 1;
+
+  bytes authenticated = 2;
+  message Authenticated {
+    google.protobuf.Timestamp created_on = 1;
+    repeated bytes for_teams = 2;
+    bytes observed_hash = 3;
+  }
+}

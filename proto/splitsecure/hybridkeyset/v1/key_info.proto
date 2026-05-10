@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.hybridkeyset.v1;
+
+import "splitsecure/keys/v1/spec.proto";
+
+message KeyInfo {
+  bytes hash = 1;
+  keys.v1.Spec public_key_spec = 2;
+  uint32 default_digest_algorithm = 3;
+}

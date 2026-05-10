@@ -1,0 +1,28 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      # <module_name>   : name in go.mod
+      # <relative_path> : where generated code should be output
+      # value: <module_name>/<relative_path>
+      value: github.com/splitsecure/apis/gen/go/proto
+  # Remove `disable` field if googleapis is not used
+  disable:
+    - module: buf.build/googleapis/googleapis
+      file_option: go_package_prefix
+plugins:
+  - local: protoc-gen-connect-go
+    out: gen/go/proto
+    opt:
+      - paths=source_relative
+  # dependencies
+  - local: protoc-gen-go
+    out: gen/go/proto
+    opt:
+      - paths=source_relative
+
+  - local: node_modules/.bin/protoc-gen-es
+    out: gen/es/proto
+    include_imports: true
+    opt: target=ts

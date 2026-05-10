@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+message WatchResponse {
+  // Empty event_id and event indicates keepalive
+  string event_id = 1;
+  // Serialized ProposalEvent
+  bytes event = 2;
+}

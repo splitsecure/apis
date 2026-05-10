@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+message BlockModeGCM {
+  // Nonce size and tag length are not configurable: the FIPS-140-3
+  // values are always used (96-bit nonce, 128-bit tag).
+}

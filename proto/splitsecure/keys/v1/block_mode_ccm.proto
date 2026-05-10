@@ -1,0 +1,4 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+message BlockModeCCM {}

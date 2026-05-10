@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+// GetProposalResourceRequest asks for the s2r URI of the team resource
+// a proposal minted. Direct proposal_id -> resource_s2r lookup.
+message GetProposalResourceRequest {
+  splitsecure.requestsigning.v1.SignedRequest signed = 1;
+
+  Base base = 2;
+  message Base {
+    // proposal_id as returned by EnclaveRoundtrip.GetProposalForRequest.
+    bytes proposal_id = 1;
+  }
+}
+
+message GetProposalResourceResponse {
+  // resource_s2r is the URI of the record the proposal minted. Empty
+  // until execution lands; poll.
+  string resource_s2r = 1;
+}

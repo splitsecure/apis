@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.delegationgraph.v1;
+
+import "splitsecure/delegationgraph/v1/value.proto";
+
+message Attribute {
+  string name = 1;
+  Value value = 2;
+  bool important = 3;
+  uint32 delegation_max_distance = 4;
+}

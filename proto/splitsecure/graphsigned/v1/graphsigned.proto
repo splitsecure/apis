@@ -1,0 +1,15 @@
+syntax = "proto3";
+package splitsecure.graphsigned.v1;
+
+import "splitsecure/delegationgraph/v1/graph.proto";
+import "splitsecure/hybridkeyset/v1/signature.proto";
+
+message GraphSigned {
+  // sum of the idv authenticating this payload
+  bytes signer_id = 1;
+
+  // graph contains at least one IdentityVertex matching `signer_id`
+  splitsecure.delegationgraph.v1.Graph graph = 2;
+
+  splitsecure.hybridkeyset.v1.Signature signature = 3;
+}

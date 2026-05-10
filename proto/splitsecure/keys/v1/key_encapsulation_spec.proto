@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "splitsecure/keys/v1/mlkem.proto";
+
+message KeyEncapsulationSpec {
+  oneof union {
+    MLKEM mlkem = 1;
+  }
+}

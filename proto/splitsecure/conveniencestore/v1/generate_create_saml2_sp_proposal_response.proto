@@ -1,0 +1,8 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/enclave/v1/invoke_request.proto";
+
+message GenerateCreateSAML2ServiceProviderProposalResponse {
+  splitsecure.enclave.v1.InvokeRequest invoke_request = 1;
+}

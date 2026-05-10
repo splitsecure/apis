@@ -1,0 +1,17 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+message PollRequest {
+  requestsigning.v1.SignedRequest signed = 1;
+  Base base = 2;
+  // When true, the server returns immediately with whatever events are
+  // queued, without waiting for new ones to arrive. Used as a
+  // connectivity pre-flight.
+  bool no_block = 3;
+
+  message Base {
+    bytes request_id = 1;
+  }
+}

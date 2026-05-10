@@ -1,0 +1,27 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/saml2/v2/service_provider.proto";
+
+// GenerateCreateSAML2ServiceProviderProposalRequest assembles the
+// payload for creating a SAML2 SP on the named team. The server
+// stamps the read-only fields (proposal_id, idp_auth_sum,
+// idp_coord_id_hint) on the resulting record; values set by the
+// caller in those positions are ignored.
+message GenerateCreateSAML2ServiceProviderProposalRequest {
+  Base base = 1;
+  message Base {
+    reserved 3, 4, 5;
+    reserved 100 to 116;
+
+    string team_s2r = 1;
+
+    // idp_resource_s2r is the s2r URI of the IdP this SP binds to.
+    // Kind must be "saml2idp" and the team portion must match team_s2r.
+    string idp_resource_s2r = 2;
+
+    splitsecure.saml2.v2.SAML2ServiceProvider sp = 6;
+
+    string justification = 200;
+  }
+}

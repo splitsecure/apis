@@ -1,0 +1,32 @@
+syntax = "proto3";
+package splitsecure.delegationgraph.v1;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+// Value and ValueList must live in the same file: Value.listv references
+// ValueList and ValueList.values references Value, which proto3 cannot
+// express across two files (cyclic import).
+message Value {
+  oneof kind {
+    google.protobuf.NullValue nullv = 1;
+    double doublev = 2;
+    string stringv = 3;
+    bool boolv = 4;
+    bytes bytesv = 6;
+    uint32 uint32v = 7;
+    uint64 uint64v = 8;
+    int32 int32v = 9;
+    int64 int64v = 10;
+    ValueList listv = 11;
+    google.protobuf.Timestamp timestampv = 12;
+    google.protobuf.Duration durationv = 13;
+    google.protobuf.Any anyv = 14;
+  }
+}
+
+message ValueList {
+  repeated Value values = 1;
+}

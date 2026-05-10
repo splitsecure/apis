@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.enclave.v1;
+
+message InvokeRequest {
+  string app_fqn = 1;
+  bytes payload = 2;
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+// GetSAML2ResourcesRequest fetches specific SAML2 IdP or SP records by
+// their s2r URIs. Callers holding a known set of resource_s2rs can use
+// this instead of ListSAML2Resources + client-side filter.
+message GetSAML2ResourcesRequest {
+  splitsecure.requestsigning.v1.SignedRequest signed = 1;
+
+  Base base = 2;
+  message Base {
+    // resource_s2rs are the SAML2 resource URIs to look up. Each must
+    // be a saml2idp or saml2sp URI; the two kinds may be mixed.
+    repeated string resource_s2rs = 1;
+  }
+}

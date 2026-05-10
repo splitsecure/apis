@@ -1,0 +1,21 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+// SLH-DSA (FIPS 205) parameter sets. Names mirror the spec; the
+// trailing s/f selects the small / fast tradeoff at the same NIST
+// security level.
+enum SLHDSA {
+  SLHDSA_UNSPECIFIED = 0;
+  SLHDSA_SHA2_128S = 1;
+  SLHDSA_SHAKE_128S = 2;
+  SLHDSA_SHA2_128F = 3;
+  SLHDSA_SHAKE_128F = 4;
+  SLHDSA_SHA2_192S = 5;
+  SLHDSA_SHAKE_192S = 6;
+  SLHDSA_SHA2_192F = 7;
+  SLHDSA_SHAKE_192F = 8;
+  SLHDSA_SHA2_256S = 9;
+  SLHDSA_SHAKE_256S = 10;
+  SLHDSA_SHA2_256F = 11;
+  SLHDSA_SHAKE_256F = 12;
+}

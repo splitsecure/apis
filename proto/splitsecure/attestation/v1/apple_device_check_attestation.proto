@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.attestation.v1;
+
+// AppleDeviceCheckAttestation contains iOS App Attest attestation and assertion data.
+message AppleDeviceCheckAttestation {
+  bytes key_id = 1;
+  bytes attestation = 2;
+  bytes assertion = 3;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.saml2.v2.providers.v1;
+
+// Provider-specific account configuration variants used in the
+// SAML2ServiceProvider.account oneof. Defined here so the v1 and v2
+// outer messages, plus the conveniencestore generate-RPC inputs, all
+// share a single source of truth.
+
+message AWS {
+  reserved 1;
+  string saml_provider_arn = 2;
+  string default_role_arn = 3 [deprecated = true];
+  repeated string allowed_role_arns = 4;
+}

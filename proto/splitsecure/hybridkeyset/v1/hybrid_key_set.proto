@@ -1,0 +1,8 @@
+syntax = "proto3";
+package splitsecure.hybridkeyset.v1;
+
+import "splitsecure/hybridkeyset/v1/key_info.proto";
+
+message HybridKeySet {
+  repeated KeyInfo keys = 1;
+}

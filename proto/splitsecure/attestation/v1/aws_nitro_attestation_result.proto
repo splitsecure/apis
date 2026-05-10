@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.attestation.v1;
+
+// AWSNitroAttestationResult contains the result of verifying an AWS Nitro attestation.
+// See: https://docs.aws.amazon.com/enclaves/latest/user/set-up-attestation.html
+message AWSNitroAttestationResult {
+  bytes key_id = 1;
+  bytes pcr0 = 2;
+  bytes pcr1 = 3;
+  bytes pcr2 = 4;
+  bytes pcr3 = 5;
+  bytes pcr4 = 6;
+  bytes pcr8 = 7;
+}

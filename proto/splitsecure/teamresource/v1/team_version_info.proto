@@ -1,0 +1,49 @@
+syntax = "proto3";
+package splitsecure.teamresource.v1;
+
+import "google/protobuf/duration.proto";
+import "splitsecure/delegationgraph/v1/delegation_edge.proto";
+import "splitsecure/teamresource/v1/bottle_policies.proto";
+import "splitsecure/teamresource/v1/notification_policy.proto";
+
+// TeamVersionInfo changes on team rotation
+message TeamVersionInfo {
+  // serialized splitsecure.delegationgraph.v1.IdentityVertex
+  bytes identity = 8;
+
+  string name = 2;
+  bytes previous_version_id = 3;
+  uint32 threshold = 4;
+
+  BottlePolicies bottle_policies = 5;
+
+  // A delegation to this team version signed by the base team identity.
+  splitsecure.delegationgraph.v1.DelegationEdge version_delegation = 9;
+
+  // notification_policy defines what notification modes are allowed for proposals
+  // involving this team version. Fixed at team creation/rollforward time.
+  splitsecure.teamresource.v1.NotificationPolicy notification_policy = 10;
+
+  // description is an optional free-form description of this team version,
+  // set at creation or rollforward time and team-signed.
+  string description = 11;
+
+  // proposal_id is the SHA3-512 hash of the execution context bottle that
+  // created this team version, linking it to the audit log. Set by the enclave.
+  bytes proposal_id = 12;
+
+  // org_uri is the S2R URI of the org this team version is associated with.
+  // Empty means the team is not attached to any org. Set at creation or rollforward.
+  string org_uri = 13;
+
+  // execution_timelock is the duration after a proposal is minted during which
+  // execution is gated even if the threshold has been reached. Voting is not
+  // affected. Must be in [0, maximum_proposal_lifetime - 5min] — values
+  // outside that range are clamped at resolution time.
+  google.protobuf.Duration execution_timelock = 14;
+
+  // maximum_proposal_lifetime is the maximum amount of time a proposal can
+  // live before it is considered expired. Must be at least 5 minutes — smaller
+  // values are clamped up at resolution time. Defaults to 7 days when unset.
+  google.protobuf.Duration maximum_proposal_lifetime = 15;
+}

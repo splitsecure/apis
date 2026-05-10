@@ -1,0 +1,24 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+import "splitsecure/enclave/v1/invoke_response.proto";
+import "splitsecure/enclaveroundtrip/v1/coordination_service_extra.proto";
+
+message WatchResponse {
+  oneof union {
+    // Keepalive - sent periodically to keep the connection alive.
+    bool keepalive = 1;
+    // The terminal enclave response.
+    Response response = 2;
+    // Error message (timeout, rejected, etc.).
+    string error = 3;
+  }
+
+  // Response is the terminal payload of a roundtrip: the enclave's
+  // own InvokeResponse plus any side-channel info the coordination
+  // service attaches on the way back.
+  message Response {
+    enclave.v1.InvokeResponse invoke_response = 1;
+    CoordinationServiceExtra extra = 2;
+  }
+}

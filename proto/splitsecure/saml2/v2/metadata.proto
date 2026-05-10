@@ -1,0 +1,450 @@
+syntax = "proto3";
+package splitsecure.saml2.v2;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+// Metadata is the top-level wrapper for SAML metadata
+message Metadata {
+  oneof content {
+    EntityDescriptor entity_descriptor = 1;
+    // EntitiesDescriptor entities_descriptor = 2;
+  }
+}
+
+// EntityDescriptor represents a SAML entity (IdP or SP)
+message EntityDescriptor {
+  // Required: unique identifier for the entity (max 1024 chars)
+  string entity_id = 1;
+
+  // Optional: signature over the descriptor
+  bytes signature = 2;
+
+  // Optional: extension elements
+  Extensions extensions = 3;
+
+  // Role descriptors - at least one required
+  repeated IDPSSODescriptor idp_sso_descriptor = 4;
+  repeated SPSSODescriptor sp_sso_descriptor = 5;
+  repeated AuthnAuthorityDescriptor authn_authority_descriptor = 6;
+  repeated AttributeAuthorityDescriptor attribute_authority_descriptor = 7;
+  repeated PDPDescriptor pdp_descriptor = 8;
+
+  // Alternative: affiliation descriptor (mutually exclusive with role descriptors)
+  AffiliationDescriptor affiliation_descriptor = 9;
+
+  // Optional: organization information
+  Organization organization = 10;
+
+  // Optional: contact persons
+  repeated ContactPerson contact_person = 11;
+
+  // Optional: additional metadata locations
+  repeated AdditionalMetadataLocation additional_metadata_location = 12;
+
+  // Optional: validity period
+  google.protobuf.Timestamp valid_until = 13;
+
+  // Optional: cache duration
+  google.protobuf.Duration cache_duration = 14;
+
+  // Optional: ID attribute
+  string id = 15;
+}
+
+// EntitiesDescriptor represents a collection of entities
+message EntitiesDescriptor {
+  // Optional: signature over the descriptor
+  bytes signature = 1;
+
+  // Optional: extension elements
+  Extensions extensions = 2;
+
+  // Child entity or entities descriptors (at least one required)
+  repeated EntityDescriptor entity_descriptor = 3;
+  repeated EntitiesDescriptor entities_descriptor = 4;
+
+  // Optional: validity period
+  google.protobuf.Timestamp valid_until = 5;
+
+  // Optional: cache duration
+  google.protobuf.Duration cache_duration = 6;
+
+  // Optional: name
+  string name = 7;
+
+  // Optional: ID attribute
+  string id = 8;
+}
+
+// IDPSSODescriptor represents an Identity Provider SSO descriptor
+message IDPSSODescriptor {
+  // Base SSO descriptor fields
+  SSODescriptorType base = 1;
+
+  // Optional: whether the IdP wants AuthnRequests to be signed
+  bool want_authn_requests_signed = 2;
+
+  // Required: single sign-on service endpoints (at least one)
+  repeated Endpoint single_sign_on_service = 3;
+
+  // Optional: name ID mapping service endpoints
+  repeated Endpoint name_id_mapping_service = 4;
+
+  // Optional: assertion ID request service endpoints
+  repeated Endpoint assertion_id_request_service = 5;
+
+  // Optional: supported attribute profiles
+  repeated string attribute_profile = 6;
+
+  // Optional: supported attributes
+  repeated Attribute attribute = 7;
+}
+
+// SPSSODescriptor represents a Service Provider SSO descriptor
+message SPSSODescriptor {
+  // Base SSO descriptor fields
+  SSODescriptorType base = 1;
+
+  // Optional: whether the SP signs AuthnRequests
+  bool authn_requests_signed = 2;
+
+  // Optional: whether the SP wants assertions to be signed
+  bool want_assertions_signed = 3;
+
+  // Required: assertion consumer service endpoints (at least one)
+  repeated IndexedEndpoint assertion_consumer_service = 4;
+
+  // Optional: attribute consuming services
+  repeated AttributeConsumingService attribute_consuming_service = 5;
+}
+
+// AuthnAuthorityDescriptor represents an Authentication Authority descriptor
+message AuthnAuthorityDescriptor {
+  // Base role descriptor fields
+  RoleDescriptorType base = 1;
+
+  // Required: authentication query service endpoints (at least one)
+  repeated Endpoint authn_query_service = 2;
+
+  // Optional: assertion ID request service endpoints
+  repeated Endpoint assertion_id_request_service = 3;
+
+  // Optional: supported name ID formats
+  repeated string name_id_format = 4;
+}
+
+// PDPDescriptor represents a Policy Decision Point descriptor
+message PDPDescriptor {
+  // Base role descriptor fields
+  RoleDescriptorType base = 1;
+
+  // Required: authorization service endpoints (at least one)
+  repeated Endpoint authz_service = 2;
+
+  // Optional: assertion ID request service endpoints
+  repeated Endpoint assertion_id_request_service = 3;
+
+  // Optional: supported name ID formats
+  repeated string name_id_format = 4;
+}
+
+// AttributeAuthorityDescriptor represents an Attribute Authority descriptor
+message AttributeAuthorityDescriptor {
+  // Base role descriptor fields
+  RoleDescriptorType base = 1;
+
+  // Required: attribute service endpoints (at least one)
+  repeated Endpoint attribute_service = 2;
+
+  // Optional: assertion ID request service endpoints
+  repeated Endpoint assertion_id_request_service = 3;
+
+  // Optional: supported name ID formats
+  repeated string name_id_format = 4;
+
+  // Optional: supported attribute profiles
+  repeated string attribute_profile = 5;
+
+  // Optional: supported attributes
+  repeated Attribute attribute = 6;
+}
+
+// SSODescriptorType is the base type for SSO descriptors
+message SSODescriptorType {
+  // Base role descriptor fields
+  RoleDescriptorType base = 1;
+
+  // Optional: artifact resolution service endpoints
+  repeated IndexedEndpoint artifact_resolution_service = 2;
+
+  // Optional: single logout service endpoints
+  repeated Endpoint single_logout_service = 3;
+
+  // Optional: manage name ID service endpoints
+  repeated Endpoint manage_name_id_service = 4;
+
+  // Optional: supported name ID formats
+  repeated string name_id_format = 5;
+}
+
+// RoleDescriptorType is the base type for all role descriptors
+message RoleDescriptorType {
+  // Optional: signature over the descriptor
+  bytes signature = 1;
+
+  // Optional: extension elements
+  Extensions extensions = 2;
+
+  // Optional: key descriptors
+  repeated KeyDescriptor key_descriptor = 3;
+
+  // Optional: organization
+  Organization organization = 4;
+
+  // Optional: contact persons
+  repeated ContactPerson contact_person = 5;
+
+  // Optional: protocol support enumeration (required, space-separated URIs)
+  repeated string protocol_support_enumeration = 6;
+
+  // Optional: error URL
+  string error_url = 7;
+
+  // Optional: validity period
+  google.protobuf.Timestamp valid_until = 8;
+
+  // Optional: cache duration
+  google.protobuf.Duration cache_duration = 9;
+
+  // Optional: ID attribute
+  string id = 10;
+}
+
+// KeyDescriptor describes a cryptographic key
+message KeyDescriptor {
+  // Optional: key use (signing or encryption)
+  KeyType use = 1;
+
+  // Required: key information (X.509 certificate, etc.)
+  KeyInfo key_info = 2;
+
+  // Optional: encryption methods supported
+  repeated EncryptionMethod encryption_method = 3;
+}
+
+enum KeyType {
+  KEY_TYPE_UNSPECIFIED = 0;
+  KEY_TYPE_SIGNING = 1;
+  KEY_TYPE_ENCRYPTION = 2;
+}
+
+// KeyInfo represents key information (simplified from XML dsig)
+message KeyInfo {
+  // X.509 certificate data
+  bytes x509_certificate = 1;
+
+  // Optional: key name
+  string key_name = 2;
+
+  // Optional: raw key value
+  bytes key_value = 3;
+}
+
+// EncryptionMethod describes an encryption algorithm
+message EncryptionMethod {
+  // Required: algorithm URI
+  string algorithm = 1;
+
+  // Optional: key size
+  int32 key_size = 2;
+
+  // Optional: OAEP parameters
+  bytes oaep_params = 3;
+}
+
+// Endpoint represents a SAML endpoint
+message Endpoint {
+  // Required: binding URI
+  string binding = 1;
+
+  // Required: location URI
+  string location = 2;
+
+  // Optional: response location URI
+  string response_location = 3;
+}
+
+// IndexedEndpoint represents an indexed SAML endpoint
+message IndexedEndpoint {
+  // Base endpoint fields
+  Endpoint base = 1;
+
+  // Required: index
+  uint32 index = 2;
+
+  // Optional: is default
+  bool is_default = 3;
+}
+
+// Organization describes an organization
+message Organization {
+  // Optional: extensions
+  Extensions extensions = 1;
+
+  // Required: organization names (at least one, with language tags)
+  repeated LocalizedName organization_name = 2;
+
+  // Required: organization display names (at least one, with language tags)
+  repeated LocalizedName organization_display_name = 3;
+
+  // Required: organization URLs (at least one, with language tags)
+  repeated LocalizedURI organization_url = 4;
+}
+
+// ContactPerson describes a contact person
+message ContactPerson {
+  // Required: contact type
+  ContactType contact_type = 1;
+
+  // Optional: extensions
+  Extensions extensions = 2;
+
+  // Optional: company
+  string company = 3;
+
+  // Optional: given name
+  string given_name = 4;
+
+  // Optional: surname
+  string surname = 5;
+
+  // Optional: email addresses
+  repeated string email_address = 6;
+
+  // Optional: telephone numbers
+  repeated string telephone_number = 7;
+}
+
+enum ContactType {
+  CONTACT_TYPE_UNSPECIFIED = 0;
+  CONTACT_TYPE_TECHNICAL = 1;
+  CONTACT_TYPE_SUPPORT = 2;
+  CONTACT_TYPE_ADMINISTRATIVE = 3;
+  CONTACT_TYPE_BILLING = 4;
+  CONTACT_TYPE_OTHER = 5;
+}
+
+// AttributeConsumingService describes a service that consumes attributes
+message AttributeConsumingService {
+  // Required: index
+  uint32 index = 1;
+
+  // Optional: is default
+  bool is_default = 2;
+
+  // Required: service names (at least one, with language tags)
+  repeated LocalizedName service_name = 3;
+
+  // Optional: service descriptions (with language tags)
+  repeated LocalizedName service_description = 4;
+
+  // Required: requested attributes (at least one)
+  repeated RequestedAttribute requested_attribute = 5;
+}
+
+// RequestedAttribute describes an attribute requested by a service
+message RequestedAttribute {
+  // Attribute definition
+  Attribute attribute = 1;
+
+  // Optional: is required
+  bool is_required = 2;
+}
+
+// Attribute represents a SAML attribute
+message Attribute {
+  // Required: attribute name
+  string name = 1;
+
+  // Optional: name format
+  string name_format = 2;
+
+  // Optional: friendly name
+  string friendly_name = 3;
+
+  // Optional: attribute values
+  repeated string attribute_value = 4;
+}
+
+// AffiliationDescriptor describes an affiliation of entities
+message AffiliationDescriptor {
+  // Required: affiliation owner ID
+  string affiliation_owner_id = 1;
+
+  // Optional: signature
+  bytes signature = 2;
+
+  // Optional: extensions
+  Extensions extensions = 3;
+
+  // Required: affiliated member entity IDs (at least one)
+  repeated string affiliate_member = 4;
+
+  // Optional: key descriptors
+  repeated KeyDescriptor key_descriptor = 5;
+
+  // Optional: validity period
+  google.protobuf.Timestamp valid_until = 6;
+
+  // Optional: cache duration
+  google.protobuf.Duration cache_duration = 7;
+
+  // Optional: ID attribute
+  string id = 8;
+}
+
+// AdditionalMetadataLocation points to additional metadata
+message AdditionalMetadataLocation {
+  // Required: namespace
+  string namespace = 1;
+
+  // Required: location URI
+  string location = 2;
+}
+
+// LocalizedName represents a name with language tag
+message LocalizedName {
+  // Required: name value
+  string value = 1;
+
+  // Required: language tag (e.g., "en", "es")
+  string lang = 2;
+}
+
+// LocalizedURI represents a URI with language tag
+message LocalizedURI {
+  // Required: URI value
+  string value = 1;
+
+  // Required: language tag (e.g., "en", "es")
+  string lang = 2;
+}
+
+// Extensions represents extension elements
+message Extensions {
+  // Arbitrary extension data (could be structured or raw XML)
+  repeated Extension extension = 1;
+}
+
+// Extension represents a single extension element
+message Extension {
+  // Extension namespace
+  string namespace = 1;
+
+  // Extension local name
+  string local_name = 2;
+
+  // Extension data (raw XML or serialized proto)
+  bytes data = 3;
+}

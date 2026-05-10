@@ -1,0 +1,105 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/saml2/v2/metadata.proto";
+import "splitsecure/teamresource/v1/account_sensitivity.proto";
+import "splitsecure/teamresource/v1/base_resource_attributes.proto";
+import "splitsecure/teamresource/v1/notification_policy.proto";
+
+message SAML2ServiceProvider {
+  string name = 1;
+  string acs = 2;
+  string idp_id = 3;
+  string entity_id = 4 [deprecated = true]; // Deprecated in favor of metadata.entity_descriptor.entity_id
+  splitsecure.saml2.v2.Metadata metadata = 5;
+  splitsecure.teamresource.v1.AccountSensitivity sensitivity = 7;
+
+  // notification_policy controls how notifications are sent for proposals
+  // involving this service provider. Copied from IdPState at creation time.
+  splitsecure.teamresource.v1.NotificationPolicy notification_policy = 6;
+
+  // base_resource_attributes is the unified resource metadata view.
+  // When present, consumers should prefer this over the flat fields above.
+  // Both paths are supported for backwards compatibility.
+  splitsecure.teamresource.v1.BaseResourceAttributes base_resource_attributes = 8;
+
+  oneof account {
+    AWS aws = 100;
+    Cloudflare cloudflare = 112;
+    EventBrite event_brite = 105;
+    GCP gcp = 106;
+    GoogleWorkspace google_workspace = 101;
+    GoogleWorkspaceLegacy google_workspace_legacy = 110;
+    IBMCloud ibm_cloud = 113;
+    Kandji kandji = 111;
+    MicrosoftEntraID microsoft_entra_id = 107;
+    Okta okta = 103;
+    OracleCloud oracle_cloud = 114;
+    PagerDuty pager_duty = 115;
+    PitchBook pitch_book = 108;
+    Rapid7 rapid7 = 116;
+    Stripe stripe = 102;
+    Veeam veeam = 104;
+    Workday workday = 109;
+  }
+
+  message AWS {
+    reserved 1;
+    string saml_provider_arn = 2;
+    string default_role_arn = 3 [deprecated = true];
+    repeated string allowed_role_arns = 4;
+  }
+
+  message Cloudflare {
+    string sso_endpoint = 1;
+    string default_email = 2;
+  }
+
+  message EventBrite {}
+
+  message GCP {
+    string default_email = 1;
+  }
+
+  message GoogleWorkspace {}
+
+  message GoogleWorkspaceLegacy {
+    string default_email = 1;
+    string domain_name = 2;
+  }
+
+  message IBMCloud {
+    string login_url = 1;
+  }
+
+  message Kandji {
+    string default_email = 1;
+  }
+
+  message MicrosoftEntraID {}
+
+  message Okta {
+    repeated string allowed_emails = 1;
+  }
+
+  message OracleCloud {}
+
+  message PagerDuty {}
+
+  message PitchBook {}
+
+  message Rapid7 {
+    string default_relay_state = 1;
+    string default_email = 2;
+    string default_first_name = 3;
+    string default_last_name = 4;
+    repeated string default_rbac_groups = 5;
+  }
+
+  message Stripe {
+    string account_id = 1;
+  }
+
+  message Veeam {}
+  message Workday {}
+}

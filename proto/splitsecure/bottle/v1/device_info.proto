@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.bottle.v1;
+
+message DeviceInfo {
+  // Hardware identifier self-reported by the device.
+  // iOS: utsname().machine (e.g., "iPhone17,2"). Mapped to marketing names
+  // ("iPhone 17 Pro Max") at the presentation layer.
+  string model_identifier = 1;
+
+  // App version string (e.g., CFBundleShortVersionString on iOS).
+  string app_version = 2;
+}

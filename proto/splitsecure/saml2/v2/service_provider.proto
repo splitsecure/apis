@@ -1,0 +1,31 @@
+syntax = "proto3";
+package splitsecure.saml2.v2;
+
+import "splitsecure/saml2/v2/metadata.proto";
+import "splitsecure/saml2/v2/providers/v1/known_provider.proto";
+import "splitsecure/teamresource/v1/base_resource_attributes.proto";
+
+message SAML2ServiceProvider {
+  reserved 1, 2, 6, 7, 8;
+  reserved 100 to 116;
+
+  // idp_auth_sum is the SHA3-256 hash of the AuthenticatedIdPStateAndKey.authenticated
+  // bytes that were presented when this SP was created. Used by the enclave at sign time
+  // to guarantee the SP was created against the exact same IdP.
+  bytes idp_auth_sum = 3;
+
+  // idp_coord_id_hint is the coordination-layer ID of the IdP resource,
+  // used as a hint by the coordination service to look up the matching
+  // IdP for this SP.
+  string idp_coord_id_hint = 4;
+
+  splitsecure.saml2.v2.Metadata metadata = 5;
+
+  // proposal_id is the SHA3-512 hash of the execution context bottle that
+  // created this resource, linking it to the audit log. Set by the enclave.
+  bytes proposal_id = 9;
+
+  splitsecure.teamresource.v1.BaseResourceAttributes base_resource_attributes = 10;
+
+  splitsecure.saml2.v2.providers.v1.KnownProvider known_provider = 200;
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.enclave.v1;
+
+import "splitsecure/enclave/v1/error.proto";
+
+message InvokeResponse {
+  oneof union {
+    bytes success = 1;
+    Error error = 2;
+  }
+}

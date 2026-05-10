@@ -1,0 +1,45 @@
+syntax = "proto3";
+package splitsecure.saml2.v2.providers.v1;
+
+import "splitsecure/saml2/v2/providers/v1/aws.proto";
+import "splitsecure/saml2/v2/providers/v1/cloudflare.proto";
+import "splitsecure/saml2/v2/providers/v1/event_brite.proto";
+import "splitsecure/saml2/v2/providers/v1/gcp.proto";
+import "splitsecure/saml2/v2/providers/v1/google_workspace.proto";
+import "splitsecure/saml2/v2/providers/v1/google_workspace_legacy.proto";
+import "splitsecure/saml2/v2/providers/v1/ibm_cloud.proto";
+import "splitsecure/saml2/v2/providers/v1/kandji.proto";
+import "splitsecure/saml2/v2/providers/v1/microsoft_entra_id.proto";
+import "splitsecure/saml2/v2/providers/v1/okta.proto";
+import "splitsecure/saml2/v2/providers/v1/oracle_cloud.proto";
+import "splitsecure/saml2/v2/providers/v1/pager_duty.proto";
+import "splitsecure/saml2/v2/providers/v1/pitch_book.proto";
+import "splitsecure/saml2/v2/providers/v1/rapid7.proto";
+import "splitsecure/saml2/v2/providers/v1/stripe.proto";
+import "splitsecure/saml2/v2/providers/v1/veeam.proto";
+import "splitsecure/saml2/v2/providers/v1/workday.proto";
+
+// KnownProvider picks one of the supported SAML2 integration kinds and
+// carries its per-kind configuration. Single source of truth for the
+// variant set; embedded by SAML2ServiceProvider.
+message KnownProvider {
+  oneof union {
+    AWS aws = 1;
+    Cloudflare cloudflare = 2;
+    EventBrite event_brite = 3;
+    GCP gcp = 4;
+    GoogleWorkspace google_workspace = 5;
+    GoogleWorkspaceLegacy google_workspace_legacy = 6;
+    IBMCloud ibm_cloud = 7;
+    Kandji kandji = 8;
+    MicrosoftEntraID microsoft_entra_id = 9;
+    Okta okta = 10;
+    OracleCloud oracle_cloud = 11;
+    PagerDuty pager_duty = 12;
+    PitchBook pitch_book = 13;
+    Rapid7 rapid7 = 14;
+    Stripe stripe = 15;
+    Veeam veeam = 16;
+    Workday workday = 17;
+  }
+}

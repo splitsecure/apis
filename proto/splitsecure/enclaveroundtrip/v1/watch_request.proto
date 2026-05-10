@@ -1,0 +1,19 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+message WatchRequest {
+  // Legacy unsigned request_id retained for backwards compatibility.
+  // New callers should populate signed/base instead; this field will
+  // be removed once all clients have migrated.
+  bytes request_id = 1 [deprecated = true];
+
+  requestsigning.v1.SignedRequest signed = 2;
+  Base base = 3;
+
+  message Base {
+    // The request ID returned by SendResponse.
+    bytes request_id = 1;
+  }
+}

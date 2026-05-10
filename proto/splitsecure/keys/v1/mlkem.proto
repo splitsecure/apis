@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "google/protobuf/empty.proto";
+
+message MLKEM {
+  oneof union {
+    google.protobuf.Empty v512 = 1;
+    google.protobuf.Empty v768 = 2;
+    google.protobuf.Empty v1024 = 3;
+  }
+}

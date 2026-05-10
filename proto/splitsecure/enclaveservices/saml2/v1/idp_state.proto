@@ -1,0 +1,24 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.saml2.v1;
+
+import "splitsecure/teamresource/v1/notification_policy.proto";
+
+message IdPState {
+  bytes x509_certificate = 1;
+  string provider_id = 2;
+  string name = 4;
+  // sso_url, when omitted, is assumed to be https://app.splitsecure.com/saml2idp/login
+  string sso_url = 3;
+  string sso_url_post = 5;
+
+  // notification_policy controls how notifications are sent for proposals
+  // involving this IdP. Set at creation time, immutable.
+  splitsecure.teamresource.v1.NotificationPolicy notification_policy = 6;
+
+  // description is an optional free-form description of this identity provider
+  string description = 7;
+
+  // proposal_id is the SHA3-512 hash of the execution context bottle that
+  // created this resource, linking it to the audit log. Set by the enclave.
+  bytes proposal_id = 8;
+}

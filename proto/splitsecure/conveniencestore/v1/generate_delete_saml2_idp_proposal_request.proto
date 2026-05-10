@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+// GenerateDeleteSAML2IdentityProviderProposalRequest assembles the
+// payload for deleting a SAML2 IdP. The server parses resource_s2r
+// to derive the owning team and the target record.
+message GenerateDeleteSAML2IdentityProviderProposalRequest {
+  Base base = 1;
+  message Base {
+    // resource_s2r is the s2r URI of the SAML2 IdP to delete. Kind must
+    // be "saml2idp". The team and resource ids are derived from it.
+    string resource_s2r = 1;
+
+    string justification = 2;
+  }
+}

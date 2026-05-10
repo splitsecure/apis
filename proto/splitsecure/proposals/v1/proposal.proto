@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+
+// Proposal carries a sealed execution context inside a Bottle. The bottle's
+// payload (ExecutionContext + Intent) is opaque to public consumers — only
+// the enclave service that minted the proposal holds the keys to unseal it.
+// Wire format is identical whether the field is typed as bytes or Bottle,
+// since Bottle is itself a length-delimited message.
+message Proposal {
+  splitsecure.bottle.v1.Bottle execution_context_bottle = 1;
+}

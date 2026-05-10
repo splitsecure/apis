@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+import "splitsecure/proposals/v1/watch_response.proto";
+
+message PollResponse {
+  // Drained events. Empty when wait elapsed with no new events.
+  repeated WatchResponse events = 1;
+}

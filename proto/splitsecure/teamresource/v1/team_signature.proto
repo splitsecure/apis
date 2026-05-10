@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.teamresource.v1;
+
+import "splitsecure/hybridkeyset/v1/signature.proto";
+
+// TeamSignature binds a resource to a team.
+// The team's base signer signs serialized authenticated bytes.
+message TeamSignature {
+  // team_id is the hash of the team's base identity.
+  bytes team_id = 1;
+
+  // signature is the team base signer's signature over the authenticated bytes.
+  splitsecure.hybridkeyset.v1.Signature signature = 2;
+}

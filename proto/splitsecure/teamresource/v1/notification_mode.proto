@@ -1,0 +1,20 @@
+syntax = "proto3";
+package splitsecure.teamresource.v1;
+
+// NotificationMode specifies how team members should be notified for a request.
+message NotificationMode {
+  oneof mode {
+    // notify_everyone sends push notifications to all team members.
+    NotifyEveryone notify_everyone = 1;
+
+    // selective sends push notifications only to the specified devices;
+    // all others receive silent notifications (stored but no push).
+    SelectiveNotification selective = 2;
+  }
+
+  message NotifyEveryone {}
+
+  message SelectiveNotification {
+    repeated bytes actively_notify_enclave_ids = 1;
+  }
+}

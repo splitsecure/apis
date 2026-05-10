@@ -1,0 +1,28 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+message WatchRequest {
+  // Legacy unsigned proposal_id retained for backwards compatibility.
+  // New callers should populate signed/base instead; this field will
+  // be removed once all clients have migrated.
+  bytes proposal_id = 1 [deprecated = true];
+  reserved 2; // was: uint32 last_msg_idx
+
+  // Authenticated request fields.
+  requestsigning.v1.SignedRequest signed = 3;
+  Base base = 4;
+
+  // Resume from this event ID. Empty means start from the beginning
+  // of the stream.
+  string last_event_id = 5;
+
+  message Base {
+    bytes proposal_id = 1;
+    reserved 2; // was: uint32 last_msg_idx
+    // Resume from this event ID. Empty means start from the beginning
+    // of the stream.
+    string last_event_id = 3;
+  }
+}

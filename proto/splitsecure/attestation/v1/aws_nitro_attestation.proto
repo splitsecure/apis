@@ -1,0 +1,18 @@
+syntax = "proto3";
+package splitsecure.attestation.v1;
+
+import "splitsecure/hybridkeyset/v1/signature.proto";
+
+// AWSNitroAttestation contains AWS Nitro Enclave attestation data.
+message AWSNitroAttestation {
+  bytes attestation_doc_cbor = 1;
+
+  // Instance-level HKS signature over (authenticated || separator || identity_vertex).
+  // Binds a virtual enclave's identity to the physically attested Nitro instance.
+  // The NSM attestation document's publicKey field contains SHA3-512(instance_hks_pub).
+  splitsecure.hybridkeyset.v1.Signature instance_identity_binding_sig = 4;
+
+  // Full instance HKS public keys (serialized HybridKeySetWithDetachedKeys, public only).
+  // SHA3-512 of this value is committed in the NSM document's publicKey field.
+  bytes instance_hks_pub = 5;
+}

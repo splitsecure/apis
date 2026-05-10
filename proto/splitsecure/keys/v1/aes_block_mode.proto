@@ -1,0 +1,15 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "google/protobuf/empty.proto";
+import "splitsecure/keys/v1/block_mode_ccm.proto";
+import "splitsecure/keys/v1/block_mode_gcm.proto";
+
+message AESBlockMode {
+  oneof mode {
+    google.protobuf.Empty ecb = 1;
+    google.protobuf.Empty cbc = 2;
+    BlockModeGCM gcm = 3;
+    BlockModeCCM ccm = 4;
+  }
+}

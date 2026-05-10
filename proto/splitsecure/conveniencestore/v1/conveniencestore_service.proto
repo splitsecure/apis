@@ -1,0 +1,34 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/conveniencestore/v1/generate_create_saml2_idp_proposal_request.proto";
+import "splitsecure/conveniencestore/v1/generate_create_saml2_idp_proposal_response.proto";
+import "splitsecure/conveniencestore/v1/generate_create_saml2_sp_proposal_request.proto";
+import "splitsecure/conveniencestore/v1/generate_create_saml2_sp_proposal_response.proto";
+import "splitsecure/conveniencestore/v1/generate_delete_saml2_idp_proposal_request.proto";
+import "splitsecure/conveniencestore/v1/generate_delete_saml2_idp_proposal_response.proto";
+import "splitsecure/conveniencestore/v1/generate_delete_saml2_sp_proposal_request.proto";
+import "splitsecure/conveniencestore/v1/generate_delete_saml2_sp_proposal_response.proto";
+import "splitsecure/conveniencestore/v1/get_proposal_resource.proto";
+import "splitsecure/conveniencestore/v1/get_saml2_resources_request.proto";
+import "splitsecure/conveniencestore/v1/get_saml2_resources_response.proto";
+
+// ConvenienceStoreService exposes SAML2 resource management.
+service ConvenienceStoreService {
+  // GetSAML2Resources is a batch point-lookup keyed by resource URIs.
+  // The response map omits keys that were not found or that the caller
+  // is not authorized to read.
+  rpc GetSAML2Resources(GetSAML2ResourcesRequest) returns (GetSAML2ResourcesResponse) {}
+
+  // GetProposalResource resolves a proposal id to the resource URI the
+  // proposal minted. Empty until execution lands; poll.
+  rpc GetProposalResource(GetProposalResourceRequest) returns (GetProposalResourceResponse) {}
+
+  // Generate* RPCs assemble the InvokeRequest payload that the caller
+  // then submits to EnclaveRoundtripService.Send. The server stamps
+  // computed fields the caller would otherwise have to derive itself.
+  rpc GenerateCreateSAML2IdentityProviderProposal(GenerateCreateSAML2IdentityProviderProposalRequest) returns (GenerateCreateSAML2IdentityProviderProposalResponse) {}
+  rpc GenerateCreateSAML2ServiceProviderProposal(GenerateCreateSAML2ServiceProviderProposalRequest) returns (GenerateCreateSAML2ServiceProviderProposalResponse) {}
+  rpc GenerateDeleteSAML2IdentityProviderProposal(GenerateDeleteSAML2IdentityProviderProposalRequest) returns (GenerateDeleteSAML2IdentityProviderProposalResponse) {}
+  rpc GenerateDeleteSAML2ServiceProviderProposal(GenerateDeleteSAML2ServiceProviderProposalRequest) returns (GenerateDeleteSAML2ServiceProviderProposalResponse) {}
+}
