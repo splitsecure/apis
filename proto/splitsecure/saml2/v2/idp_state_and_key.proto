@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.saml2.v2;
+
+import "splitsecure/keys/v1/threshold_key.proto";
+import "splitsecure/saml2/v2/idp_state.proto";
+import "splitsecure/teamresource/v1/team_signature.proto";
+
+message IdPStateAndKey {
+  IdPState idp_state = 1;
+  splitsecure.keys.v1.ThresholdKey signing_key = 2; // team_ids live in DerivedKey.team_ids
+
+  // authenticated is the serialization of fields 1-2 only, as the
+  // exact bytes signed by team_signatures.
+  bytes authenticated = 3;
+  repeated splitsecure.teamresource.v1.TeamSignature team_signatures = 4;
+}

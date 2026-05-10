@@ -1,0 +1,33 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+enum ECDSA {
+  ECDSA_UNSPECIFIED = 0;
+  // NIST curves
+  ECDSA_NIST_P224 = 1;
+  ECDSA_NIST_P256 = 2;
+  ECDSA_NIST_P384 = 3;
+  ECDSA_NIST_P521 = 4;
+
+  // NIST pseudorandom curves
+  ECDSA_NIST_B233 = 5;
+  ECDSA_NIST_B283 = 6;
+  ECDSA_NIST_B409 = 7;
+  ECDSA_NIST_B571 = 8;
+
+  // NIST Koblitz curves
+  ECDSA_NIST_K233 = 9;
+  ECDSA_NIST_K283 = 10;
+  ECDSA_NIST_K409 = 11;
+  ECDSA_NIST_K571 = 12;
+
+  // SEC curves
+  ECDSA_SEC_P192K1 = 13;
+  ECDSA_SEC_P224K1 = 14;
+  ECDSA_SEC_P256K1 = 15;
+
+  // Brainpool curves
+  ECDSA_BRAINPOOL_P256R1 = 16;
+  ECDSA_BRAINPOOL_P384R1 = 17;
+  ECDSA_BRAINPOOL_P512R1 = 18;
+}

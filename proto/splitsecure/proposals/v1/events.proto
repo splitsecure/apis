@@ -1,0 +1,61 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/proposals/v1/proposal.proto";
+
+// ProposalEvent represents events in a proposal's lifecycle.
+message ProposalEvent {
+  google.protobuf.Timestamp created_at = 1;
+  int32 emitted_by_step_id = 2;
+
+  oneof union {
+    ProposalPublished proposal_published = 3;
+    VoteReceived vote_received = 4;
+    ProposalCompleted proposal_completed = 5;
+    ProposalError proposal_error = 6;
+    NotificationSent notification_sent = 7;
+    NotificationAcked notification_acked = 8;
+    ThresholdReached threshold_reached = 9;
+    ProposalExpired proposal_expired = 10;
+  }
+
+  message ProposalPublished {
+    Proposal proposal = 1;
+    bytes initiator_enclave_id = 2;
+  }
+
+  message VoteReceived {
+    splitsecure.bottle.v1.Bottle vote_bottle = 1;
+    bytes voter_enclave_id = 2;
+  }
+
+  message ProposalCompleted {
+    // The execution result bottle
+    splitsecure.bottle.v1.Bottle result_bottle = 1;
+  }
+
+  message ProposalError {
+    string message = 1;
+  }
+
+  message NotificationSent {
+    bytes target_enclave_id = 1;
+    string notification_type = 2;
+    // When true, the notification was stored without sending an APNS push.
+    bool silently_delivered = 3;
+  }
+
+  message NotificationAcked {
+    bytes enclave_id = 1;
+  }
+
+  // ThresholdReached is emitted when the voting threshold is met
+  // and the proposal transitions to AwaitingExecutionStepID.
+  message ThresholdReached {}
+
+  // ProposalExpired is emitted by the cleanup sweeper when a proposal
+  // passes its expire_at without having been executed.
+  message ProposalExpired {}
+}

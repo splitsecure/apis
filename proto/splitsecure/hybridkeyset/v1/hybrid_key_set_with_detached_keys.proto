@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.hybridkeyset.v1;
+
+import "splitsecure/hybridkeyset/v1/detached_key.proto";
+
+message HybridKeySetWithDetachedKeys {
+  // hybrid_key_set holds a serialized HybridKeySet
+  bytes hybrid_key_set = 1;
+  repeated DetachedKey keys = 2;
+}

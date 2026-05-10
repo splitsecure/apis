@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.delegationgraph.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message LifetimeInfo {
+  google.protobuf.Timestamp not_before = 1;
+  google.protobuf.Timestamp not_after = 2;
+}

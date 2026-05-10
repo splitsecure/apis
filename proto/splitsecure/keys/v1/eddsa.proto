@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+message EDDSA {
+  oneof union {
+    ED25519 ed25519 = 1;
+    ED448 ed448 = 2;
+  }
+
+  message ED25519 {}
+  message ED448 {}
+}

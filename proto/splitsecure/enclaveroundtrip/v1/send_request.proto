@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+import "splitsecure/enclave/v1/invoke_request.proto";
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+message SendRequest {
+  requestsigning.v1.SignedRequest signed = 1;
+  Base base = 2;
+
+  message Base {
+    oneof target {
+      // The enclave to send the request to (must be paired with the companion)
+      bytes target_enclave_id = 1;
+      // Create a fresh proposal-scoped managed enclave in the given org.
+      // The caller must be a member of this org.
+      string new_proposal_scoped_enclave = 3;
+    }
+    // The invoke request payload for the enclave
+    enclave.v1.InvokeRequest invoke_request = 2;
+  }
+}

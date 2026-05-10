@@ -1,0 +1,21 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+message WatchRequest {
+  // Authenticated request fields.
+  requestsigning.v1.SignedRequest signed = 3;
+  Base base = 4;
+
+  // Resume from this event ID. Empty means start from the beginning
+  // of the stream.
+  string last_event_id = 5;
+
+  message Base {
+    bytes proposal_id = 1;
+    // Resume from this event ID. Empty means start from the beginning
+    // of the stream.
+    string last_event_id = 3;
+  }
+}

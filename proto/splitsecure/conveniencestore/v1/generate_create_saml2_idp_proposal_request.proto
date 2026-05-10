@@ -1,0 +1,23 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/saml2/v2/idp_state.proto";
+
+// GenerateCreateSAML2IdentityProviderProposalRequest assembles the
+// payload for creating a SAML2 IdP on the named team. The server
+// stamps the read-only fields (x509_certificate, proposal_id) on the
+// resulting record; values set by the caller in those positions are
+// ignored. Cert validity (NotBefore/NotAfter) is encoded in the
+// minted x509_certificate.
+message GenerateCreateSAML2IdentityProviderProposalRequest {
+  Base base = 1;
+  message Base {
+    reserved 2, 3, 4, 5, 6, 7;
+
+    string team_s2r = 1;
+
+    splitsecure.saml2.v2.IdPState idp = 8;
+
+    string justification = 200;
+  }
+}

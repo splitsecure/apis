@@ -1,0 +1,20 @@
+syntax = "proto3";
+package splitsecure.delegationgraph.v1;
+
+import "splitsecure/delegationgraph/v1/attribute.proto";
+import "splitsecure/delegationgraph/v1/lifetime_info.proto";
+import "splitsecure/delegationgraph/v1/revocation_info.proto";
+
+// IdentityVertex represents a node in the trust graph. Trust flows
+// in and out of an IdentityVertex via DelegationEdges.
+message IdentityVertex {
+  RevocationInfo revocation_info = 2;
+  LifetimeInfo lifetime_info = 3;
+
+  // attributes contains information about this node.
+  // Here is a non-exhaustive list of attributes:
+  // - s2.hkswdk: the node's hybrid key set with detached keys
+  // - s2.att.kind: the kind of attestation used by this node (ex.: aa)
+  // - s2.att.static: the attestation stable value (ex.: AppAttest device pubkey)
+  repeated Attribute attributes = 1;
+}

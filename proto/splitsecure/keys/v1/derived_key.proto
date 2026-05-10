@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "splitsecure/keys/v1/spec.proto";
+
+message DerivedKey {
+  // team_id can be repeated if this key depends on multiple teams.
+  repeated bytes team_ids = 1;
+  Spec spec = 2;
+  bytes derivation = 3;
+}

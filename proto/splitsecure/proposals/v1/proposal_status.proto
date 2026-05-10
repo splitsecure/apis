@@ -1,0 +1,20 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+message ProposalStatus {
+  oneof status {
+    InProgress in_progress = 1;
+    Completed completed = 2;
+    Error error = 3;
+    Expired expired = 4;
+  }
+
+  message InProgress {}
+  message Completed {}
+  message Error {
+    string message = 1;
+  }
+  // Expired is set when a proposal passes its expire_at without reaching
+  // execution. Recorded by the cleanup sweeper, not by the enclave.
+  message Expired {}
+}

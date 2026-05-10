@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.hybridkeyset.v1;
+
+// ExchangeEphemeralCiphertext contains one matching entry for each public exchange key provided by the initiator
+// Those entries are:
+// - for Diffie-Hellman: a public key
+// - for Key Encapsulation Mechanism (KEM): a ciphertext / encapsulated key
+//
+// An entry index is meant to map to the index of an exchange key provided in the initiator's keyset.
+message ExchangeEphemeralCiphertext {
+  repeated Entry ciphertexts = 1;
+  message Entry {
+    uint32 index = 1;
+    bytes key = 2;
+  }
+}

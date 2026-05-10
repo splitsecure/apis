@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.bottle.v1;
+
+import "splitsecure/audit_observation_receipt/v1/audit_observation_receipt.proto";
+import "splitsecure/bottle/v1/signature.proto";
+
+message Bottle {
+  bytes magic = 1;
+  // data authenticated by the signature
+  // contains a marshaled `Authenticated` message
+  bytes authenticated = 2;
+  Signature signature = 3;
+  splitsecure.audit_observation_receipt.v1.AuditObservationReceipt audit_observation_receipt = 5;
+}

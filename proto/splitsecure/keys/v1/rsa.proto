@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+message RSA {
+  uint32 bits = 1;
+  SignatureScheme signature_scheme = 2;
+
+  enum SignatureScheme {
+    SIGNATURE_SCHEME_UNSPECIFIED = 0;
+    SIGNATURE_SCHEME_PKCS1V15 = 1;
+    SIGNATURE_SCHEME_PSS = 2;
+  }
+}

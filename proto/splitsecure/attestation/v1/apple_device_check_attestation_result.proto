@@ -1,0 +1,25 @@
+syntax = "proto3";
+package splitsecure.attestation.v1;
+
+import "google/protobuf/wrappers.proto";
+
+// AppleDeviceCheckAttestationResult contains the result of verifying an Apple attestation.
+message AppleDeviceCheckAttestationResult {
+  bytes key_id = 1;
+  bytes bundle_digest = 2;
+  bytes environment_guid = 3;
+  uint32 assertion_counter = 4;
+  DeviceInfo device_info = 5;
+
+  // DeviceInfo contains device and OS metadata extracted from the Apple App
+  // Attest leaf certificate extension (OID 1.2.840.113635.100.8.7).
+  message DeviceInfo {
+    string os_version = 1;
+    string os_build = 2;
+    google.protobuf.Int32Value device_class = 3;
+    string iboot_version = 4;
+    string sep_version = 5;
+    string platform = 6;
+    string build_variant = 7;
+  }
+}

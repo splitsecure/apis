@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.hybridkeyset.v1;
+
+message Signature {
+  // keys_bitfield has a high bit for each key used to generate this
+  // signature. The field is authenticated by the signature itself so
+  // that individual algorithm signatures cannot be silently dropped.
+  //
+  // Caveat: if an algorithm is broken such that an adversary can
+  // forge a signature from a public key alone, that adversary could
+  // strip all other signatures and present a bitfield containing only
+  // keys of the broken algorithm. To mitigate this, signature
+  // verification returns the list of keys that actually verified, and
+  // callers should require a minimum set of algorithm classes (e.g.
+  // `n` distinct schemes of at least `b` bits of security). The
+  // exact threshold is left to the verifier.
+  uint32 keys_bitfield = 1;
+
+  // signatures contains the signatures for each key specified in the bitfield.
+  // They are ordered from LSB to MSB based on the order of appearance in `keys_bitfield`.
+  repeated bytes signatures = 2;
+}

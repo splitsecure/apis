@@ -1,0 +1,34 @@
+syntax = "proto3";
+package splitsecure.delegationgraph.v1;
+
+import "splitsecure/delegationgraph/v1/attribute.proto";
+import "splitsecure/delegationgraph/v1/lifetime_info.proto";
+
+message DelegationEdge {
+  bytes authenticated = 1;
+  bytes issuer_node_sum = 2;
+  bytes signature = 3;
+
+  // unauthenticated_attributes contains additional information relating to this
+  // delegation which was likely created after it has been authenticated.
+  // This could for example be any audit-related information relevant for the
+  // verifier.
+  repeated Attribute unauthenticated_attributes = 4;
+
+  message Authenticated {
+    // nonce ensures that if two otherwise identical delegations were
+    // to be minted, the checksum of the authenticated component will differ.
+    bytes nonce = 4;
+    bytes subject_node_sum = 2;
+
+    // if missing, duration of the delegation is infinite.
+    LifetimeInfo lifetime_info = 3;
+
+    // attributes contains information about this link.
+    // Here is a non-exhaustive list of attributes:
+    // - s2.att.data: the attestation for the authenticated part of this link (if this link is issued by an identity supporting attestation, the attestation data must be valid)
+    // - s2.companion.read: can perform read operations as a companion
+    // - s2.companion.paired: proves a pairing between the subject and issuer nodes
+    repeated Attribute attributes = 1;
+  }
+}

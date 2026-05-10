@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "google/protobuf/empty.proto";
+
+message ECDHSpec {
+  oneof union {
+    google.protobuf.Empty p256 = 1;
+    google.protobuf.Empty p384 = 2;
+    google.protobuf.Empty p521 = 3;
+    google.protobuf.Empty x25519 = 4;
+    google.protobuf.Empty x448 = 5;
+  }
+}

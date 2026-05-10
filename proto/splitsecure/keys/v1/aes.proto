@@ -1,0 +1,15 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "splitsecure/keys/v1/aes_block_mode.proto";
+
+message AES {
+  enum Length {
+    LENGTH_UNSPECIFIED = 0;
+    LENGTH_128 = 1;
+    LENGTH_256 = 2;
+  }
+
+  AESBlockMode block_mode = 1;
+  Length length = 2;
+}

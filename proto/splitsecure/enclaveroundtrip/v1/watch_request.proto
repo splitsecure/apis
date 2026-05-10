@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+message WatchRequest {
+  requestsigning.v1.SignedRequest signed = 2;
+  Base base = 3;
+
+  message Base {
+    // The request ID returned by SendResponse.
+    bytes request_id = 1;
+  }
+}

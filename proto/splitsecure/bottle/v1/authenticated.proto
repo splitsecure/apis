@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.bottle.v1;
+
+import "google/protobuf/any.proto";
+import "splitsecure/bottle/v1/platform_data.proto";
+
+message Authenticated {
+  PlatformData platform_data = 1;
+  google.protobuf.Any data = 2;
+}

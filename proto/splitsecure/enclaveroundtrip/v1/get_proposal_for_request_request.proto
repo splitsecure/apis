@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+message GetProposalForRequestRequest {
+  // request_id returned by the earlier Send.
+  bytes request_id = 1;
+}

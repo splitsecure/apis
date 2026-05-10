@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+// GetProposal
+message GetProposalRequest {
+  requestsigning.v1.SignedRequest signed = 1;
+  Base base = 2;
+
+  message Base {
+    bytes proposal_id = 1;
+  }
+}

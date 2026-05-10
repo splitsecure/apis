@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.teamresource.v1;
+
+import "splitsecure/hybridkeyset/v1/signature.proto";
+
+message AuthenticatedTeamInfo {
+  bytes team_info = 1;
+
+  hybridkeyset.v1.Signature team_signature = 2;
+  hybridkeyset.v1.Signature team_version_signature = 3;
+}

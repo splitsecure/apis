@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.saml2.v2.providers.v1;
+
+message Rapid7 {
+  string default_relay_state = 1;
+  string default_email = 2;
+  string default_first_name = 3;
+  string default_last_name = 4;
+  repeated string default_rbac_groups = 5;
+}

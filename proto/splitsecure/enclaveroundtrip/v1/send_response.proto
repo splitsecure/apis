@@ -1,0 +1,6 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+message SendResponse {
+  bytes request_id = 1;
+}

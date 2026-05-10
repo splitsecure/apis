@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.saml2.v2.providers.v1;
+
+message Cloudflare {
+  string sso_endpoint = 1;
+  string default_email = 2;
+}

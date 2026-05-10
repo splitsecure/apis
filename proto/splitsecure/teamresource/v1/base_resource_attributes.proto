@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.teamresource.v1;
+
+import "splitsecure/teamresource/v1/account_sensitivity.proto";
+import "splitsecure/teamresource/v1/notification_policy.proto";
+
+// BaseResourceAttributes holds the common metadata shared by all managed resources.
+message BaseResourceAttributes {
+  string name = 1;
+  string description = 2;
+  splitsecure.teamresource.v1.NotificationPolicy notification_policy = 3;
+  AccountSensitivity sensitivity = 4;
+  bytes proposal_id = 5;
+}

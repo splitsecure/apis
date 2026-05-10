@@ -1,0 +1,109 @@
+syntax = "proto3";
+package splitsecure.teamresource.v1;
+
+import "google/protobuf/empty.proto";
+
+message BottlePolicies {
+  oneof union {
+    BasicPolicies basic = 1;
+    // contains a rego policy expecting an attestation result as an input and exporting:
+    // - isShareholder
+    // - isExecEnv
+    string rego_policy = 2;
+  }
+
+  message BasicPolicies {
+    repeated Targets shareholder = 1;
+    repeated Targets exec_env = 2;
+
+    message Targets {
+      oneof union {
+        google.protobuf.Empty apple_splitsecure = 1;
+        google.protobuf.Empty apple_splitsecure_develop = 2;
+
+        GrapheneOS grapheneos = 4;
+        GrapheneOS grapheneos_develop = 7;
+
+        Android android = 5;
+        Android android_develop = 6;
+
+        // SplitSecure-managed enclave target. Today the only supported backend
+        // is AWS Nitro; other backends can be added to ManagedEnclave.backend.
+        ManagedEnclave managed = 9;
+      }
+
+      // Android selects Android devices, optionally filtering by manufacturer.
+      // Empty manufacturer string means all manufacturers are allowed.
+      message Android {
+        string manufacturer = 4;
+      }
+
+      // ManagedEnclave selects a SplitSecure-managed enclave. The backend
+      // oneof picks which flavour of managed enclave (today only AWS Nitro).
+      message ManagedEnclave {
+        oneof backend {
+          Nitro nitro = 1;
+        }
+
+        // Nitro selects an AWS Nitro-backed managed enclave at a specific
+        // trust tier. Each tier is identified by a named deployment whose
+        // IAM role hash appears in the attestation document as PCR3.
+        message Nitro {
+          oneof tier {
+            // Production deployment.
+            ManagedDeployment prod = 1;
+            // Staging deployment. Only available when dev flags are enabled.
+            ManagedDeployment staging = 2;
+            // Development deployment. Only available when dev flags are
+            // enabled. Name is typically the developer's username on the
+            // machine running the dev enclave.
+            ManagedDeployment dev = 3;
+          }
+
+          // ManagedDeployment identifies a specific deployment by name.
+          // Empty name means all deployments of the enclosing tier.
+          message ManagedDeployment {
+            string name = 1;
+          }
+        }
+      }
+
+      message GrapheneOS {
+        oneof union {
+          // GrapheneOS attestation targets
+          google.protobuf.Empty grapheneos_all = 3;
+
+          // Pixel 10 series
+          google.protobuf.Empty grapheneos_10pf = 4; // Pixel 10 Pro Fold
+          google.protobuf.Empty grapheneos_10px = 5; // Pixel 10 Pro XL
+          google.protobuf.Empty grapheneos_10p = 6; // Pixel 10 Pro
+          google.protobuf.Empty grapheneos_10 = 7; // Pixel 10
+
+          // Pixel 9 series
+          google.protobuf.Empty grapheneos_9a = 8; // Pixel 9a
+          google.protobuf.Empty grapheneos_9pf = 9; // Pixel 9 Pro Fold
+          google.protobuf.Empty grapheneos_9px = 10; // Pixel 9 Pro XL
+          google.protobuf.Empty grapheneos_9p = 11; // Pixel 9 Pro
+          google.protobuf.Empty grapheneos_9 = 12; // Pixel 9
+
+          // Pixel 8 series
+          google.protobuf.Empty grapheneos_8a = 13; // Pixel 8a
+          google.protobuf.Empty grapheneos_8p = 14; // Pixel 8 Pro
+          google.protobuf.Empty grapheneos_8 = 15; // Pixel 8
+          google.protobuf.Empty grapheneos_fold = 16; // Pixel Fold
+          google.protobuf.Empty grapheneos_tablet = 17; // Pixel Tablet
+
+          // Pixel 7 series
+          google.protobuf.Empty grapheneos_7a = 18; // Pixel 7a
+          google.protobuf.Empty grapheneos_7p = 19; // Pixel 7 Pro
+          google.protobuf.Empty grapheneos_7 = 20; // Pixel 7
+
+          // Pixel 6 series
+          google.protobuf.Empty grapheneos_6a = 21; // Pixel 6a
+          google.protobuf.Empty grapheneos_6p = 22; // Pixel 6 Pro
+          google.protobuf.Empty grapheneos_6 = 23; // Pixel 6
+        }
+      }
+    }
+  }
+}

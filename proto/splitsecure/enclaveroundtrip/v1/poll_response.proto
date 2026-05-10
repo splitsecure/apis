@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+import "splitsecure/enclaveroundtrip/v1/watch_response.proto";
+
+message PollResponse {
+  // Drained events. Each entry mirrors a streaming WatchResponse — clients
+  // filter keepalive entries the same way they would in the streaming flow.
+  // Empty when wait elapsed with no events.
+  repeated WatchResponse events = 1;
+}

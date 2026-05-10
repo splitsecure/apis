@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.teamresource.v1;
+
+import "splitsecure/teamresource/v1/account_sensitivity_level.proto";
+
+message AccountSensitivity {
+  AccountSensitivityLevel level = 1;
+  string description = 2;
+}

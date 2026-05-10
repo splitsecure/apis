@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "google/protobuf/empty.proto";
+
+message MLDSA {
+  oneof union {
+    google.protobuf.Empty v44 = 1;
+    google.protobuf.Empty v65 = 2;
+    google.protobuf.Empty v87 = 3;
+  }
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+import "splitsecure/proposals/v1/proposal_metadata.proto";
+
+message GetProposalResponse {
+  ProposalMetadata metadata = 1;
+  // The regional stream ID for Watch/Vote/Complete operations
+  bytes stream_id = 2;
+}

@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.proposals.v1;
+
+import "splitsecure/proposals/v1/get_proposal_request.proto";
+import "splitsecure/proposals/v1/get_proposal_response.proto";
+import "splitsecure/proposals/v1/poll_request.proto";
+import "splitsecure/proposals/v1/poll_response.proto";
+import "splitsecure/proposals/v1/watch_request.proto";
+import "splitsecure/proposals/v1/watch_response.proto";
+
+// ProposalsService observes threshold-voting proposals.
+service ProposalsService {
+  // Watch streams events from a proposal as voting progresses.
+  rpc Watch(WatchRequest) returns (stream WatchResponse);
+
+  // Poll is the unary long-poll companion to Watch. Returns drained
+  // events since last_event_id; with no_block=true returns immediately.
+  rpc Poll(PollRequest) returns (PollResponse);
+
+  // GetProposal retrieves proposal metadata by proposal ID.
+  rpc GetProposal(GetProposalRequest) returns (GetProposalResponse);
+}

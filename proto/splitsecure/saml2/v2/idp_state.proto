@@ -1,0 +1,17 @@
+syntax = "proto3";
+package splitsecure.saml2.v2;
+
+import "splitsecure/teamresource/v1/base_resource_attributes.proto";
+
+message IdPState {
+  bytes x509_certificate = 1;
+  string provider_id = 2;
+  string sso_url = 3;
+  string sso_url_post = 5;
+  uint64 serial = 6;
+
+  // base_resource_attributes carries name, description,
+  // notification_policy, sensitivity and the audit-linked proposal_id.
+  // Shared shape with all team-managed resources.
+  splitsecure.teamresource.v1.BaseResourceAttributes base_resource_attributes = 9;
+}

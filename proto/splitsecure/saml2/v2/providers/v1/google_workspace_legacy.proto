@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.saml2.v2.providers.v1;
+
+message GoogleWorkspaceLegacy {
+  string default_email = 1;
+  string domain_name = 2;
+}

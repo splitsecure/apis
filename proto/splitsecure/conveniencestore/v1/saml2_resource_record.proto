@@ -1,0 +1,43 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/conveniencestore/v1/tombstone.proto";
+import "splitsecure/saml2/v2/authenticated_idp_state_and_key.proto";
+import "splitsecure/saml2/v2/authenticated_saml2_service_provider.proto";
+
+message SAML2ResourceRecord {
+  bytes id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  Content content = 3;
+
+  // resource_s2r is the stable resource URI. Kind is "saml2idp" for an
+  // IdP record or "saml2sp" for an SP record. Populated server-side on
+  // read; not persisted. Empty for pure-tombstone records that can't
+  // be classified from content.
+  string resource_s2r = 4;
+
+  message Content {
+    oneof union {
+      Tombstone tombstone = 1;
+      UpdateableRecord updateable_record = 2;
+    }
+  }
+
+  message UpdateableRecord {
+    // The ID of the canonical resource record
+    bytes original_id = 1;
+
+    // The last time this record was updated
+    google.protobuf.Timestamp updated_at = 2;
+
+    UpdateableContent content = 3;
+  }
+
+  message UpdateableContent {
+    oneof union {
+      splitsecure.saml2.v2.AuthenticatedSAML2ServiceProvider signed_service_provider = 1;
+      splitsecure.saml2.v2.AuthenticatedIdPStateAndKey signed_idp = 2;
+    }
+  }
+}

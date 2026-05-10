@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/enclave/v1/invoke_request.proto";
+
+message GenerateCreateSAML2IdentityProviderProposalResponse {
+  // invoke_request is the fully built payload the caller should pass to
+  // EnclaveRoundtripService.Send.Base.invoke_request. The caller
+  // supplies new_proposal_scoped_enclave = the org s2r it already knows
+  // from having picked the team.
+  splitsecure.enclave.v1.InvokeRequest invoke_request = 1;
+}

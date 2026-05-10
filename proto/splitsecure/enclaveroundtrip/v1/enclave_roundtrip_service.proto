@@ -1,0 +1,37 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+import "splitsecure/enclaveroundtrip/v1/get_proposal_for_request_request.proto";
+import "splitsecure/enclaveroundtrip/v1/get_proposal_for_request_response.proto";
+import "splitsecure/enclaveroundtrip/v1/poll_request.proto";
+import "splitsecure/enclaveroundtrip/v1/poll_response.proto";
+import "splitsecure/enclaveroundtrip/v1/send_request.proto";
+import "splitsecure/enclaveroundtrip/v1/send_response.proto";
+import "splitsecure/enclaveroundtrip/v1/watch_request.proto";
+import "splitsecure/enclaveroundtrip/v1/watch_response.proto";
+
+// EnclaveRoundtripService carries companion-to-enclave requests and
+// their responses. A caller submits with Send, then either streams the
+// response with Watch, long-polls it with Poll, or polls indirectly
+// via GetProposalForRequest until the response materializes as a
+// proposal.
+service EnclaveRoundtripService {
+  // Send forwards a request from a companion to its paired enclave.
+  // Returns a request ID the caller uses to retrieve the response.
+  rpc Send(SendRequest) returns (SendResponse);
+
+  // Watch streams responses for a previously sent request, with
+  // keepalives until the enclave responds or the deadline elapses.
+  rpc Watch(WatchRequest) returns (stream WatchResponse);
+
+  // Poll is the unary long-poll companion to Watch. Drains queued
+  // events (keepalives, response, error) and returns them in one shot;
+  // with no_block=true returns immediately. Useful for callers that
+  // can't consume server streaming.
+  rpc Poll(PollRequest) returns (PollResponse);
+
+  // GetProposalForRequest resolves a Send request_id to the proposal
+  // id of the proposal that was auto-published from the enclave's
+  // reply. The response is empty until the enclave has replied.
+  rpc GetProposalForRequest(GetProposalForRequestRequest) returns (GetProposalForRequestResponse);
+}

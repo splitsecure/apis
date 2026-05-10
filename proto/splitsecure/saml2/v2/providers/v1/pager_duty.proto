@@ -1,0 +1,4 @@
+syntax = "proto3";
+package splitsecure.saml2.v2.providers.v1;
+
+message PagerDuty {}

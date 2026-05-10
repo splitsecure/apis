@@ -1,0 +1,8 @@
+syntax = "proto3";
+package splitsecure.enclaveroundtrip.v1;
+
+message GetProposalForRequestResponse {
+  // proposal_id is the SHA3-512 of the proposal's execution-context
+  // bottle. Empty until the enclave replies; poll.
+  bytes proposal_id = 1;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.bottle.v1;
+
+import "splitsecure/attestation/v1/generic.proto";
+import "splitsecure/hybridkeyset/v1/signature.proto";
+
+message Signature {
+  // provided by shell (key material belongs to device)
+  splitsecure.attestation.v1.Generic attestation = 1;
+
+  bytes identity_vertex = 2;
+  hybridkeyset.v1.Signature sig = 3;
+}

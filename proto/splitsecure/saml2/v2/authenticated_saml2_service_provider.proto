@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.saml2.v2;
+
+import "splitsecure/teamresource/v1/team_signature.proto";
+
+message AuthenticatedSAML2ServiceProvider {
+  bytes authenticated = 1; // Serialized saml2.v2.SAML2ServiceProvider
+  repeated splitsecure.teamresource.v1.TeamSignature team_signatures = 2;
+}
