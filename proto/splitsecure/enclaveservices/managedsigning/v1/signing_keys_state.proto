@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.managedsigning.v1;
+
+import "splitsecure/keys/v1/serialized_key.proto";
+import "splitsecure/keys/v1/threshold_key.proto";
+import "splitsecure/teamresource/v1/base_resource_attributes.proto";
+
+message ManagedSigningKeys {
+  splitsecure.teamresource.v1.BaseResourceAttributes base_resource_attributes = 1;
+  repeated SigningKey keys = 2;
+}
+
+message SigningKey {
+  splitsecure.keys.v1.SerializedKey public_key = 1;
+  splitsecure.keys.v1.ThresholdKey threshold_key = 2;
+}

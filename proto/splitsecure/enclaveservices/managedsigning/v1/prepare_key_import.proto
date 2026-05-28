@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.managedsigning.v1;
+
+import "splitsecure/hybridkeyset/v1/hybrid_key_set_with_detached_keys.proto";
+
+message PrepareKeyImportRequest {}
+
+message PrepareKeyImportResponse {
+  // Unique label identifying this import session's keyset within the enclave.
+  string label = 1;
+  // Public hybrid keyset (P521-ECDH + X448 + MLKEM1024) for encrypting keys.
+  splitsecure.hybridkeyset.v1.HybridKeySetWithDetachedKeys public_key = 2;
+}

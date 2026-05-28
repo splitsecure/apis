@@ -53,6 +53,15 @@ const (
 	// ConvenienceStoreServiceGenerateDeleteSAML2ServiceProviderProposalProcedure is the fully-qualified
 	// name of the ConvenienceStoreService's GenerateDeleteSAML2ServiceProviderProposal RPC.
 	ConvenienceStoreServiceGenerateDeleteSAML2ServiceProviderProposalProcedure = "/splitsecure.conveniencestore.v1.ConvenienceStoreService/GenerateDeleteSAML2ServiceProviderProposal"
+	// ConvenienceStoreServiceGenerateSignManagedKeyProposalProcedure is the fully-qualified name of the
+	// ConvenienceStoreService's GenerateSignManagedKeyProposal RPC.
+	ConvenienceStoreServiceGenerateSignManagedKeyProposalProcedure = "/splitsecure.conveniencestore.v1.ConvenienceStoreService/GenerateSignManagedKeyProposal"
+	// ConvenienceStoreServiceListManagedSigningResourcesProcedure is the fully-qualified name of the
+	// ConvenienceStoreService's ListManagedSigningResources RPC.
+	ConvenienceStoreServiceListManagedSigningResourcesProcedure = "/splitsecure.conveniencestore.v1.ConvenienceStoreService/ListManagedSigningResources"
+	// ConvenienceStoreServiceGetManagedSigningResourcesProcedure is the fully-qualified name of the
+	// ConvenienceStoreService's GetManagedSigningResources RPC.
+	ConvenienceStoreServiceGetManagedSigningResourcesProcedure = "/splitsecure.conveniencestore.v1.ConvenienceStoreService/GetManagedSigningResources"
 )
 
 // ConvenienceStoreServiceClient is a client for the
@@ -72,6 +81,13 @@ type ConvenienceStoreServiceClient interface {
 	GenerateCreateSAML2ServiceProviderProposal(context.Context, *connect.Request[v1.GenerateCreateSAML2ServiceProviderProposalRequest]) (*connect.Response[v1.GenerateCreateSAML2ServiceProviderProposalResponse], error)
 	GenerateDeleteSAML2IdentityProviderProposal(context.Context, *connect.Request[v1.GenerateDeleteSAML2IdentityProviderProposalRequest]) (*connect.Response[v1.GenerateDeleteSAML2IdentityProviderProposalResponse], error)
 	GenerateDeleteSAML2ServiceProviderProposal(context.Context, *connect.Request[v1.GenerateDeleteSAML2ServiceProviderProposalRequest]) (*connect.Response[v1.GenerateDeleteSAML2ServiceProviderProposalResponse], error)
+	GenerateSignManagedKeyProposal(context.Context, *connect.Request[v1.GenerateSignManagedKeyProposalRequest]) (*connect.Response[v1.GenerateSignManagedKeyProposalResponse], error)
+	// Managed-signing key listing and lookup. ListManagedSigningResources
+	// enumerates the team's published signing-key records; the
+	// GetManagedSigningResources batch point-lookup is the URI-keyed
+	// counterpart.
+	ListManagedSigningResources(context.Context, *connect.Request[v1.ListManagedSigningResourcesRequest]) (*connect.Response[v1.ListManagedSigningResourcesResponse], error)
+	GetManagedSigningResources(context.Context, *connect.Request[v1.GetManagedSigningResourcesRequest]) (*connect.Response[v1.GetManagedSigningResourcesResponse], error)
 }
 
 // NewConvenienceStoreServiceClient constructs a client for the
@@ -122,6 +138,24 @@ func NewConvenienceStoreServiceClient(httpClient connect.HTTPClient, baseURL str
 			connect.WithSchema(convenienceStoreServiceMethods.ByName("GenerateDeleteSAML2ServiceProviderProposal")),
 			connect.WithClientOptions(opts...),
 		),
+		generateSignManagedKeyProposal: connect.NewClient[v1.GenerateSignManagedKeyProposalRequest, v1.GenerateSignManagedKeyProposalResponse](
+			httpClient,
+			baseURL+ConvenienceStoreServiceGenerateSignManagedKeyProposalProcedure,
+			connect.WithSchema(convenienceStoreServiceMethods.ByName("GenerateSignManagedKeyProposal")),
+			connect.WithClientOptions(opts...),
+		),
+		listManagedSigningResources: connect.NewClient[v1.ListManagedSigningResourcesRequest, v1.ListManagedSigningResourcesResponse](
+			httpClient,
+			baseURL+ConvenienceStoreServiceListManagedSigningResourcesProcedure,
+			connect.WithSchema(convenienceStoreServiceMethods.ByName("ListManagedSigningResources")),
+			connect.WithClientOptions(opts...),
+		),
+		getManagedSigningResources: connect.NewClient[v1.GetManagedSigningResourcesRequest, v1.GetManagedSigningResourcesResponse](
+			httpClient,
+			baseURL+ConvenienceStoreServiceGetManagedSigningResourcesProcedure,
+			connect.WithSchema(convenienceStoreServiceMethods.ByName("GetManagedSigningResources")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -133,6 +167,9 @@ type convenienceStoreServiceClient struct {
 	generateCreateSAML2ServiceProviderProposal  *connect.Client[v1.GenerateCreateSAML2ServiceProviderProposalRequest, v1.GenerateCreateSAML2ServiceProviderProposalResponse]
 	generateDeleteSAML2IdentityProviderProposal *connect.Client[v1.GenerateDeleteSAML2IdentityProviderProposalRequest, v1.GenerateDeleteSAML2IdentityProviderProposalResponse]
 	generateDeleteSAML2ServiceProviderProposal  *connect.Client[v1.GenerateDeleteSAML2ServiceProviderProposalRequest, v1.GenerateDeleteSAML2ServiceProviderProposalResponse]
+	generateSignManagedKeyProposal              *connect.Client[v1.GenerateSignManagedKeyProposalRequest, v1.GenerateSignManagedKeyProposalResponse]
+	listManagedSigningResources                 *connect.Client[v1.ListManagedSigningResourcesRequest, v1.ListManagedSigningResourcesResponse]
+	getManagedSigningResources                  *connect.Client[v1.GetManagedSigningResourcesRequest, v1.GetManagedSigningResourcesResponse]
 }
 
 // GetSAML2Resources calls
@@ -171,6 +208,24 @@ func (c *convenienceStoreServiceClient) GenerateDeleteSAML2ServiceProviderPropos
 	return c.generateDeleteSAML2ServiceProviderProposal.CallUnary(ctx, req)
 }
 
+// GenerateSignManagedKeyProposal calls
+// splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateSignManagedKeyProposal.
+func (c *convenienceStoreServiceClient) GenerateSignManagedKeyProposal(ctx context.Context, req *connect.Request[v1.GenerateSignManagedKeyProposalRequest]) (*connect.Response[v1.GenerateSignManagedKeyProposalResponse], error) {
+	return c.generateSignManagedKeyProposal.CallUnary(ctx, req)
+}
+
+// ListManagedSigningResources calls
+// splitsecure.conveniencestore.v1.ConvenienceStoreService.ListManagedSigningResources.
+func (c *convenienceStoreServiceClient) ListManagedSigningResources(ctx context.Context, req *connect.Request[v1.ListManagedSigningResourcesRequest]) (*connect.Response[v1.ListManagedSigningResourcesResponse], error) {
+	return c.listManagedSigningResources.CallUnary(ctx, req)
+}
+
+// GetManagedSigningResources calls
+// splitsecure.conveniencestore.v1.ConvenienceStoreService.GetManagedSigningResources.
+func (c *convenienceStoreServiceClient) GetManagedSigningResources(ctx context.Context, req *connect.Request[v1.GetManagedSigningResourcesRequest]) (*connect.Response[v1.GetManagedSigningResourcesResponse], error) {
+	return c.getManagedSigningResources.CallUnary(ctx, req)
+}
+
 // ConvenienceStoreServiceHandler is an implementation of the
 // splitsecure.conveniencestore.v1.ConvenienceStoreService service.
 type ConvenienceStoreServiceHandler interface {
@@ -188,6 +243,13 @@ type ConvenienceStoreServiceHandler interface {
 	GenerateCreateSAML2ServiceProviderProposal(context.Context, *connect.Request[v1.GenerateCreateSAML2ServiceProviderProposalRequest]) (*connect.Response[v1.GenerateCreateSAML2ServiceProviderProposalResponse], error)
 	GenerateDeleteSAML2IdentityProviderProposal(context.Context, *connect.Request[v1.GenerateDeleteSAML2IdentityProviderProposalRequest]) (*connect.Response[v1.GenerateDeleteSAML2IdentityProviderProposalResponse], error)
 	GenerateDeleteSAML2ServiceProviderProposal(context.Context, *connect.Request[v1.GenerateDeleteSAML2ServiceProviderProposalRequest]) (*connect.Response[v1.GenerateDeleteSAML2ServiceProviderProposalResponse], error)
+	GenerateSignManagedKeyProposal(context.Context, *connect.Request[v1.GenerateSignManagedKeyProposalRequest]) (*connect.Response[v1.GenerateSignManagedKeyProposalResponse], error)
+	// Managed-signing key listing and lookup. ListManagedSigningResources
+	// enumerates the team's published signing-key records; the
+	// GetManagedSigningResources batch point-lookup is the URI-keyed
+	// counterpart.
+	ListManagedSigningResources(context.Context, *connect.Request[v1.ListManagedSigningResourcesRequest]) (*connect.Response[v1.ListManagedSigningResourcesResponse], error)
+	GetManagedSigningResources(context.Context, *connect.Request[v1.GetManagedSigningResourcesRequest]) (*connect.Response[v1.GetManagedSigningResourcesResponse], error)
 }
 
 // NewConvenienceStoreServiceHandler builds an HTTP handler from the service implementation. It
@@ -233,6 +295,24 @@ func NewConvenienceStoreServiceHandler(svc ConvenienceStoreServiceHandler, opts 
 		connect.WithSchema(convenienceStoreServiceMethods.ByName("GenerateDeleteSAML2ServiceProviderProposal")),
 		connect.WithHandlerOptions(opts...),
 	)
+	convenienceStoreServiceGenerateSignManagedKeyProposalHandler := connect.NewUnaryHandler(
+		ConvenienceStoreServiceGenerateSignManagedKeyProposalProcedure,
+		svc.GenerateSignManagedKeyProposal,
+		connect.WithSchema(convenienceStoreServiceMethods.ByName("GenerateSignManagedKeyProposal")),
+		connect.WithHandlerOptions(opts...),
+	)
+	convenienceStoreServiceListManagedSigningResourcesHandler := connect.NewUnaryHandler(
+		ConvenienceStoreServiceListManagedSigningResourcesProcedure,
+		svc.ListManagedSigningResources,
+		connect.WithSchema(convenienceStoreServiceMethods.ByName("ListManagedSigningResources")),
+		connect.WithHandlerOptions(opts...),
+	)
+	convenienceStoreServiceGetManagedSigningResourcesHandler := connect.NewUnaryHandler(
+		ConvenienceStoreServiceGetManagedSigningResourcesProcedure,
+		svc.GetManagedSigningResources,
+		connect.WithSchema(convenienceStoreServiceMethods.ByName("GetManagedSigningResources")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/splitsecure.conveniencestore.v1.ConvenienceStoreService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ConvenienceStoreServiceGetSAML2ResourcesProcedure:
@@ -247,6 +327,12 @@ func NewConvenienceStoreServiceHandler(svc ConvenienceStoreServiceHandler, opts 
 			convenienceStoreServiceGenerateDeleteSAML2IdentityProviderProposalHandler.ServeHTTP(w, r)
 		case ConvenienceStoreServiceGenerateDeleteSAML2ServiceProviderProposalProcedure:
 			convenienceStoreServiceGenerateDeleteSAML2ServiceProviderProposalHandler.ServeHTTP(w, r)
+		case ConvenienceStoreServiceGenerateSignManagedKeyProposalProcedure:
+			convenienceStoreServiceGenerateSignManagedKeyProposalHandler.ServeHTTP(w, r)
+		case ConvenienceStoreServiceListManagedSigningResourcesProcedure:
+			convenienceStoreServiceListManagedSigningResourcesHandler.ServeHTTP(w, r)
+		case ConvenienceStoreServiceGetManagedSigningResourcesProcedure:
+			convenienceStoreServiceGetManagedSigningResourcesHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -278,4 +364,16 @@ func (UnimplementedConvenienceStoreServiceHandler) GenerateDeleteSAML2IdentityPr
 
 func (UnimplementedConvenienceStoreServiceHandler) GenerateDeleteSAML2ServiceProviderProposal(context.Context, *connect.Request[v1.GenerateDeleteSAML2ServiceProviderProposalRequest]) (*connect.Response[v1.GenerateDeleteSAML2ServiceProviderProposalResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateDeleteSAML2ServiceProviderProposal is not implemented"))
+}
+
+func (UnimplementedConvenienceStoreServiceHandler) GenerateSignManagedKeyProposal(context.Context, *connect.Request[v1.GenerateSignManagedKeyProposalRequest]) (*connect.Response[v1.GenerateSignManagedKeyProposalResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateSignManagedKeyProposal is not implemented"))
+}
+
+func (UnimplementedConvenienceStoreServiceHandler) ListManagedSigningResources(context.Context, *connect.Request[v1.ListManagedSigningResourcesRequest]) (*connect.Response[v1.ListManagedSigningResourcesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.conveniencestore.v1.ConvenienceStoreService.ListManagedSigningResources is not implemented"))
+}
+
+func (UnimplementedConvenienceStoreServiceHandler) GetManagedSigningResources(context.Context, *connect.Request[v1.GetManagedSigningResourcesRequest]) (*connect.Response[v1.GetManagedSigningResourcesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.conveniencestore.v1.ConvenienceStoreService.GetManagedSigningResources is not implemented"))
 }

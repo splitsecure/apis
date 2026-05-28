@@ -1,0 +1,27 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+// GenerateSignManagedKeyProposalRequest assembles the
+// MintProposalRequest payload for invoking ManagedSigning.Sign on an
+// existing managed signing key.  The server parses resource_s2r to
+// derive the owning team and the target ManagedSigningResourceRecord,
+// extracts the authenticated key bundle, and builds the threshold
+// proposal that — when executed — will sign `data` with the key.
+message GenerateSignManagedKeyProposalRequest {
+  Base base = 1;
+  message Base {
+    // resource_s2r is the s2r URI of the managed signing key to sign
+    // with.  Kind must be "managedkey".  The team and resource ids are
+    // derived from it.
+    string resource_s2r = 1;
+
+    // data is the bytes to sign.  The bytes are passed verbatim to the
+    // managed signing service; the caller is responsible for any
+    // pre-hashing the chosen mechanism requires (e.g. CKM_RSA_PKCS
+    // expects a DER-encoded DigestInfo, CKM_ECDSA expects the digest).
+    bytes data = 2;
+
+    // justification is an optional free-form reason surfaced to voters.
+    string justification = 3;
+  }
+}

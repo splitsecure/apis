@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.managedsigning.v1;
+
+import "splitsecure/hybridkeyset/v1/ies_ciphertext.proto";
+import "splitsecure/keys/v1/spec.proto";
+
+// ImportedKeyEntry represents a private key encrypted with the enclave's
+// import hybrid keyset (P521-ECDH + X448 + MLKEM1024) using IES.
+message ImportedKeyEntry {
+  splitsecure.keys.v1.Spec spec = 1;
+  splitsecure.hybridkeyset.v1.IesCiphertext encrypted_key = 2;
+}

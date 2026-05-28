@@ -9,11 +9,16 @@ import "splitsecure/conveniencestore/v1/generate_delete_saml2_idp_proposal_reque
 import "splitsecure/conveniencestore/v1/generate_delete_saml2_idp_proposal_response.proto";
 import "splitsecure/conveniencestore/v1/generate_delete_saml2_sp_proposal_request.proto";
 import "splitsecure/conveniencestore/v1/generate_delete_saml2_sp_proposal_response.proto";
+import "splitsecure/conveniencestore/v1/generate_sign_managedkey_proposal_request.proto";
+import "splitsecure/conveniencestore/v1/generate_sign_managedkey_proposal_response.proto";
+import "splitsecure/conveniencestore/v1/get_managedsigning_resource.proto";
 import "splitsecure/conveniencestore/v1/get_proposal_resource.proto";
 import "splitsecure/conveniencestore/v1/get_saml2_resources_request.proto";
 import "splitsecure/conveniencestore/v1/get_saml2_resources_response.proto";
+import "splitsecure/conveniencestore/v1/list_managedsigning_resources.proto";
 
-// ConvenienceStoreService exposes SAML2 resource management.
+// ConvenienceStoreService exposes SAML2 and managed-signing resource
+// management.
 service ConvenienceStoreService {
   // GetSAML2Resources is a batch point-lookup keyed by resource URIs.
   // The response map omits keys that were not found or that the caller
@@ -31,4 +36,12 @@ service ConvenienceStoreService {
   rpc GenerateCreateSAML2ServiceProviderProposal(GenerateCreateSAML2ServiceProviderProposalRequest) returns (GenerateCreateSAML2ServiceProviderProposalResponse) {}
   rpc GenerateDeleteSAML2IdentityProviderProposal(GenerateDeleteSAML2IdentityProviderProposalRequest) returns (GenerateDeleteSAML2IdentityProviderProposalResponse) {}
   rpc GenerateDeleteSAML2ServiceProviderProposal(GenerateDeleteSAML2ServiceProviderProposalRequest) returns (GenerateDeleteSAML2ServiceProviderProposalResponse) {}
+  rpc GenerateSignManagedKeyProposal(GenerateSignManagedKeyProposalRequest) returns (GenerateSignManagedKeyProposalResponse) {}
+
+  // Managed-signing key listing and lookup. ListManagedSigningResources
+  // enumerates the team's published signing-key records; the
+  // GetManagedSigningResources batch point-lookup is the URI-keyed
+  // counterpart.
+  rpc ListManagedSigningResources(ListManagedSigningResourcesRequest) returns (ListManagedSigningResourcesResponse) {}
+  rpc GetManagedSigningResources(GetManagedSigningResourcesRequest) returns (GetManagedSigningResourcesResponse) {}
 }

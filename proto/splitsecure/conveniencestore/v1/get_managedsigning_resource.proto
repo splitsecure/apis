@@ -1,0 +1,27 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/conveniencestore/v1/managedsigning_resource_record.proto";
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+// GetManagedSigningResourcesRequest fetches specific managed-signing
+// key-set records by their s2r URIs. Callers holding a known set of
+// resource_s2rs can use this instead of ListManagedSigningResources +
+// client-side filter.
+message GetManagedSigningResourcesRequest {
+  splitsecure.requestsigning.v1.SignedRequest signed = 1;
+
+  Base base = 2;
+  message Base {
+    // resource_s2rs are managedkey URIs to look up.
+    repeated string resource_s2rs = 1;
+  }
+}
+
+message GetManagedSigningResourcesResponse {
+  // resources maps each found record's resource_s2r to the record.
+  // Keys absent from the map mean the record was not found, the
+  // caller is unauthorized on its owning team, the s2r was malformed,
+  // or the minting proposal has not yet completed.
+  map<string, ManagedSigningResourceRecord> resources = 1;
+}

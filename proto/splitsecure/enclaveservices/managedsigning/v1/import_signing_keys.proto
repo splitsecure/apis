@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.managedsigning.v1;
+
+import "splitsecure/enclaveservices/managedsigning/v1/authenticated_signing_keys.proto";
+import "splitsecure/enclaveservices/managedsigning/v1/import_key.proto";
+import "splitsecure/teamresource/v1/base_resource_attributes.proto";
+
+message ImportSigningKeysRequest {
+  splitsecure.teamresource.v1.BaseResourceAttributes base_resource_attributes = 1;
+  string label = 2;
+  repeated ImportedKeyEntry entries = 3;
+}
+
+message ImportSigningKeysResponse {
+  ManagedSigningKeysAuthenticated authenticated_signing_keys = 1;
+}

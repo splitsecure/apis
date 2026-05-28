@@ -24,14 +24,17 @@ var File_splitsecure_conveniencestore_v1_conveniencestore_service_proto protoref
 
 const file_splitsecure_conveniencestore_v1_conveniencestore_service_proto_rawDesc = "" +
 	"\n" +
-	">splitsecure/conveniencestore/v1/conveniencestore_service.proto\x12\x1fsplitsecure.conveniencestore.v1\x1aPsplitsecure/conveniencestore/v1/generate_create_saml2_idp_proposal_request.proto\x1aQsplitsecure/conveniencestore/v1/generate_create_saml2_idp_proposal_response.proto\x1aOsplitsecure/conveniencestore/v1/generate_create_saml2_sp_proposal_request.proto\x1aPsplitsecure/conveniencestore/v1/generate_create_saml2_sp_proposal_response.proto\x1aPsplitsecure/conveniencestore/v1/generate_delete_saml2_idp_proposal_request.proto\x1aQsplitsecure/conveniencestore/v1/generate_delete_saml2_idp_proposal_response.proto\x1aOsplitsecure/conveniencestore/v1/generate_delete_saml2_sp_proposal_request.proto\x1aPsplitsecure/conveniencestore/v1/generate_delete_saml2_sp_proposal_response.proto\x1a;splitsecure/conveniencestore/v1/get_proposal_resource.proto\x1aAsplitsecure/conveniencestore/v1/get_saml2_resources_request.proto\x1aBsplitsecure/conveniencestore/v1/get_saml2_resources_response.proto2\xab\t\n" +
+	">splitsecure/conveniencestore/v1/conveniencestore_service.proto\x12\x1fsplitsecure.conveniencestore.v1\x1aPsplitsecure/conveniencestore/v1/generate_create_saml2_idp_proposal_request.proto\x1aQsplitsecure/conveniencestore/v1/generate_create_saml2_idp_proposal_response.proto\x1aOsplitsecure/conveniencestore/v1/generate_create_saml2_sp_proposal_request.proto\x1aPsplitsecure/conveniencestore/v1/generate_create_saml2_sp_proposal_response.proto\x1aPsplitsecure/conveniencestore/v1/generate_delete_saml2_idp_proposal_request.proto\x1aQsplitsecure/conveniencestore/v1/generate_delete_saml2_idp_proposal_response.proto\x1aOsplitsecure/conveniencestore/v1/generate_delete_saml2_sp_proposal_request.proto\x1aPsplitsecure/conveniencestore/v1/generate_delete_saml2_sp_proposal_response.proto\x1aOsplitsecure/conveniencestore/v1/generate_sign_managedkey_proposal_request.proto\x1aPsplitsecure/conveniencestore/v1/generate_sign_managedkey_proposal_response.proto\x1aAsplitsecure/conveniencestore/v1/get_managedsigning_resource.proto\x1a;splitsecure/conveniencestore/v1/get_proposal_resource.proto\x1aAsplitsecure/conveniencestore/v1/get_saml2_resources_request.proto\x1aBsplitsecure/conveniencestore/v1/get_saml2_resources_response.proto\x1aCsplitsecure/conveniencestore/v1/list_managedsigning_resources.proto2\xb8\r\n" +
 	"\x17ConvenienceStoreService\x12\x8c\x01\n" +
 	"\x11GetSAML2Resources\x129.splitsecure.conveniencestore.v1.GetSAML2ResourcesRequest\x1a:.splitsecure.conveniencestore.v1.GetSAML2ResourcesResponse\"\x00\x12\x92\x01\n" +
 	"\x13GetProposalResource\x12;.splitsecure.conveniencestore.v1.GetProposalResourceRequest\x1a<.splitsecure.conveniencestore.v1.GetProposalResourceResponse\"\x00\x12\xda\x01\n" +
 	"+GenerateCreateSAML2IdentityProviderProposal\x12S.splitsecure.conveniencestore.v1.GenerateCreateSAML2IdentityProviderProposalRequest\x1aT.splitsecure.conveniencestore.v1.GenerateCreateSAML2IdentityProviderProposalResponse\"\x00\x12\xd7\x01\n" +
 	"*GenerateCreateSAML2ServiceProviderProposal\x12R.splitsecure.conveniencestore.v1.GenerateCreateSAML2ServiceProviderProposalRequest\x1aS.splitsecure.conveniencestore.v1.GenerateCreateSAML2ServiceProviderProposalResponse\"\x00\x12\xda\x01\n" +
 	"+GenerateDeleteSAML2IdentityProviderProposal\x12S.splitsecure.conveniencestore.v1.GenerateDeleteSAML2IdentityProviderProposalRequest\x1aT.splitsecure.conveniencestore.v1.GenerateDeleteSAML2IdentityProviderProposalResponse\"\x00\x12\xd7\x01\n" +
-	"*GenerateDeleteSAML2ServiceProviderProposal\x12R.splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalRequest\x1aS.splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalResponse\"\x00B\xbe\x02\n" +
+	"*GenerateDeleteSAML2ServiceProviderProposal\x12R.splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalRequest\x1aS.splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalResponse\"\x00\x12\xb3\x01\n" +
+	"\x1eGenerateSignManagedKeyProposal\x12F.splitsecure.conveniencestore.v1.GenerateSignManagedKeyProposalRequest\x1aG.splitsecure.conveniencestore.v1.GenerateSignManagedKeyProposalResponse\"\x00\x12\xaa\x01\n" +
+	"\x1bListManagedSigningResources\x12C.splitsecure.conveniencestore.v1.ListManagedSigningResourcesRequest\x1aD.splitsecure.conveniencestore.v1.ListManagedSigningResourcesResponse\"\x00\x12\xa7\x01\n" +
+	"\x1aGetManagedSigningResources\x12B.splitsecure.conveniencestore.v1.GetManagedSigningResourcesRequest\x1aC.splitsecure.conveniencestore.v1.GetManagedSigningResourcesResponse\"\x00B\xbe\x02\n" +
 	"#com.splitsecure.conveniencestore.v1B\x1cConveniencestoreServiceProtoP\x01Z[github.com/splitsecure/apis/gen/go/proto/splitsecure/conveniencestore/v1;conveniencestorev1\xa2\x02\x03SCX\xaa\x02\x1fSplitsecure.Conveniencestore.V1\xca\x02\x1fSplitsecure\\Conveniencestore\\V1\xe2\x02+Splitsecure\\Conveniencestore\\V1\\GPBMetadata\xea\x02!Splitsecure::Conveniencestore::V1b\x06proto3"
 
 var file_splitsecure_conveniencestore_v1_conveniencestore_service_proto_goTypes = []any{
@@ -41,12 +44,18 @@ var file_splitsecure_conveniencestore_v1_conveniencestore_service_proto_goTypes 
 	(*GenerateCreateSAML2ServiceProviderProposalRequest)(nil),   // 3: splitsecure.conveniencestore.v1.GenerateCreateSAML2ServiceProviderProposalRequest
 	(*GenerateDeleteSAML2IdentityProviderProposalRequest)(nil),  // 4: splitsecure.conveniencestore.v1.GenerateDeleteSAML2IdentityProviderProposalRequest
 	(*GenerateDeleteSAML2ServiceProviderProposalRequest)(nil),   // 5: splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalRequest
-	(*GetSAML2ResourcesResponse)(nil),                           // 6: splitsecure.conveniencestore.v1.GetSAML2ResourcesResponse
-	(*GetProposalResourceResponse)(nil),                         // 7: splitsecure.conveniencestore.v1.GetProposalResourceResponse
-	(*GenerateCreateSAML2IdentityProviderProposalResponse)(nil), // 8: splitsecure.conveniencestore.v1.GenerateCreateSAML2IdentityProviderProposalResponse
-	(*GenerateCreateSAML2ServiceProviderProposalResponse)(nil),  // 9: splitsecure.conveniencestore.v1.GenerateCreateSAML2ServiceProviderProposalResponse
-	(*GenerateDeleteSAML2IdentityProviderProposalResponse)(nil), // 10: splitsecure.conveniencestore.v1.GenerateDeleteSAML2IdentityProviderProposalResponse
-	(*GenerateDeleteSAML2ServiceProviderProposalResponse)(nil),  // 11: splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalResponse
+	(*GenerateSignManagedKeyProposalRequest)(nil),               // 6: splitsecure.conveniencestore.v1.GenerateSignManagedKeyProposalRequest
+	(*ListManagedSigningResourcesRequest)(nil),                  // 7: splitsecure.conveniencestore.v1.ListManagedSigningResourcesRequest
+	(*GetManagedSigningResourcesRequest)(nil),                   // 8: splitsecure.conveniencestore.v1.GetManagedSigningResourcesRequest
+	(*GetSAML2ResourcesResponse)(nil),                           // 9: splitsecure.conveniencestore.v1.GetSAML2ResourcesResponse
+	(*GetProposalResourceResponse)(nil),                         // 10: splitsecure.conveniencestore.v1.GetProposalResourceResponse
+	(*GenerateCreateSAML2IdentityProviderProposalResponse)(nil), // 11: splitsecure.conveniencestore.v1.GenerateCreateSAML2IdentityProviderProposalResponse
+	(*GenerateCreateSAML2ServiceProviderProposalResponse)(nil),  // 12: splitsecure.conveniencestore.v1.GenerateCreateSAML2ServiceProviderProposalResponse
+	(*GenerateDeleteSAML2IdentityProviderProposalResponse)(nil), // 13: splitsecure.conveniencestore.v1.GenerateDeleteSAML2IdentityProviderProposalResponse
+	(*GenerateDeleteSAML2ServiceProviderProposalResponse)(nil),  // 14: splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalResponse
+	(*GenerateSignManagedKeyProposalResponse)(nil),              // 15: splitsecure.conveniencestore.v1.GenerateSignManagedKeyProposalResponse
+	(*ListManagedSigningResourcesResponse)(nil),                 // 16: splitsecure.conveniencestore.v1.ListManagedSigningResourcesResponse
+	(*GetManagedSigningResourcesResponse)(nil),                  // 17: splitsecure.conveniencestore.v1.GetManagedSigningResourcesResponse
 }
 var file_splitsecure_conveniencestore_v1_conveniencestore_service_proto_depIdxs = []int32{
 	0,  // 0: splitsecure.conveniencestore.v1.ConvenienceStoreService.GetSAML2Resources:input_type -> splitsecure.conveniencestore.v1.GetSAML2ResourcesRequest
@@ -55,14 +64,20 @@ var file_splitsecure_conveniencestore_v1_conveniencestore_service_proto_depIdxs 
 	3,  // 3: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateCreateSAML2ServiceProviderProposal:input_type -> splitsecure.conveniencestore.v1.GenerateCreateSAML2ServiceProviderProposalRequest
 	4,  // 4: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateDeleteSAML2IdentityProviderProposal:input_type -> splitsecure.conveniencestore.v1.GenerateDeleteSAML2IdentityProviderProposalRequest
 	5,  // 5: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateDeleteSAML2ServiceProviderProposal:input_type -> splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalRequest
-	6,  // 6: splitsecure.conveniencestore.v1.ConvenienceStoreService.GetSAML2Resources:output_type -> splitsecure.conveniencestore.v1.GetSAML2ResourcesResponse
-	7,  // 7: splitsecure.conveniencestore.v1.ConvenienceStoreService.GetProposalResource:output_type -> splitsecure.conveniencestore.v1.GetProposalResourceResponse
-	8,  // 8: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateCreateSAML2IdentityProviderProposal:output_type -> splitsecure.conveniencestore.v1.GenerateCreateSAML2IdentityProviderProposalResponse
-	9,  // 9: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateCreateSAML2ServiceProviderProposal:output_type -> splitsecure.conveniencestore.v1.GenerateCreateSAML2ServiceProviderProposalResponse
-	10, // 10: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateDeleteSAML2IdentityProviderProposal:output_type -> splitsecure.conveniencestore.v1.GenerateDeleteSAML2IdentityProviderProposalResponse
-	11, // 11: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateDeleteSAML2ServiceProviderProposal:output_type -> splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalResponse
-	6,  // [6:12] is the sub-list for method output_type
-	0,  // [0:6] is the sub-list for method input_type
+	6,  // 6: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateSignManagedKeyProposal:input_type -> splitsecure.conveniencestore.v1.GenerateSignManagedKeyProposalRequest
+	7,  // 7: splitsecure.conveniencestore.v1.ConvenienceStoreService.ListManagedSigningResources:input_type -> splitsecure.conveniencestore.v1.ListManagedSigningResourcesRequest
+	8,  // 8: splitsecure.conveniencestore.v1.ConvenienceStoreService.GetManagedSigningResources:input_type -> splitsecure.conveniencestore.v1.GetManagedSigningResourcesRequest
+	9,  // 9: splitsecure.conveniencestore.v1.ConvenienceStoreService.GetSAML2Resources:output_type -> splitsecure.conveniencestore.v1.GetSAML2ResourcesResponse
+	10, // 10: splitsecure.conveniencestore.v1.ConvenienceStoreService.GetProposalResource:output_type -> splitsecure.conveniencestore.v1.GetProposalResourceResponse
+	11, // 11: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateCreateSAML2IdentityProviderProposal:output_type -> splitsecure.conveniencestore.v1.GenerateCreateSAML2IdentityProviderProposalResponse
+	12, // 12: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateCreateSAML2ServiceProviderProposal:output_type -> splitsecure.conveniencestore.v1.GenerateCreateSAML2ServiceProviderProposalResponse
+	13, // 13: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateDeleteSAML2IdentityProviderProposal:output_type -> splitsecure.conveniencestore.v1.GenerateDeleteSAML2IdentityProviderProposalResponse
+	14, // 14: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateDeleteSAML2ServiceProviderProposal:output_type -> splitsecure.conveniencestore.v1.GenerateDeleteSAML2ServiceProviderProposalResponse
+	15, // 15: splitsecure.conveniencestore.v1.ConvenienceStoreService.GenerateSignManagedKeyProposal:output_type -> splitsecure.conveniencestore.v1.GenerateSignManagedKeyProposalResponse
+	16, // 16: splitsecure.conveniencestore.v1.ConvenienceStoreService.ListManagedSigningResources:output_type -> splitsecure.conveniencestore.v1.ListManagedSigningResourcesResponse
+	17, // 17: splitsecure.conveniencestore.v1.ConvenienceStoreService.GetManagedSigningResources:output_type -> splitsecure.conveniencestore.v1.GetManagedSigningResourcesResponse
+	9,  // [9:18] is the sub-list for method output_type
+	0,  // [0:9] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -81,9 +96,13 @@ func file_splitsecure_conveniencestore_v1_conveniencestore_service_proto_init() 
 	file_splitsecure_conveniencestore_v1_generate_delete_saml2_idp_proposal_response_proto_init()
 	file_splitsecure_conveniencestore_v1_generate_delete_saml2_sp_proposal_request_proto_init()
 	file_splitsecure_conveniencestore_v1_generate_delete_saml2_sp_proposal_response_proto_init()
+	file_splitsecure_conveniencestore_v1_generate_sign_managedkey_proposal_request_proto_init()
+	file_splitsecure_conveniencestore_v1_generate_sign_managedkey_proposal_response_proto_init()
+	file_splitsecure_conveniencestore_v1_get_managedsigning_resource_proto_init()
 	file_splitsecure_conveniencestore_v1_get_proposal_resource_proto_init()
 	file_splitsecure_conveniencestore_v1_get_saml2_resources_request_proto_init()
 	file_splitsecure_conveniencestore_v1_get_saml2_resources_response_proto_init()
+	file_splitsecure_conveniencestore_v1_list_managedsigning_resources_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

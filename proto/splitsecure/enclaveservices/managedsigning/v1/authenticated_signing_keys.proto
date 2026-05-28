@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.managedsigning.v1;
+
+import "splitsecure/teamresource/v1/team_signature.proto";
+
+message ManagedSigningKeysAuthenticated {
+  bytes managed_signing_keys = 1;
+  repeated splitsecure.teamresource.v1.TeamSignature team_signatures = 2;
+}

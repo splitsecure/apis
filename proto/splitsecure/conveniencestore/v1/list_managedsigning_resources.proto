@@ -1,0 +1,25 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "splitsecure/conveniencestore/v1/managedsigning_resource_record.proto";
+import "splitsecure/requestsigning/v1/signed_request.proto";
+
+message ListManagedSigningResourcesRequest {
+  splitsecure.requestsigning.v1.SignedRequest signed = 1;
+
+  Base base = 2;
+  message Base {
+    bytes enclave_id = 1; // Used for authorization (enclave caller path)
+    // team selects the target team. team_id (SHA3-512 base identity hash
+    // bytes) and team_s2r (s2r:{deployment}:team:{snowflake}) are mutually
+    // exclusive; server resolves team_s2r to team_base_id internally.
+    oneof team {
+      bytes team_id = 2;
+      string team_s2r = 3;
+    }
+  }
+}
+
+message ListManagedSigningResourcesResponse {
+  repeated ManagedSigningResourceRecord resources = 1;
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+package splitsecure.conveniencestore.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/conveniencestore/v1/tombstone.proto";
+import "splitsecure/enclaveservices/managedsigning/v1/authenticated_signing_keys.proto";
+
+message ManagedSigningResourceRecord {
+  bytes id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  Content content = 3;
+
+  // resource_s2r is the stable resource URI
+  // (s2r:{deployment}:managedkey:{teamSf}/{resourceSf}). Populated
+  // server-side on read from the team snowflake and the resource id; not
+  // persisted in DDB.
+  string resource_s2r = 4;
+
+  message Content {
+    oneof union {
+      Tombstone tombstone = 1;
+      UpdateableRecord updateable_record = 2;
+    }
+  }
+
+  message UpdateableRecord {
+    // The ID of the canonical resource record
+    bytes original_id = 1;
+
+    // The last time this record was updated
+    google.protobuf.Timestamp updated_at = 2;
+
+    UpdateableContent content = 3;
+  }
+
+  message UpdateableContent {
+    oneof union {
+      splitsecure.enclaveservices.managedsigning.v1.ManagedSigningKeysAuthenticated authenticated_signing_keys = 1;
+    }
+  }
+}

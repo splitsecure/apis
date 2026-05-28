@@ -1,0 +1,25 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.managedsigning.v1;
+
+import "splitsecure/enclaveservices/managedsigning/v1/create_signing_keys.proto";
+import "splitsecure/enclaveservices/managedsigning/v1/import_signing_keys.proto";
+import "splitsecure/enclaveservices/managedsigning/v1/prepare_key_import.proto";
+import "splitsecure/enclaveservices/managedsigning/v1/sign.proto";
+
+message Request {
+  oneof union {
+    CreateSigningKeysRequest create_signing_keys = 1;
+    SignRequest sign = 2;
+    PrepareKeyImportRequest prepare_key_import = 3;
+    ImportSigningKeysRequest import_signing_keys = 4;
+  }
+}
+
+message Response {
+  oneof union {
+    CreateSigningKeysResponse create_signing_keys = 1;
+    SignResponse sign = 2;
+    PrepareKeyImportResponse prepare_key_import = 3;
+    ImportSigningKeysResponse import_signing_keys = 4;
+  }
+}

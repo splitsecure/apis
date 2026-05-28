@@ -1,0 +1,28 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.threshold.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/enclave/v1/invoke_response.proto";
+
+// Public, trimmed view of the threshold service's proposal-result
+// bottle payload. Field tags 1 and 2 are wire-compatible with the
+// full definition in priv (splitsecure.enclaveservices.threshold.v1);
+// the private side additionally serializes a `scope_hints` field (tag
+// 3) carrying orgsvc-internal envelope material. Public consumers
+// ignore that tag as an unknown field — they only need `result` to
+// pull the proposal's InvokeResponse out of the bottle.
+//
+// Keep tags 1 and 2 in lockstep with the priv copy. Field numbers
+// above 2 are reserved here so future public additions don't collide
+// with private extensions.
+message ExecuteProposalResponse {
+  bottle.v1.Bottle result_bottle = 1;
+}
+
+message ProposalResult {
+  bytes execution_context_sum_sha3_512 = 1;
+  enclave.v1.InvokeResponse result = 2;
+
+  reserved 3;
+  reserved "scope_hints";
+}
