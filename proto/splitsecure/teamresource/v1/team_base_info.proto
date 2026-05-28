@@ -1,6 +1,8 @@
 syntax = "proto3";
 package splitsecure.teamresource.v1;
 
+import "splitsecure/hybridkeyset/v1/hybrid_key_set_with_detached_keys.proto";
+
 // TeamBaseInfo carries fields that persist across team rotations.
 message TeamBaseInfo {
   // serialized splitsecure.delegationgraph.v1.IdentityVertex
@@ -13,4 +15,12 @@ message TeamBaseInfo {
   // Empty when the team does not use this feature.
   // This persists through all team rotations (per-team, not per-version).
   bytes missing_piece_checksum = 2;
+
+  // exchange_hkswdk is the team's public exchange keyset. The private side
+  // is deterministically derived from the same team root as the team's
+  // signing keyset, so it is reconstructible by the team's threshold via
+  // the existing share material — no new shares are introduced. Used to
+  // IES-encrypt data targeted at the team. Persists through all team
+  // rotations (per-team, not per-version).
+  splitsecure.hybridkeyset.v1.HybridKeySetWithDetachedKeys exchange_hkswdk = 3;
 }

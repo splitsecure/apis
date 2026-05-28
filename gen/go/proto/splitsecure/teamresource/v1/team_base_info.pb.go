@@ -7,6 +7,7 @@
 package teamresourcev1
 
 import (
+	v1 "github.com/splitsecure/apis/gen/go/proto/splitsecure/hybridkeyset/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -33,8 +34,15 @@ type TeamBaseInfo struct {
 	// Empty when the team does not use this feature.
 	// This persists through all team rotations (per-team, not per-version).
 	MissingPieceChecksum []byte `protobuf:"bytes,2,opt,name=missing_piece_checksum,json=missingPieceChecksum,proto3" json:"missing_piece_checksum,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// exchange_hkswdk is the team's public exchange keyset. The private side
+	// is deterministically derived from the same team root as the team's
+	// signing keyset, so it is reconstructible by the team's threshold via
+	// the existing share material — no new shares are introduced. Used to
+	// IES-encrypt data targeted at the team. Persists through all team
+	// rotations (per-team, not per-version).
+	ExchangeHkswdk *v1.HybridKeySetWithDetachedKeys `protobuf:"bytes,3,opt,name=exchange_hkswdk,json=exchangeHkswdk,proto3" json:"exchange_hkswdk,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *TeamBaseInfo) Reset() {
@@ -81,14 +89,22 @@ func (x *TeamBaseInfo) GetMissingPieceChecksum() []byte {
 	return nil
 }
 
+func (x *TeamBaseInfo) GetExchangeHkswdk() *v1.HybridKeySetWithDetachedKeys {
+	if x != nil {
+		return x.ExchangeHkswdk
+	}
+	return nil
+}
+
 var File_splitsecure_teamresource_v1_team_base_info_proto protoreflect.FileDescriptor
 
 const file_splitsecure_teamresource_v1_team_base_info_proto_rawDesc = "" +
 	"\n" +
-	"0splitsecure/teamresource/v1/team_base_info.proto\x12\x1bsplitsecure.teamresource.v1\"`\n" +
+	"0splitsecure/teamresource/v1/team_base_info.proto\x12\x1bsplitsecure.teamresource.v1\x1aCsplitsecure/hybridkeyset/v1/hybrid_key_set_with_detached_keys.proto\"\xc4\x01\n" +
 	"\fTeamBaseInfo\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\fR\bidentity\x124\n" +
-	"\x16missing_piece_checksum\x18\x02 \x01(\fR\x14missingPieceChecksumB\x97\x02\n" +
+	"\x16missing_piece_checksum\x18\x02 \x01(\fR\x14missingPieceChecksum\x12b\n" +
+	"\x0fexchange_hkswdk\x18\x03 \x01(\v29.splitsecure.hybridkeyset.v1.HybridKeySetWithDetachedKeysR\x0eexchangeHkswdkB\x97\x02\n" +
 	"\x1fcom.splitsecure.teamresource.v1B\x11TeamBaseInfoProtoP\x01ZSgithub.com/splitsecure/apis/gen/go/proto/splitsecure/teamresource/v1;teamresourcev1\xa2\x02\x03STX\xaa\x02\x1bSplitsecure.Teamresource.V1\xca\x02\x1bSplitsecure\\Teamresource\\V1\xe2\x02'Splitsecure\\Teamresource\\V1\\GPBMetadata\xea\x02\x1dSplitsecure::Teamresource::V1b\x06proto3"
 
 var (
@@ -105,14 +121,16 @@ func file_splitsecure_teamresource_v1_team_base_info_proto_rawDescGZIP() []byte 
 
 var file_splitsecure_teamresource_v1_team_base_info_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_splitsecure_teamresource_v1_team_base_info_proto_goTypes = []any{
-	(*TeamBaseInfo)(nil), // 0: splitsecure.teamresource.v1.TeamBaseInfo
+	(*TeamBaseInfo)(nil),                    // 0: splitsecure.teamresource.v1.TeamBaseInfo
+	(*v1.HybridKeySetWithDetachedKeys)(nil), // 1: splitsecure.hybridkeyset.v1.HybridKeySetWithDetachedKeys
 }
 var file_splitsecure_teamresource_v1_team_base_info_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	1, // 0: splitsecure.teamresource.v1.TeamBaseInfo.exchange_hkswdk:type_name -> splitsecure.hybridkeyset.v1.HybridKeySetWithDetachedKeys
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_teamresource_v1_team_base_info_proto_init() }

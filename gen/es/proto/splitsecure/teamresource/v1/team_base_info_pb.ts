@@ -4,13 +4,15 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { HybridKeySetWithDetachedKeys } from "../../hybridkeyset/v1/hybrid_key_set_with_detached_keys_pb";
+import { file_splitsecure_hybridkeyset_v1_hybrid_key_set_with_detached_keys } from "../../hybridkeyset/v1/hybrid_key_set_with_detached_keys_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file splitsecure/teamresource/v1/team_base_info.proto.
  */
 export const file_splitsecure_teamresource_v1_team_base_info: GenFile = /*@__PURE__*/
-  fileDesc("CjBzcGxpdHNlY3VyZS90ZWFtcmVzb3VyY2UvdjEvdGVhbV9iYXNlX2luZm8ucHJvdG8SG3NwbGl0c2VjdXJlLnRlYW1yZXNvdXJjZS52MSJACgxUZWFtQmFzZUluZm8SEAoIaWRlbnRpdHkYASABKAwSHgoWbWlzc2luZ19waWVjZV9jaGVja3N1bRgCIAEoDEKXAgofY29tLnNwbGl0c2VjdXJlLnRlYW1yZXNvdXJjZS52MUIRVGVhbUJhc2VJbmZvUHJvdG9QAVpTZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS90ZWFtcmVzb3VyY2UvdjE7dGVhbXJlc291cmNldjGiAgNTVFiqAhtTcGxpdHNlY3VyZS5UZWFtcmVzb3VyY2UuVjHKAhtTcGxpdHNlY3VyZVxUZWFtcmVzb3VyY2VcVjHiAidTcGxpdHNlY3VyZVxUZWFtcmVzb3VyY2VcVjFcR1BCTWV0YWRhdGHqAh1TcGxpdHNlY3VyZTo6VGVhbXJlc291cmNlOjpWMWIGcHJvdG8z");
+  fileDesc("CjBzcGxpdHNlY3VyZS90ZWFtcmVzb3VyY2UvdjEvdGVhbV9iYXNlX2luZm8ucHJvdG8SG3NwbGl0c2VjdXJlLnRlYW1yZXNvdXJjZS52MSKUAQoMVGVhbUJhc2VJbmZvEhAKCGlkZW50aXR5GAEgASgMEh4KFm1pc3NpbmdfcGllY2VfY2hlY2tzdW0YAiABKAwSUgoPZXhjaGFuZ2VfaGtzd2RrGAMgASgLMjkuc3BsaXRzZWN1cmUuaHlicmlka2V5c2V0LnYxLkh5YnJpZEtleVNldFdpdGhEZXRhY2hlZEtleXNClwIKH2NvbS5zcGxpdHNlY3VyZS50ZWFtcmVzb3VyY2UudjFCEVRlYW1CYXNlSW5mb1Byb3RvUAFaU2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvdGVhbXJlc291cmNlL3YxO3RlYW1yZXNvdXJjZXYxogIDU1RYqgIbU3BsaXRzZWN1cmUuVGVhbXJlc291cmNlLlYxygIbU3BsaXRzZWN1cmVcVGVhbXJlc291cmNlXFYx4gInU3BsaXRzZWN1cmVcVGVhbXJlc291cmNlXFYxXEdQQk1ldGFkYXRh6gIdU3BsaXRzZWN1cmU6OlRlYW1yZXNvdXJjZTo6VjFiBnByb3RvMw", [file_splitsecure_hybridkeyset_v1_hybrid_key_set_with_detached_keys]);
 
 /**
  * TeamBaseInfo carries fields that persist across team rotations.
@@ -36,6 +38,18 @@ export type TeamBaseInfo = Message<"splitsecure.teamresource.v1.TeamBaseInfo"> &
    * @generated from field: bytes missing_piece_checksum = 2;
    */
   missingPieceChecksum: Uint8Array;
+
+  /**
+   * exchange_hkswdk is the team's public exchange keyset. The private side
+   * is deterministically derived from the same team root as the team's
+   * signing keyset, so it is reconstructible by the team's threshold via
+   * the existing share material — no new shares are introduced. Used to
+   * IES-encrypt data targeted at the team. Persists through all team
+   * rotations (per-team, not per-version).
+   *
+   * @generated from field: splitsecure.hybridkeyset.v1.HybridKeySetWithDetachedKeys exchange_hkswdk = 3;
+   */
+  exchangeHkswdk?: HybridKeySetWithDetachedKeys;
 };
 
 /**
