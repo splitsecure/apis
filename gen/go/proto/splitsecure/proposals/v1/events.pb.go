@@ -222,8 +222,12 @@ type ProposalEvent_ProposalPublished struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
 	Proposal           *Proposal              `protobuf:"bytes,1,opt,name=proposal,proto3" json:"proposal,omitempty"`
 	InitiatorEnclaveId []byte                 `protobuf:"bytes,2,opt,name=initiator_enclave_id,json=initiatorEnclaveId,proto3" json:"initiator_enclave_id,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// initiator_principal_s2r is the user/SA S2R of the account
+	// caller who issued the original Send that produced this proposal.
+	// Empty for enclave-initiated proposals (companion-paired sends).
+	InitiatorPrincipalS2R string `protobuf:"bytes,3,opt,name=initiator_principal_s2r,json=initiatorPrincipalS2r,proto3" json:"initiator_principal_s2r,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ProposalEvent_ProposalPublished) Reset() {
@@ -268,6 +272,13 @@ func (x *ProposalEvent_ProposalPublished) GetInitiatorEnclaveId() []byte {
 		return x.InitiatorEnclaveId
 	}
 	return nil
+}
+
+func (x *ProposalEvent_ProposalPublished) GetInitiatorPrincipalS2R() string {
+	if x != nil {
+		return x.InitiatorPrincipalS2R
+	}
+	return ""
 }
 
 type ProposalEvent_VoteReceived struct {
@@ -596,7 +607,7 @@ var File_splitsecure_proposals_v1_events_proto protoreflect.FileDescriptor
 
 const file_splitsecure_proposals_v1_events_proto_rawDesc = "" +
 	"\n" +
-	"%splitsecure/proposals/v1/events.proto\x12\x18splitsecure.proposals.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\"splitsecure/bottle/v1/bottle.proto\x1a'splitsecure/proposals/v1/proposal.proto\"\xb7\f\n" +
+	"%splitsecure/proposals/v1/events.proto\x12\x18splitsecure.proposals.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\"splitsecure/bottle/v1/bottle.proto\x1a'splitsecure/proposals/v1/proposal.proto\"\xef\f\n" +
 	"\rProposalEvent\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12+\n" +
@@ -609,10 +620,11 @@ const file_splitsecure_proposals_v1_events_proto_rawDesc = "" +
 	"\x12notification_acked\x18\b \x01(\v29.splitsecure.proposals.v1.ProposalEvent.NotificationAckedH\x00R\x11notificationAcked\x12g\n" +
 	"\x11threshold_reached\x18\t \x01(\v28.splitsecure.proposals.v1.ProposalEvent.ThresholdReachedH\x00R\x10thresholdReached\x12d\n" +
 	"\x10proposal_expired\x18\n" +
-	" \x01(\v27.splitsecure.proposals.v1.ProposalEvent.ProposalExpiredH\x00R\x0fproposalExpired\x1a\x85\x01\n" +
+	" \x01(\v27.splitsecure.proposals.v1.ProposalEvent.ProposalExpiredH\x00R\x0fproposalExpired\x1a\xbd\x01\n" +
 	"\x11ProposalPublished\x12>\n" +
 	"\bproposal\x18\x01 \x01(\v2\".splitsecure.proposals.v1.ProposalR\bproposal\x120\n" +
-	"\x14initiator_enclave_id\x18\x02 \x01(\fR\x12initiatorEnclaveId\x1ax\n" +
+	"\x14initiator_enclave_id\x18\x02 \x01(\fR\x12initiatorEnclaveId\x126\n" +
+	"\x17initiator_principal_s2r\x18\x03 \x01(\tR\x15initiatorPrincipalS2r\x1ax\n" +
 	"\fVoteReceived\x12>\n" +
 	"\vvote_bottle\x18\x01 \x01(\v2\x1d.splitsecure.bottle.v1.BottleR\n" +
 	"voteBottle\x12(\n" +

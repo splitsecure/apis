@@ -24,6 +24,10 @@ message ProposalEvent {
   message ProposalPublished {
     Proposal proposal = 1;
     bytes initiator_enclave_id = 2;
+    // initiator_principal_s2r is the user/SA S2R of the account
+    // caller who issued the original Send that produced this proposal.
+    // Empty for enclave-initiated proposals (companion-paired sends).
+    string initiator_principal_s2r = 3;
   }
 
   message VoteReceived {
