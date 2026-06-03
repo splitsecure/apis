@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.delegationgraph.v1;
+
+import "splitsecure/attestation/v1/generic.proto";
+
+// AttestationNode associates a platform attestation with an identity in the graph.
+message AttestationNode {
+  bytes subject_node_sum = 1;
+  splitsecure.attestation.v1.Generic attestation = 2;
+}

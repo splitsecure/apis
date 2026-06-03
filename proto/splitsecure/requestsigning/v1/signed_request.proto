@@ -3,7 +3,6 @@ package splitsecure.requestsigning.v1;
 
 import "google/protobuf/any.proto";
 import "google/protobuf/timestamp.proto";
-import "splitsecure/attestation/v1/generic.proto";
 import "splitsecure/delegationgraph/v1/graph.proto";
 import "splitsecure/hybridkeyset/v1/signature.proto";
 
@@ -13,9 +12,6 @@ message SignedRequest {
 
   splitsecure.delegationgraph.v1.Graph graph = 3;
   splitsecure.hybridkeyset.v1.Signature signature = 4;
-
-  // attestation present only if request comes from an enclave
-  splitsecure.attestation.v1.Generic attestation = 5;
 
   // contains SignedRequest_Authenticated
   bytes authenticated = 1;
