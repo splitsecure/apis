@@ -1,9 +1,11 @@
 syntax = "proto3";
 package splitsecure.attestation.v1;
 
+import "splitsecure/attestation/v1/amd_sev_snp_attestation.proto";
 import "splitsecure/attestation/v1/android_key_attestation.proto";
 import "splitsecure/attestation/v1/apple_device_check_attestation.proto";
 import "splitsecure/attestation/v1/aws_nitro_attestation.proto";
+import "splitsecure/attestation/v1/intel_tdx_attestation.proto";
 
 // Generic represents platform attestation data from any supported platform.
 message Generic {
@@ -12,5 +14,7 @@ message Generic {
     AppleDeviceCheckAttestation apple_dc = 2;
     AWSNitroAttestation aws_nitro = 3;
     AndroidKeyAttestation android_ka = 4;
+    IntelTDXAttestation intel_tdx = 5;
+    AMDSEVSNPAttestation amd_sev_snp = 6;
   }
 }
