@@ -19,4 +19,22 @@ message PlatformData {
   // produces; tamper-evident via the bottle signature. Consumers dispatch
   // on s2rid.KindOf(principal_s2r) to resolve the principal.
   string principal_s2r = 3;
+
+  // attributed_principal_s2rs are the verified s2r URIs of the principal(s)
+  // this bottle is attributed to — the acting team member(s), resolved at
+  // seal time from the signing enclave's own team membership (deduped; may be
+  // multiple when more than one user is linked to the enclave), falling back
+  // to the enclave creator principal. Distinct from principal_s2r, which is
+  // the enclave's provisioned/owner principal. Free-text identities are
+  // carried separately in attributed_custom_identifiers. Tamper-evident via
+  // the bottle signature.
+  repeated string attributed_principal_s2rs = 4;
+
+  // attributed_custom_identifiers are the free-text identifiers of unlinked
+  // (custom-identity) team members this bottle is attributed to, resolved at
+  // seal time from the signing enclave's team membership (deduped). No backing
+  // account record; always rendered with an "(unverified)" tag. Kept separate
+  // from attributed_principal_s2rs so free text can never be parsed as a
+  // verified URI.
+  repeated string attributed_custom_identifiers = 5;
 }
