@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "splitsecure/authz/v1/tier.proto";
+import "splitsecure/orgsvc/v1/grant.proto";
+
+message PutGrantRequest {
+  string org_s2r = 1;
+  string resource_s2r = 2;
+  string grantee_s2r = 3;
+  splitsecure.authz.v1.Tier tier = 4;
+}
+
+message PutGrantResponse {
+  Grant grant = 1;
+}

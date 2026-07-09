@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+message Member {
+  // User S2R URI: s2r:{deployment}:usr:{id}.
+  string user_id = 1;
+  string email = 2;
+  string display_name = 3;
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// GroupMember is a single (group, principal) membership row.
+message GroupMember {
+  string group_s2r = 1;
+  string principal_s2r = 2;
+  google.protobuf.Timestamp created_at = 3;
+}

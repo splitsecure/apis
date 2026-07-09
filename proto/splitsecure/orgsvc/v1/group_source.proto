@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+// GroupSource is how a group is managed.
+//
+// SYSTEM is the per-org "Everyone" group minted at org creation.
+enum GroupSource {
+  GROUP_SOURCE_UNSPECIFIED = 0;
+  GROUP_SOURCE_LOCAL = 1;
+  GROUP_SOURCE_SCIM = 2;
+  GROUP_SOURCE_SYSTEM = 3;
+}

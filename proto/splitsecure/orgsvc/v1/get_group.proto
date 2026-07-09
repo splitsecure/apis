@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "splitsecure/orgsvc/v1/group.proto";
+
+message GetGroupRequest {
+  string group_s2r = 1;
+}
+
+message GetGroupResponse {
+  Group group = 1;
+}

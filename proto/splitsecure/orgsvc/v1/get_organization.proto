@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "splitsecure/orgsvc/v1/organization_resource.proto";
+
+message GetOrganizationRequest {
+  Base base = 2;
+  message Base {
+    string organization_id = 1;
+  }
+}
+
+message GetOrganizationResponse {
+  Organization organization = 1;
+}

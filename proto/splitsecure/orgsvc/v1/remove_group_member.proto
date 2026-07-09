@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+message RemoveGroupMemberRequest {
+  string group_s2r = 1;
+  string principal_s2r = 2;
+}
+
+message RemoveGroupMemberResponse {}

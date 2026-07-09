@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "splitsecure/orgsvc/v1/add_group_members.proto";
+import "splitsecure/orgsvc/v1/create_group.proto";
+import "splitsecure/orgsvc/v1/delete_grant.proto";
+import "splitsecure/orgsvc/v1/delete_group.proto";
+import "splitsecure/orgsvc/v1/get_grant.proto";
+import "splitsecure/orgsvc/v1/get_group.proto";
+import "splitsecure/orgsvc/v1/get_organization.proto";
+import "splitsecure/orgsvc/v1/get_service_accounts.proto";
+import "splitsecure/orgsvc/v1/list_grants_by_resource.proto";
+import "splitsecure/orgsvc/v1/list_group_members.proto";
+import "splitsecure/orgsvc/v1/list_groups.proto";
+import "splitsecure/orgsvc/v1/list_members.proto";
+import "splitsecure/orgsvc/v1/put_grant.proto";
+import "splitsecure/orgsvc/v1/remove_group_member.proto";
+import "splitsecure/orgsvc/v1/update_group.proto";
+
+// OrgService exposes org-scoped directory reads and access management:
+// principal groups and per-resource grants. Callers authenticate with a
+// bearer credential (e.g. a service-account API key); every RPC requires
+// membership in the target org.
+service OrgService {
+  // Directory reads. Any org member may call these.
+  rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse);
+  rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
+  rpc GetServiceAccounts(GetServiceAccountsRequest) returns (GetServiceAccountsResponse);
+
+  // Groups. Reads are open to any org member. ListGroups omits system
+  // groups; the org's "Everyone" group is exposed as
+  // Organization.everyone_group_s2r, and ListGroupMembers rejects it
+  // (its membership is the org membership). Mutations require the org
+  // owner or admin role and are rejected for SCIM- and system-managed
+  // groups.
+  rpc CreateGroup(CreateGroupRequest) returns (CreateGroupResponse);
+  rpc GetGroup(GetGroupRequest) returns (GetGroupResponse);
+  rpc ListGroups(ListGroupsRequest) returns (ListGroupsResponse);
+  rpc UpdateGroup(UpdateGroupRequest) returns (UpdateGroupResponse);
+  rpc DeleteGroup(DeleteGroupRequest) returns (DeleteGroupResponse);
+  rpc AddGroupMembers(AddGroupMembersRequest) returns (AddGroupMembersResponse);
+  rpc RemoveGroupMember(RemoveGroupMemberRequest) returns (RemoveGroupMemberResponse);
+  rpc ListGroupMembers(ListGroupMembersRequest) returns (ListGroupMembersResponse);
+
+  // Per-resource grants: (resource, grantee) -> tier, where the grantee
+  // is a user, service account, or group S2R. PutGrant is an upsert.
+  // Mutations require the caller to hold the edit tier on the resource
+  // (org owners and admins hold it implicitly).
+  rpc PutGrant(PutGrantRequest) returns (PutGrantResponse);
+  rpc GetGrant(GetGrantRequest) returns (GetGrantResponse);
+  rpc DeleteGrant(DeleteGrantRequest) returns (DeleteGrantResponse);
+  rpc ListGrantsByResource(ListGrantsByResourceRequest) returns (ListGrantsByResourceResponse);
+}

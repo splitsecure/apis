@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "splitsecure/orgsvc/v1/grant.proto";
+
+// ListGrantsByResource returns every grant pointing at a single
+// resource for the specified org.
+message ListGrantsByResourceRequest {
+  string org_s2r = 1;
+  string resource_s2r = 2;
+}
+
+message ListGrantsByResourceResponse {
+  repeated Grant grants = 1;
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+message Organization {
+  string id = 1;
+  string name = 2;
+  // S2R of the org's system "Everyone" group, minted at org creation.
+  // Every active org member is implicitly included. ListGroups does not
+  // return system groups; this field is the way to obtain it.
+  string everyone_group_s2r = 6;
+
+  State state = 5;
+  enum State {
+    STATE_UNSPECIFIED = 0;
+    STATE_ACTIVE = 1;
+    STATE_DEACTIVATED = 2;
+    STATE_PENDING_DEACTIVATION = 3;
+    STATE_UNPAID = 4;
+    // Deactivated org with a scheduled, reversible data purge.
+    STATE_PENDING_DELETION = 6;
+    // 5 was STATE_TRIALING; premium trial is an org attribute, not a lifecycle state.
+    reserved 5;
+    reserved "STATE_TRIALING";
+  }
+}

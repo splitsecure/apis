@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+message AddGroupMembersRequest {
+  string group_s2r = 1;
+  // User ("usr") or service-account ("sa") S2Rs. Other
+  // s2r kinds are rejected.
+  repeated string principal_s2rs = 2;
+}
+
+message AddGroupMembersResponse {
+  repeated Result results = 1;
+
+  message Result {
+    string principal_s2r = 1;
+    // Empty when the principal was added successfully or was already a member.
+    // Populated with a human-readable reason for any other failure.
+    string error = 2;
+    bool already_member = 3;
+  }
+}
