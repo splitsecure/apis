@@ -35,9 +35,25 @@ type PlatformData struct {
 	// at enclave-creation time and sealed into every bottle the enclave
 	// produces; tamper-evident via the bottle signature. Consumers dispatch
 	// on s2rid.KindOf(principal_s2r) to resolve the principal.
-	PrincipalS2R  string `protobuf:"bytes,3,opt,name=principal_s2r,json=principalS2r,proto3" json:"principal_s2r,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	PrincipalS2R string `protobuf:"bytes,3,opt,name=principal_s2r,json=principalS2r,proto3" json:"principal_s2r,omitempty"`
+	// attributed_principal_s2rs are the verified s2r URIs of the principal(s)
+	// this bottle is attributed to — the acting team member(s), resolved at
+	// seal time from the signing enclave's own team membership (deduped; may be
+	// multiple when more than one user is linked to the enclave), falling back
+	// to the enclave creator principal. Distinct from principal_s2r, which is
+	// the enclave's provisioned/owner principal. Free-text identities are
+	// carried separately in attributed_custom_identifiers. Tamper-evident via
+	// the bottle signature.
+	AttributedPrincipalS2Rs []string `protobuf:"bytes,4,rep,name=attributed_principal_s2rs,json=attributedPrincipalS2rs,proto3" json:"attributed_principal_s2rs,omitempty"`
+	// attributed_custom_identifiers are the free-text identifiers of unlinked
+	// (custom-identity) team members this bottle is attributed to, resolved at
+	// seal time from the signing enclave's team membership (deduped). No backing
+	// account record; always rendered with an "(unverified)" tag. Kept separate
+	// from attributed_principal_s2rs so free text can never be parsed as a
+	// verified URI.
+	AttributedCustomIdentifiers []string `protobuf:"bytes,5,rep,name=attributed_custom_identifiers,json=attributedCustomIdentifiers,proto3" json:"attributed_custom_identifiers,omitempty"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *PlatformData) Reset() {
@@ -91,16 +107,32 @@ func (x *PlatformData) GetPrincipalS2R() string {
 	return ""
 }
 
+func (x *PlatformData) GetAttributedPrincipalS2Rs() []string {
+	if x != nil {
+		return x.AttributedPrincipalS2Rs
+	}
+	return nil
+}
+
+func (x *PlatformData) GetAttributedCustomIdentifiers() []string {
+	if x != nil {
+		return x.AttributedCustomIdentifiers
+	}
+	return nil
+}
+
 var File_splitsecure_bottle_v1_platform_data_proto protoreflect.FileDescriptor
 
 const file_splitsecure_bottle_v1_platform_data_proto_rawDesc = "" +
 	"\n" +
-	")splitsecure/bottle/v1/platform_data.proto\x12\x15splitsecure.bottle.v1\x1a'splitsecure/bottle/v1/device_info.proto\"\x8f\x01\n" +
+	")splitsecure/bottle/v1/platform_data.proto\x12\x15splitsecure.bottle.v1\x1a'splitsecure/bottle/v1/device_info.proto\"\x8f\x02\n" +
 	"\fPlatformData\x12\x16\n" +
 	"\x06source\x18\x01 \x01(\tR\x06source\x12B\n" +
 	"\vdevice_info\x18\x02 \x01(\v2!.splitsecure.bottle.v1.DeviceInfoR\n" +
 	"deviceInfo\x12#\n" +
-	"\rprincipal_s2r\x18\x03 \x01(\tR\fprincipalS2rB\xed\x01\n" +
+	"\rprincipal_s2r\x18\x03 \x01(\tR\fprincipalS2r\x12:\n" +
+	"\x19attributed_principal_s2rs\x18\x04 \x03(\tR\x17attributedPrincipalS2rs\x12B\n" +
+	"\x1dattributed_custom_identifiers\x18\x05 \x03(\tR\x1battributedCustomIdentifiersB\xed\x01\n" +
 	"\x19com.splitsecure.bottle.v1B\x11PlatformDataProtoP\x01ZGgithub.com/splitsecure/apis/gen/go/proto/splitsecure/bottle/v1;bottlev1\xa2\x02\x03SBX\xaa\x02\x15Splitsecure.Bottle.V1\xca\x02\x15Splitsecure\\Bottle\\V1\xe2\x02!Splitsecure\\Bottle\\V1\\GPBMetadata\xea\x02\x17Splitsecure::Bottle::V1b\x06proto3"
 
 var (

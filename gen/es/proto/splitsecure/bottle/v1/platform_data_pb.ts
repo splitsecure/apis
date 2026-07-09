@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/bottle/v1/platform_data.proto.
  */
 export const file_splitsecure_bottle_v1_platform_data: GenFile = /*@__PURE__*/
-  fileDesc("CilzcGxpdHNlY3VyZS9ib3R0bGUvdjEvcGxhdGZvcm1fZGF0YS5wcm90bxIVc3BsaXRzZWN1cmUuYm90dGxlLnYxIm0KDFBsYXRmb3JtRGF0YRIOCgZzb3VyY2UYASABKAkSNgoLZGV2aWNlX2luZm8YAiABKAsyIS5zcGxpdHNlY3VyZS5ib3R0bGUudjEuRGV2aWNlSW5mbxIVCg1wcmluY2lwYWxfczJyGAMgASgJQu0BChljb20uc3BsaXRzZWN1cmUuYm90dGxlLnYxQhFQbGF0Zm9ybURhdGFQcm90b1ABWkdnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL2JvdHRsZS92MTtib3R0bGV2MaICA1NCWKoCFVNwbGl0c2VjdXJlLkJvdHRsZS5WMcoCFVNwbGl0c2VjdXJlXEJvdHRsZVxWMeICIVNwbGl0c2VjdXJlXEJvdHRsZVxWMVxHUEJNZXRhZGF0YeoCF1NwbGl0c2VjdXJlOjpCb3R0bGU6OlYxYgZwcm90bzM", [file_splitsecure_bottle_v1_device_info]);
+  fileDesc("CilzcGxpdHNlY3VyZS9ib3R0bGUvdjEvcGxhdGZvcm1fZGF0YS5wcm90bxIVc3BsaXRzZWN1cmUuYm90dGxlLnYxIrcBCgxQbGF0Zm9ybURhdGESDgoGc291cmNlGAEgASgJEjYKC2RldmljZV9pbmZvGAIgASgLMiEuc3BsaXRzZWN1cmUuYm90dGxlLnYxLkRldmljZUluZm8SFQoNcHJpbmNpcGFsX3MychgDIAEoCRIhChlhdHRyaWJ1dGVkX3ByaW5jaXBhbF9zMnJzGAQgAygJEiUKHWF0dHJpYnV0ZWRfY3VzdG9tX2lkZW50aWZpZXJzGAUgAygJQu0BChljb20uc3BsaXRzZWN1cmUuYm90dGxlLnYxQhFQbGF0Zm9ybURhdGFQcm90b1ABWkdnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL2JvdHRsZS92MTtib3R0bGV2MaICA1NCWKoCFVNwbGl0c2VjdXJlLkJvdHRsZS5WMcoCFVNwbGl0c2VjdXJlXEJvdHRsZVxWMeICIVNwbGl0c2VjdXJlXEJvdHRsZVxWMVxHUEJNZXRhZGF0YeoCF1NwbGl0c2VjdXJlOjpCb3R0bGU6OlYxYgZwcm90bzM", [file_splitsecure_bottle_v1_device_info]);
 
 /**
  * @generated from message splitsecure.bottle.v1.PlatformData
@@ -45,6 +45,32 @@ export type PlatformData = Message<"splitsecure.bottle.v1.PlatformData"> & {
    * @generated from field: string principal_s2r = 3;
    */
   principalS2r: string;
+
+  /**
+   * attributed_principal_s2rs are the verified s2r URIs of the principal(s)
+   * this bottle is attributed to — the acting team member(s), resolved at
+   * seal time from the signing enclave's own team membership (deduped; may be
+   * multiple when more than one user is linked to the enclave), falling back
+   * to the enclave creator principal. Distinct from principal_s2r, which is
+   * the enclave's provisioned/owner principal. Free-text identities are
+   * carried separately in attributed_custom_identifiers. Tamper-evident via
+   * the bottle signature.
+   *
+   * @generated from field: repeated string attributed_principal_s2rs = 4;
+   */
+  attributedPrincipalS2rs: string[];
+
+  /**
+   * attributed_custom_identifiers are the free-text identifiers of unlinked
+   * (custom-identity) team members this bottle is attributed to, resolved at
+   * seal time from the signing enclave's team membership (deduped). No backing
+   * account record; always rendered with an "(unverified)" tag. Kept separate
+   * from attributed_principal_s2rs so free text can never be parsed as a
+   * verified URI.
+   *
+   * @generated from field: repeated string attributed_custom_identifiers = 5;
+   */
+  attributedCustomIdentifiers: string[];
 };
 
 /**
