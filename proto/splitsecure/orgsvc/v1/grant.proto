@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/authz/v1/tier.proto";
+
+// Grant authorizes a principal or group to act on a single resource
+// at a given tier.
+message Grant {
+  string org_s2r = 1;
+  string resource_s2r = 2;
+  string grantee_s2r = 3;
+  splitsecure.authz.v1.Tier tier = 4;
+  // Principal id of the granter, recorded for audit purposes.
+  string granted_by = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+}

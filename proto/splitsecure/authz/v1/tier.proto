@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package splitsecure.authz.v1;
+
+// Tier is the per-resource permission level granted to a principal or
+// group. Tiers are linear: edit implies use, use implies view. Cross-
+// service: lives outside any specific service package so authz, org,
+// conveniencestore, and admin protos can all reference it without
+// pulling each other in.
+enum Tier {
+  TIER_UNSPECIFIED = 0;
+  TIER_VIEW = 1;
+  TIER_USE = 2;
+  TIER_EDIT = 3;
+}

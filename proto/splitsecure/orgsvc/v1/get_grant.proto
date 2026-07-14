@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "splitsecure/orgsvc/v1/grant.proto";
+
+message GetGrantRequest {
+  string org_s2r = 1;
+  string resource_s2r = 2;
+  string grantee_s2r = 3;
+}
+
+message GetGrantResponse {
+  Grant grant = 1;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "splitsecure/orgsvc/v1/group.proto";
+
+message ListGroupsRequest {
+  string org_s2r = 1;
+}
+
+message ListGroupsResponse {
+  repeated Group groups = 1;
+}

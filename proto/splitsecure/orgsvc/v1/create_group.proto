@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "splitsecure/orgsvc/v1/group.proto";
+import "splitsecure/orgsvc/v1/group_source.proto";
+
+message CreateGroupRequest {
+  string org_s2r = 1;
+  string name = 2;
+  GroupSource source = 3;
+  // Required when source = GROUP_SOURCE_SCIM, empty otherwise.
+  string external_id = 4;
+}
+
+message CreateGroupResponse {
+  Group group = 1;
+}
