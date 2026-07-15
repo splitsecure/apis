@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/orgsvc/v1/list_groups.proto.
  */
 export const file_splitsecure_orgsvc_v1_list_groups: GenFile = /*@__PURE__*/
-  fileDesc("CidzcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncm91cHMucHJvdG8SFXNwbGl0c2VjdXJlLm9yZ3N2Yy52MSIkChFMaXN0R3JvdXBzUmVxdWVzdBIPCgdvcmdfczJyGAEgASgJIkIKEkxpc3RHcm91cHNSZXNwb25zZRIsCgZncm91cHMYASADKAsyHC5zcGxpdHNlY3VyZS5vcmdzdmMudjEuR3JvdXBC6wEKGWNvbS5zcGxpdHNlY3VyZS5vcmdzdmMudjFCD0xpc3RHcm91cHNQcm90b1ABWkdnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL29yZ3N2Yy92MTtvcmdzdmN2MaICA1NPWKoCFVNwbGl0c2VjdXJlLk9yZ3N2Yy5WMcoCFVNwbGl0c2VjdXJlXE9yZ3N2Y1xWMeICIVNwbGl0c2VjdXJlXE9yZ3N2Y1xWMVxHUEJNZXRhZGF0YeoCF1NwbGl0c2VjdXJlOjpPcmdzdmM6OlYxYgZwcm90bzM", [file_splitsecure_orgsvc_v1_group]);
+  fileDesc("CidzcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncm91cHMucHJvdG8SFXNwbGl0c2VjdXJlLm9yZ3N2Yy52MSJDChFMaXN0R3JvdXBzUmVxdWVzdBIPCgdvcmdfczJyGAEgASgJEg0KBWxpbWl0GAIgASgFEg4KBmN1cnNvchgDIAEoCSJXChJMaXN0R3JvdXBzUmVzcG9uc2USLAoGZ3JvdXBzGAEgAygLMhwuc3BsaXRzZWN1cmUub3Jnc3ZjLnYxLkdyb3VwEhMKC25leHRfY3Vyc29yGAIgASgJQusBChljb20uc3BsaXRzZWN1cmUub3Jnc3ZjLnYxQg9MaXN0R3JvdXBzUHJvdG9QAVpHZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS9vcmdzdmMvdjE7b3Jnc3ZjdjGiAgNTT1iqAhVTcGxpdHNlY3VyZS5PcmdzdmMuVjHKAhVTcGxpdHNlY3VyZVxPcmdzdmNcVjHiAiFTcGxpdHNlY3VyZVxPcmdzdmNcVjFcR1BCTWV0YWRhdGHqAhdTcGxpdHNlY3VyZTo6T3Jnc3ZjOjpWMWIGcHJvdG8z", [file_splitsecure_orgsvc_v1_group]);
 
 /**
  * @generated from message splitsecure.orgsvc.v1.ListGroupsRequest
@@ -22,6 +22,16 @@ export type ListGroupsRequest = Message<"splitsecure.orgsvc.v1.ListGroupsRequest
    * @generated from field: string org_s2r = 1;
    */
   orgS2r: string;
+
+  /**
+   * @generated from field: int32 limit = 2;
+   */
+  limit: number;
+
+  /**
+   * @generated from field: string cursor = 3;
+   */
+  cursor: string;
 };
 
 /**
@@ -39,6 +49,11 @@ export type ListGroupsResponse = Message<"splitsecure.orgsvc.v1.ListGroupsRespon
    * @generated from field: repeated splitsecure.orgsvc.v1.Group groups = 1;
    */
   groups: Group[];
+
+  /**
+   * @generated from field: string next_cursor = 2;
+   */
+  nextCursor: string;
 };
 
 /**

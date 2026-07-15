@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/orgsvc/v1/list_group_members.proto.
  */
 export const file_splitsecure_orgsvc_v1_list_group_members: GenFile = /*@__PURE__*/
-  fileDesc("Ci5zcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncm91cF9tZW1iZXJzLnByb3RvEhVzcGxpdHNlY3VyZS5vcmdzdmMudjEiLAoXTGlzdEdyb3VwTWVtYmVyc1JlcXVlc3QSEQoJZ3JvdXBfczJyGAEgASgJIk8KGExpc3RHcm91cE1lbWJlcnNSZXNwb25zZRIzCgdtZW1iZXJzGAEgAygLMiIuc3BsaXRzZWN1cmUub3Jnc3ZjLnYxLkdyb3VwTWVtYmVyQvEBChljb20uc3BsaXRzZWN1cmUub3Jnc3ZjLnYxQhVMaXN0R3JvdXBNZW1iZXJzUHJvdG9QAVpHZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS9vcmdzdmMvdjE7b3Jnc3ZjdjGiAgNTT1iqAhVTcGxpdHNlY3VyZS5PcmdzdmMuVjHKAhVTcGxpdHNlY3VyZVxPcmdzdmNcVjHiAiFTcGxpdHNlY3VyZVxPcmdzdmNcVjFcR1BCTWV0YWRhdGHqAhdTcGxpdHNlY3VyZTo6T3Jnc3ZjOjpWMWIGcHJvdG8z", [file_splitsecure_orgsvc_v1_group_member]);
+  fileDesc("Ci5zcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncm91cF9tZW1iZXJzLnByb3RvEhVzcGxpdHNlY3VyZS5vcmdzdmMudjEiSwoXTGlzdEdyb3VwTWVtYmVyc1JlcXVlc3QSEQoJZ3JvdXBfczJyGAEgASgJEg0KBWxpbWl0GAIgASgFEg4KBmN1cnNvchgDIAEoCSJkChhMaXN0R3JvdXBNZW1iZXJzUmVzcG9uc2USMwoHbWVtYmVycxgBIAMoCzIiLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MS5Hcm91cE1lbWJlchITCgtuZXh0X2N1cnNvchgCIAEoCULxAQoZY29tLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MUIVTGlzdEdyb3VwTWVtYmVyc1Byb3RvUAFaR2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvb3Jnc3ZjL3YxO29yZ3N2Y3YxogIDU09YqgIVU3BsaXRzZWN1cmUuT3Jnc3ZjLlYxygIVU3BsaXRzZWN1cmVcT3Jnc3ZjXFYx4gIhU3BsaXRzZWN1cmVcT3Jnc3ZjXFYxXEdQQk1ldGFkYXRh6gIXU3BsaXRzZWN1cmU6Ok9yZ3N2Yzo6VjFiBnByb3RvMw", [file_splitsecure_orgsvc_v1_group_member]);
 
 /**
  * @generated from message splitsecure.orgsvc.v1.ListGroupMembersRequest
@@ -22,6 +22,16 @@ export type ListGroupMembersRequest = Message<"splitsecure.orgsvc.v1.ListGroupMe
    * @generated from field: string group_s2r = 1;
    */
   groupS2r: string;
+
+  /**
+   * @generated from field: int32 limit = 2;
+   */
+  limit: number;
+
+  /**
+   * @generated from field: string cursor = 3;
+   */
+  cursor: string;
 };
 
 /**
@@ -39,6 +49,11 @@ export type ListGroupMembersResponse = Message<"splitsecure.orgsvc.v1.ListGroupM
    * @generated from field: repeated splitsecure.orgsvc.v1.GroupMember members = 1;
    */
   members: GroupMember[];
+
+  /**
+   * @generated from field: string next_cursor = 2;
+   */
+  nextCursor: string;
 };
 
 /**
