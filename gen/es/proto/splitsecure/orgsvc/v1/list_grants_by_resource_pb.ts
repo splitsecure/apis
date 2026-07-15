@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/orgsvc/v1/list_grants_by_resource.proto.
  */
 export const file_splitsecure_orgsvc_v1_list_grants_by_resource: GenFile = /*@__PURE__*/
-  fileDesc("CjNzcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncmFudHNfYnlfcmVzb3VyY2UucHJvdG8SFXNwbGl0c2VjdXJlLm9yZ3N2Yy52MSJEChtMaXN0R3JhbnRzQnlSZXNvdXJjZVJlcXVlc3QSDwoHb3JnX3MychgBIAEoCRIUCgxyZXNvdXJjZV9zMnIYAiABKAkiTAocTGlzdEdyYW50c0J5UmVzb3VyY2VSZXNwb25zZRIsCgZncmFudHMYASADKAsyHC5zcGxpdHNlY3VyZS5vcmdzdmMudjEuR3JhbnRC9QEKGWNvbS5zcGxpdHNlY3VyZS5vcmdzdmMudjFCGUxpc3RHcmFudHNCeVJlc291cmNlUHJvdG9QAVpHZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS9vcmdzdmMvdjE7b3Jnc3ZjdjGiAgNTT1iqAhVTcGxpdHNlY3VyZS5PcmdzdmMuVjHKAhVTcGxpdHNlY3VyZVxPcmdzdmNcVjHiAiFTcGxpdHNlY3VyZVxPcmdzdmNcVjFcR1BCTWV0YWRhdGHqAhdTcGxpdHNlY3VyZTo6T3Jnc3ZjOjpWMWIGcHJvdG8z", [file_splitsecure_orgsvc_v1_grant]);
+  fileDesc("CjNzcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncmFudHNfYnlfcmVzb3VyY2UucHJvdG8SFXNwbGl0c2VjdXJlLm9yZ3N2Yy52MSJjChtMaXN0R3JhbnRzQnlSZXNvdXJjZVJlcXVlc3QSDwoHb3JnX3MychgBIAEoCRIUCgxyZXNvdXJjZV9zMnIYAiABKAkSDQoFbGltaXQYAyABKAUSDgoGY3Vyc29yGAQgASgJImEKHExpc3RHcmFudHNCeVJlc291cmNlUmVzcG9uc2USLAoGZ3JhbnRzGAEgAygLMhwuc3BsaXRzZWN1cmUub3Jnc3ZjLnYxLkdyYW50EhMKC25leHRfY3Vyc29yGAIgASgJQvUBChljb20uc3BsaXRzZWN1cmUub3Jnc3ZjLnYxQhlMaXN0R3JhbnRzQnlSZXNvdXJjZVByb3RvUAFaR2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvb3Jnc3ZjL3YxO29yZ3N2Y3YxogIDU09YqgIVU3BsaXRzZWN1cmUuT3Jnc3ZjLlYxygIVU3BsaXRzZWN1cmVcT3Jnc3ZjXFYx4gIhU3BsaXRzZWN1cmVcT3Jnc3ZjXFYxXEdQQk1ldGFkYXRh6gIXU3BsaXRzZWN1cmU6Ok9yZ3N2Yzo6VjFiBnByb3RvMw", [file_splitsecure_orgsvc_v1_grant]);
 
 /**
  * ListGrantsByResource returns every grant pointing at a single
@@ -30,6 +30,16 @@ export type ListGrantsByResourceRequest = Message<"splitsecure.orgsvc.v1.ListGra
    * @generated from field: string resource_s2r = 2;
    */
   resourceS2r: string;
+
+  /**
+   * @generated from field: int32 limit = 3;
+   */
+  limit: number;
+
+  /**
+   * @generated from field: string cursor = 4;
+   */
+  cursor: string;
 };
 
 /**
@@ -47,6 +57,11 @@ export type ListGrantsByResourceResponse = Message<"splitsecure.orgsvc.v1.ListGr
    * @generated from field: repeated splitsecure.orgsvc.v1.Grant grants = 1;
    */
   grants: Grant[];
+
+  /**
+   * @generated from field: string next_cursor = 2;
+   */
+  nextCursor: string;
 };
 
 /**

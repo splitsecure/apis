@@ -27,6 +27,8 @@ type ListGrantsByResourceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	OrgS2R        string                 `protobuf:"bytes,1,opt,name=org_s2r,json=orgS2r,proto3" json:"org_s2r,omitempty"`
 	ResourceS2R   string                 `protobuf:"bytes,2,opt,name=resource_s2r,json=resourceS2r,proto3" json:"resource_s2r,omitempty"`
+	Limit         int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	Cursor        string                 `protobuf:"bytes,4,opt,name=cursor,proto3" json:"cursor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -75,9 +77,24 @@ func (x *ListGrantsByResourceRequest) GetResourceS2R() string {
 	return ""
 }
 
+func (x *ListGrantsByResourceRequest) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *ListGrantsByResourceRequest) GetCursor() string {
+	if x != nil {
+		return x.Cursor
+	}
+	return ""
+}
+
 type ListGrantsByResourceResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Grants        []*Grant               `protobuf:"bytes,1,rep,name=grants,proto3" json:"grants,omitempty"`
+	NextCursor    string                 `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -119,16 +136,27 @@ func (x *ListGrantsByResourceResponse) GetGrants() []*Grant {
 	return nil
 }
 
+func (x *ListGrantsByResourceResponse) GetNextCursor() string {
+	if x != nil {
+		return x.NextCursor
+	}
+	return ""
+}
+
 var File_splitsecure_orgsvc_v1_list_grants_by_resource_proto protoreflect.FileDescriptor
 
 const file_splitsecure_orgsvc_v1_list_grants_by_resource_proto_rawDesc = "" +
 	"\n" +
-	"3splitsecure/orgsvc/v1/list_grants_by_resource.proto\x12\x15splitsecure.orgsvc.v1\x1a!splitsecure/orgsvc/v1/grant.proto\"Y\n" +
+	"3splitsecure/orgsvc/v1/list_grants_by_resource.proto\x12\x15splitsecure.orgsvc.v1\x1a!splitsecure/orgsvc/v1/grant.proto\"\x87\x01\n" +
 	"\x1bListGrantsByResourceRequest\x12\x17\n" +
 	"\aorg_s2r\x18\x01 \x01(\tR\x06orgS2r\x12!\n" +
-	"\fresource_s2r\x18\x02 \x01(\tR\vresourceS2r\"T\n" +
+	"\fresource_s2r\x18\x02 \x01(\tR\vresourceS2r\x12\x14\n" +
+	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12\x16\n" +
+	"\x06cursor\x18\x04 \x01(\tR\x06cursor\"u\n" +
 	"\x1cListGrantsByResourceResponse\x124\n" +
-	"\x06grants\x18\x01 \x03(\v2\x1c.splitsecure.orgsvc.v1.GrantR\x06grantsB\xf5\x01\n" +
+	"\x06grants\x18\x01 \x03(\v2\x1c.splitsecure.orgsvc.v1.GrantR\x06grants\x12\x1f\n" +
+	"\vnext_cursor\x18\x02 \x01(\tR\n" +
+	"nextCursorB\xf5\x01\n" +
 	"\x19com.splitsecure.orgsvc.v1B\x19ListGrantsByResourceProtoP\x01ZGgithub.com/splitsecure/apis/gen/go/proto/splitsecure/orgsvc/v1;orgsvcv1\xa2\x02\x03SOX\xaa\x02\x15Splitsecure.Orgsvc.V1\xca\x02\x15Splitsecure\\Orgsvc\\V1\xe2\x02!Splitsecure\\Orgsvc\\V1\\GPBMetadata\xea\x02\x17Splitsecure::Orgsvc::V1b\x06proto3"
 
 var (

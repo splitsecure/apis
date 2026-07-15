@@ -6,8 +6,11 @@ import "splitsecure/orgsvc/v1/group.proto";
 
 message ListGroupsRequest {
   string org_s2r = 1;
+  int32 limit = 2;
+  string cursor = 3;
 }
 
 message ListGroupsResponse {
   repeated Group groups = 1;
+  string next_cursor = 2;
 }
