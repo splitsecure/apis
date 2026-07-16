@@ -38,8 +38,22 @@ type BaseResourceAttributes struct {
 	// afterwards without a new ceremony, and nothing keeps this field in sync
 	// with the tree.
 	RequestedParentNodeId string `protobuf:"bytes,6,opt,name=requested_parent_node_id,json=requestedParentNodeId,proto3" json:"requested_parent_node_id,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	// lineage_id identifies this resource's lineage across supersession: every
+	// edit is a new CREATE presenting its predecessor, and all versions of the
+	// "same" resource share one lineage.
+	// Empty at genesis — the enclave stamps this into the signed bytes only
+	// when a presented predecessor makes this a superseding CREATE, copying
+	// the predecessor's lineage_id verbatim. A record's true lineage id is
+	// therefore this field when non-empty, else the domain-tagged digest of
+	// its own signed issuance bytes (genesis IS its own lineage). Callers
+	// never set this directly; it is enclave-derived only.
+	LineageId []byte `protobuf:"bytes,7,opt,name=lineage_id,json=lineageId,proto3" json:"lineage_id,omitempty"`
+	// revision counts supersessions within a lineage: 0 at genesis, and the
+	// enclave stamps predecessor.revision + 1 into the signed bytes of each
+	// superseding CREATE. Callers never set this directly.
+	Revision      uint64 `protobuf:"varint,8,opt,name=revision,proto3" json:"revision,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *BaseResourceAttributes) Reset() {
@@ -114,11 +128,25 @@ func (x *BaseResourceAttributes) GetRequestedParentNodeId() string {
 	return ""
 }
 
+func (x *BaseResourceAttributes) GetLineageId() []byte {
+	if x != nil {
+		return x.LineageId
+	}
+	return nil
+}
+
+func (x *BaseResourceAttributes) GetRevision() uint64 {
+	if x != nil {
+		return x.Revision
+	}
+	return 0
+}
+
 var File_splitsecure_teamresource_v1_base_resource_attributes_proto protoreflect.FileDescriptor
 
 const file_splitsecure_teamresource_v1_base_resource_attributes_proto_rawDesc = "" +
 	"\n" +
-	":splitsecure/teamresource/v1/base_resource_attributes.proto\x12\x1bsplitsecure.teamresource.v1\x1a5splitsecure/teamresource/v1/account_sensitivity.proto\x1a5splitsecure/teamresource/v1/notification_policy.proto\"\xdd\x02\n" +
+	":splitsecure/teamresource/v1/base_resource_attributes.proto\x12\x1bsplitsecure.teamresource.v1\x1a5splitsecure/teamresource/v1/account_sensitivity.proto\x1a5splitsecure/teamresource/v1/notification_policy.proto\"\x98\x03\n" +
 	"\x16BaseResourceAttributes\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12`\n" +
@@ -126,7 +154,10 @@ const file_splitsecure_teamresource_v1_base_resource_attributes_proto_rawDesc = 
 	"\vsensitivity\x18\x04 \x01(\v2/.splitsecure.teamresource.v1.AccountSensitivityR\vsensitivity\x12\x1f\n" +
 	"\vproposal_id\x18\x05 \x01(\fR\n" +
 	"proposalId\x127\n" +
-	"\x18requested_parent_node_id\x18\x06 \x01(\tR\x15requestedParentNodeIdB\xa1\x02\n" +
+	"\x18requested_parent_node_id\x18\x06 \x01(\tR\x15requestedParentNodeId\x12\x1d\n" +
+	"\n" +
+	"lineage_id\x18\a \x01(\fR\tlineageId\x12\x1a\n" +
+	"\brevision\x18\b \x01(\x04R\brevisionB\xa1\x02\n" +
 	"\x1fcom.splitsecure.teamresource.v1B\x1bBaseResourceAttributesProtoP\x01ZSgithub.com/splitsecure/apis/gen/go/proto/splitsecure/teamresource/v1;teamresourcev1\xa2\x02\x03STX\xaa\x02\x1bSplitsecure.Teamresource.V1\xca\x02\x1bSplitsecure\\Teamresource\\V1\xe2\x02'Splitsecure\\Teamresource\\V1\\GPBMetadata\xea\x02\x1dSplitsecure::Teamresource::V1b\x06proto3"
 
 var (
