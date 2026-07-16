@@ -8,6 +8,7 @@ import "splitsecure/orgsvc/v1/delete_grant.proto";
 import "splitsecure/orgsvc/v1/delete_group.proto";
 import "splitsecure/orgsvc/v1/get_grant.proto";
 import "splitsecure/orgsvc/v1/get_group.proto";
+import "splitsecure/orgsvc/v1/get_members_by_email.proto";
 import "splitsecure/orgsvc/v1/get_organization.proto";
 import "splitsecure/orgsvc/v1/get_service_accounts.proto";
 import "splitsecure/orgsvc/v1/list_grants_by_resource.proto";
@@ -27,6 +28,9 @@ service OrgService {
   rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse);
   rpc ListMembers(ListMembersRequest) returns (ListMembersResponse);
   rpc GetServiceAccounts(GetServiceAccountsRequest) returns (GetServiceAccountsResponse);
+  // Resolve emails to Member records (users and service accounts) so callers
+  // reference principals by the console email instead of a raw s2r.
+  rpc GetMembersByEmail(GetMembersByEmailRequest) returns (GetMembersByEmailResponse);
 
   // Groups. Reads are open to any org member. ListGroups omits system
   // groups; the org's "Everyone" group is exposed as

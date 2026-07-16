@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package splitsecure.orgsvc.v1;
+
+import "splitsecure/orgsvc/v1/member.proto";
+
+// GetMembersByEmail resolves a batch of emails to Member records, so callers
+// can reference org principals by the email shown in the console instead of a
+// raw s2r. Both user members and service accounts are resolved: the returned
+// Member.user_id carries the principal s2r — usr: for a user, sa: for a
+// service account (the kind is embedded in the s2r).
+//
+// A user email resolves to the org member(s) that assert it; a service-account
+// email (whose local part encodes the SA id) is parsed and verified against the
+// org. The response carries one result per requested email, in request order:
+// its members list is empty when the email matches no active member / service
+// account, and has several entries for an address shared by multiple members
+// (which the caller treats as ambiguous). Bounded to 20 emails per request.
+message GetMembersByEmailRequest {
+  Base base = 2;
+
+  message Base {
+    string organization_id = 1;
+    // Emails to resolve. At most 20 per request.
+    repeated string emails = 2;
+  }
+}
+
+message GetMembersByEmailResponse {
+  // One entry per requested email, in request order, so a caller can map matches
+  // back to the input it sent.
+  repeated Result results = 1;
+
+  message Result {
+    string email = 1;
+    // Principals matching this email: empty when it resolves to nothing, more
+    // than one when the address is shared (the caller treats that as ambiguous).
+    repeated Member members = 2;
+  }
+}
