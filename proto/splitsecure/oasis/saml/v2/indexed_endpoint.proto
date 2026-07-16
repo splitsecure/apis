@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "splitsecure/oasis/saml/v2/endpoint.proto";
+
+// IndexedEndpoint represents an indexed SAML endpoint
+message IndexedEndpoint {
+  // Base endpoint fields
+  Endpoint base = 1;
+
+  // Required: index
+  uint32 index = 2;
+
+  // Optional: is default
+  bool is_default = 3;
+}

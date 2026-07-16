@@ -1,0 +1,21 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "splitsecure/oasis/saml/v2/extensions.proto";
+import "splitsecure/oasis/saml/v2/localized_name.proto";
+import "splitsecure/oasis/saml/v2/localized_uri.proto";
+
+// Organization describes an organization
+message Organization {
+  // Optional: extensions
+  Extensions extensions = 1;
+
+  // Required: organization names (at least one, with language tags)
+  repeated LocalizedName organization_name = 2;
+
+  // Required: organization display names (at least one, with language tags)
+  repeated LocalizedName organization_display_name = 3;
+
+  // Required: organization URLs (at least one, with language tags)
+  repeated LocalizedURI organization_url = 4;
+}

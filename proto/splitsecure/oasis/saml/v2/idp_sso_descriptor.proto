@@ -1,0 +1,30 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "splitsecure/oasis/saml/v2/attribute.proto";
+import "splitsecure/oasis/saml/v2/endpoint.proto";
+import "splitsecure/oasis/saml/v2/sso_descriptor_type.proto";
+
+// IDPSSODescriptor represents an Identity Provider SSO descriptor
+message IDPSSODescriptor {
+  // Base SSO descriptor fields
+  SSODescriptorType base = 1;
+
+  // Optional: whether the IdP wants AuthnRequests to be signed
+  bool want_authn_requests_signed = 2;
+
+  // Required: single sign-on service endpoints (at least one)
+  repeated Endpoint single_sign_on_service = 3;
+
+  // Optional: name ID mapping service endpoints
+  repeated Endpoint name_id_mapping_service = 4;
+
+  // Optional: assertion ID request service endpoints
+  repeated Endpoint assertion_id_request_service = 5;
+
+  // Optional: supported attribute profiles
+  repeated string attribute_profile = 6;
+
+  // Optional: supported attributes
+  repeated Attribute attribute = 7;
+}

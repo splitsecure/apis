@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+// KeyInfo represents key information (simplified from XML dsig)
+message KeyInfo {
+  // X.509 certificate data
+  bytes x509_certificate = 1;
+
+  // Optional: key name
+  string key_name = 2;
+
+  // Optional: raw key value
+  bytes key_value = 3;
+}

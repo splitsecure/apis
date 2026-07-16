@@ -1,0 +1,29 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "splitsecure/oasis/saml/v2/contact_type.proto";
+import "splitsecure/oasis/saml/v2/extensions.proto";
+
+// ContactPerson describes a contact person
+message ContactPerson {
+  // Required: contact type
+  ContactType contact_type = 1;
+
+  // Optional: extensions
+  Extensions extensions = 2;
+
+  // Optional: company
+  string company = 3;
+
+  // Optional: given name
+  string given_name = 4;
+
+  // Optional: surname
+  string surname = 5;
+
+  // Optional: email addresses
+  repeated string email_address = 6;
+
+  // Optional: telephone numbers
+  repeated string telephone_number = 7;
+}

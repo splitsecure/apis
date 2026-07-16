@@ -4,6 +4,8 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { AsymmetricEncryptionSpec } from "./asymmetric_encryption_spec_pb";
+import { file_splitsecure_keys_v1_asymmetric_encryption_spec } from "./asymmetric_encryption_spec_pb";
 import type { DiffieHellmanSpec } from "./diffie_hellman_spec_pb";
 import { file_splitsecure_keys_v1_diffie_hellman_spec } from "./diffie_hellman_spec_pb";
 import type { KeyEncapsulationSpec } from "./key_encapsulation_spec_pb";
@@ -18,7 +20,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/keys/v1/spec.proto.
  */
 export const file_splitsecure_keys_v1_spec: GenFile = /*@__PURE__*/
-  fileDesc("Ch5zcGxpdHNlY3VyZS9rZXlzL3YxL3NwZWMucHJvdG8SE3NwbGl0c2VjdXJlLmtleXMudjEioAIKBFNwZWMSTAoUc3ltbWV0cmljX2VuY3J5cHRpb24YASABKAsyLC5zcGxpdHNlY3VyZS5rZXlzLnYxLlN5bW1ldHJpY0VuY3J5cHRpb25TcGVjSAASNwoJc2lnbmF0dXJlGAIgASgLMiIuc3BsaXRzZWN1cmUua2V5cy52MS5TaWduYXR1cmVTcGVjSAASQAoOZGlmZmllX2hlbGxtYW4YAyABKAsyJi5zcGxpdHNlY3VyZS5rZXlzLnYxLkRpZmZpZUhlbGxtYW5TcGVjSAASRgoRa2V5X2VuY2Fwc3VsYXRpb24YBCABKAsyKS5zcGxpdHNlY3VyZS5rZXlzLnYxLktleUVuY2Fwc3VsYXRpb25TcGVjSABCBwoFdW5pb25C1wEKF2NvbS5zcGxpdHNlY3VyZS5rZXlzLnYxQglTcGVjUHJvdG9QAVpDZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS9rZXlzL3YxO2tleXN2MaICA1NLWKoCE1NwbGl0c2VjdXJlLktleXMuVjHKAhNTcGxpdHNlY3VyZVxLZXlzXFYx4gIfU3BsaXRzZWN1cmVcS2V5c1xWMVxHUEJNZXRhZGF0YeoCFVNwbGl0c2VjdXJlOjpLZXlzOjpWMWIGcHJvdG8z", [file_splitsecure_keys_v1_diffie_hellman_spec, file_splitsecure_keys_v1_key_encapsulation_spec, file_splitsecure_keys_v1_signature_spec, file_splitsecure_keys_v1_symmetric_encryption_spec]);
+  fileDesc("Ch5zcGxpdHNlY3VyZS9rZXlzL3YxL3NwZWMucHJvdG8SE3NwbGl0c2VjdXJlLmtleXMudjEi8AIKBFNwZWMSTAoUc3ltbWV0cmljX2VuY3J5cHRpb24YASABKAsyLC5zcGxpdHNlY3VyZS5rZXlzLnYxLlN5bW1ldHJpY0VuY3J5cHRpb25TcGVjSAASNwoJc2lnbmF0dXJlGAIgASgLMiIuc3BsaXRzZWN1cmUua2V5cy52MS5TaWduYXR1cmVTcGVjSAASQAoOZGlmZmllX2hlbGxtYW4YAyABKAsyJi5zcGxpdHNlY3VyZS5rZXlzLnYxLkRpZmZpZUhlbGxtYW5TcGVjSAASRgoRa2V5X2VuY2Fwc3VsYXRpb24YBCABKAsyKS5zcGxpdHNlY3VyZS5rZXlzLnYxLktleUVuY2Fwc3VsYXRpb25TcGVjSAASTgoVYXN5bW1ldHJpY19lbmNyeXB0aW9uGAUgASgLMi0uc3BsaXRzZWN1cmUua2V5cy52MS5Bc3ltbWV0cmljRW5jcnlwdGlvblNwZWNIAEIHCgV1bmlvbkLXAQoXY29tLnNwbGl0c2VjdXJlLmtleXMudjFCCVNwZWNQcm90b1ABWkNnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL2tleXMvdjE7a2V5c3YxogIDU0tYqgITU3BsaXRzZWN1cmUuS2V5cy5WMcoCE1NwbGl0c2VjdXJlXEtleXNcVjHiAh9TcGxpdHNlY3VyZVxLZXlzXFYxXEdQQk1ldGFkYXRh6gIVU3BsaXRzZWN1cmU6OktleXM6OlYxYgZwcm90bzM", [file_splitsecure_keys_v1_asymmetric_encryption_spec, file_splitsecure_keys_v1_diffie_hellman_spec, file_splitsecure_keys_v1_key_encapsulation_spec, file_splitsecure_keys_v1_signature_spec, file_splitsecure_keys_v1_symmetric_encryption_spec]);
 
 /**
  * @generated from message splitsecure.keys.v1.Spec
@@ -51,6 +53,12 @@ export type Spec = Message<"splitsecure.keys.v1.Spec"> & {
      */
     value: KeyEncapsulationSpec;
     case: "keyEncapsulation";
+  } | {
+    /**
+     * @generated from field: splitsecure.keys.v1.AsymmetricEncryptionSpec asymmetric_encryption = 5;
+     */
+    value: AsymmetricEncryptionSpec;
+    case: "asymmetricEncryption";
   } | { case: undefined; value?: undefined };
 };
 

@@ -1,0 +1,32 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "splitsecure/oasis/saml/v2/entity_descriptor.proto";
+import "splitsecure/oasis/saml/v2/extensions.proto";
+
+// EntitiesDescriptor represents a collection of entities
+message EntitiesDescriptor {
+  // Optional: signature over the descriptor
+  bytes signature = 1;
+
+  // Optional: extension elements
+  Extensions extensions = 2;
+
+  // Child entity or entities descriptors (at least one required)
+  repeated EntityDescriptor entity_descriptor = 3;
+  repeated EntitiesDescriptor entities_descriptor = 4;
+
+  // Optional: validity period
+  google.protobuf.Timestamp valid_until = 5;
+
+  // Optional: cache duration
+  google.protobuf.Duration cache_duration = 6;
+
+  // Optional: name
+  string name = 7;
+
+  // Optional: ID attribute
+  string id = 8;
+}

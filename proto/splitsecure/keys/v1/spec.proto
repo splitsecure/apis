@@ -1,6 +1,7 @@
 syntax = "proto3";
 package splitsecure.keys.v1;
 
+import "splitsecure/keys/v1/asymmetric_encryption_spec.proto";
 import "splitsecure/keys/v1/diffie_hellman_spec.proto";
 import "splitsecure/keys/v1/key_encapsulation_spec.proto";
 import "splitsecure/keys/v1/signature_spec.proto";
@@ -12,5 +13,6 @@ message Spec {
     SignatureSpec signature = 2;
     DiffieHellmanSpec diffie_hellman = 3;
     KeyEncapsulationSpec key_encapsulation = 4;
+    AsymmetricEncryptionSpec asymmetric_encryption = 5;
   }
 }

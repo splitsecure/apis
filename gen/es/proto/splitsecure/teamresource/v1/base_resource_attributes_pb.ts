@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/teamresource/v1/base_resource_attributes.proto.
  */
 export const file_splitsecure_teamresource_v1_base_resource_attributes: GenFile = /*@__PURE__*/
-  fileDesc("CjpzcGxpdHNlY3VyZS90ZWFtcmVzb3VyY2UvdjEvYmFzZV9yZXNvdXJjZV9hdHRyaWJ1dGVzLnByb3RvEhtzcGxpdHNlY3VyZS50ZWFtcmVzb3VyY2UudjEi5AEKFkJhc2VSZXNvdXJjZUF0dHJpYnV0ZXMSDAoEbmFtZRgBIAEoCRITCgtkZXNjcmlwdGlvbhgCIAEoCRJMChNub3RpZmljYXRpb25fcG9saWN5GAMgASgOMi8uc3BsaXRzZWN1cmUudGVhbXJlc291cmNlLnYxLk5vdGlmaWNhdGlvblBvbGljeRJECgtzZW5zaXRpdml0eRgEIAEoCzIvLnNwbGl0c2VjdXJlLnRlYW1yZXNvdXJjZS52MS5BY2NvdW50U2Vuc2l0aXZpdHkSEwoLcHJvcG9zYWxfaWQYBSABKAxCoQIKH2NvbS5zcGxpdHNlY3VyZS50ZWFtcmVzb3VyY2UudjFCG0Jhc2VSZXNvdXJjZUF0dHJpYnV0ZXNQcm90b1ABWlNnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL3RlYW1yZXNvdXJjZS92MTt0ZWFtcmVzb3VyY2V2MaICA1NUWKoCG1NwbGl0c2VjdXJlLlRlYW1yZXNvdXJjZS5WMcoCG1NwbGl0c2VjdXJlXFRlYW1yZXNvdXJjZVxWMeICJ1NwbGl0c2VjdXJlXFRlYW1yZXNvdXJjZVxWMVxHUEJNZXRhZGF0YeoCHVNwbGl0c2VjdXJlOjpUZWFtcmVzb3VyY2U6OlYxYgZwcm90bzM", [file_splitsecure_teamresource_v1_account_sensitivity, file_splitsecure_teamresource_v1_notification_policy]);
+  fileDesc("CjpzcGxpdHNlY3VyZS90ZWFtcmVzb3VyY2UvdjEvYmFzZV9yZXNvdXJjZV9hdHRyaWJ1dGVzLnByb3RvEhtzcGxpdHNlY3VyZS50ZWFtcmVzb3VyY2UudjEihgIKFkJhc2VSZXNvdXJjZUF0dHJpYnV0ZXMSDAoEbmFtZRgBIAEoCRITCgtkZXNjcmlwdGlvbhgCIAEoCRJMChNub3RpZmljYXRpb25fcG9saWN5GAMgASgOMi8uc3BsaXRzZWN1cmUudGVhbXJlc291cmNlLnYxLk5vdGlmaWNhdGlvblBvbGljeRJECgtzZW5zaXRpdml0eRgEIAEoCzIvLnNwbGl0c2VjdXJlLnRlYW1yZXNvdXJjZS52MS5BY2NvdW50U2Vuc2l0aXZpdHkSEwoLcHJvcG9zYWxfaWQYBSABKAwSIAoYcmVxdWVzdGVkX3BhcmVudF9ub2RlX2lkGAYgASgJQqECCh9jb20uc3BsaXRzZWN1cmUudGVhbXJlc291cmNlLnYxQhtCYXNlUmVzb3VyY2VBdHRyaWJ1dGVzUHJvdG9QAVpTZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS90ZWFtcmVzb3VyY2UvdjE7dGVhbXJlc291cmNldjGiAgNTVFiqAhtTcGxpdHNlY3VyZS5UZWFtcmVzb3VyY2UuVjHKAhtTcGxpdHNlY3VyZVxUZWFtcmVzb3VyY2VcVjHiAidTcGxpdHNlY3VyZVxUZWFtcmVzb3VyY2VcVjFcR1BCTWV0YWRhdGHqAh1TcGxpdHNlY3VyZTo6VGVhbXJlc291cmNlOjpWMWIGcHJvdG8z", [file_splitsecure_teamresource_v1_account_sensitivity, file_splitsecure_teamresource_v1_notification_policy]);
 
 /**
  * BaseResourceAttributes holds the common metadata shared by all managed resources.
@@ -46,6 +46,20 @@ export type BaseResourceAttributes = Message<"splitsecure.teamresource.v1.BaseRe
    * @generated from field: bytes proposal_id = 5;
    */
   proposalId: Uint8Array;
+
+  /**
+   * requested_parent_node_id is the vault-tree node the creator asked to file
+   * this resource under. It rides in the quorum-signed part of a create
+   * request so approvers and the audit trail see the creator's own placement
+   * statement; empty requests the root of the resource's vault, which is also
+   * the persist-time fallback when the requested parent no longer exists.
+   * This is a birth-time request, not a live pointer: the node can be moved
+   * afterwards without a new ceremony, and nothing keeps this field in sync
+   * with the tree.
+   *
+   * @generated from field: string requested_parent_node_id = 6;
+   */
+  requestedParentNodeId: string;
 };
 
 /**

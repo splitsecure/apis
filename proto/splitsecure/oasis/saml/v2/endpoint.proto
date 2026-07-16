@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+// Endpoint represents a SAML endpoint
+message Endpoint {
+  // Required: binding URI
+  string binding = 1;
+
+  // Required: location URI
+  string location = 2;
+
+  // Optional: response location URI
+  string response_location = 3;
+}
