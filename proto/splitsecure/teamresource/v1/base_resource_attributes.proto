@@ -21,4 +21,20 @@ message BaseResourceAttributes {
   // afterwards without a new ceremony, and nothing keeps this field in sync
   // with the tree.
   string requested_parent_node_id = 6;
+
+  // lineage_id identifies this resource's lineage across supersession
+  // (HashiCorp-style versioning): every edit is a new CREATE presenting its
+  // predecessor, and all versions of the "same" resource share one lineage.
+  // Empty at genesis — the enclave stamps this into the signed bytes only
+  // when a presented predecessor makes this a superseding CREATE, copying
+  // the predecessor's lineage_id verbatim. A record's true lineage id is
+  // therefore this field when non-empty, else the domain-tagged digest of
+  // its own signed issuance bytes (genesis IS its own lineage). Callers
+  // never set this directly; it is enclave-derived only.
+  bytes lineage_id = 7;
+
+  // revision counts supersessions within a lineage: 0 at genesis, and the
+  // enclave stamps predecessor.revision + 1 into the signed bytes of each
+  // superseding CREATE. Callers never set this directly.
+  uint64 revision = 8;
 }
