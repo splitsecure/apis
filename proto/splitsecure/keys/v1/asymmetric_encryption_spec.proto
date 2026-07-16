@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "splitsecure/keys/v1/rsa.proto";
+
+message AsymmetricEncryptionSpec {
+  oneof union {
+    RSA rsa = 1;
+  }
+}

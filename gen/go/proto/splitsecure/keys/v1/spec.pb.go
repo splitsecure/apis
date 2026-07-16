@@ -29,6 +29,7 @@ type Spec struct {
 	//	*Spec_Signature
 	//	*Spec_DiffieHellman
 	//	*Spec_KeyEncapsulation
+	//	*Spec_AsymmetricEncryption
 	Union         isSpec_Union `protobuf_oneof:"union"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -107,6 +108,15 @@ func (x *Spec) GetKeyEncapsulation() *KeyEncapsulationSpec {
 	return nil
 }
 
+func (x *Spec) GetAsymmetricEncryption() *AsymmetricEncryptionSpec {
+	if x != nil {
+		if x, ok := x.Union.(*Spec_AsymmetricEncryption); ok {
+			return x.AsymmetricEncryption
+		}
+	}
+	return nil
+}
+
 type isSpec_Union interface {
 	isSpec_Union()
 }
@@ -127,6 +137,10 @@ type Spec_KeyEncapsulation struct {
 	KeyEncapsulation *KeyEncapsulationSpec `protobuf:"bytes,4,opt,name=key_encapsulation,json=keyEncapsulation,proto3,oneof"`
 }
 
+type Spec_AsymmetricEncryption struct {
+	AsymmetricEncryption *AsymmetricEncryptionSpec `protobuf:"bytes,5,opt,name=asymmetric_encryption,json=asymmetricEncryption,proto3,oneof"`
+}
+
 func (*Spec_SymmetricEncryption) isSpec_Union() {}
 
 func (*Spec_Signature) isSpec_Union() {}
@@ -135,16 +149,19 @@ func (*Spec_DiffieHellman) isSpec_Union() {}
 
 func (*Spec_KeyEncapsulation) isSpec_Union() {}
 
+func (*Spec_AsymmetricEncryption) isSpec_Union() {}
+
 var File_splitsecure_keys_v1_spec_proto protoreflect.FileDescriptor
 
 const file_splitsecure_keys_v1_spec_proto_rawDesc = "" +
 	"\n" +
-	"\x1esplitsecure/keys/v1/spec.proto\x12\x13splitsecure.keys.v1\x1a-splitsecure/keys/v1/diffie_hellman_spec.proto\x1a0splitsecure/keys/v1/key_encapsulation_spec.proto\x1a(splitsecure/keys/v1/signature_spec.proto\x1a3splitsecure/keys/v1/symmetric_encryption_spec.proto\"\xe1\x02\n" +
+	"\x1esplitsecure/keys/v1/spec.proto\x12\x13splitsecure.keys.v1\x1a4splitsecure/keys/v1/asymmetric_encryption_spec.proto\x1a-splitsecure/keys/v1/diffie_hellman_spec.proto\x1a0splitsecure/keys/v1/key_encapsulation_spec.proto\x1a(splitsecure/keys/v1/signature_spec.proto\x1a3splitsecure/keys/v1/symmetric_encryption_spec.proto\"\xc7\x03\n" +
 	"\x04Spec\x12a\n" +
 	"\x14symmetric_encryption\x18\x01 \x01(\v2,.splitsecure.keys.v1.SymmetricEncryptionSpecH\x00R\x13symmetricEncryption\x12B\n" +
 	"\tsignature\x18\x02 \x01(\v2\".splitsecure.keys.v1.SignatureSpecH\x00R\tsignature\x12O\n" +
 	"\x0ediffie_hellman\x18\x03 \x01(\v2&.splitsecure.keys.v1.DiffieHellmanSpecH\x00R\rdiffieHellman\x12X\n" +
-	"\x11key_encapsulation\x18\x04 \x01(\v2).splitsecure.keys.v1.KeyEncapsulationSpecH\x00R\x10keyEncapsulationB\a\n" +
+	"\x11key_encapsulation\x18\x04 \x01(\v2).splitsecure.keys.v1.KeyEncapsulationSpecH\x00R\x10keyEncapsulation\x12d\n" +
+	"\x15asymmetric_encryption\x18\x05 \x01(\v2-.splitsecure.keys.v1.AsymmetricEncryptionSpecH\x00R\x14asymmetricEncryptionB\a\n" +
 	"\x05unionB\xd7\x01\n" +
 	"\x17com.splitsecure.keys.v1B\tSpecProtoP\x01ZCgithub.com/splitsecure/apis/gen/go/proto/splitsecure/keys/v1;keysv1\xa2\x02\x03SKX\xaa\x02\x13Splitsecure.Keys.V1\xca\x02\x13Splitsecure\\Keys\\V1\xe2\x02\x1fSplitsecure\\Keys\\V1\\GPBMetadata\xea\x02\x15Splitsecure::Keys::V1b\x06proto3"
 
@@ -162,22 +179,24 @@ func file_splitsecure_keys_v1_spec_proto_rawDescGZIP() []byte {
 
 var file_splitsecure_keys_v1_spec_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_splitsecure_keys_v1_spec_proto_goTypes = []any{
-	(*Spec)(nil),                    // 0: splitsecure.keys.v1.Spec
-	(*SymmetricEncryptionSpec)(nil), // 1: splitsecure.keys.v1.SymmetricEncryptionSpec
-	(*SignatureSpec)(nil),           // 2: splitsecure.keys.v1.SignatureSpec
-	(*DiffieHellmanSpec)(nil),       // 3: splitsecure.keys.v1.DiffieHellmanSpec
-	(*KeyEncapsulationSpec)(nil),    // 4: splitsecure.keys.v1.KeyEncapsulationSpec
+	(*Spec)(nil),                     // 0: splitsecure.keys.v1.Spec
+	(*SymmetricEncryptionSpec)(nil),  // 1: splitsecure.keys.v1.SymmetricEncryptionSpec
+	(*SignatureSpec)(nil),            // 2: splitsecure.keys.v1.SignatureSpec
+	(*DiffieHellmanSpec)(nil),        // 3: splitsecure.keys.v1.DiffieHellmanSpec
+	(*KeyEncapsulationSpec)(nil),     // 4: splitsecure.keys.v1.KeyEncapsulationSpec
+	(*AsymmetricEncryptionSpec)(nil), // 5: splitsecure.keys.v1.AsymmetricEncryptionSpec
 }
 var file_splitsecure_keys_v1_spec_proto_depIdxs = []int32{
 	1, // 0: splitsecure.keys.v1.Spec.symmetric_encryption:type_name -> splitsecure.keys.v1.SymmetricEncryptionSpec
 	2, // 1: splitsecure.keys.v1.Spec.signature:type_name -> splitsecure.keys.v1.SignatureSpec
 	3, // 2: splitsecure.keys.v1.Spec.diffie_hellman:type_name -> splitsecure.keys.v1.DiffieHellmanSpec
 	4, // 3: splitsecure.keys.v1.Spec.key_encapsulation:type_name -> splitsecure.keys.v1.KeyEncapsulationSpec
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5, // 4: splitsecure.keys.v1.Spec.asymmetric_encryption:type_name -> splitsecure.keys.v1.AsymmetricEncryptionSpec
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_keys_v1_spec_proto_init() }
@@ -185,6 +204,7 @@ func file_splitsecure_keys_v1_spec_proto_init() {
 	if File_splitsecure_keys_v1_spec_proto != nil {
 		return
 	}
+	file_splitsecure_keys_v1_asymmetric_encryption_spec_proto_init()
 	file_splitsecure_keys_v1_diffie_hellman_spec_proto_init()
 	file_splitsecure_keys_v1_key_encapsulation_spec_proto_init()
 	file_splitsecure_keys_v1_signature_spec_proto_init()
@@ -194,6 +214,7 @@ func file_splitsecure_keys_v1_spec_proto_init() {
 		(*Spec_Signature)(nil),
 		(*Spec_DiffieHellman)(nil),
 		(*Spec_KeyEncapsulation)(nil),
+		(*Spec_AsymmetricEncryption)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

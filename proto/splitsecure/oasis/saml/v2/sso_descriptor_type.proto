@@ -1,0 +1,24 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "splitsecure/oasis/saml/v2/endpoint.proto";
+import "splitsecure/oasis/saml/v2/indexed_endpoint.proto";
+import "splitsecure/oasis/saml/v2/role_descriptor_type.proto";
+
+// SSODescriptorType is the base type for SSO descriptors
+message SSODescriptorType {
+  // Base role descriptor fields
+  RoleDescriptorType base = 1;
+
+  // Optional: artifact resolution service endpoints
+  repeated IndexedEndpoint artifact_resolution_service = 2;
+
+  // Optional: single logout service endpoints
+  repeated Endpoint single_logout_service = 3;
+
+  // Optional: manage name ID service endpoints
+  repeated Endpoint manage_name_id_service = 4;
+
+  // Optional: supported name ID formats
+  repeated string name_id_format = 5;
+}

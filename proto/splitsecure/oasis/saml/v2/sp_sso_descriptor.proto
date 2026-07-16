@@ -1,0 +1,24 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "splitsecure/oasis/saml/v2/attribute_consuming_service.proto";
+import "splitsecure/oasis/saml/v2/indexed_endpoint.proto";
+import "splitsecure/oasis/saml/v2/sso_descriptor_type.proto";
+
+// SPSSODescriptor represents a Service Provider SSO descriptor
+message SPSSODescriptor {
+  // Base SSO descriptor fields
+  SSODescriptorType base = 1;
+
+  // Optional: whether the SP signs AuthnRequests
+  bool authn_requests_signed = 2;
+
+  // Optional: whether the SP wants assertions to be signed
+  bool want_assertions_signed = 3;
+
+  // Required: assertion consumer service endpoints (at least one)
+  repeated IndexedEndpoint assertion_consumer_service = 4;
+
+  // Optional: attribute consuming services
+  repeated AttributeConsumingService attribute_consuming_service = 5;
+}

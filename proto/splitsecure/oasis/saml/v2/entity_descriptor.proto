@@ -1,0 +1,55 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "splitsecure/oasis/saml/v2/additional_metadata_location.proto";
+import "splitsecure/oasis/saml/v2/affiliation_descriptor.proto";
+import "splitsecure/oasis/saml/v2/attribute_authority_descriptor.proto";
+import "splitsecure/oasis/saml/v2/authn_authority_descriptor.proto";
+import "splitsecure/oasis/saml/v2/contact_person.proto";
+import "splitsecure/oasis/saml/v2/extensions.proto";
+import "splitsecure/oasis/saml/v2/idp_sso_descriptor.proto";
+import "splitsecure/oasis/saml/v2/organization.proto";
+import "splitsecure/oasis/saml/v2/pdp_descriptor.proto";
+import "splitsecure/oasis/saml/v2/sp_sso_descriptor.proto";
+
+// EntityDescriptor represents a SAML entity (IdP or SP)
+message EntityDescriptor {
+  // Required: unique identifier for the entity (max 1024 chars)
+  string entity_id = 1;
+
+  // Optional: signature over the descriptor
+  bytes signature = 2;
+
+  // Optional: extension elements
+  Extensions extensions = 3;
+
+  // Role descriptors - at least one required
+  repeated IDPSSODescriptor idp_sso_descriptor = 4;
+  repeated SPSSODescriptor sp_sso_descriptor = 5;
+  repeated AuthnAuthorityDescriptor authn_authority_descriptor = 6;
+  repeated AttributeAuthorityDescriptor attribute_authority_descriptor = 7;
+  repeated PDPDescriptor pdp_descriptor = 8;
+
+  // Alternative: affiliation descriptor (mutually exclusive with role descriptors)
+  AffiliationDescriptor affiliation_descriptor = 9;
+
+  // Optional: organization information
+  Organization organization = 10;
+
+  // Optional: contact persons
+  repeated ContactPerson contact_person = 11;
+
+  // Optional: additional metadata locations
+  repeated AdditionalMetadataLocation additional_metadata_location = 12;
+
+  // Optional: validity period
+  google.protobuf.Timestamp valid_until = 13;
+
+  // Optional: cache duration
+  google.protobuf.Duration cache_duration = 14;
+
+  // Optional: ID attribute
+  string id = 15;
+}

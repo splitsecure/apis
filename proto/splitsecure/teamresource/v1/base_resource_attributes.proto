@@ -11,4 +11,14 @@ message BaseResourceAttributes {
   splitsecure.teamresource.v1.NotificationPolicy notification_policy = 3;
   AccountSensitivity sensitivity = 4;
   bytes proposal_id = 5;
+
+  // requested_parent_node_id is the vault-tree node the creator asked to file
+  // this resource under. It rides in the quorum-signed part of a create
+  // request so approvers and the audit trail see the creator's own placement
+  // statement; empty requests the root of the resource's vault, which is also
+  // the persist-time fallback when the requested parent no longer exists.
+  // This is a birth-time request, not a live pointer: the node can be moved
+  // afterwards without a new ceremony, and nothing keeps this field in sync
+  // with the tree.
+  string requested_parent_node_id = 6;
 }

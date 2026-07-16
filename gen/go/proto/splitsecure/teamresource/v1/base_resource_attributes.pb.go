@@ -29,8 +29,17 @@ type BaseResourceAttributes struct {
 	NotificationPolicy NotificationPolicy     `protobuf:"varint,3,opt,name=notification_policy,json=notificationPolicy,proto3,enum=splitsecure.teamresource.v1.NotificationPolicy" json:"notification_policy,omitempty"`
 	Sensitivity        *AccountSensitivity    `protobuf:"bytes,4,opt,name=sensitivity,proto3" json:"sensitivity,omitempty"`
 	ProposalId         []byte                 `protobuf:"bytes,5,opt,name=proposal_id,json=proposalId,proto3" json:"proposal_id,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// requested_parent_node_id is the vault-tree node the creator asked to file
+	// this resource under. It rides in the quorum-signed part of a create
+	// request so approvers and the audit trail see the creator's own placement
+	// statement; empty requests the root of the resource's vault, which is also
+	// the persist-time fallback when the requested parent no longer exists.
+	// This is a birth-time request, not a live pointer: the node can be moved
+	// afterwards without a new ceremony, and nothing keeps this field in sync
+	// with the tree.
+	RequestedParentNodeId string `protobuf:"bytes,6,opt,name=requested_parent_node_id,json=requestedParentNodeId,proto3" json:"requested_parent_node_id,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *BaseResourceAttributes) Reset() {
@@ -98,18 +107,26 @@ func (x *BaseResourceAttributes) GetProposalId() []byte {
 	return nil
 }
 
+func (x *BaseResourceAttributes) GetRequestedParentNodeId() string {
+	if x != nil {
+		return x.RequestedParentNodeId
+	}
+	return ""
+}
+
 var File_splitsecure_teamresource_v1_base_resource_attributes_proto protoreflect.FileDescriptor
 
 const file_splitsecure_teamresource_v1_base_resource_attributes_proto_rawDesc = "" +
 	"\n" +
-	":splitsecure/teamresource/v1/base_resource_attributes.proto\x12\x1bsplitsecure.teamresource.v1\x1a5splitsecure/teamresource/v1/account_sensitivity.proto\x1a5splitsecure/teamresource/v1/notification_policy.proto\"\xa4\x02\n" +
+	":splitsecure/teamresource/v1/base_resource_attributes.proto\x12\x1bsplitsecure.teamresource.v1\x1a5splitsecure/teamresource/v1/account_sensitivity.proto\x1a5splitsecure/teamresource/v1/notification_policy.proto\"\xdd\x02\n" +
 	"\x16BaseResourceAttributes\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12`\n" +
 	"\x13notification_policy\x18\x03 \x01(\x0e2/.splitsecure.teamresource.v1.NotificationPolicyR\x12notificationPolicy\x12Q\n" +
 	"\vsensitivity\x18\x04 \x01(\v2/.splitsecure.teamresource.v1.AccountSensitivityR\vsensitivity\x12\x1f\n" +
 	"\vproposal_id\x18\x05 \x01(\fR\n" +
-	"proposalIdB\xa1\x02\n" +
+	"proposalId\x127\n" +
+	"\x18requested_parent_node_id\x18\x06 \x01(\tR\x15requestedParentNodeIdB\xa1\x02\n" +
 	"\x1fcom.splitsecure.teamresource.v1B\x1bBaseResourceAttributesProtoP\x01ZSgithub.com/splitsecure/apis/gen/go/proto/splitsecure/teamresource/v1;teamresourcev1\xa2\x02\x03STX\xaa\x02\x1bSplitsecure.Teamresource.V1\xca\x02\x1bSplitsecure\\Teamresource\\V1\xe2\x02'Splitsecure\\Teamresource\\V1\\GPBMetadata\xea\x02\x1dSplitsecure::Teamresource::V1b\x06proto3"
 
 var (

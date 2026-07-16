@@ -1,0 +1,27 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "splitsecure/oasis/saml/v2/attribute.proto";
+import "splitsecure/oasis/saml/v2/endpoint.proto";
+import "splitsecure/oasis/saml/v2/role_descriptor_type.proto";
+
+// AttributeAuthorityDescriptor represents an Attribute Authority descriptor
+message AttributeAuthorityDescriptor {
+  // Base role descriptor fields
+  RoleDescriptorType base = 1;
+
+  // Required: attribute service endpoints (at least one)
+  repeated Endpoint attribute_service = 2;
+
+  // Optional: assertion ID request service endpoints
+  repeated Endpoint assertion_id_request_service = 3;
+
+  // Optional: supported name ID formats
+  repeated string name_id_format = 4;
+
+  // Optional: supported attribute profiles
+  repeated string attribute_profile = 5;
+
+  // Optional: supported attributes
+  repeated Attribute attribute = 6;
+}

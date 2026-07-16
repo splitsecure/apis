@@ -1,0 +1,34 @@
+syntax = "proto3";
+package splitsecure.oasis.saml.v2;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "splitsecure/oasis/saml/v2/extensions.proto";
+import "splitsecure/oasis/saml/v2/key_descriptor.proto";
+
+// AffiliationDescriptor describes an affiliation of entities
+message AffiliationDescriptor {
+  // Required: affiliation owner ID
+  string affiliation_owner_id = 1;
+
+  // Optional: signature
+  bytes signature = 2;
+
+  // Optional: extensions
+  Extensions extensions = 3;
+
+  // Required: affiliated member entity IDs (at least one)
+  repeated string affiliate_member = 4;
+
+  // Optional: key descriptors
+  repeated KeyDescriptor key_descriptor = 5;
+
+  // Optional: validity period
+  google.protobuf.Timestamp valid_until = 6;
+
+  // Optional: cache duration
+  google.protobuf.Duration cache_duration = 7;
+
+  // Optional: ID attribute
+  string id = 8;
+}
