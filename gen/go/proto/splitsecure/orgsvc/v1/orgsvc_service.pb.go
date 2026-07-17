@@ -24,12 +24,13 @@ var File_splitsecure_orgsvc_v1_orgsvc_service_proto protoreflect.FileDescriptor
 
 const file_splitsecure_orgsvc_v1_orgsvc_service_proto_rawDesc = "" +
 	"\n" +
-	"*splitsecure/orgsvc/v1/orgsvc_service.proto\x12\x15splitsecure.orgsvc.v1\x1a-splitsecure/orgsvc/v1/add_group_members.proto\x1a(splitsecure/orgsvc/v1/create_group.proto\x1a(splitsecure/orgsvc/v1/delete_grant.proto\x1a(splitsecure/orgsvc/v1/delete_group.proto\x1a%splitsecure/orgsvc/v1/get_grant.proto\x1a%splitsecure/orgsvc/v1/get_group.proto\x1a,splitsecure/orgsvc/v1/get_organization.proto\x1a0splitsecure/orgsvc/v1/get_service_accounts.proto\x1a3splitsecure/orgsvc/v1/list_grants_by_resource.proto\x1a.splitsecure/orgsvc/v1/list_group_members.proto\x1a'splitsecure/orgsvc/v1/list_groups.proto\x1a(splitsecure/orgsvc/v1/list_members.proto\x1a%splitsecure/orgsvc/v1/put_grant.proto\x1a/splitsecure/orgsvc/v1/remove_group_member.proto\x1a(splitsecure/orgsvc/v1/update_group.proto2\xd1\f\n" +
+	"*splitsecure/orgsvc/v1/orgsvc_service.proto\x12\x15splitsecure.orgsvc.v1\x1a-splitsecure/orgsvc/v1/add_group_members.proto\x1a(splitsecure/orgsvc/v1/create_group.proto\x1a(splitsecure/orgsvc/v1/delete_grant.proto\x1a(splitsecure/orgsvc/v1/delete_group.proto\x1a%splitsecure/orgsvc/v1/get_grant.proto\x1a%splitsecure/orgsvc/v1/get_group.proto\x1a0splitsecure/orgsvc/v1/get_members_by_email.proto\x1a,splitsecure/orgsvc/v1/get_organization.proto\x1a0splitsecure/orgsvc/v1/get_service_accounts.proto\x1a3splitsecure/orgsvc/v1/list_grants_by_resource.proto\x1a.splitsecure/orgsvc/v1/list_group_members.proto\x1a'splitsecure/orgsvc/v1/list_groups.proto\x1a(splitsecure/orgsvc/v1/list_members.proto\x1a%splitsecure/orgsvc/v1/put_grant.proto\x1a/splitsecure/orgsvc/v1/remove_group_member.proto\x1a(splitsecure/orgsvc/v1/update_group.proto2\xc9\r\n" +
 	"\n" +
 	"OrgService\x12p\n" +
 	"\x0fGetOrganization\x12-.splitsecure.orgsvc.v1.GetOrganizationRequest\x1a..splitsecure.orgsvc.v1.GetOrganizationResponse\x12d\n" +
 	"\vListMembers\x12).splitsecure.orgsvc.v1.ListMembersRequest\x1a*.splitsecure.orgsvc.v1.ListMembersResponse\x12y\n" +
-	"\x12GetServiceAccounts\x120.splitsecure.orgsvc.v1.GetServiceAccountsRequest\x1a1.splitsecure.orgsvc.v1.GetServiceAccountsResponse\x12d\n" +
+	"\x12GetServiceAccounts\x120.splitsecure.orgsvc.v1.GetServiceAccountsRequest\x1a1.splitsecure.orgsvc.v1.GetServiceAccountsResponse\x12v\n" +
+	"\x11GetMembersByEmail\x12/.splitsecure.orgsvc.v1.GetMembersByEmailRequest\x1a0.splitsecure.orgsvc.v1.GetMembersByEmailResponse\x12d\n" +
 	"\vCreateGroup\x12).splitsecure.orgsvc.v1.CreateGroupRequest\x1a*.splitsecure.orgsvc.v1.CreateGroupResponse\x12[\n" +
 	"\bGetGroup\x12&.splitsecure.orgsvc.v1.GetGroupRequest\x1a'.splitsecure.orgsvc.v1.GetGroupResponse\x12a\n" +
 	"\n" +
@@ -49,67 +50,71 @@ var file_splitsecure_orgsvc_v1_orgsvc_service_proto_goTypes = []any{
 	(*GetOrganizationRequest)(nil),       // 0: splitsecure.orgsvc.v1.GetOrganizationRequest
 	(*ListMembersRequest)(nil),           // 1: splitsecure.orgsvc.v1.ListMembersRequest
 	(*GetServiceAccountsRequest)(nil),    // 2: splitsecure.orgsvc.v1.GetServiceAccountsRequest
-	(*CreateGroupRequest)(nil),           // 3: splitsecure.orgsvc.v1.CreateGroupRequest
-	(*GetGroupRequest)(nil),              // 4: splitsecure.orgsvc.v1.GetGroupRequest
-	(*ListGroupsRequest)(nil),            // 5: splitsecure.orgsvc.v1.ListGroupsRequest
-	(*UpdateGroupRequest)(nil),           // 6: splitsecure.orgsvc.v1.UpdateGroupRequest
-	(*DeleteGroupRequest)(nil),           // 7: splitsecure.orgsvc.v1.DeleteGroupRequest
-	(*AddGroupMembersRequest)(nil),       // 8: splitsecure.orgsvc.v1.AddGroupMembersRequest
-	(*RemoveGroupMemberRequest)(nil),     // 9: splitsecure.orgsvc.v1.RemoveGroupMemberRequest
-	(*ListGroupMembersRequest)(nil),      // 10: splitsecure.orgsvc.v1.ListGroupMembersRequest
-	(*PutGrantRequest)(nil),              // 11: splitsecure.orgsvc.v1.PutGrantRequest
-	(*GetGrantRequest)(nil),              // 12: splitsecure.orgsvc.v1.GetGrantRequest
-	(*DeleteGrantRequest)(nil),           // 13: splitsecure.orgsvc.v1.DeleteGrantRequest
-	(*ListGrantsByResourceRequest)(nil),  // 14: splitsecure.orgsvc.v1.ListGrantsByResourceRequest
-	(*GetOrganizationResponse)(nil),      // 15: splitsecure.orgsvc.v1.GetOrganizationResponse
-	(*ListMembersResponse)(nil),          // 16: splitsecure.orgsvc.v1.ListMembersResponse
-	(*GetServiceAccountsResponse)(nil),   // 17: splitsecure.orgsvc.v1.GetServiceAccountsResponse
-	(*CreateGroupResponse)(nil),          // 18: splitsecure.orgsvc.v1.CreateGroupResponse
-	(*GetGroupResponse)(nil),             // 19: splitsecure.orgsvc.v1.GetGroupResponse
-	(*ListGroupsResponse)(nil),           // 20: splitsecure.orgsvc.v1.ListGroupsResponse
-	(*UpdateGroupResponse)(nil),          // 21: splitsecure.orgsvc.v1.UpdateGroupResponse
-	(*DeleteGroupResponse)(nil),          // 22: splitsecure.orgsvc.v1.DeleteGroupResponse
-	(*AddGroupMembersResponse)(nil),      // 23: splitsecure.orgsvc.v1.AddGroupMembersResponse
-	(*RemoveGroupMemberResponse)(nil),    // 24: splitsecure.orgsvc.v1.RemoveGroupMemberResponse
-	(*ListGroupMembersResponse)(nil),     // 25: splitsecure.orgsvc.v1.ListGroupMembersResponse
-	(*PutGrantResponse)(nil),             // 26: splitsecure.orgsvc.v1.PutGrantResponse
-	(*GetGrantResponse)(nil),             // 27: splitsecure.orgsvc.v1.GetGrantResponse
-	(*DeleteGrantResponse)(nil),          // 28: splitsecure.orgsvc.v1.DeleteGrantResponse
-	(*ListGrantsByResourceResponse)(nil), // 29: splitsecure.orgsvc.v1.ListGrantsByResourceResponse
+	(*GetMembersByEmailRequest)(nil),     // 3: splitsecure.orgsvc.v1.GetMembersByEmailRequest
+	(*CreateGroupRequest)(nil),           // 4: splitsecure.orgsvc.v1.CreateGroupRequest
+	(*GetGroupRequest)(nil),              // 5: splitsecure.orgsvc.v1.GetGroupRequest
+	(*ListGroupsRequest)(nil),            // 6: splitsecure.orgsvc.v1.ListGroupsRequest
+	(*UpdateGroupRequest)(nil),           // 7: splitsecure.orgsvc.v1.UpdateGroupRequest
+	(*DeleteGroupRequest)(nil),           // 8: splitsecure.orgsvc.v1.DeleteGroupRequest
+	(*AddGroupMembersRequest)(nil),       // 9: splitsecure.orgsvc.v1.AddGroupMembersRequest
+	(*RemoveGroupMemberRequest)(nil),     // 10: splitsecure.orgsvc.v1.RemoveGroupMemberRequest
+	(*ListGroupMembersRequest)(nil),      // 11: splitsecure.orgsvc.v1.ListGroupMembersRequest
+	(*PutGrantRequest)(nil),              // 12: splitsecure.orgsvc.v1.PutGrantRequest
+	(*GetGrantRequest)(nil),              // 13: splitsecure.orgsvc.v1.GetGrantRequest
+	(*DeleteGrantRequest)(nil),           // 14: splitsecure.orgsvc.v1.DeleteGrantRequest
+	(*ListGrantsByResourceRequest)(nil),  // 15: splitsecure.orgsvc.v1.ListGrantsByResourceRequest
+	(*GetOrganizationResponse)(nil),      // 16: splitsecure.orgsvc.v1.GetOrganizationResponse
+	(*ListMembersResponse)(nil),          // 17: splitsecure.orgsvc.v1.ListMembersResponse
+	(*GetServiceAccountsResponse)(nil),   // 18: splitsecure.orgsvc.v1.GetServiceAccountsResponse
+	(*GetMembersByEmailResponse)(nil),    // 19: splitsecure.orgsvc.v1.GetMembersByEmailResponse
+	(*CreateGroupResponse)(nil),          // 20: splitsecure.orgsvc.v1.CreateGroupResponse
+	(*GetGroupResponse)(nil),             // 21: splitsecure.orgsvc.v1.GetGroupResponse
+	(*ListGroupsResponse)(nil),           // 22: splitsecure.orgsvc.v1.ListGroupsResponse
+	(*UpdateGroupResponse)(nil),          // 23: splitsecure.orgsvc.v1.UpdateGroupResponse
+	(*DeleteGroupResponse)(nil),          // 24: splitsecure.orgsvc.v1.DeleteGroupResponse
+	(*AddGroupMembersResponse)(nil),      // 25: splitsecure.orgsvc.v1.AddGroupMembersResponse
+	(*RemoveGroupMemberResponse)(nil),    // 26: splitsecure.orgsvc.v1.RemoveGroupMemberResponse
+	(*ListGroupMembersResponse)(nil),     // 27: splitsecure.orgsvc.v1.ListGroupMembersResponse
+	(*PutGrantResponse)(nil),             // 28: splitsecure.orgsvc.v1.PutGrantResponse
+	(*GetGrantResponse)(nil),             // 29: splitsecure.orgsvc.v1.GetGrantResponse
+	(*DeleteGrantResponse)(nil),          // 30: splitsecure.orgsvc.v1.DeleteGrantResponse
+	(*ListGrantsByResourceResponse)(nil), // 31: splitsecure.orgsvc.v1.ListGrantsByResourceResponse
 }
 var file_splitsecure_orgsvc_v1_orgsvc_service_proto_depIdxs = []int32{
 	0,  // 0: splitsecure.orgsvc.v1.OrgService.GetOrganization:input_type -> splitsecure.orgsvc.v1.GetOrganizationRequest
 	1,  // 1: splitsecure.orgsvc.v1.OrgService.ListMembers:input_type -> splitsecure.orgsvc.v1.ListMembersRequest
 	2,  // 2: splitsecure.orgsvc.v1.OrgService.GetServiceAccounts:input_type -> splitsecure.orgsvc.v1.GetServiceAccountsRequest
-	3,  // 3: splitsecure.orgsvc.v1.OrgService.CreateGroup:input_type -> splitsecure.orgsvc.v1.CreateGroupRequest
-	4,  // 4: splitsecure.orgsvc.v1.OrgService.GetGroup:input_type -> splitsecure.orgsvc.v1.GetGroupRequest
-	5,  // 5: splitsecure.orgsvc.v1.OrgService.ListGroups:input_type -> splitsecure.orgsvc.v1.ListGroupsRequest
-	6,  // 6: splitsecure.orgsvc.v1.OrgService.UpdateGroup:input_type -> splitsecure.orgsvc.v1.UpdateGroupRequest
-	7,  // 7: splitsecure.orgsvc.v1.OrgService.DeleteGroup:input_type -> splitsecure.orgsvc.v1.DeleteGroupRequest
-	8,  // 8: splitsecure.orgsvc.v1.OrgService.AddGroupMembers:input_type -> splitsecure.orgsvc.v1.AddGroupMembersRequest
-	9,  // 9: splitsecure.orgsvc.v1.OrgService.RemoveGroupMember:input_type -> splitsecure.orgsvc.v1.RemoveGroupMemberRequest
-	10, // 10: splitsecure.orgsvc.v1.OrgService.ListGroupMembers:input_type -> splitsecure.orgsvc.v1.ListGroupMembersRequest
-	11, // 11: splitsecure.orgsvc.v1.OrgService.PutGrant:input_type -> splitsecure.orgsvc.v1.PutGrantRequest
-	12, // 12: splitsecure.orgsvc.v1.OrgService.GetGrant:input_type -> splitsecure.orgsvc.v1.GetGrantRequest
-	13, // 13: splitsecure.orgsvc.v1.OrgService.DeleteGrant:input_type -> splitsecure.orgsvc.v1.DeleteGrantRequest
-	14, // 14: splitsecure.orgsvc.v1.OrgService.ListGrantsByResource:input_type -> splitsecure.orgsvc.v1.ListGrantsByResourceRequest
-	15, // 15: splitsecure.orgsvc.v1.OrgService.GetOrganization:output_type -> splitsecure.orgsvc.v1.GetOrganizationResponse
-	16, // 16: splitsecure.orgsvc.v1.OrgService.ListMembers:output_type -> splitsecure.orgsvc.v1.ListMembersResponse
-	17, // 17: splitsecure.orgsvc.v1.OrgService.GetServiceAccounts:output_type -> splitsecure.orgsvc.v1.GetServiceAccountsResponse
-	18, // 18: splitsecure.orgsvc.v1.OrgService.CreateGroup:output_type -> splitsecure.orgsvc.v1.CreateGroupResponse
-	19, // 19: splitsecure.orgsvc.v1.OrgService.GetGroup:output_type -> splitsecure.orgsvc.v1.GetGroupResponse
-	20, // 20: splitsecure.orgsvc.v1.OrgService.ListGroups:output_type -> splitsecure.orgsvc.v1.ListGroupsResponse
-	21, // 21: splitsecure.orgsvc.v1.OrgService.UpdateGroup:output_type -> splitsecure.orgsvc.v1.UpdateGroupResponse
-	22, // 22: splitsecure.orgsvc.v1.OrgService.DeleteGroup:output_type -> splitsecure.orgsvc.v1.DeleteGroupResponse
-	23, // 23: splitsecure.orgsvc.v1.OrgService.AddGroupMembers:output_type -> splitsecure.orgsvc.v1.AddGroupMembersResponse
-	24, // 24: splitsecure.orgsvc.v1.OrgService.RemoveGroupMember:output_type -> splitsecure.orgsvc.v1.RemoveGroupMemberResponse
-	25, // 25: splitsecure.orgsvc.v1.OrgService.ListGroupMembers:output_type -> splitsecure.orgsvc.v1.ListGroupMembersResponse
-	26, // 26: splitsecure.orgsvc.v1.OrgService.PutGrant:output_type -> splitsecure.orgsvc.v1.PutGrantResponse
-	27, // 27: splitsecure.orgsvc.v1.OrgService.GetGrant:output_type -> splitsecure.orgsvc.v1.GetGrantResponse
-	28, // 28: splitsecure.orgsvc.v1.OrgService.DeleteGrant:output_type -> splitsecure.orgsvc.v1.DeleteGrantResponse
-	29, // 29: splitsecure.orgsvc.v1.OrgService.ListGrantsByResource:output_type -> splitsecure.orgsvc.v1.ListGrantsByResourceResponse
-	15, // [15:30] is the sub-list for method output_type
-	0,  // [0:15] is the sub-list for method input_type
+	3,  // 3: splitsecure.orgsvc.v1.OrgService.GetMembersByEmail:input_type -> splitsecure.orgsvc.v1.GetMembersByEmailRequest
+	4,  // 4: splitsecure.orgsvc.v1.OrgService.CreateGroup:input_type -> splitsecure.orgsvc.v1.CreateGroupRequest
+	5,  // 5: splitsecure.orgsvc.v1.OrgService.GetGroup:input_type -> splitsecure.orgsvc.v1.GetGroupRequest
+	6,  // 6: splitsecure.orgsvc.v1.OrgService.ListGroups:input_type -> splitsecure.orgsvc.v1.ListGroupsRequest
+	7,  // 7: splitsecure.orgsvc.v1.OrgService.UpdateGroup:input_type -> splitsecure.orgsvc.v1.UpdateGroupRequest
+	8,  // 8: splitsecure.orgsvc.v1.OrgService.DeleteGroup:input_type -> splitsecure.orgsvc.v1.DeleteGroupRequest
+	9,  // 9: splitsecure.orgsvc.v1.OrgService.AddGroupMembers:input_type -> splitsecure.orgsvc.v1.AddGroupMembersRequest
+	10, // 10: splitsecure.orgsvc.v1.OrgService.RemoveGroupMember:input_type -> splitsecure.orgsvc.v1.RemoveGroupMemberRequest
+	11, // 11: splitsecure.orgsvc.v1.OrgService.ListGroupMembers:input_type -> splitsecure.orgsvc.v1.ListGroupMembersRequest
+	12, // 12: splitsecure.orgsvc.v1.OrgService.PutGrant:input_type -> splitsecure.orgsvc.v1.PutGrantRequest
+	13, // 13: splitsecure.orgsvc.v1.OrgService.GetGrant:input_type -> splitsecure.orgsvc.v1.GetGrantRequest
+	14, // 14: splitsecure.orgsvc.v1.OrgService.DeleteGrant:input_type -> splitsecure.orgsvc.v1.DeleteGrantRequest
+	15, // 15: splitsecure.orgsvc.v1.OrgService.ListGrantsByResource:input_type -> splitsecure.orgsvc.v1.ListGrantsByResourceRequest
+	16, // 16: splitsecure.orgsvc.v1.OrgService.GetOrganization:output_type -> splitsecure.orgsvc.v1.GetOrganizationResponse
+	17, // 17: splitsecure.orgsvc.v1.OrgService.ListMembers:output_type -> splitsecure.orgsvc.v1.ListMembersResponse
+	18, // 18: splitsecure.orgsvc.v1.OrgService.GetServiceAccounts:output_type -> splitsecure.orgsvc.v1.GetServiceAccountsResponse
+	19, // 19: splitsecure.orgsvc.v1.OrgService.GetMembersByEmail:output_type -> splitsecure.orgsvc.v1.GetMembersByEmailResponse
+	20, // 20: splitsecure.orgsvc.v1.OrgService.CreateGroup:output_type -> splitsecure.orgsvc.v1.CreateGroupResponse
+	21, // 21: splitsecure.orgsvc.v1.OrgService.GetGroup:output_type -> splitsecure.orgsvc.v1.GetGroupResponse
+	22, // 22: splitsecure.orgsvc.v1.OrgService.ListGroups:output_type -> splitsecure.orgsvc.v1.ListGroupsResponse
+	23, // 23: splitsecure.orgsvc.v1.OrgService.UpdateGroup:output_type -> splitsecure.orgsvc.v1.UpdateGroupResponse
+	24, // 24: splitsecure.orgsvc.v1.OrgService.DeleteGroup:output_type -> splitsecure.orgsvc.v1.DeleteGroupResponse
+	25, // 25: splitsecure.orgsvc.v1.OrgService.AddGroupMembers:output_type -> splitsecure.orgsvc.v1.AddGroupMembersResponse
+	26, // 26: splitsecure.orgsvc.v1.OrgService.RemoveGroupMember:output_type -> splitsecure.orgsvc.v1.RemoveGroupMemberResponse
+	27, // 27: splitsecure.orgsvc.v1.OrgService.ListGroupMembers:output_type -> splitsecure.orgsvc.v1.ListGroupMembersResponse
+	28, // 28: splitsecure.orgsvc.v1.OrgService.PutGrant:output_type -> splitsecure.orgsvc.v1.PutGrantResponse
+	29, // 29: splitsecure.orgsvc.v1.OrgService.GetGrant:output_type -> splitsecure.orgsvc.v1.GetGrantResponse
+	30, // 30: splitsecure.orgsvc.v1.OrgService.DeleteGrant:output_type -> splitsecure.orgsvc.v1.DeleteGrantResponse
+	31, // 31: splitsecure.orgsvc.v1.OrgService.ListGrantsByResource:output_type -> splitsecure.orgsvc.v1.ListGrantsByResourceResponse
+	16, // [16:32] is the sub-list for method output_type
+	0,  // [0:16] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -126,6 +131,7 @@ func file_splitsecure_orgsvc_v1_orgsvc_service_proto_init() {
 	file_splitsecure_orgsvc_v1_delete_group_proto_init()
 	file_splitsecure_orgsvc_v1_get_grant_proto_init()
 	file_splitsecure_orgsvc_v1_get_group_proto_init()
+	file_splitsecure_orgsvc_v1_get_members_by_email_proto_init()
 	file_splitsecure_orgsvc_v1_get_organization_proto_init()
 	file_splitsecure_orgsvc_v1_get_service_accounts_proto_init()
 	file_splitsecure_orgsvc_v1_list_grants_by_resource_proto_init()

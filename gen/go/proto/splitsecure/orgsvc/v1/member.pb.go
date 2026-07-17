@@ -23,7 +23,8 @@ const (
 
 type Member struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// User S2R URI: s2r:{deployment}:usr:{id}.
+	// Principal S2R URI: s2r:{deployment}:usr:{id} for a user, or
+	// s2r:{deployment}:sa:{id} for a service account.
 	UserId        string `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Email         string `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	DisplayName   string `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`

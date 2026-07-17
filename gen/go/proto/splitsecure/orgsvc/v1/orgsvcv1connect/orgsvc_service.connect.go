@@ -41,6 +41,9 @@ const (
 	// OrgServiceGetServiceAccountsProcedure is the fully-qualified name of the OrgService's
 	// GetServiceAccounts RPC.
 	OrgServiceGetServiceAccountsProcedure = "/splitsecure.orgsvc.v1.OrgService/GetServiceAccounts"
+	// OrgServiceGetMembersByEmailProcedure is the fully-qualified name of the OrgService's
+	// GetMembersByEmail RPC.
+	OrgServiceGetMembersByEmailProcedure = "/splitsecure.orgsvc.v1.OrgService/GetMembersByEmail"
 	// OrgServiceCreateGroupProcedure is the fully-qualified name of the OrgService's CreateGroup RPC.
 	OrgServiceCreateGroupProcedure = "/splitsecure.orgsvc.v1.OrgService/CreateGroup"
 	// OrgServiceGetGroupProcedure is the fully-qualified name of the OrgService's GetGroup RPC.
@@ -77,6 +80,9 @@ type OrgServiceClient interface {
 	GetOrganization(context.Context, *connect.Request[v1.GetOrganizationRequest]) (*connect.Response[v1.GetOrganizationResponse], error)
 	ListMembers(context.Context, *connect.Request[v1.ListMembersRequest]) (*connect.Response[v1.ListMembersResponse], error)
 	GetServiceAccounts(context.Context, *connect.Request[v1.GetServiceAccountsRequest]) (*connect.Response[v1.GetServiceAccountsResponse], error)
+	// Resolve emails to Member records (users and service accounts) so callers
+	// reference principals by the console email instead of a raw s2r.
+	GetMembersByEmail(context.Context, *connect.Request[v1.GetMembersByEmailRequest]) (*connect.Response[v1.GetMembersByEmailResponse], error)
 	// Groups. Reads are open to any org member. ListGroups omits system
 	// groups; the org's "Everyone" group is exposed as
 	// Organization.everyone_group_s2r, and ListGroupMembers rejects it
@@ -128,6 +134,12 @@ func NewOrgServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...
 			httpClient,
 			baseURL+OrgServiceGetServiceAccountsProcedure,
 			connect.WithSchema(orgServiceMethods.ByName("GetServiceAccounts")),
+			connect.WithClientOptions(opts...),
+		),
+		getMembersByEmail: connect.NewClient[v1.GetMembersByEmailRequest, v1.GetMembersByEmailResponse](
+			httpClient,
+			baseURL+OrgServiceGetMembersByEmailProcedure,
+			connect.WithSchema(orgServiceMethods.ByName("GetMembersByEmail")),
 			connect.WithClientOptions(opts...),
 		),
 		createGroup: connect.NewClient[v1.CreateGroupRequest, v1.CreateGroupResponse](
@@ -210,6 +222,7 @@ type orgServiceClient struct {
 	getOrganization      *connect.Client[v1.GetOrganizationRequest, v1.GetOrganizationResponse]
 	listMembers          *connect.Client[v1.ListMembersRequest, v1.ListMembersResponse]
 	getServiceAccounts   *connect.Client[v1.GetServiceAccountsRequest, v1.GetServiceAccountsResponse]
+	getMembersByEmail    *connect.Client[v1.GetMembersByEmailRequest, v1.GetMembersByEmailResponse]
 	createGroup          *connect.Client[v1.CreateGroupRequest, v1.CreateGroupResponse]
 	getGroup             *connect.Client[v1.GetGroupRequest, v1.GetGroupResponse]
 	listGroups           *connect.Client[v1.ListGroupsRequest, v1.ListGroupsResponse]
@@ -237,6 +250,11 @@ func (c *orgServiceClient) ListMembers(ctx context.Context, req *connect.Request
 // GetServiceAccounts calls splitsecure.orgsvc.v1.OrgService.GetServiceAccounts.
 func (c *orgServiceClient) GetServiceAccounts(ctx context.Context, req *connect.Request[v1.GetServiceAccountsRequest]) (*connect.Response[v1.GetServiceAccountsResponse], error) {
 	return c.getServiceAccounts.CallUnary(ctx, req)
+}
+
+// GetMembersByEmail calls splitsecure.orgsvc.v1.OrgService.GetMembersByEmail.
+func (c *orgServiceClient) GetMembersByEmail(ctx context.Context, req *connect.Request[v1.GetMembersByEmailRequest]) (*connect.Response[v1.GetMembersByEmailResponse], error) {
+	return c.getMembersByEmail.CallUnary(ctx, req)
 }
 
 // CreateGroup calls splitsecure.orgsvc.v1.OrgService.CreateGroup.
@@ -305,6 +323,9 @@ type OrgServiceHandler interface {
 	GetOrganization(context.Context, *connect.Request[v1.GetOrganizationRequest]) (*connect.Response[v1.GetOrganizationResponse], error)
 	ListMembers(context.Context, *connect.Request[v1.ListMembersRequest]) (*connect.Response[v1.ListMembersResponse], error)
 	GetServiceAccounts(context.Context, *connect.Request[v1.GetServiceAccountsRequest]) (*connect.Response[v1.GetServiceAccountsResponse], error)
+	// Resolve emails to Member records (users and service accounts) so callers
+	// reference principals by the console email instead of a raw s2r.
+	GetMembersByEmail(context.Context, *connect.Request[v1.GetMembersByEmailRequest]) (*connect.Response[v1.GetMembersByEmailResponse], error)
 	// Groups. Reads are open to any org member. ListGroups omits system
 	// groups; the org's "Everyone" group is exposed as
 	// Organization.everyone_group_s2r, and ListGroupMembers rejects it
@@ -352,6 +373,12 @@ func NewOrgServiceHandler(svc OrgServiceHandler, opts ...connect.HandlerOption) 
 		OrgServiceGetServiceAccountsProcedure,
 		svc.GetServiceAccounts,
 		connect.WithSchema(orgServiceMethods.ByName("GetServiceAccounts")),
+		connect.WithHandlerOptions(opts...),
+	)
+	orgServiceGetMembersByEmailHandler := connect.NewUnaryHandler(
+		OrgServiceGetMembersByEmailProcedure,
+		svc.GetMembersByEmail,
+		connect.WithSchema(orgServiceMethods.ByName("GetMembersByEmail")),
 		connect.WithHandlerOptions(opts...),
 	)
 	orgServiceCreateGroupHandler := connect.NewUnaryHandler(
@@ -434,6 +461,8 @@ func NewOrgServiceHandler(svc OrgServiceHandler, opts ...connect.HandlerOption) 
 			orgServiceListMembersHandler.ServeHTTP(w, r)
 		case OrgServiceGetServiceAccountsProcedure:
 			orgServiceGetServiceAccountsHandler.ServeHTTP(w, r)
+		case OrgServiceGetMembersByEmailProcedure:
+			orgServiceGetMembersByEmailHandler.ServeHTTP(w, r)
 		case OrgServiceCreateGroupProcedure:
 			orgServiceCreateGroupHandler.ServeHTTP(w, r)
 		case OrgServiceGetGroupProcedure:
@@ -477,6 +506,10 @@ func (UnimplementedOrgServiceHandler) ListMembers(context.Context, *connect.Requ
 
 func (UnimplementedOrgServiceHandler) GetServiceAccounts(context.Context, *connect.Request[v1.GetServiceAccountsRequest]) (*connect.Response[v1.GetServiceAccountsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.orgsvc.v1.OrgService.GetServiceAccounts is not implemented"))
+}
+
+func (UnimplementedOrgServiceHandler) GetMembersByEmail(context.Context, *connect.Request[v1.GetMembersByEmailRequest]) (*connect.Response[v1.GetMembersByEmailResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.orgsvc.v1.OrgService.GetMembersByEmail is not implemented"))
 }
 
 func (UnimplementedOrgServiceHandler) CreateGroup(context.Context, *connect.Request[v1.CreateGroupRequest]) (*connect.Response[v1.CreateGroupResponse], error) {

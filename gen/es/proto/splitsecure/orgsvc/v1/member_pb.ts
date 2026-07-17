@@ -17,7 +17,8 @@ export const file_splitsecure_orgsvc_v1_member: GenFile = /*@__PURE__*/
  */
 export type Member = Message<"splitsecure.orgsvc.v1.Member"> & {
   /**
-   * User S2R URI: s2r:{deployment}:usr:{id}.
+   * Principal S2R URI: s2r:{deployment}:usr:{id} for a user, or
+   * s2r:{deployment}:sa:{id} for a service account.
    *
    * @generated from field: string user_id = 1;
    */
