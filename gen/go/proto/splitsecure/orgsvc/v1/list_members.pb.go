@@ -68,6 +68,7 @@ func (x *ListMembersRequest) GetBase() *ListMembersRequest_Base {
 type ListMembersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Members       []*Member              `protobuf:"bytes,1,rep,name=members,proto3" json:"members,omitempty"`
+	NextCursor    string                 `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -109,9 +110,18 @@ func (x *ListMembersResponse) GetMembers() []*Member {
 	return nil
 }
 
+func (x *ListMembersResponse) GetNextCursor() string {
+	if x != nil {
+		return x.NextCursor
+	}
+	return ""
+}
+
 type ListMembersRequest_Base struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	OrganizationId string                 `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	Limit          int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
+	Cursor         string                 `protobuf:"bytes,3,opt,name=cursor,proto3" json:"cursor,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -153,17 +163,35 @@ func (x *ListMembersRequest_Base) GetOrganizationId() string {
 	return ""
 }
 
+func (x *ListMembersRequest_Base) GetLimit() int32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+func (x *ListMembersRequest_Base) GetCursor() string {
+	if x != nil {
+		return x.Cursor
+	}
+	return ""
+}
+
 var File_splitsecure_orgsvc_v1_list_members_proto protoreflect.FileDescriptor
 
 const file_splitsecure_orgsvc_v1_list_members_proto_rawDesc = "" +
 	"\n" +
-	"(splitsecure/orgsvc/v1/list_members.proto\x12\x15splitsecure.orgsvc.v1\x1a\"splitsecure/orgsvc/v1/member.proto\"\x89\x01\n" +
+	"(splitsecure/orgsvc/v1/list_members.proto\x12\x15splitsecure.orgsvc.v1\x1a\"splitsecure/orgsvc/v1/member.proto\"\xb7\x01\n" +
 	"\x12ListMembersRequest\x12B\n" +
-	"\x04base\x18\x02 \x01(\v2..splitsecure.orgsvc.v1.ListMembersRequest.BaseR\x04base\x1a/\n" +
+	"\x04base\x18\x02 \x01(\v2..splitsecure.orgsvc.v1.ListMembersRequest.BaseR\x04base\x1a]\n" +
 	"\x04Base\x12'\n" +
-	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\"N\n" +
+	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
+	"\x06cursor\x18\x03 \x01(\tR\x06cursor\"o\n" +
 	"\x13ListMembersResponse\x127\n" +
-	"\amembers\x18\x01 \x03(\v2\x1d.splitsecure.orgsvc.v1.MemberR\amembersB\xec\x01\n" +
+	"\amembers\x18\x01 \x03(\v2\x1d.splitsecure.orgsvc.v1.MemberR\amembers\x12\x1f\n" +
+	"\vnext_cursor\x18\x02 \x01(\tR\n" +
+	"nextCursorB\xec\x01\n" +
 	"\x19com.splitsecure.orgsvc.v1B\x10ListMembersProtoP\x01ZGgithub.com/splitsecure/apis/gen/go/proto/splitsecure/orgsvc/v1;orgsvcv1\xa2\x02\x03SOX\xaa\x02\x15Splitsecure.Orgsvc.V1\xca\x02\x15Splitsecure\\Orgsvc\\V1\xe2\x02!Splitsecure\\Orgsvc\\V1\\GPBMetadata\xea\x02\x17Splitsecure::Orgsvc::V1b\x06proto3"
 
 var (
