@@ -9,6 +9,7 @@ package bottlev1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -52,8 +53,11 @@ type PlatformData struct {
 	// from attributed_principal_s2rs so free text can never be parsed as a
 	// verified URI.
 	AttributedCustomIdentifiers []string `protobuf:"bytes,5,rep,name=attributed_custom_identifiers,json=attributedCustomIdentifiers,proto3" json:"attributed_custom_identifiers,omitempty"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	// sealed_at is the time the bottle was sealed according to the enclave.
+	// Other time sources are available, such as the AuditObservationReceipt.
+	SealedAt      *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=sealed_at,json=sealedAt,proto3" json:"sealed_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PlatformData) Reset() {
@@ -121,18 +125,26 @@ func (x *PlatformData) GetAttributedCustomIdentifiers() []string {
 	return nil
 }
 
+func (x *PlatformData) GetSealedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.SealedAt
+	}
+	return nil
+}
+
 var File_splitsecure_bottle_v1_platform_data_proto protoreflect.FileDescriptor
 
 const file_splitsecure_bottle_v1_platform_data_proto_rawDesc = "" +
 	"\n" +
-	")splitsecure/bottle/v1/platform_data.proto\x12\x15splitsecure.bottle.v1\x1a'splitsecure/bottle/v1/device_info.proto\"\x8f\x02\n" +
+	")splitsecure/bottle/v1/platform_data.proto\x12\x15splitsecure.bottle.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a'splitsecure/bottle/v1/device_info.proto\"\xc8\x02\n" +
 	"\fPlatformData\x12\x16\n" +
 	"\x06source\x18\x01 \x01(\tR\x06source\x12B\n" +
 	"\vdevice_info\x18\x02 \x01(\v2!.splitsecure.bottle.v1.DeviceInfoR\n" +
 	"deviceInfo\x12#\n" +
 	"\rprincipal_s2r\x18\x03 \x01(\tR\fprincipalS2r\x12:\n" +
 	"\x19attributed_principal_s2rs\x18\x04 \x03(\tR\x17attributedPrincipalS2rs\x12B\n" +
-	"\x1dattributed_custom_identifiers\x18\x05 \x03(\tR\x1battributedCustomIdentifiersB\xed\x01\n" +
+	"\x1dattributed_custom_identifiers\x18\x05 \x03(\tR\x1battributedCustomIdentifiers\x127\n" +
+	"\tsealed_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\bsealedAtB\xed\x01\n" +
 	"\x19com.splitsecure.bottle.v1B\x11PlatformDataProtoP\x01ZGgithub.com/splitsecure/apis/gen/go/proto/splitsecure/bottle/v1;bottlev1\xa2\x02\x03SBX\xaa\x02\x15Splitsecure.Bottle.V1\xca\x02\x15Splitsecure\\Bottle\\V1\xe2\x02!Splitsecure\\Bottle\\V1\\GPBMetadata\xea\x02\x17Splitsecure::Bottle::V1b\x06proto3"
 
 var (
@@ -149,16 +161,18 @@ func file_splitsecure_bottle_v1_platform_data_proto_rawDescGZIP() []byte {
 
 var file_splitsecure_bottle_v1_platform_data_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_splitsecure_bottle_v1_platform_data_proto_goTypes = []any{
-	(*PlatformData)(nil), // 0: splitsecure.bottle.v1.PlatformData
-	(*DeviceInfo)(nil),   // 1: splitsecure.bottle.v1.DeviceInfo
+	(*PlatformData)(nil),          // 0: splitsecure.bottle.v1.PlatformData
+	(*DeviceInfo)(nil),            // 1: splitsecure.bottle.v1.DeviceInfo
+	(*timestamppb.Timestamp)(nil), // 2: google.protobuf.Timestamp
 }
 var file_splitsecure_bottle_v1_platform_data_proto_depIdxs = []int32{
 	1, // 0: splitsecure.bottle.v1.PlatformData.device_info:type_name -> splitsecure.bottle.v1.DeviceInfo
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: splitsecure.bottle.v1.PlatformData.sealed_at:type_name -> google.protobuf.Timestamp
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_bottle_v1_platform_data_proto_init() }

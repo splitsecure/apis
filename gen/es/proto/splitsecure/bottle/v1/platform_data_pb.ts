@@ -4,6 +4,8 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { DeviceInfo } from "./device_info_pb";
 import { file_splitsecure_bottle_v1_device_info } from "./device_info_pb";
 import type { Message } from "@bufbuild/protobuf";
@@ -12,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/bottle/v1/platform_data.proto.
  */
 export const file_splitsecure_bottle_v1_platform_data: GenFile = /*@__PURE__*/
-  fileDesc("CilzcGxpdHNlY3VyZS9ib3R0bGUvdjEvcGxhdGZvcm1fZGF0YS5wcm90bxIVc3BsaXRzZWN1cmUuYm90dGxlLnYxIrcBCgxQbGF0Zm9ybURhdGESDgoGc291cmNlGAEgASgJEjYKC2RldmljZV9pbmZvGAIgASgLMiEuc3BsaXRzZWN1cmUuYm90dGxlLnYxLkRldmljZUluZm8SFQoNcHJpbmNpcGFsX3MychgDIAEoCRIhChlhdHRyaWJ1dGVkX3ByaW5jaXBhbF9zMnJzGAQgAygJEiUKHWF0dHJpYnV0ZWRfY3VzdG9tX2lkZW50aWZpZXJzGAUgAygJQu0BChljb20uc3BsaXRzZWN1cmUuYm90dGxlLnYxQhFQbGF0Zm9ybURhdGFQcm90b1ABWkdnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL2JvdHRsZS92MTtib3R0bGV2MaICA1NCWKoCFVNwbGl0c2VjdXJlLkJvdHRsZS5WMcoCFVNwbGl0c2VjdXJlXEJvdHRsZVxWMeICIVNwbGl0c2VjdXJlXEJvdHRsZVxWMVxHUEJNZXRhZGF0YeoCF1NwbGl0c2VjdXJlOjpCb3R0bGU6OlYxYgZwcm90bzM", [file_splitsecure_bottle_v1_device_info]);
+  fileDesc("CilzcGxpdHNlY3VyZS9ib3R0bGUvdjEvcGxhdGZvcm1fZGF0YS5wcm90bxIVc3BsaXRzZWN1cmUuYm90dGxlLnYxIuYBCgxQbGF0Zm9ybURhdGESDgoGc291cmNlGAEgASgJEjYKC2RldmljZV9pbmZvGAIgASgLMiEuc3BsaXRzZWN1cmUuYm90dGxlLnYxLkRldmljZUluZm8SFQoNcHJpbmNpcGFsX3MychgDIAEoCRIhChlhdHRyaWJ1dGVkX3ByaW5jaXBhbF9zMnJzGAQgAygJEiUKHWF0dHJpYnV0ZWRfY3VzdG9tX2lkZW50aWZpZXJzGAUgAygJEi0KCXNlYWxlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBC7QEKGWNvbS5zcGxpdHNlY3VyZS5ib3R0bGUudjFCEVBsYXRmb3JtRGF0YVByb3RvUAFaR2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvYm90dGxlL3YxO2JvdHRsZXYxogIDU0JYqgIVU3BsaXRzZWN1cmUuQm90dGxlLlYxygIVU3BsaXRzZWN1cmVcQm90dGxlXFYx4gIhU3BsaXRzZWN1cmVcQm90dGxlXFYxXEdQQk1ldGFkYXRh6gIXU3BsaXRzZWN1cmU6OkJvdHRsZTo6VjFiBnByb3RvMw", [file_google_protobuf_timestamp, file_splitsecure_bottle_v1_device_info]);
 
 /**
  * @generated from message splitsecure.bottle.v1.PlatformData
@@ -71,6 +73,14 @@ export type PlatformData = Message<"splitsecure.bottle.v1.PlatformData"> & {
    * @generated from field: repeated string attributed_custom_identifiers = 5;
    */
   attributedCustomIdentifiers: string[];
+
+  /**
+   * sealed_at is the time the bottle was sealed according to the enclave.
+   * Other time sources are available, such as the AuditObservationReceipt.
+   *
+   * @generated from field: google.protobuf.Timestamp sealed_at = 6;
+   */
+  sealedAt?: Timestamp;
 };
 
 /**
