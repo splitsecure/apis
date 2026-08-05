@@ -2,7 +2,7 @@
 enable_free_tier: false
 
 reviews:
-  profile: assertive
+  profile: chill
   high_level_summary: false
   high_level_summary_in_walkthrough: true
   review_details: true
