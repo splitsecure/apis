@@ -1,6 +1,7 @@
 syntax = "proto3";
 package splitsecure.bottle.v1;
 
+import "google/protobuf/timestamp.proto";
 import "splitsecure/bottle/v1/device_info.proto";
 
 message PlatformData {
@@ -37,4 +38,8 @@ message PlatformData {
   // from attributed_principal_s2rs so free text can never be parsed as a
   // verified URI.
   repeated string attributed_custom_identifiers = 5;
+
+  // sealed_at is the time the bottle was sealed according to the enclave.
+  // Other time sources are available, such as the AuditObservationReceipt.
+  google.protobuf.Timestamp sealed_at = 6;
 }
