@@ -19,4 +19,7 @@ message ProposalMetadata {
   // ExecutionContext. Surfaced for cleanup sweepers and UI listing; the
   // sealed value remains authoritative for execute-time enforcement.
   google.protobuf.Timestamp expire_at = 9;
+
+  // Journey this flow was published under, stamped at publish time.
+  string journey_id = 10;
 }
