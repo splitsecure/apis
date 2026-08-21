@@ -37,7 +37,9 @@ type ProposalMetadata struct {
 	// Mirror of the expire_at timestamp sealed inside the proposal's
 	// ExecutionContext. Surfaced for cleanup sweepers and UI listing; the
 	// sealed value remains authoritative for execute-time enforcement.
-	ExpireAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
+	ExpireAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
+	// Journey this flow was published under, stamped at publish time.
+	JourneyId     string `protobuf:"bytes,10,opt,name=journey_id,json=journeyId,proto3" json:"journey_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -135,11 +137,18 @@ func (x *ProposalMetadata) GetExpireAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *ProposalMetadata) GetJourneyId() string {
+	if x != nil {
+		return x.JourneyId
+	}
+	return ""
+}
+
 var File_splitsecure_proposals_v1_proposal_metadata_proto protoreflect.FileDescriptor
 
 const file_splitsecure_proposals_v1_proposal_metadata_proto_rawDesc = "" +
 	"\n" +
-	"0splitsecure/proposals/v1/proposal_metadata.proto\x12\x18splitsecure.proposals.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.splitsecure/proposals/v1/proposal_status.proto\"\xad\x03\n" +
+	"0splitsecure/proposals/v1/proposal_metadata.proto\x12\x18splitsecure.proposals.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.splitsecure/proposals/v1/proposal_status.proto\"\xcc\x03\n" +
 	"\x10ProposalMetadata\x12\x1f\n" +
 	"\vproposal_id\x18\x01 \x01(\fR\n" +
 	"proposalId\x12@\n" +
@@ -152,7 +161,10 @@ const file_splitsecure_proposals_v1_proposal_metadata_proto_rawDesc = "" +
 	"\x14initiator_enclave_id\x18\x06 \x01(\fR\x12initiatorEnclaveId\x12\x19\n" +
 	"\bteam_ids\x18\a \x03(\fR\ateamIds\x12\x17\n" +
 	"\aflow_id\x18\b \x01(\tR\x06flowId\x127\n" +
-	"\texpire_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\bexpireAtB\x86\x02\n" +
+	"\texpire_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\bexpireAt\x12\x1d\n" +
+	"\n" +
+	"journey_id\x18\n" +
+	" \x01(\tR\tjourneyIdB\x86\x02\n" +
 	"\x1ccom.splitsecure.proposals.v1B\x15ProposalMetadataProtoP\x01ZMgithub.com/splitsecure/apis/gen/go/proto/splitsecure/proposals/v1;proposalsv1\xa2\x02\x03SPX\xaa\x02\x18Splitsecure.Proposals.V1\xca\x02\x18Splitsecure\\Proposals\\V1\xe2\x02$Splitsecure\\Proposals\\V1\\GPBMetadata\xea\x02\x1aSplitsecure::Proposals::V1b\x06proto3"
 
 var (
