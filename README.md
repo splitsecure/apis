@@ -1,7 +1,8 @@
 # splitsecure/apis
 
-Protocol Buffer and [Connect-RPC](https://connectrpc.com/) definitions for
-the SplitSecure public APIs.
+The SplitSecure public API surface: Protocol Buffer and
+[Connect-RPC](https://connectrpc.com/) definitions under `proto/`, and the
+SplitSecure SDK under `sdk/`.
 
 This repository is the source of truth for the wire format. Generated
 Go and TypeScript bindings are checked in under `gen/` so that
@@ -40,10 +41,48 @@ import (
 ### TypeScript
 
 The TypeScript bindings are emitted under `gen/es/proto/` and target
-[`@bufbuild/protobuf`](https://github.com/bufbuild/protobuf-es) v2 and
-[`@connectrpc/connect`](https://github.com/connectrpc/connect-es) v2.
-Vendor the `gen/es/proto/` tree directly or publish your own npm package
-from it.
+[`@bufbuild/protobuf`](https://github.com/bufbuild/protobuf-es) v2. They are
+packaged as `@splitsecure/proto`, with one subpath per generated file:
+
+```ts
+import { TeamBaseInfoSchema } from "@splitsecure/proto/splitsecure/teamresource/v1/team_base_info_pb";
+```
+
+`@bufbuild/protobuf` is a peer dependency, so one copy is shared with whatever
+else in the consumer uses it.
+
+## SplitSecure SDK
+
+`sdk/` holds the SplitSecure SDK: client libraries for the StepAuth
+service-provider protocol.
+
+StepAuth is a JSON protocol rather than a Protocol Buffer one, and its
+signatures and request digest cover the raw payload bytes with no
+canonicalization. These libraries are therefore written directly against the
+wire rather than emitted from `proto/`. The languages are meant to be kept in
+step by a shared conformance vector suite generated from the hub; that suite
+is not committed yet.
+
+One subdirectory per service: each is a separate Go module or TypeScript
+package, so its types cannot collide with another's.
+
+| Language | Import |
+| --- | --- |
+| Go | `github.com/splitsecure/apis/sdk/go/stepauth` |
+| TypeScript | `@splitsecure/sdk/stepauth` |
+
+A service provider is both a client of a hub and a server for that hub's
+decision callbacks, so the SDK spans both directions: signing and submitting
+requests outbound, and verifying signed decisions inbound.
+
+`examples/` holds one runnable app per supported language. Each establishes a
+signing identity, writes the metadata document a hub administrator registers,
+and produces a signed authorization request under `out/`.
+
+```bash
+(cd examples/go && go run .)
+(cd examples/es && pnpm install && pnpm start)
+```
 
 ## Regenerating
 

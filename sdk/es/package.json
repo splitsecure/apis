@@ -1,0 +1,44 @@
+{
+  "name": "@splitsecure/sdk",
+  "version": "0.0.0",
+  "description": "SplitSecure SDK: StepAuth service-provider client.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/splitsecure/apis.git",
+    "directory": "sdk/es"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    "./stepauth": {
+      "types": "./dist/stepauth/index.d.ts",
+      "import": "./dist/stepauth/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "tsc -p tsconfig.build.json",
+    "test": "tsx --test 'test/**/*.test.ts'",
+    "lint": "eslint . && tsc --noEmit"
+  },
+  "dependencies": {
+    "@noble/post-quantum": "catalog:"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:"
+  }
+}

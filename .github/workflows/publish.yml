@@ -1,0 +1,90 @@
+name: Publish
+
+on:
+  push:
+    tags: ["v*"]
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  npm:
+    name: npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Required for build provenance, which attests that the tarball came from
+      # this commit in this workflow rather than from someone's machine.
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+          registry-url: https://registry.npmjs.org
+
+      # A plain tag publishes a prerelease under the alpha dist-tag. Promoting
+      # it to latest is a GitHub release. A tag without a prerelease suffix
+      # publishes nothing, so a release that creates its own tag cannot publish
+      # the same version twice.
+      - name: Resolve version and dist-tag
+        id: v
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" = "release" ]; then
+            echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
+            echo "publish=yes" >> "$GITHUB_OUTPUT"
+          elif [ "${version#*-}" != "$version" ]; then
+            echo "dist_tag=alpha" >> "$GITHUB_OUTPUT"
+            echo "publish=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "publish=no" >> "$GITHUB_OUTPUT"
+            echo "::notice::$version has no prerelease suffix. Publishing waits for the release event."
+          fi
+
+      - name: Install
+        if: steps.v.outputs.publish == 'yes'
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        if: steps.v.outputs.publish == 'yes'
+        run: |
+          pnpm --filter @splitsecure/proto run build
+          pnpm --filter @splitsecure/sdk run build
+
+      # Both packages carry the version of the tag, so a consumer never has to
+      # reason about which pairing is compatible.
+      - name: Set version
+        if: steps.v.outputs.publish == 'yes'
+        run: |
+          for pkg in gen/es sdk/es; do
+            (cd "$pkg" && npm version "${{ steps.v.outputs.version }}" \
+              --no-git-tag-version --allow-same-version)
+          done
+
+      # pnpm rather than npm: it rewrites the catalog: protocol to the resolved
+      # versions, which npm publishes verbatim and consumers cannot install.
+      - name: Publish
+        if: steps.v.outputs.publish == 'yes'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          for pkg in gen/es sdk/es; do
+            (cd "$pkg" && pnpm publish \
+              --tag "${{ steps.v.outputs.dist_tag }}" \
+              --provenance --no-git-checks)
+          done

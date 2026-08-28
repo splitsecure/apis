@@ -1,0 +1,72 @@
+version: "2"
+
+# Sized for the SDK modules rather than copied from priv: the monolith's
+# depguard, sql and telemetry linters have nothing to bite on here.
+linters:
+  default: none
+  enable:
+    - bodyclose
+    - contextcheck
+    - copyloopvar
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint
+    - gocognit
+    - gosec
+    - govet
+    - ineffassign
+    - intrange
+    - makezero
+    - nilerr
+    - nilnil
+    - noctx
+    - nolintlint
+    - predeclared
+    - reassign
+    - staticcheck
+    - testableexamples
+    - unconvert
+    - unused
+    - usestdlibvars
+    - usetesting
+    - whitespace
+  settings:
+    errcheck:
+      check-type-assertions: true
+    gocognit:
+      min-complexity: 30
+    nolintlint:
+      require-explanation: true
+      require-specific: true
+  exclusions:
+    generated: lax
+    rules:
+      # Test scaffolding trips these without saying anything useful.
+      - path: _test\.go
+        linters:
+          - bodyclose
+          - gosec
+          - noctx
+      # PendingLookup's contract is (nil, nil) for a requestId this SP never
+      # issued, so the fakes return it deliberately.
+      - path: callback_test\.go
+        linters:
+          - nilnil
+      # The body is json.Marshal output served as application/json. There is
+      # no HTML sink, so the taint analysis has nowhere to land.
+      - path: callback\.go
+        text: G705
+      # attempt is bounded by maxSendAttempts, so the shift cannot overflow.
+      - path: client\.go
+        text: G115
+    paths:
+      - gen
+
+formatters:
+  enable:
+    - gofumpt
+  exclusions:
+    generated: strict
+    paths:
+      - gen

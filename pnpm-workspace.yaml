@@ -1,0 +1,24 @@
+packages:
+  - gen/es
+  - sdk/es
+  - examples/es
+
+# One version per dependency across every package. @types/node drifting from
+# the Node major CI runs on is exactly the skew this prevents.
+catalog:
+  "@bufbuild/buf": ^1.72.0
+  # Pinned exactly: protoc-gen-es depends on a matching protobuf version, and
+  # a caret here silently floats past it and breaks codegen.
+  "@bufbuild/protobuf": 2.13.0
+  "@bufbuild/protoc-gen-es": 2.13.0
+  "@connectrpc/connect": ^2.1.2
+  "@connectrpc/connect-web": ^2.1.2
+  "@eslint/js": ^9.39.1
+  # Pinned exactly, not ranged: a pre-1.0 signing primitive is not something
+  # to float across patch releases.
+  "@noble/post-quantum": 0.6.1
+  "@types/node": ^22.0.0
+  eslint: ^10.8.0
+  tsx: ^4.21.0
+  typescript: ^5.5.0
+  typescript-eslint: ^8.65.0

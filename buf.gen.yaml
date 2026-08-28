@@ -25,4 +25,8 @@ plugins:
   - local: node_modules/.bin/protoc-gen-es
     out: gen/es/proto
     include_imports: true
-    opt: target=ts
+    opt:
+      - target=ts
+      # Extensionless relative imports resolve under a bundler but not under
+      # Node ESM, which the published package has to support.
+      - import_extension=js

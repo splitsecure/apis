@@ -1,0 +1,82 @@
+# Hand-maintained snapshot of the hub's wire surface.
+# A change here is a change every SDK language must follow.
+
+[const]
+algEd25519 = "ed25519"
+algMLDSA65 = "ml-dsa-65"
+decisionApproved = "approved"
+decisionDenied = "denied"
+digestSHA256 = "sha256"
+maxActionNameLen = 120
+maxClockSkew = 5 * time.Minute
+maxKeyIDLen = 256
+maxOperatorDepth = 5
+
+[error]
+# default = http.StatusBadRequest
+approver_set_too_large -> http.StatusBadRequest
+duplicate_request -> http.StatusConflict
+invalid_callback_url -> http.StatusBadRequest
+invalid_signature -> http.StatusUnauthorized
+malformed_request -> http.StatusBadRequest
+operator_depth_exceeded -> http.StatusBadRequest
+request_not_found -> http.StatusNotFound
+timestamp_out_of_range -> http.StatusBadRequest
+unknown_approver -> http.StatusBadRequest
+unknown_category -> http.StatusBadRequest
+unknown_sender -> http.StatusUnauthorized
+wrong_recipient -> http.StatusForbidden
+
+[type]
+Action.approver string optional
+Action.category string required
+Action.details []LabeledEntry optional
+Action.name string optional
+Action.summary string required
+Action.target *Target optional
+Action.type string required
+AuthorizationRequest.action Action required
+AuthorizationRequest.callbackUrl string optional
+AuthorizationRequest.expiresAt string required
+AuthorizationRequest.policyVersion string optional
+AuthorizationRequest.principal Principal required
+AuthorizationRequest.recipientId string required
+AuthorizationRequest.requestId string required
+AuthorizationRequest.senderId string required
+AuthorizationRequest.timestamp string required
+Decision.decidedAt string required
+Decision.decidedBy []string required
+Decision.decision string required
+Decision.recipientId string required
+Decision.requestDigest Digest required
+Decision.requestId string required
+Decision.senderId string required
+Digest.algorithm string required
+Digest.value string required
+Envelope.payload string required
+Envelope.signature Signature required
+ExecutionResult.error string optional
+ExecutionResult.requestId string required
+ExecutionResult.status string required
+LabeledEntry.key string required
+LabeledEntry.label string required
+LabeledEntry.value json.RawMessage required
+PendingResponse.createdAt string required
+PendingResponse.requestId string required
+PendingResponse.reviewDescription string optional
+PendingResponse.status string required
+Principal.attributes []LabeledEntry optional
+Principal.operator *Principal optional
+Principal.subject string required
+Signature.keysetId string required
+Signature.signatures []string required
+Target.id string required
+Target.kind string required
+metadataDoc.entity string required
+metadataDoc.host string required
+metadataDoc.keysets []metadataKeyset required
+metadataKey.alg string required
+metadataKey.idx int required
+metadataKey.pub string required
+metadataKeyset.keys []metadataKey required
+metadataKeyset.keysetId string required

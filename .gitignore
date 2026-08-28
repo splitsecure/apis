@@ -7,3 +7,9 @@ node_modules
 
 # macos
 .DS_Store
+
+# example artifacts
+out/
+
+# built by pnpm run build
+dist/

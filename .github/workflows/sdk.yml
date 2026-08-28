@@ -1,0 +1,106 @@
+name: SDK
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sdk-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  go:
+    name: Go
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          # Read the version from the module rather than pinning it here, so CI
+          # always exercises the oldest toolchain the SDK claims to support.
+          go-version-file: sdk/go/go.mod
+          cache: true
+          cache-dependency-path: sdk/go/go.sum
+
+      - uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.10.1
+          working-directory: sdk/go
+
+      # The example is a separate module, so golangci-lint has to be pointed
+      # at it separately.
+      - uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.10.1
+          working-directory: examples/go
+
+      - name: Test
+        working-directory: sdk/go
+        run: go test ./...
+
+      # The example is a separate module, so a breaking change to the SDK's
+      # public API shows up here and nowhere else.
+      - name: Build example
+        working-directory: examples/go
+        run: go build -o /dev/null .
+
+      - name: Run example
+        working-directory: examples/go
+        run: go run .
+
+  es:
+    name: TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v5
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      # One workspace install covers the SDK and the example.
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      # The generated bindings ship as their own package, so a codegen change
+      # that stops compiling has to fail here rather than on first install.
+      - name: Build generated bindings
+        working-directory: gen/es
+        run: pnpm run build
+
+      - name: Lint
+        working-directory: sdk/es
+        run: pnpm run lint
+
+      - name: Test
+        working-directory: sdk/es
+        run: pnpm test
+
+      - name: Build SDK
+        working-directory: sdk/es
+        run: pnpm run build
+
+      # The example consumes the SDK through its published export map, so a
+      # missing or misnamed subpath export is caught here.
+      - name: Typecheck example
+        working-directory: examples/es
+        run: pnpm run lint
+
+      - name: Run example
+        working-directory: examples/es
+        run: pnpm start

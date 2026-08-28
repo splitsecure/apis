@@ -1,0 +1,39 @@
+{
+  "name": "@splitsecure/proto",
+  "version": "0.0.0",
+  "description": "Generated TypeScript bindings for the SplitSecure protobuf APIs.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/splitsecure/apis.git",
+    "directory": "gen/es"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "tsc -p tsconfig.build.json",
+    "lint": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@bufbuild/protobuf": "2.13.0"
+  },
+  "devDependencies": {
+    "@bufbuild/protobuf": "catalog:",
+    "typescript": "catalog:"
+  }
+}

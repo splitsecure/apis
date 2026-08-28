@@ -1,0 +1,19 @@
+{
+  "name": "@splitsecure/sdk-examples",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prestart": "pnpm --filter @splitsecure/sdk run build",
+    "start": "tsx main.ts",
+    "prelint": "pnpm --filter @splitsecure/sdk run build",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@splitsecure/sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  }
+}

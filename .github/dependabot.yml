@@ -1,7 +1,10 @@
 version: 2
 updates:
   - package-ecosystem: gomod
-    directory: /
+    directories:
+      - /
+      - /sdk/go
+      - /examples/go
     schedule:
       interval: weekly
     cooldown:
@@ -20,7 +23,10 @@ updates:
           - "*"
 
   - package-ecosystem: npm
-    directory: /
+    directories:
+      - /
+      - /sdk/es
+      - /examples/es
     schedule:
       interval: weekly
     cooldown:
