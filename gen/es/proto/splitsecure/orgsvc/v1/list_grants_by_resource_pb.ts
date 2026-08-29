@@ -6,13 +6,15 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Grant } from "./grant_pb";
 import { file_splitsecure_orgsvc_v1_grant } from "./grant_pb";
+import type { PageParams } from "../../page/v1/page_params_pb";
+import { file_splitsecure_page_v1_page_params } from "../../page/v1/page_params_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file splitsecure/orgsvc/v1/list_grants_by_resource.proto.
  */
 export const file_splitsecure_orgsvc_v1_list_grants_by_resource: GenFile = /*@__PURE__*/
-  fileDesc("CjNzcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncmFudHNfYnlfcmVzb3VyY2UucHJvdG8SFXNwbGl0c2VjdXJlLm9yZ3N2Yy52MSJjChtMaXN0R3JhbnRzQnlSZXNvdXJjZVJlcXVlc3QSDwoHb3JnX3MychgBIAEoCRIUCgxyZXNvdXJjZV9zMnIYAiABKAkSDQoFbGltaXQYAyABKAUSDgoGY3Vyc29yGAQgASgJImEKHExpc3RHcmFudHNCeVJlc291cmNlUmVzcG9uc2USLAoGZ3JhbnRzGAEgAygLMhwuc3BsaXRzZWN1cmUub3Jnc3ZjLnYxLkdyYW50EhMKC25leHRfY3Vyc29yGAIgASgJQvUBChljb20uc3BsaXRzZWN1cmUub3Jnc3ZjLnYxQhlMaXN0R3JhbnRzQnlSZXNvdXJjZVByb3RvUAFaR2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvb3Jnc3ZjL3YxO29yZ3N2Y3YxogIDU09YqgIVU3BsaXRzZWN1cmUuT3Jnc3ZjLlYxygIVU3BsaXRzZWN1cmVcT3Jnc3ZjXFYx4gIhU3BsaXRzZWN1cmVcT3Jnc3ZjXFYxXEdQQk1ldGFkYXRh6gIXU3BsaXRzZWN1cmU6Ok9yZ3N2Yzo6VjFiBnByb3RvMw", [file_splitsecure_orgsvc_v1_grant]);
+  fileDesc("CjNzcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncmFudHNfYnlfcmVzb3VyY2UucHJvdG8SFXNwbGl0c2VjdXJlLm9yZ3N2Yy52MSJzChtMaXN0R3JhbnRzQnlSZXNvdXJjZVJlcXVlc3QSDwoHb3JnX3MychgBIAEoCRIUCgxyZXNvdXJjZV9zMnIYAiABKAkSLQoEcGFnZRgDIAEoCzIfLnNwbGl0c2VjdXJlLnBhZ2UudjEuUGFnZVBhcmFtcyJhChxMaXN0R3JhbnRzQnlSZXNvdXJjZVJlc3BvbnNlEiwKBmdyYW50cxgBIAMoCzIcLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MS5HcmFudBITCgtuZXh0X2N1cnNvchgCIAEoDEL1AQoZY29tLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MUIZTGlzdEdyYW50c0J5UmVzb3VyY2VQcm90b1ABWkdnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL29yZ3N2Yy92MTtvcmdzdmN2MaICA1NPWKoCFVNwbGl0c2VjdXJlLk9yZ3N2Yy5WMcoCFVNwbGl0c2VjdXJlXE9yZ3N2Y1xWMeICIVNwbGl0c2VjdXJlXE9yZ3N2Y1xWMVxHUEJNZXRhZGF0YeoCF1NwbGl0c2VjdXJlOjpPcmdzdmM6OlYxYgZwcm90bzM", [file_splitsecure_orgsvc_v1_grant, file_splitsecure_page_v1_page_params]);
 
 /**
  * ListGrantsByResource returns every grant pointing at a single
@@ -32,14 +34,9 @@ export type ListGrantsByResourceRequest = Message<"splitsecure.orgsvc.v1.ListGra
   resourceS2r: string;
 
   /**
-   * @generated from field: int32 limit = 3;
+   * @generated from field: splitsecure.page.v1.PageParams page = 3;
    */
-  limit: number;
-
-  /**
-   * @generated from field: string cursor = 4;
-   */
-  cursor: string;
+  page?: PageParams | undefined;
 };
 
 /**
@@ -59,9 +56,9 @@ export type ListGrantsByResourceResponse = Message<"splitsecure.orgsvc.v1.ListGr
   grants: Grant[];
 
   /**
-   * @generated from field: string next_cursor = 2;
+   * @generated from field: bytes next_cursor = 2;
    */
-  nextCursor: string;
+  nextCursor: Uint8Array;
 };
 
 /**

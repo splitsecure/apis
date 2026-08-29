@@ -6,13 +6,15 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { GroupMember } from "./group_member_pb";
 import { file_splitsecure_orgsvc_v1_group_member } from "./group_member_pb";
+import type { PageParams } from "../../page/v1/page_params_pb";
+import { file_splitsecure_page_v1_page_params } from "../../page/v1/page_params_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file splitsecure/orgsvc/v1/list_group_members.proto.
  */
 export const file_splitsecure_orgsvc_v1_list_group_members: GenFile = /*@__PURE__*/
-  fileDesc("Ci5zcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncm91cF9tZW1iZXJzLnByb3RvEhVzcGxpdHNlY3VyZS5vcmdzdmMudjEiSwoXTGlzdEdyb3VwTWVtYmVyc1JlcXVlc3QSEQoJZ3JvdXBfczJyGAEgASgJEg0KBWxpbWl0GAIgASgFEg4KBmN1cnNvchgDIAEoCSJkChhMaXN0R3JvdXBNZW1iZXJzUmVzcG9uc2USMwoHbWVtYmVycxgBIAMoCzIiLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MS5Hcm91cE1lbWJlchITCgtuZXh0X2N1cnNvchgCIAEoCULxAQoZY29tLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MUIVTGlzdEdyb3VwTWVtYmVyc1Byb3RvUAFaR2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvb3Jnc3ZjL3YxO29yZ3N2Y3YxogIDU09YqgIVU3BsaXRzZWN1cmUuT3Jnc3ZjLlYxygIVU3BsaXRzZWN1cmVcT3Jnc3ZjXFYx4gIhU3BsaXRzZWN1cmVcT3Jnc3ZjXFYxXEdQQk1ldGFkYXRh6gIXU3BsaXRzZWN1cmU6Ok9yZ3N2Yzo6VjFiBnByb3RvMw", [file_splitsecure_orgsvc_v1_group_member]);
+  fileDesc("Ci5zcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncm91cF9tZW1iZXJzLnByb3RvEhVzcGxpdHNlY3VyZS5vcmdzdmMudjEiWwoXTGlzdEdyb3VwTWVtYmVyc1JlcXVlc3QSEQoJZ3JvdXBfczJyGAEgASgJEi0KBHBhZ2UYAiABKAsyHy5zcGxpdHNlY3VyZS5wYWdlLnYxLlBhZ2VQYXJhbXMiZAoYTGlzdEdyb3VwTWVtYmVyc1Jlc3BvbnNlEjMKB21lbWJlcnMYASADKAsyIi5zcGxpdHNlY3VyZS5vcmdzdmMudjEuR3JvdXBNZW1iZXISEwoLbmV4dF9jdXJzb3IYAiABKAxC8QEKGWNvbS5zcGxpdHNlY3VyZS5vcmdzdmMudjFCFUxpc3RHcm91cE1lbWJlcnNQcm90b1ABWkdnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL29yZ3N2Yy92MTtvcmdzdmN2MaICA1NPWKoCFVNwbGl0c2VjdXJlLk9yZ3N2Yy5WMcoCFVNwbGl0c2VjdXJlXE9yZ3N2Y1xWMeICIVNwbGl0c2VjdXJlXE9yZ3N2Y1xWMVxHUEJNZXRhZGF0YeoCF1NwbGl0c2VjdXJlOjpPcmdzdmM6OlYxYgZwcm90bzM", [file_splitsecure_orgsvc_v1_group_member, file_splitsecure_page_v1_page_params]);
 
 /**
  * @generated from message splitsecure.orgsvc.v1.ListGroupMembersRequest
@@ -24,14 +26,9 @@ export type ListGroupMembersRequest = Message<"splitsecure.orgsvc.v1.ListGroupMe
   groupS2r: string;
 
   /**
-   * @generated from field: int32 limit = 2;
+   * @generated from field: splitsecure.page.v1.PageParams page = 2;
    */
-  limit: number;
-
-  /**
-   * @generated from field: string cursor = 3;
-   */
-  cursor: string;
+  page?: PageParams | undefined;
 };
 
 /**
@@ -51,9 +48,9 @@ export type ListGroupMembersResponse = Message<"splitsecure.orgsvc.v1.ListGroupM
   members: GroupMember[];
 
   /**
-   * @generated from field: string next_cursor = 2;
+   * @generated from field: bytes next_cursor = 2;
    */
-  nextCursor: string;
+  nextCursor: Uint8Array;
 };
 
 /**

@@ -3,14 +3,14 @@ syntax = "proto3";
 package splitsecure.orgsvc.v1;
 
 import "splitsecure/orgsvc/v1/group_member.proto";
+import "splitsecure/page/v1/page_params.proto";
 
 message ListGroupMembersRequest {
   string group_s2r = 1;
-  int32 limit = 2;
-  string cursor = 3;
+  splitsecure.page.v1.PageParams page = 2;
 }
 
 message ListGroupMembersResponse {
   repeated GroupMember members = 1;
-  string next_cursor = 2;
+  bytes next_cursor = 2;
 }

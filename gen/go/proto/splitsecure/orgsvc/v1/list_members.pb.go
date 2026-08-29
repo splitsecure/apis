@@ -7,6 +7,7 @@
 package orgsvcv1
 
 import (
+	v1 "github.com/splitsecure/apis/gen/go/proto/splitsecure/page/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -68,7 +69,7 @@ func (x *ListMembersRequest) GetBase() *ListMembersRequest_Base {
 type ListMembersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Members       []*Member              `protobuf:"bytes,1,rep,name=members,proto3" json:"members,omitempty"`
-	NextCursor    string                 `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"`
+	NextCursor    []byte                 `protobuf:"bytes,2,opt,name=next_cursor,json=nextCursor,proto3" json:"next_cursor,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -110,18 +111,17 @@ func (x *ListMembersResponse) GetMembers() []*Member {
 	return nil
 }
 
-func (x *ListMembersResponse) GetNextCursor() string {
+func (x *ListMembersResponse) GetNextCursor() []byte {
 	if x != nil {
 		return x.NextCursor
 	}
-	return ""
+	return nil
 }
 
 type ListMembersRequest_Base struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	OrganizationId string                 `protobuf:"bytes,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	Limit          int32                  `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`
-	Cursor         string                 `protobuf:"bytes,3,opt,name=cursor,proto3" json:"cursor,omitempty"`
+	Page           *v1.PageParams         `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -163,34 +163,26 @@ func (x *ListMembersRequest_Base) GetOrganizationId() string {
 	return ""
 }
 
-func (x *ListMembersRequest_Base) GetLimit() int32 {
+func (x *ListMembersRequest_Base) GetPage() *v1.PageParams {
 	if x != nil {
-		return x.Limit
+		return x.Page
 	}
-	return 0
-}
-
-func (x *ListMembersRequest_Base) GetCursor() string {
-	if x != nil {
-		return x.Cursor
-	}
-	return ""
+	return nil
 }
 
 var File_splitsecure_orgsvc_v1_list_members_proto protoreflect.FileDescriptor
 
 const file_splitsecure_orgsvc_v1_list_members_proto_rawDesc = "" +
 	"\n" +
-	"(splitsecure/orgsvc/v1/list_members.proto\x12\x15splitsecure.orgsvc.v1\x1a\"splitsecure/orgsvc/v1/member.proto\"\xb7\x01\n" +
+	"(splitsecure/orgsvc/v1/list_members.proto\x12\x15splitsecure.orgsvc.v1\x1a\"splitsecure/orgsvc/v1/member.proto\x1a%splitsecure/page/v1/page_params.proto\"\xbe\x01\n" +
 	"\x12ListMembersRequest\x12B\n" +
-	"\x04base\x18\x02 \x01(\v2..splitsecure.orgsvc.v1.ListMembersRequest.BaseR\x04base\x1a]\n" +
+	"\x04base\x18\x02 \x01(\v2..splitsecure.orgsvc.v1.ListMembersRequest.BaseR\x04base\x1ad\n" +
 	"\x04Base\x12'\n" +
-	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12\x14\n" +
-	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12\x16\n" +
-	"\x06cursor\x18\x03 \x01(\tR\x06cursor\"o\n" +
+	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x123\n" +
+	"\x04page\x18\x02 \x01(\v2\x1f.splitsecure.page.v1.PageParamsR\x04page\"o\n" +
 	"\x13ListMembersResponse\x127\n" +
 	"\amembers\x18\x01 \x03(\v2\x1d.splitsecure.orgsvc.v1.MemberR\amembers\x12\x1f\n" +
-	"\vnext_cursor\x18\x02 \x01(\tR\n" +
+	"\vnext_cursor\x18\x02 \x01(\fR\n" +
 	"nextCursorB\xec\x01\n" +
 	"\x19com.splitsecure.orgsvc.v1B\x10ListMembersProtoP\x01ZGgithub.com/splitsecure/apis/gen/go/proto/splitsecure/orgsvc/v1;orgsvcv1\xa2\x02\x03SOX\xaa\x02\x15Splitsecure.Orgsvc.V1\xca\x02\x15Splitsecure\\Orgsvc\\V1\xe2\x02!Splitsecure\\Orgsvc\\V1\\GPBMetadata\xea\x02\x17Splitsecure::Orgsvc::V1b\x06proto3"
 
@@ -212,15 +204,17 @@ var file_splitsecure_orgsvc_v1_list_members_proto_goTypes = []any{
 	(*ListMembersResponse)(nil),     // 1: splitsecure.orgsvc.v1.ListMembersResponse
 	(*ListMembersRequest_Base)(nil), // 2: splitsecure.orgsvc.v1.ListMembersRequest.Base
 	(*Member)(nil),                  // 3: splitsecure.orgsvc.v1.Member
+	(*v1.PageParams)(nil),           // 4: splitsecure.page.v1.PageParams
 }
 var file_splitsecure_orgsvc_v1_list_members_proto_depIdxs = []int32{
 	2, // 0: splitsecure.orgsvc.v1.ListMembersRequest.base:type_name -> splitsecure.orgsvc.v1.ListMembersRequest.Base
 	3, // 1: splitsecure.orgsvc.v1.ListMembersResponse.members:type_name -> splitsecure.orgsvc.v1.Member
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4, // 2: splitsecure.orgsvc.v1.ListMembersRequest.Base.page:type_name -> splitsecure.page.v1.PageParams
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_orgsvc_v1_list_members_proto_init() }

@@ -6,13 +6,15 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Group } from "./group_pb";
 import { file_splitsecure_orgsvc_v1_group } from "./group_pb";
+import type { PageParams } from "../../page/v1/page_params_pb";
+import { file_splitsecure_page_v1_page_params } from "../../page/v1/page_params_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file splitsecure/orgsvc/v1/list_groups.proto.
  */
 export const file_splitsecure_orgsvc_v1_list_groups: GenFile = /*@__PURE__*/
-  fileDesc("CidzcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncm91cHMucHJvdG8SFXNwbGl0c2VjdXJlLm9yZ3N2Yy52MSJDChFMaXN0R3JvdXBzUmVxdWVzdBIPCgdvcmdfczJyGAEgASgJEg0KBWxpbWl0GAIgASgFEg4KBmN1cnNvchgDIAEoCSJXChJMaXN0R3JvdXBzUmVzcG9uc2USLAoGZ3JvdXBzGAEgAygLMhwuc3BsaXRzZWN1cmUub3Jnc3ZjLnYxLkdyb3VwEhMKC25leHRfY3Vyc29yGAIgASgJQusBChljb20uc3BsaXRzZWN1cmUub3Jnc3ZjLnYxQg9MaXN0R3JvdXBzUHJvdG9QAVpHZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS9vcmdzdmMvdjE7b3Jnc3ZjdjGiAgNTT1iqAhVTcGxpdHNlY3VyZS5PcmdzdmMuVjHKAhVTcGxpdHNlY3VyZVxPcmdzdmNcVjHiAiFTcGxpdHNlY3VyZVxPcmdzdmNcVjFcR1BCTWV0YWRhdGHqAhdTcGxpdHNlY3VyZTo6T3Jnc3ZjOjpWMWIGcHJvdG8z", [file_splitsecure_orgsvc_v1_group]);
+  fileDesc("CidzcGxpdHNlY3VyZS9vcmdzdmMvdjEvbGlzdF9ncm91cHMucHJvdG8SFXNwbGl0c2VjdXJlLm9yZ3N2Yy52MSJTChFMaXN0R3JvdXBzUmVxdWVzdBIPCgdvcmdfczJyGAEgASgJEi0KBHBhZ2UYAiABKAsyHy5zcGxpdHNlY3VyZS5wYWdlLnYxLlBhZ2VQYXJhbXMiVwoSTGlzdEdyb3Vwc1Jlc3BvbnNlEiwKBmdyb3VwcxgBIAMoCzIcLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MS5Hcm91cBITCgtuZXh0X2N1cnNvchgCIAEoDELrAQoZY29tLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MUIPTGlzdEdyb3Vwc1Byb3RvUAFaR2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvb3Jnc3ZjL3YxO29yZ3N2Y3YxogIDU09YqgIVU3BsaXRzZWN1cmUuT3Jnc3ZjLlYxygIVU3BsaXRzZWN1cmVcT3Jnc3ZjXFYx4gIhU3BsaXRzZWN1cmVcT3Jnc3ZjXFYxXEdQQk1ldGFkYXRh6gIXU3BsaXRzZWN1cmU6Ok9yZ3N2Yzo6VjFiBnByb3RvMw", [file_splitsecure_orgsvc_v1_group, file_splitsecure_page_v1_page_params]);
 
 /**
  * @generated from message splitsecure.orgsvc.v1.ListGroupsRequest
@@ -24,14 +26,9 @@ export type ListGroupsRequest = Message<"splitsecure.orgsvc.v1.ListGroupsRequest
   orgS2r: string;
 
   /**
-   * @generated from field: int32 limit = 2;
+   * @generated from field: splitsecure.page.v1.PageParams page = 2;
    */
-  limit: number;
-
-  /**
-   * @generated from field: string cursor = 3;
-   */
-  cursor: string;
+  page?: PageParams | undefined;
 };
 
 /**
@@ -51,9 +48,9 @@ export type ListGroupsResponse = Message<"splitsecure.orgsvc.v1.ListGroupsRespon
   groups: Group[];
 
   /**
-   * @generated from field: string next_cursor = 2;
+   * @generated from field: bytes next_cursor = 2;
    */
-  nextCursor: string;
+  nextCursor: Uint8Array;
 };
 
 /**
