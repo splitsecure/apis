@@ -3,17 +3,17 @@ syntax = "proto3";
 package splitsecure.orgsvc.v1;
 
 import "splitsecure/orgsvc/v1/grant.proto";
+import "splitsecure/page/v1/page_params.proto";
 
 // ListGrantsByResource returns every grant pointing at a single
 // resource for the specified org.
 message ListGrantsByResourceRequest {
   string org_s2r = 1;
   string resource_s2r = 2;
-  int32 limit = 3;
-  string cursor = 4;
+  splitsecure.page.v1.PageParams page = 3;
 }
 
 message ListGrantsByResourceResponse {
   repeated Grant grants = 1;
-  string next_cursor = 2;
+  bytes next_cursor = 2;
 }

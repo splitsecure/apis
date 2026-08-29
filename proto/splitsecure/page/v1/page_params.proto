@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package splitsecure.page.v1;
+
+// PageParams is the pagination request shape shared by every list RPC.
+//
+// direction_or_cursor holds the sort direction and the continuation cursor in
+// one oneof so a continuation cannot restate direction: the direction is chosen
+// on the first page and sealed into every cursor that follows. Send `descending`
+// on the first request, then echo `cursor` from the previous response.
+message PageParams {
+  // limit is the maximum number of items to return. Unset takes the server's
+  // default, and the server clamps values above its maximum.
+  uint32 limit = 1;
+
+  DirectionOrCursor direction_or_cursor = 2;
+
+  message DirectionOrCursor {
+    oneof union {
+      // descending selects the sort direction, and applies to a first page
+      // only. Unset takes the RPC's own default.
+      bool descending = 1;
+
+      // cursor continues a listing from a previous response's next_cursor. It
+      // carries the sealed direction, so it cannot be combined with
+      // descending. An empty next_cursor means the listing is drained.
+      bytes cursor = 2;
+    }
+  }
+}
