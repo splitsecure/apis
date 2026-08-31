@@ -8,4 +8,8 @@ message DerivedKey {
   repeated bytes team_ids = 1;
   Spec spec = 2;
   bytes derivation = 3;
+  // Version of the derivation construction. 0 is the legacy
+  // construction. Consumers must reject an unknown version
+  // instead of falling back to a default.
+  uint32 derivation_version = 4;
 }

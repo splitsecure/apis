@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/keys/v1/derived_key.proto.
  */
 export const file_splitsecure_keys_v1_derived_key: GenFile = /*@__PURE__*/
-  fileDesc("CiVzcGxpdHNlY3VyZS9rZXlzL3YxL2Rlcml2ZWRfa2V5LnByb3RvEhNzcGxpdHNlY3VyZS5rZXlzLnYxIlsKCkRlcml2ZWRLZXkSEAoIdGVhbV9pZHMYASADKAwSJwoEc3BlYxgCIAEoCzIZLnNwbGl0c2VjdXJlLmtleXMudjEuU3BlYxISCgpkZXJpdmF0aW9uGAMgASgMQt0BChdjb20uc3BsaXRzZWN1cmUua2V5cy52MUIPRGVyaXZlZEtleVByb3RvUAFaQ2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUva2V5cy92MTtrZXlzdjGiAgNTS1iqAhNTcGxpdHNlY3VyZS5LZXlzLlYxygITU3BsaXRzZWN1cmVcS2V5c1xWMeICH1NwbGl0c2VjdXJlXEtleXNcVjFcR1BCTWV0YWRhdGHqAhVTcGxpdHNlY3VyZTo6S2V5czo6VjFiBnByb3RvMw", [file_splitsecure_keys_v1_spec]);
+  fileDesc("CiVzcGxpdHNlY3VyZS9rZXlzL3YxL2Rlcml2ZWRfa2V5LnByb3RvEhNzcGxpdHNlY3VyZS5rZXlzLnYxIncKCkRlcml2ZWRLZXkSEAoIdGVhbV9pZHMYASADKAwSJwoEc3BlYxgCIAEoCzIZLnNwbGl0c2VjdXJlLmtleXMudjEuU3BlYxISCgpkZXJpdmF0aW9uGAMgASgMEhoKEmRlcml2YXRpb25fdmVyc2lvbhgEIAEoDULdAQoXY29tLnNwbGl0c2VjdXJlLmtleXMudjFCD0Rlcml2ZWRLZXlQcm90b1ABWkNnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL2tleXMvdjE7a2V5c3YxogIDU0tYqgITU3BsaXRzZWN1cmUuS2V5cy5WMcoCE1NwbGl0c2VjdXJlXEtleXNcVjHiAh9TcGxpdHNlY3VyZVxLZXlzXFYxXEdQQk1ldGFkYXRh6gIVU3BsaXRzZWN1cmU6OktleXM6OlYxYgZwcm90bzM", [file_splitsecure_keys_v1_spec]);
 
 /**
  * @generated from message splitsecure.keys.v1.DerivedKey
@@ -34,6 +34,15 @@ export type DerivedKey = Message<"splitsecure.keys.v1.DerivedKey"> & {
    * @generated from field: bytes derivation = 3;
    */
   derivation: Uint8Array;
+
+  /**
+   * Version of the derivation construction. 0 is the legacy
+   * construction. Consumers must reject an unknown version
+   * instead of falling back to a default.
+   *
+   * @generated from field: uint32 derivation_version = 4;
+   */
+  derivationVersion: number;
 };
 
 /**

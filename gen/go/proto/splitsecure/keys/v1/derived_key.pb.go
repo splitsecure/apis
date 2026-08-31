@@ -24,11 +24,15 @@ const (
 type DerivedKey struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// team_id can be repeated if this key depends on multiple teams.
-	TeamIds       [][]byte `protobuf:"bytes,1,rep,name=team_ids,json=teamIds,proto3" json:"team_ids,omitempty"`
-	Spec          *Spec    `protobuf:"bytes,2,opt,name=spec,proto3" json:"spec,omitempty"`
-	Derivation    []byte   `protobuf:"bytes,3,opt,name=derivation,proto3" json:"derivation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	TeamIds    [][]byte `protobuf:"bytes,1,rep,name=team_ids,json=teamIds,proto3" json:"team_ids,omitempty"`
+	Spec       *Spec    `protobuf:"bytes,2,opt,name=spec,proto3" json:"spec,omitempty"`
+	Derivation []byte   `protobuf:"bytes,3,opt,name=derivation,proto3" json:"derivation,omitempty"`
+	// Version of the derivation construction. 0 is the legacy
+	// construction. Consumers must reject an unknown version
+	// instead of falling back to a default.
+	DerivationVersion uint32 `protobuf:"varint,4,opt,name=derivation_version,json=derivationVersion,proto3" json:"derivation_version,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *DerivedKey) Reset() {
@@ -82,18 +86,26 @@ func (x *DerivedKey) GetDerivation() []byte {
 	return nil
 }
 
+func (x *DerivedKey) GetDerivationVersion() uint32 {
+	if x != nil {
+		return x.DerivationVersion
+	}
+	return 0
+}
+
 var File_splitsecure_keys_v1_derived_key_proto protoreflect.FileDescriptor
 
 const file_splitsecure_keys_v1_derived_key_proto_rawDesc = "" +
 	"\n" +
-	"%splitsecure/keys/v1/derived_key.proto\x12\x13splitsecure.keys.v1\x1a\x1esplitsecure/keys/v1/spec.proto\"v\n" +
+	"%splitsecure/keys/v1/derived_key.proto\x12\x13splitsecure.keys.v1\x1a\x1esplitsecure/keys/v1/spec.proto\"\xa5\x01\n" +
 	"\n" +
 	"DerivedKey\x12\x19\n" +
 	"\bteam_ids\x18\x01 \x03(\fR\ateamIds\x12-\n" +
 	"\x04spec\x18\x02 \x01(\v2\x19.splitsecure.keys.v1.SpecR\x04spec\x12\x1e\n" +
 	"\n" +
 	"derivation\x18\x03 \x01(\fR\n" +
-	"derivationB\xdd\x01\n" +
+	"derivation\x12-\n" +
+	"\x12derivation_version\x18\x04 \x01(\rR\x11derivationVersionB\xdd\x01\n" +
 	"\x17com.splitsecure.keys.v1B\x0fDerivedKeyProtoP\x01ZCgithub.com/splitsecure/apis/gen/go/proto/splitsecure/keys/v1;keysv1\xa2\x02\x03SKX\xaa\x02\x13Splitsecure.Keys.V1\xca\x02\x13Splitsecure\\Keys\\V1\xe2\x02\x1fSplitsecure\\Keys\\V1\\GPBMetadata\xea\x02\x15Splitsecure::Keys::V1b\x06proto3"
 
 var (
