@@ -1,0 +1,61 @@
+syntax = "proto3";
+package splitsecure.attestation.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// MeasurementEndorsement is a signed statement pinning the identity of a
+// release, independent of the underlying attestation platform. Confidential
+// VM platforms such as Intel TDX and AMD SEV-SNP measure the guest image
+// into hardware registers but do not embed a signature over that
+// measurement the way some other platforms do, so this message carries an
+// out-of-band signature over the set of measurements a release is expected
+// to produce.
+message MeasurementEndorsement {
+  // Deterministic-marshaled EndorsementPayload. Verifiers unmarshal this and
+  // check the signature over these exact bytes.
+  bytes payload = 1;
+
+  // ECDSA P-384 signature (DER) over payload, produced by a release signing
+  // certificate.
+  bytes signature = 2;
+
+  // Lowercase-hex SHA-384 digest of the signing certificate's DER encoding.
+  // Verifiers look this digest up in a compiled-in trusted set and reject
+  // any endorsement whose digest is not present; the certificate itself
+  // never rides in the message.
+  string signing_cert_der_sha384 = 3;
+}
+
+// EndorsementPayload describes the measurements a specific release build is
+// expected to produce, along with metadata identifying that release.
+message EndorsementPayload {
+  // Platform this endorsement applies to: "intel-tdx" or "amd-sev-snp". Must
+  // equal the attestation arm being verified.
+  string platform = 1;
+
+  // Deployment tier: "prod", "staging", or "develop".
+  string tier = 2;
+
+  // Per-tier/region label, e.g. "us".
+  string deployment = 3;
+
+  repeated MeasurementConstraint constraints = 4;
+
+  google.protobuf.Timestamp signed_at = 5;
+
+  // Audit trail: identifies which image build this endorsement covers.
+  string image_ref = 6;
+}
+
+// MeasurementConstraint pins one platform measurement register to a set of
+// acceptable values.
+message MeasurementConstraint {
+  // Register name, e.g. "mrtd", "rtmr0".."rtmr3", or "measurement".
+  string register = 1;
+
+  // Set of acceptable values for this register; at least one entry.
+  // Represented as a set (rather than a single value) to allow for
+  // legitimate variation, e.g. several acceptable host-firmware
+  // measurements.
+  repeated bytes acceptable = 2;
+}
