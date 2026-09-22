@@ -33,8 +33,9 @@ message BaseResourceAttributes {
   // never set this directly; it is enclave-derived only.
   bytes lineage_id = 7;
 
-  // revision counts supersessions within a lineage: 0 at genesis, and the
+  // revision counts supersessions within a lineage: 1 at genesis, and the
   // enclave stamps predecessor.revision + 1 into the signed bytes of each
-  // superseding CREATE. Callers never set this directly.
-  uint64 revision = 8;
+  // superseding CREATE. Callers never set this directly. Never 0 — 0 is the
+  // "latest" sentinel the read lanes use to select a revision.
+  uint32 revision = 8;
 }
