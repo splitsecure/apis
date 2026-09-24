@@ -38,6 +38,7 @@ type ProposalEvent struct {
 	//	*ProposalEvent_NotificationAcked_
 	//	*ProposalEvent_ThresholdReached_
 	//	*ProposalEvent_ProposalExpired_
+	//	*ProposalEvent_VoteDeclined_
 	Union         isProposalEvent_Union `protobuf_oneof:"union"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -166,6 +167,15 @@ func (x *ProposalEvent) GetProposalExpired() *ProposalEvent_ProposalExpired {
 	return nil
 }
 
+func (x *ProposalEvent) GetVoteDeclined() *ProposalEvent_VoteDeclined {
+	if x != nil {
+		if x, ok := x.Union.(*ProposalEvent_VoteDeclined_); ok {
+			return x.VoteDeclined
+		}
+	}
+	return nil
+}
+
 type isProposalEvent_Union interface {
 	isProposalEvent_Union()
 }
@@ -202,6 +212,10 @@ type ProposalEvent_ProposalExpired_ struct {
 	ProposalExpired *ProposalEvent_ProposalExpired `protobuf:"bytes,10,opt,name=proposal_expired,json=proposalExpired,proto3,oneof"`
 }
 
+type ProposalEvent_VoteDeclined_ struct {
+	VoteDeclined *ProposalEvent_VoteDeclined `protobuf:"bytes,11,opt,name=vote_declined,json=voteDeclined,proto3,oneof"`
+}
+
 func (*ProposalEvent_ProposalPublished_) isProposalEvent_Union() {}
 
 func (*ProposalEvent_VoteReceived_) isProposalEvent_Union() {}
@@ -217,6 +231,8 @@ func (*ProposalEvent_NotificationAcked_) isProposalEvent_Union() {}
 func (*ProposalEvent_ThresholdReached_) isProposalEvent_Union() {}
 
 func (*ProposalEvent_ProposalExpired_) isProposalEvent_Union() {}
+
+func (*ProposalEvent_VoteDeclined_) isProposalEvent_Union() {}
 
 type ProposalEvent_ProposalPublished struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
@@ -333,6 +349,60 @@ func (x *ProposalEvent_VoteReceived) GetVoterEnclaveId() []byte {
 	return nil
 }
 
+// VoteDeclined records one device's decline. It never counts toward the
+// threshold, and its bottle carries no share material.
+type ProposalEvent_VoteDeclined struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	VoteBottle     *v1.Bottle             `protobuf:"bytes,1,opt,name=vote_bottle,json=voteBottle,proto3" json:"vote_bottle,omitempty"`
+	VoterEnclaveId []byte                 `protobuf:"bytes,2,opt,name=voter_enclave_id,json=voterEnclaveId,proto3" json:"voter_enclave_id,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ProposalEvent_VoteDeclined) Reset() {
+	*x = ProposalEvent_VoteDeclined{}
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProposalEvent_VoteDeclined) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProposalEvent_VoteDeclined) ProtoMessage() {}
+
+func (x *ProposalEvent_VoteDeclined) ProtoReflect() protoreflect.Message {
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProposalEvent_VoteDeclined.ProtoReflect.Descriptor instead.
+func (*ProposalEvent_VoteDeclined) Descriptor() ([]byte, []int) {
+	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 2}
+}
+
+func (x *ProposalEvent_VoteDeclined) GetVoteBottle() *v1.Bottle {
+	if x != nil {
+		return x.VoteBottle
+	}
+	return nil
+}
+
+func (x *ProposalEvent_VoteDeclined) GetVoterEnclaveId() []byte {
+	if x != nil {
+		return x.VoterEnclaveId
+	}
+	return nil
+}
+
 type ProposalEvent_ProposalCompleted struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The execution result bottle
@@ -343,7 +413,7 @@ type ProposalEvent_ProposalCompleted struct {
 
 func (x *ProposalEvent_ProposalCompleted) Reset() {
 	*x = ProposalEvent_ProposalCompleted{}
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[3]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -355,7 +425,7 @@ func (x *ProposalEvent_ProposalCompleted) String() string {
 func (*ProposalEvent_ProposalCompleted) ProtoMessage() {}
 
 func (x *ProposalEvent_ProposalCompleted) ProtoReflect() protoreflect.Message {
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[3]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -368,7 +438,7 @@ func (x *ProposalEvent_ProposalCompleted) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProposalEvent_ProposalCompleted.ProtoReflect.Descriptor instead.
 func (*ProposalEvent_ProposalCompleted) Descriptor() ([]byte, []int) {
-	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 2}
+	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 3}
 }
 
 func (x *ProposalEvent_ProposalCompleted) GetResultBottle() *v1.Bottle {
@@ -387,7 +457,7 @@ type ProposalEvent_ProposalError struct {
 
 func (x *ProposalEvent_ProposalError) Reset() {
 	*x = ProposalEvent_ProposalError{}
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[4]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -399,7 +469,7 @@ func (x *ProposalEvent_ProposalError) String() string {
 func (*ProposalEvent_ProposalError) ProtoMessage() {}
 
 func (x *ProposalEvent_ProposalError) ProtoReflect() protoreflect.Message {
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[4]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -412,7 +482,7 @@ func (x *ProposalEvent_ProposalError) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProposalEvent_ProposalError.ProtoReflect.Descriptor instead.
 func (*ProposalEvent_ProposalError) Descriptor() ([]byte, []int) {
-	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 3}
+	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 4}
 }
 
 func (x *ProposalEvent_ProposalError) GetMessage() string {
@@ -434,7 +504,7 @@ type ProposalEvent_NotificationSent struct {
 
 func (x *ProposalEvent_NotificationSent) Reset() {
 	*x = ProposalEvent_NotificationSent{}
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[5]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -446,7 +516,7 @@ func (x *ProposalEvent_NotificationSent) String() string {
 func (*ProposalEvent_NotificationSent) ProtoMessage() {}
 
 func (x *ProposalEvent_NotificationSent) ProtoReflect() protoreflect.Message {
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[5]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -459,7 +529,7 @@ func (x *ProposalEvent_NotificationSent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProposalEvent_NotificationSent.ProtoReflect.Descriptor instead.
 func (*ProposalEvent_NotificationSent) Descriptor() ([]byte, []int) {
-	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 4}
+	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 5}
 }
 
 func (x *ProposalEvent_NotificationSent) GetTargetEnclaveId() []byte {
@@ -492,7 +562,7 @@ type ProposalEvent_NotificationAcked struct {
 
 func (x *ProposalEvent_NotificationAcked) Reset() {
 	*x = ProposalEvent_NotificationAcked{}
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[6]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -504,7 +574,7 @@ func (x *ProposalEvent_NotificationAcked) String() string {
 func (*ProposalEvent_NotificationAcked) ProtoMessage() {}
 
 func (x *ProposalEvent_NotificationAcked) ProtoReflect() protoreflect.Message {
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[6]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -517,7 +587,7 @@ func (x *ProposalEvent_NotificationAcked) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProposalEvent_NotificationAcked.ProtoReflect.Descriptor instead.
 func (*ProposalEvent_NotificationAcked) Descriptor() ([]byte, []int) {
-	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 5}
+	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 6}
 }
 
 func (x *ProposalEvent_NotificationAcked) GetEnclaveId() []byte {
@@ -537,7 +607,7 @@ type ProposalEvent_ThresholdReached struct {
 
 func (x *ProposalEvent_ThresholdReached) Reset() {
 	*x = ProposalEvent_ThresholdReached{}
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[7]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -549,7 +619,7 @@ func (x *ProposalEvent_ThresholdReached) String() string {
 func (*ProposalEvent_ThresholdReached) ProtoMessage() {}
 
 func (x *ProposalEvent_ThresholdReached) ProtoReflect() protoreflect.Message {
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[7]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -562,7 +632,7 @@ func (x *ProposalEvent_ThresholdReached) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProposalEvent_ThresholdReached.ProtoReflect.Descriptor instead.
 func (*ProposalEvent_ThresholdReached) Descriptor() ([]byte, []int) {
-	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 6}
+	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 7}
 }
 
 // ProposalExpired is emitted by the cleanup sweeper when a proposal
@@ -575,7 +645,7 @@ type ProposalEvent_ProposalExpired struct {
 
 func (x *ProposalEvent_ProposalExpired) Reset() {
 	*x = ProposalEvent_ProposalExpired{}
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[8]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -587,7 +657,7 @@ func (x *ProposalEvent_ProposalExpired) String() string {
 func (*ProposalEvent_ProposalExpired) ProtoMessage() {}
 
 func (x *ProposalEvent_ProposalExpired) ProtoReflect() protoreflect.Message {
-	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[8]
+	mi := &file_splitsecure_proposals_v1_events_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -600,14 +670,14 @@ func (x *ProposalEvent_ProposalExpired) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProposalEvent_ProposalExpired.ProtoReflect.Descriptor instead.
 func (*ProposalEvent_ProposalExpired) Descriptor() ([]byte, []int) {
-	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 7}
+	return file_splitsecure_proposals_v1_events_proto_rawDescGZIP(), []int{0, 8}
 }
 
 var File_splitsecure_proposals_v1_events_proto protoreflect.FileDescriptor
 
 const file_splitsecure_proposals_v1_events_proto_rawDesc = "" +
 	"\n" +
-	"%splitsecure/proposals/v1/events.proto\x12\x18splitsecure.proposals.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\"splitsecure/bottle/v1/bottle.proto\x1a'splitsecure/proposals/v1/proposal.proto\"\xef\f\n" +
+	"%splitsecure/proposals/v1/events.proto\x12\x18splitsecure.proposals.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\"splitsecure/bottle/v1/bottle.proto\x1a'splitsecure/proposals/v1/proposal.proto\"\xc6\x0e\n" +
 	"\rProposalEvent\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12+\n" +
@@ -620,12 +690,17 @@ const file_splitsecure_proposals_v1_events_proto_rawDesc = "" +
 	"\x12notification_acked\x18\b \x01(\v29.splitsecure.proposals.v1.ProposalEvent.NotificationAckedH\x00R\x11notificationAcked\x12g\n" +
 	"\x11threshold_reached\x18\t \x01(\v28.splitsecure.proposals.v1.ProposalEvent.ThresholdReachedH\x00R\x10thresholdReached\x12d\n" +
 	"\x10proposal_expired\x18\n" +
-	" \x01(\v27.splitsecure.proposals.v1.ProposalEvent.ProposalExpiredH\x00R\x0fproposalExpired\x1a\xbd\x01\n" +
+	" \x01(\v27.splitsecure.proposals.v1.ProposalEvent.ProposalExpiredH\x00R\x0fproposalExpired\x12[\n" +
+	"\rvote_declined\x18\v \x01(\v24.splitsecure.proposals.v1.ProposalEvent.VoteDeclinedH\x00R\fvoteDeclined\x1a\xbd\x01\n" +
 	"\x11ProposalPublished\x12>\n" +
 	"\bproposal\x18\x01 \x01(\v2\".splitsecure.proposals.v1.ProposalR\bproposal\x120\n" +
 	"\x14initiator_enclave_id\x18\x02 \x01(\fR\x12initiatorEnclaveId\x126\n" +
 	"\x17initiator_principal_s2r\x18\x03 \x01(\tR\x15initiatorPrincipalS2r\x1ax\n" +
 	"\fVoteReceived\x12>\n" +
+	"\vvote_bottle\x18\x01 \x01(\v2\x1d.splitsecure.bottle.v1.BottleR\n" +
+	"voteBottle\x12(\n" +
+	"\x10voter_enclave_id\x18\x02 \x01(\fR\x0evoterEnclaveId\x1ax\n" +
+	"\fVoteDeclined\x12>\n" +
 	"\vvote_bottle\x18\x01 \x01(\v2\x1d.splitsecure.bottle.v1.BottleR\n" +
 	"voteBottle\x12(\n" +
 	"\x10voter_enclave_id\x18\x02 \x01(\fR\x0evoterEnclaveId\x1aW\n" +
@@ -657,39 +732,42 @@ func file_splitsecure_proposals_v1_events_proto_rawDescGZIP() []byte {
 	return file_splitsecure_proposals_v1_events_proto_rawDescData
 }
 
-var file_splitsecure_proposals_v1_events_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_splitsecure_proposals_v1_events_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_splitsecure_proposals_v1_events_proto_goTypes = []any{
 	(*ProposalEvent)(nil),                   // 0: splitsecure.proposals.v1.ProposalEvent
 	(*ProposalEvent_ProposalPublished)(nil), // 1: splitsecure.proposals.v1.ProposalEvent.ProposalPublished
 	(*ProposalEvent_VoteReceived)(nil),      // 2: splitsecure.proposals.v1.ProposalEvent.VoteReceived
-	(*ProposalEvent_ProposalCompleted)(nil), // 3: splitsecure.proposals.v1.ProposalEvent.ProposalCompleted
-	(*ProposalEvent_ProposalError)(nil),     // 4: splitsecure.proposals.v1.ProposalEvent.ProposalError
-	(*ProposalEvent_NotificationSent)(nil),  // 5: splitsecure.proposals.v1.ProposalEvent.NotificationSent
-	(*ProposalEvent_NotificationAcked)(nil), // 6: splitsecure.proposals.v1.ProposalEvent.NotificationAcked
-	(*ProposalEvent_ThresholdReached)(nil),  // 7: splitsecure.proposals.v1.ProposalEvent.ThresholdReached
-	(*ProposalEvent_ProposalExpired)(nil),   // 8: splitsecure.proposals.v1.ProposalEvent.ProposalExpired
-	(*timestamppb.Timestamp)(nil),           // 9: google.protobuf.Timestamp
-	(*Proposal)(nil),                        // 10: splitsecure.proposals.v1.Proposal
-	(*v1.Bottle)(nil),                       // 11: splitsecure.bottle.v1.Bottle
+	(*ProposalEvent_VoteDeclined)(nil),      // 3: splitsecure.proposals.v1.ProposalEvent.VoteDeclined
+	(*ProposalEvent_ProposalCompleted)(nil), // 4: splitsecure.proposals.v1.ProposalEvent.ProposalCompleted
+	(*ProposalEvent_ProposalError)(nil),     // 5: splitsecure.proposals.v1.ProposalEvent.ProposalError
+	(*ProposalEvent_NotificationSent)(nil),  // 6: splitsecure.proposals.v1.ProposalEvent.NotificationSent
+	(*ProposalEvent_NotificationAcked)(nil), // 7: splitsecure.proposals.v1.ProposalEvent.NotificationAcked
+	(*ProposalEvent_ThresholdReached)(nil),  // 8: splitsecure.proposals.v1.ProposalEvent.ThresholdReached
+	(*ProposalEvent_ProposalExpired)(nil),   // 9: splitsecure.proposals.v1.ProposalEvent.ProposalExpired
+	(*timestamppb.Timestamp)(nil),           // 10: google.protobuf.Timestamp
+	(*Proposal)(nil),                        // 11: splitsecure.proposals.v1.Proposal
+	(*v1.Bottle)(nil),                       // 12: splitsecure.bottle.v1.Bottle
 }
 var file_splitsecure_proposals_v1_events_proto_depIdxs = []int32{
-	9,  // 0: splitsecure.proposals.v1.ProposalEvent.created_at:type_name -> google.protobuf.Timestamp
+	10, // 0: splitsecure.proposals.v1.ProposalEvent.created_at:type_name -> google.protobuf.Timestamp
 	1,  // 1: splitsecure.proposals.v1.ProposalEvent.proposal_published:type_name -> splitsecure.proposals.v1.ProposalEvent.ProposalPublished
 	2,  // 2: splitsecure.proposals.v1.ProposalEvent.vote_received:type_name -> splitsecure.proposals.v1.ProposalEvent.VoteReceived
-	3,  // 3: splitsecure.proposals.v1.ProposalEvent.proposal_completed:type_name -> splitsecure.proposals.v1.ProposalEvent.ProposalCompleted
-	4,  // 4: splitsecure.proposals.v1.ProposalEvent.proposal_error:type_name -> splitsecure.proposals.v1.ProposalEvent.ProposalError
-	5,  // 5: splitsecure.proposals.v1.ProposalEvent.notification_sent:type_name -> splitsecure.proposals.v1.ProposalEvent.NotificationSent
-	6,  // 6: splitsecure.proposals.v1.ProposalEvent.notification_acked:type_name -> splitsecure.proposals.v1.ProposalEvent.NotificationAcked
-	7,  // 7: splitsecure.proposals.v1.ProposalEvent.threshold_reached:type_name -> splitsecure.proposals.v1.ProposalEvent.ThresholdReached
-	8,  // 8: splitsecure.proposals.v1.ProposalEvent.proposal_expired:type_name -> splitsecure.proposals.v1.ProposalEvent.ProposalExpired
-	10, // 9: splitsecure.proposals.v1.ProposalEvent.ProposalPublished.proposal:type_name -> splitsecure.proposals.v1.Proposal
-	11, // 10: splitsecure.proposals.v1.ProposalEvent.VoteReceived.vote_bottle:type_name -> splitsecure.bottle.v1.Bottle
-	11, // 11: splitsecure.proposals.v1.ProposalEvent.ProposalCompleted.result_bottle:type_name -> splitsecure.bottle.v1.Bottle
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	4,  // 3: splitsecure.proposals.v1.ProposalEvent.proposal_completed:type_name -> splitsecure.proposals.v1.ProposalEvent.ProposalCompleted
+	5,  // 4: splitsecure.proposals.v1.ProposalEvent.proposal_error:type_name -> splitsecure.proposals.v1.ProposalEvent.ProposalError
+	6,  // 5: splitsecure.proposals.v1.ProposalEvent.notification_sent:type_name -> splitsecure.proposals.v1.ProposalEvent.NotificationSent
+	7,  // 6: splitsecure.proposals.v1.ProposalEvent.notification_acked:type_name -> splitsecure.proposals.v1.ProposalEvent.NotificationAcked
+	8,  // 7: splitsecure.proposals.v1.ProposalEvent.threshold_reached:type_name -> splitsecure.proposals.v1.ProposalEvent.ThresholdReached
+	9,  // 8: splitsecure.proposals.v1.ProposalEvent.proposal_expired:type_name -> splitsecure.proposals.v1.ProposalEvent.ProposalExpired
+	3,  // 9: splitsecure.proposals.v1.ProposalEvent.vote_declined:type_name -> splitsecure.proposals.v1.ProposalEvent.VoteDeclined
+	11, // 10: splitsecure.proposals.v1.ProposalEvent.ProposalPublished.proposal:type_name -> splitsecure.proposals.v1.Proposal
+	12, // 11: splitsecure.proposals.v1.ProposalEvent.VoteReceived.vote_bottle:type_name -> splitsecure.bottle.v1.Bottle
+	12, // 12: splitsecure.proposals.v1.ProposalEvent.VoteDeclined.vote_bottle:type_name -> splitsecure.bottle.v1.Bottle
+	12, // 13: splitsecure.proposals.v1.ProposalEvent.ProposalCompleted.result_bottle:type_name -> splitsecure.bottle.v1.Bottle
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_proposals_v1_events_proto_init() }
@@ -707,6 +785,7 @@ func file_splitsecure_proposals_v1_events_proto_init() {
 		(*ProposalEvent_NotificationAcked_)(nil),
 		(*ProposalEvent_ThresholdReached_)(nil),
 		(*ProposalEvent_ProposalExpired_)(nil),
+		(*ProposalEvent_VoteDeclined_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -714,7 +793,7 @@ func file_splitsecure_proposals_v1_events_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_splitsecure_proposals_v1_events_proto_rawDesc), len(file_splitsecure_proposals_v1_events_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

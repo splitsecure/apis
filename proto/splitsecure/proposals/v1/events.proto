@@ -19,6 +19,7 @@ message ProposalEvent {
     NotificationAcked notification_acked = 8;
     ThresholdReached threshold_reached = 9;
     ProposalExpired proposal_expired = 10;
+    VoteDeclined vote_declined = 11;
   }
 
   message ProposalPublished {
@@ -31,6 +32,13 @@ message ProposalEvent {
   }
 
   message VoteReceived {
+    splitsecure.bottle.v1.Bottle vote_bottle = 1;
+    bytes voter_enclave_id = 2;
+  }
+
+  // VoteDeclined records one device's decline. It never counts toward the
+  // threshold, and its bottle carries no share material.
+  message VoteDeclined {
     splitsecure.bottle.v1.Bottle vote_bottle = 1;
     bytes voter_enclave_id = 2;
   }

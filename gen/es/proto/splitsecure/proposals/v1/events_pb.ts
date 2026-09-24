@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/proposals/v1/events.proto.
  */
 export const file_splitsecure_proposals_v1_events: GenFile = /*@__PURE__*/
-  fileDesc("CiVzcGxpdHNlY3VyZS9wcm9wb3NhbHMvdjEvZXZlbnRzLnByb3RvEhhzcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEingoKDVByb3Bvc2FsRXZlbnQSLgoKY3JlYXRlZF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASGgoSZW1pdHRlZF9ieV9zdGVwX2lkGAIgASgFElcKEnByb3Bvc2FsX3B1Ymxpc2hlZBgDIAEoCzI5LnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbEV2ZW50LlByb3Bvc2FsUHVibGlzaGVkSAASTQoNdm90ZV9yZWNlaXZlZBgEIAEoCzI0LnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbEV2ZW50LlZvdGVSZWNlaXZlZEgAElcKEnByb3Bvc2FsX2NvbXBsZXRlZBgFIAEoCzI5LnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbEV2ZW50LlByb3Bvc2FsQ29tcGxldGVkSAASTwoOcHJvcG9zYWxfZXJyb3IYBiABKAsyNS5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEuUHJvcG9zYWxFdmVudC5Qcm9wb3NhbEVycm9ySAASVQoRbm90aWZpY2F0aW9uX3NlbnQYByABKAsyOC5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEuUHJvcG9zYWxFdmVudC5Ob3RpZmljYXRpb25TZW50SAASVwoSbm90aWZpY2F0aW9uX2Fja2VkGAggASgLMjkuc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxLlByb3Bvc2FsRXZlbnQuTm90aWZpY2F0aW9uQWNrZWRIABJVChF0aHJlc2hvbGRfcmVhY2hlZBgJIAEoCzI4LnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbEV2ZW50LlRocmVzaG9sZFJlYWNoZWRIABJTChBwcm9wb3NhbF9leHBpcmVkGAogASgLMjcuc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxLlByb3Bvc2FsRXZlbnQuUHJvcG9zYWxFeHBpcmVkSAAaiAEKEVByb3Bvc2FsUHVibGlzaGVkEjQKCHByb3Bvc2FsGAEgASgLMiIuc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxLlByb3Bvc2FsEhwKFGluaXRpYXRvcl9lbmNsYXZlX2lkGAIgASgMEh8KF2luaXRpYXRvcl9wcmluY2lwYWxfczJyGAMgASgJGlwKDFZvdGVSZWNlaXZlZBIyCgt2b3RlX2JvdHRsZRgBIAEoCzIdLnNwbGl0c2VjdXJlLmJvdHRsZS52MS5Cb3R0bGUSGAoQdm90ZXJfZW5jbGF2ZV9pZBgCIAEoDBpJChFQcm9wb3NhbENvbXBsZXRlZBI0Cg1yZXN1bHRfYm90dGxlGAEgASgLMh0uc3BsaXRzZWN1cmUuYm90dGxlLnYxLkJvdHRsZRogCg1Qcm9wb3NhbEVycm9yEg8KB21lc3NhZ2UYASABKAkaZAoQTm90aWZpY2F0aW9uU2VudBIZChF0YXJnZXRfZW5jbGF2ZV9pZBgBIAEoDBIZChFub3RpZmljYXRpb25fdHlwZRgCIAEoCRIaChJzaWxlbnRseV9kZWxpdmVyZWQYAyABKAgaJwoRTm90aWZpY2F0aW9uQWNrZWQSEgoKZW5jbGF2ZV9pZBgBIAEoDBoSChBUaHJlc2hvbGRSZWFjaGVkGhEKD1Byb3Bvc2FsRXhwaXJlZEIHCgV1bmlvbkL8AQocY29tLnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MUILRXZlbnRzUHJvdG9QAVpNZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS9wcm9wb3NhbHMvdjE7cHJvcG9zYWxzdjGiAgNTUFiqAhhTcGxpdHNlY3VyZS5Qcm9wb3NhbHMuVjHKAhhTcGxpdHNlY3VyZVxQcm9wb3NhbHNcVjHiAiRTcGxpdHNlY3VyZVxQcm9wb3NhbHNcVjFcR1BCTWV0YWRhdGHqAhpTcGxpdHNlY3VyZTo6UHJvcG9zYWxzOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_splitsecure_bottle_v1_bottle, file_splitsecure_proposals_v1_proposal]);
+  fileDesc("CiVzcGxpdHNlY3VyZS9wcm9wb3NhbHMvdjEvZXZlbnRzLnByb3RvEhhzcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEiywsKDVByb3Bvc2FsRXZlbnQSLgoKY3JlYXRlZF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASGgoSZW1pdHRlZF9ieV9zdGVwX2lkGAIgASgFElcKEnByb3Bvc2FsX3B1Ymxpc2hlZBgDIAEoCzI5LnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbEV2ZW50LlByb3Bvc2FsUHVibGlzaGVkSAASTQoNdm90ZV9yZWNlaXZlZBgEIAEoCzI0LnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbEV2ZW50LlZvdGVSZWNlaXZlZEgAElcKEnByb3Bvc2FsX2NvbXBsZXRlZBgFIAEoCzI5LnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbEV2ZW50LlByb3Bvc2FsQ29tcGxldGVkSAASTwoOcHJvcG9zYWxfZXJyb3IYBiABKAsyNS5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEuUHJvcG9zYWxFdmVudC5Qcm9wb3NhbEVycm9ySAASVQoRbm90aWZpY2F0aW9uX3NlbnQYByABKAsyOC5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEuUHJvcG9zYWxFdmVudC5Ob3RpZmljYXRpb25TZW50SAASVwoSbm90aWZpY2F0aW9uX2Fja2VkGAggASgLMjkuc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxLlByb3Bvc2FsRXZlbnQuTm90aWZpY2F0aW9uQWNrZWRIABJVChF0aHJlc2hvbGRfcmVhY2hlZBgJIAEoCzI4LnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbEV2ZW50LlRocmVzaG9sZFJlYWNoZWRIABJTChBwcm9wb3NhbF9leHBpcmVkGAogASgLMjcuc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxLlByb3Bvc2FsRXZlbnQuUHJvcG9zYWxFeHBpcmVkSAASTQoNdm90ZV9kZWNsaW5lZBgLIAEoCzI0LnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbEV2ZW50LlZvdGVEZWNsaW5lZEgAGogBChFQcm9wb3NhbFB1Ymxpc2hlZBI0Cghwcm9wb3NhbBgBIAEoCzIiLnNwbGl0c2VjdXJlLnByb3Bvc2Fscy52MS5Qcm9wb3NhbBIcChRpbml0aWF0b3JfZW5jbGF2ZV9pZBgCIAEoDBIfChdpbml0aWF0b3JfcHJpbmNpcGFsX3MychgDIAEoCRpcCgxWb3RlUmVjZWl2ZWQSMgoLdm90ZV9ib3R0bGUYASABKAsyHS5zcGxpdHNlY3VyZS5ib3R0bGUudjEuQm90dGxlEhgKEHZvdGVyX2VuY2xhdmVfaWQYAiABKAwaXAoMVm90ZURlY2xpbmVkEjIKC3ZvdGVfYm90dGxlGAEgASgLMh0uc3BsaXRzZWN1cmUuYm90dGxlLnYxLkJvdHRsZRIYChB2b3Rlcl9lbmNsYXZlX2lkGAIgASgMGkkKEVByb3Bvc2FsQ29tcGxldGVkEjQKDXJlc3VsdF9ib3R0bGUYASABKAsyHS5zcGxpdHNlY3VyZS5ib3R0bGUudjEuQm90dGxlGiAKDVByb3Bvc2FsRXJyb3ISDwoHbWVzc2FnZRgBIAEoCRpkChBOb3RpZmljYXRpb25TZW50EhkKEXRhcmdldF9lbmNsYXZlX2lkGAEgASgMEhkKEW5vdGlmaWNhdGlvbl90eXBlGAIgASgJEhoKEnNpbGVudGx5X2RlbGl2ZXJlZBgDIAEoCBonChFOb3RpZmljYXRpb25BY2tlZBISCgplbmNsYXZlX2lkGAEgASgMGhIKEFRocmVzaG9sZFJlYWNoZWQaEQoPUHJvcG9zYWxFeHBpcmVkQgcKBXVuaW9uQvwBChxjb20uc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxQgtFdmVudHNQcm90b1ABWk1naXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL3Byb3Bvc2Fscy92MTtwcm9wb3NhbHN2MaICA1NQWKoCGFNwbGl0c2VjdXJlLlByb3Bvc2Fscy5WMcoCGFNwbGl0c2VjdXJlXFByb3Bvc2Fsc1xWMeICJFNwbGl0c2VjdXJlXFByb3Bvc2Fsc1xWMVxHUEJNZXRhZGF0YeoCGlNwbGl0c2VjdXJlOjpQcm9wb3NhbHM6OlYxYgZwcm90bzM", [file_google_protobuf_timestamp, file_splitsecure_bottle_v1_bottle, file_splitsecure_proposals_v1_proposal]);
 
 /**
  * ProposalEvent represents events in a proposal's lifecycle.
@@ -85,6 +85,12 @@ export type ProposalEvent = Message<"splitsecure.proposals.v1.ProposalEvent"> & 
      */
     value: ProposalEvent_ProposalExpired;
     case: "proposalExpired";
+  } | {
+    /**
+     * @generated from field: splitsecure.proposals.v1.ProposalEvent.VoteDeclined vote_declined = 11;
+     */
+    value: ProposalEvent_VoteDeclined;
+    case: "voteDeclined";
   } | { case: undefined; value?: undefined };
 };
 
@@ -149,6 +155,31 @@ export const ProposalEvent_VoteReceivedSchema: GenMessage<ProposalEvent_VoteRece
   messageDesc(file_splitsecure_proposals_v1_events, 0, 1);
 
 /**
+ * VoteDeclined records one device's decline. It never counts toward the
+ * threshold, and its bottle carries no share material.
+ *
+ * @generated from message splitsecure.proposals.v1.ProposalEvent.VoteDeclined
+ */
+export type ProposalEvent_VoteDeclined = Message<"splitsecure.proposals.v1.ProposalEvent.VoteDeclined"> & {
+  /**
+   * @generated from field: splitsecure.bottle.v1.Bottle vote_bottle = 1;
+   */
+  voteBottle?: Bottle | undefined;
+
+  /**
+   * @generated from field: bytes voter_enclave_id = 2;
+   */
+  voterEnclaveId: Uint8Array;
+};
+
+/**
+ * Describes the message splitsecure.proposals.v1.ProposalEvent.VoteDeclined.
+ * Use `create(ProposalEvent_VoteDeclinedSchema)` to create a new message.
+ */
+export const ProposalEvent_VoteDeclinedSchema: GenMessage<ProposalEvent_VoteDeclined> = /*@__PURE__*/
+  messageDesc(file_splitsecure_proposals_v1_events, 0, 2);
+
+/**
  * @generated from message splitsecure.proposals.v1.ProposalEvent.ProposalCompleted
  */
 export type ProposalEvent_ProposalCompleted = Message<"splitsecure.proposals.v1.ProposalEvent.ProposalCompleted"> & {
@@ -165,7 +196,7 @@ export type ProposalEvent_ProposalCompleted = Message<"splitsecure.proposals.v1.
  * Use `create(ProposalEvent_ProposalCompletedSchema)` to create a new message.
  */
 export const ProposalEvent_ProposalCompletedSchema: GenMessage<ProposalEvent_ProposalCompleted> = /*@__PURE__*/
-  messageDesc(file_splitsecure_proposals_v1_events, 0, 2);
+  messageDesc(file_splitsecure_proposals_v1_events, 0, 3);
 
 /**
  * @generated from message splitsecure.proposals.v1.ProposalEvent.ProposalError
@@ -182,7 +213,7 @@ export type ProposalEvent_ProposalError = Message<"splitsecure.proposals.v1.Prop
  * Use `create(ProposalEvent_ProposalErrorSchema)` to create a new message.
  */
 export const ProposalEvent_ProposalErrorSchema: GenMessage<ProposalEvent_ProposalError> = /*@__PURE__*/
-  messageDesc(file_splitsecure_proposals_v1_events, 0, 3);
+  messageDesc(file_splitsecure_proposals_v1_events, 0, 4);
 
 /**
  * @generated from message splitsecure.proposals.v1.ProposalEvent.NotificationSent
@@ -211,7 +242,7 @@ export type ProposalEvent_NotificationSent = Message<"splitsecure.proposals.v1.P
  * Use `create(ProposalEvent_NotificationSentSchema)` to create a new message.
  */
 export const ProposalEvent_NotificationSentSchema: GenMessage<ProposalEvent_NotificationSent> = /*@__PURE__*/
-  messageDesc(file_splitsecure_proposals_v1_events, 0, 4);
+  messageDesc(file_splitsecure_proposals_v1_events, 0, 5);
 
 /**
  * @generated from message splitsecure.proposals.v1.ProposalEvent.NotificationAcked
@@ -228,7 +259,7 @@ export type ProposalEvent_NotificationAcked = Message<"splitsecure.proposals.v1.
  * Use `create(ProposalEvent_NotificationAckedSchema)` to create a new message.
  */
 export const ProposalEvent_NotificationAckedSchema: GenMessage<ProposalEvent_NotificationAcked> = /*@__PURE__*/
-  messageDesc(file_splitsecure_proposals_v1_events, 0, 5);
+  messageDesc(file_splitsecure_proposals_v1_events, 0, 6);
 
 /**
  * ThresholdReached is emitted when the voting threshold is met
@@ -244,7 +275,7 @@ export type ProposalEvent_ThresholdReached = Message<"splitsecure.proposals.v1.P
  * Use `create(ProposalEvent_ThresholdReachedSchema)` to create a new message.
  */
 export const ProposalEvent_ThresholdReachedSchema: GenMessage<ProposalEvent_ThresholdReached> = /*@__PURE__*/
-  messageDesc(file_splitsecure_proposals_v1_events, 0, 6);
+  messageDesc(file_splitsecure_proposals_v1_events, 0, 7);
 
 /**
  * ProposalExpired is emitted by the cleanup sweeper when a proposal
@@ -260,5 +291,5 @@ export type ProposalEvent_ProposalExpired = Message<"splitsecure.proposals.v1.Pr
  * Use `create(ProposalEvent_ProposalExpiredSchema)` to create a new message.
  */
 export const ProposalEvent_ProposalExpiredSchema: GenMessage<ProposalEvent_ProposalExpired> = /*@__PURE__*/
-  messageDesc(file_splitsecure_proposals_v1_events, 0, 7);
+  messageDesc(file_splitsecure_proposals_v1_events, 0, 8);
 
