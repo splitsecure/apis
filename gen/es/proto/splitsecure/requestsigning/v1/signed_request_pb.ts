@@ -6,8 +6,6 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_any, file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { Generic } from "../../attestation/v1/generic_pb";
-import { file_splitsecure_attestation_v1_generic } from "../../attestation/v1/generic_pb";
 import type { Graph } from "../../delegationgraph/v1/graph_pb";
 import { file_splitsecure_delegationgraph_v1_graph } from "../../delegationgraph/v1/graph_pb";
 import type { Signature } from "../../hybridkeyset/v1/signature_pb";
@@ -18,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/requestsigning/v1/signed_request.proto.
  */
 export const file_splitsecure_requestsigning_v1_signed_request: GenFile = /*@__PURE__*/
-  fileDesc("CjJzcGxpdHNlY3VyZS9yZXF1ZXN0c2lnbmluZy92MS9zaWduZWRfcmVxdWVzdC5wcm90bxIdc3BsaXRzZWN1cmUucmVxdWVzdHNpZ25pbmcudjEi1AIKDVNpZ25lZFJlcXVlc3QSFAoMcmVxdWVzdG9yX2lkGAIgASgMEjQKBWdyYXBoGAMgASgLMiUuc3BsaXRzZWN1cmUuZGVsZWdhdGlvbmdyYXBoLnYxLkdyYXBoEjkKCXNpZ25hdHVyZRgEIAEoCzImLnNwbGl0c2VjdXJlLmh5YnJpZGtleXNldC52MS5TaWduYXR1cmUSOAoLYXR0ZXN0YXRpb24YBSABKAsyIy5zcGxpdHNlY3VyZS5hdHRlc3RhdGlvbi52MS5HZW5lcmljEhUKDWF1dGhlbnRpY2F0ZWQYASABKAwaawoNQXV0aGVudGljYXRlZBIqCgxiYXNlX3JlcXVlc3QYASABKAsyFC5nb29nbGUucHJvdG9idWYuQW55Ei4KCmNyZWF0ZWRfb24YAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQqYCCiFjb20uc3BsaXRzZWN1cmUucmVxdWVzdHNpZ25pbmcudjFCElNpZ25lZFJlcXVlc3RQcm90b1ABWldnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL3JlcXVlc3RzaWduaW5nL3YxO3JlcXVlc3RzaWduaW5ndjGiAgNTUliqAh1TcGxpdHNlY3VyZS5SZXF1ZXN0c2lnbmluZy5WMcoCHVNwbGl0c2VjdXJlXFJlcXVlc3RzaWduaW5nXFYx4gIpU3BsaXRzZWN1cmVcUmVxdWVzdHNpZ25pbmdcVjFcR1BCTWV0YWRhdGHqAh9TcGxpdHNlY3VyZTo6UmVxdWVzdHNpZ25pbmc6OlYxYgZwcm90bzM", [file_google_protobuf_any, file_google_protobuf_timestamp, file_splitsecure_attestation_v1_generic, file_splitsecure_delegationgraph_v1_graph, file_splitsecure_hybridkeyset_v1_signature]);
+  fileDesc("CjJzcGxpdHNlY3VyZS9yZXF1ZXN0c2lnbmluZy92MS9zaWduZWRfcmVxdWVzdC5wcm90bxIdc3BsaXRzZWN1cmUucmVxdWVzdHNpZ25pbmcudjEirQIKDVNpZ25lZFJlcXVlc3QSFAoMcmVxdWVzdG9yX2lkGAIgASgMEjQKBWdyYXBoGAMgASgLMiUuc3BsaXRzZWN1cmUuZGVsZWdhdGlvbmdyYXBoLnYxLkdyYXBoEjkKCXNpZ25hdHVyZRgEIAEoCzImLnNwbGl0c2VjdXJlLmh5YnJpZGtleXNldC52MS5TaWduYXR1cmUSFQoNYXV0aGVudGljYXRlZBgBIAEoDBprCg1BdXRoZW50aWNhdGVkEioKDGJhc2VfcmVxdWVzdBgBIAEoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkSLgoKY3JlYXRlZF9vbhgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBKBAgFEAZSC2F0dGVzdGF0aW9uQqYCCiFjb20uc3BsaXRzZWN1cmUucmVxdWVzdHNpZ25pbmcudjFCElNpZ25lZFJlcXVlc3RQcm90b1ABWldnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL3JlcXVlc3RzaWduaW5nL3YxO3JlcXVlc3RzaWduaW5ndjGiAgNTUliqAh1TcGxpdHNlY3VyZS5SZXF1ZXN0c2lnbmluZy5WMcoCHVNwbGl0c2VjdXJlXFJlcXVlc3RzaWduaW5nXFYx4gIpU3BsaXRzZWN1cmVcUmVxdWVzdHNpZ25pbmdcVjFcR1BCTWV0YWRhdGHqAh9TcGxpdHNlY3VyZTo6UmVxdWVzdHNpZ25pbmc6OlYxYgZwcm90bzM", [file_google_protobuf_any, file_google_protobuf_timestamp, file_splitsecure_delegationgraph_v1_graph, file_splitsecure_hybridkeyset_v1_signature]);
 
 /**
  * @generated from message splitsecure.requestsigning.v1.SignedRequest
@@ -40,13 +38,6 @@ export type SignedRequest = Message<"splitsecure.requestsigning.v1.SignedRequest
    * @generated from field: splitsecure.hybridkeyset.v1.Signature signature = 4;
    */
   signature?: Signature | undefined;
-
-  /**
-   * attestation present only if request comes from an enclave
-   *
-   * @generated from field: splitsecure.attestation.v1.Generic attestation = 5;
-   */
-  attestation?: Generic | undefined;
 
   /**
    * contains SignedRequest_Authenticated

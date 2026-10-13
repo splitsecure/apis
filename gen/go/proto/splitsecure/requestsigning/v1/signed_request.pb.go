@@ -7,7 +7,6 @@
 package requestsigningv1
 
 import (
-	v12 "github.com/splitsecure/apis/gen/go/proto/splitsecure/attestation/v1"
 	v1 "github.com/splitsecure/apis/gen/go/proto/splitsecure/delegationgraph/v1"
 	v11 "github.com/splitsecure/apis/gen/go/proto/splitsecure/hybridkeyset/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -32,8 +31,6 @@ type SignedRequest struct {
 	RequestorId []byte         `protobuf:"bytes,2,opt,name=requestor_id,json=requestorId,proto3" json:"requestor_id,omitempty"`
 	Graph       *v1.Graph      `protobuf:"bytes,3,opt,name=graph,proto3" json:"graph,omitempty"`
 	Signature   *v11.Signature `protobuf:"bytes,4,opt,name=signature,proto3" json:"signature,omitempty"`
-	// attestation present only if request comes from an enclave
-	Attestation *v12.Generic `protobuf:"bytes,5,opt,name=attestation,proto3" json:"attestation,omitempty"`
 	// contains SignedRequest_Authenticated
 	Authenticated []byte `protobuf:"bytes,1,opt,name=authenticated,proto3" json:"authenticated,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -87,13 +84,6 @@ func (x *SignedRequest) GetGraph() *v1.Graph {
 func (x *SignedRequest) GetSignature() *v11.Signature {
 	if x != nil {
 		return x.Signature
-	}
-	return nil
-}
-
-func (x *SignedRequest) GetAttestation() *v12.Generic {
-	if x != nil {
-		return x.Attestation
 	}
 	return nil
 }
@@ -161,17 +151,16 @@ var File_splitsecure_requestsigning_v1_signed_request_proto protoreflect.FileDes
 
 const file_splitsecure_requestsigning_v1_signed_request_proto_rawDesc = "" +
 	"\n" +
-	"2splitsecure/requestsigning/v1/signed_request.proto\x12\x1dsplitsecure.requestsigning.v1\x1a\x19google/protobuf/any.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a(splitsecure/attestation/v1/generic.proto\x1a*splitsecure/delegationgraph/v1/graph.proto\x1a+splitsecure/hybridkeyset/v1/signature.proto\"\xa8\x03\n" +
+	"2splitsecure/requestsigning/v1/signed_request.proto\x12\x1dsplitsecure.requestsigning.v1\x1a\x19google/protobuf/any.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a*splitsecure/delegationgraph/v1/graph.proto\x1a+splitsecure/hybridkeyset/v1/signature.proto\"\xf4\x02\n" +
 	"\rSignedRequest\x12!\n" +
 	"\frequestor_id\x18\x02 \x01(\fR\vrequestorId\x12;\n" +
 	"\x05graph\x18\x03 \x01(\v2%.splitsecure.delegationgraph.v1.GraphR\x05graph\x12D\n" +
-	"\tsignature\x18\x04 \x01(\v2&.splitsecure.hybridkeyset.v1.SignatureR\tsignature\x12E\n" +
-	"\vattestation\x18\x05 \x01(\v2#.splitsecure.attestation.v1.GenericR\vattestation\x12$\n" +
+	"\tsignature\x18\x04 \x01(\v2&.splitsecure.hybridkeyset.v1.SignatureR\tsignature\x12$\n" +
 	"\rauthenticated\x18\x01 \x01(\fR\rauthenticated\x1a\x83\x01\n" +
 	"\rAuthenticated\x127\n" +
 	"\fbase_request\x18\x01 \x01(\v2\x14.google.protobuf.AnyR\vbaseRequest\x129\n" +
 	"\n" +
-	"created_on\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedOnB\xa6\x02\n" +
+	"created_on\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedOnJ\x04\b\x05\x10\x06R\vattestationB\xa6\x02\n" +
 	"!com.splitsecure.requestsigning.v1B\x12SignedRequestProtoP\x01ZWgithub.com/splitsecure/apis/gen/go/proto/splitsecure/requestsigning/v1;requestsigningv1\xa2\x02\x03SRX\xaa\x02\x1dSplitsecure.Requestsigning.V1\xca\x02\x1dSplitsecure\\Requestsigning\\V1\xe2\x02)Splitsecure\\Requestsigning\\V1\\GPBMetadata\xea\x02\x1fSplitsecure::Requestsigning::V1b\x06proto3"
 
 var (
@@ -192,21 +181,19 @@ var file_splitsecure_requestsigning_v1_signed_request_proto_goTypes = []any{
 	(*SignedRequest_Authenticated)(nil), // 1: splitsecure.requestsigning.v1.SignedRequest.Authenticated
 	(*v1.Graph)(nil),                    // 2: splitsecure.delegationgraph.v1.Graph
 	(*v11.Signature)(nil),               // 3: splitsecure.hybridkeyset.v1.Signature
-	(*v12.Generic)(nil),                 // 4: splitsecure.attestation.v1.Generic
-	(*anypb.Any)(nil),                   // 5: google.protobuf.Any
-	(*timestamppb.Timestamp)(nil),       // 6: google.protobuf.Timestamp
+	(*anypb.Any)(nil),                   // 4: google.protobuf.Any
+	(*timestamppb.Timestamp)(nil),       // 5: google.protobuf.Timestamp
 }
 var file_splitsecure_requestsigning_v1_signed_request_proto_depIdxs = []int32{
 	2, // 0: splitsecure.requestsigning.v1.SignedRequest.graph:type_name -> splitsecure.delegationgraph.v1.Graph
 	3, // 1: splitsecure.requestsigning.v1.SignedRequest.signature:type_name -> splitsecure.hybridkeyset.v1.Signature
-	4, // 2: splitsecure.requestsigning.v1.SignedRequest.attestation:type_name -> splitsecure.attestation.v1.Generic
-	5, // 3: splitsecure.requestsigning.v1.SignedRequest.Authenticated.base_request:type_name -> google.protobuf.Any
-	6, // 4: splitsecure.requestsigning.v1.SignedRequest.Authenticated.created_on:type_name -> google.protobuf.Timestamp
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	4, // 2: splitsecure.requestsigning.v1.SignedRequest.Authenticated.base_request:type_name -> google.protobuf.Any
+	5, // 3: splitsecure.requestsigning.v1.SignedRequest.Authenticated.created_on:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_requestsigning_v1_signed_request_proto_init() }
