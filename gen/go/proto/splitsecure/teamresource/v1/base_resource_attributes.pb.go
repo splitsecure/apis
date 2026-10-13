@@ -48,10 +48,11 @@ type BaseResourceAttributes struct {
 	// its own signed issuance bytes (genesis IS its own lineage). Callers
 	// never set this directly; it is enclave-derived only.
 	LineageId []byte `protobuf:"bytes,7,opt,name=lineage_id,json=lineageId,proto3" json:"lineage_id,omitempty"`
-	// revision counts supersessions within a lineage: 0 at genesis, and the
+	// revision counts supersessions within a lineage: 1 at genesis, and the
 	// enclave stamps predecessor.revision + 1 into the signed bytes of each
-	// superseding CREATE. Callers never set this directly.
-	Revision      uint64 `protobuf:"varint,8,opt,name=revision,proto3" json:"revision,omitempty"`
+	// superseding CREATE. Callers never set this directly. Never 0 — 0 is the
+	// "latest" sentinel the read lanes use to select a revision.
+	Revision      uint32 `protobuf:"varint,8,opt,name=revision,proto3" json:"revision,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -135,7 +136,7 @@ func (x *BaseResourceAttributes) GetLineageId() []byte {
 	return nil
 }
 
-func (x *BaseResourceAttributes) GetRevision() uint64 {
+func (x *BaseResourceAttributes) GetRevision() uint32 {
 	if x != nil {
 		return x.Revision
 	}
@@ -157,7 +158,7 @@ const file_splitsecure_teamresource_v1_base_resource_attributes_proto_rawDesc = 
 	"\x18requested_parent_node_id\x18\x06 \x01(\tR\x15requestedParentNodeId\x12\x1d\n" +
 	"\n" +
 	"lineage_id\x18\a \x01(\fR\tlineageId\x12\x1a\n" +
-	"\brevision\x18\b \x01(\x04R\brevisionB\xa1\x02\n" +
+	"\brevision\x18\b \x01(\rR\brevisionB\xa1\x02\n" +
 	"\x1fcom.splitsecure.teamresource.v1B\x1bBaseResourceAttributesProtoP\x01ZSgithub.com/splitsecure/apis/gen/go/proto/splitsecure/teamresource/v1;teamresourcev1\xa2\x02\x03STX\xaa\x02\x1bSplitsecure.Teamresource.V1\xca\x02\x1bSplitsecure\\Teamresource\\V1\xe2\x02'Splitsecure\\Teamresource\\V1\\GPBMetadata\xea\x02\x1dSplitsecure::Teamresource::V1b\x06proto3"
 
 var (

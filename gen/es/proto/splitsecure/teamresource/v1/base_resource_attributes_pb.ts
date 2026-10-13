@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/teamresource/v1/base_resource_attributes.proto.
  */
 export const file_splitsecure_teamresource_v1_base_resource_attributes: GenFile = /*@__PURE__*/
-  fileDesc("CjpzcGxpdHNlY3VyZS90ZWFtcmVzb3VyY2UvdjEvYmFzZV9yZXNvdXJjZV9hdHRyaWJ1dGVzLnByb3RvEhtzcGxpdHNlY3VyZS50ZWFtcmVzb3VyY2UudjEirAIKFkJhc2VSZXNvdXJjZUF0dHJpYnV0ZXMSDAoEbmFtZRgBIAEoCRITCgtkZXNjcmlwdGlvbhgCIAEoCRJMChNub3RpZmljYXRpb25fcG9saWN5GAMgASgOMi8uc3BsaXRzZWN1cmUudGVhbXJlc291cmNlLnYxLk5vdGlmaWNhdGlvblBvbGljeRJECgtzZW5zaXRpdml0eRgEIAEoCzIvLnNwbGl0c2VjdXJlLnRlYW1yZXNvdXJjZS52MS5BY2NvdW50U2Vuc2l0aXZpdHkSEwoLcHJvcG9zYWxfaWQYBSABKAwSIAoYcmVxdWVzdGVkX3BhcmVudF9ub2RlX2lkGAYgASgJEhIKCmxpbmVhZ2VfaWQYByABKAwSEAoIcmV2aXNpb24YCCABKARCoQIKH2NvbS5zcGxpdHNlY3VyZS50ZWFtcmVzb3VyY2UudjFCG0Jhc2VSZXNvdXJjZUF0dHJpYnV0ZXNQcm90b1ABWlNnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL3RlYW1yZXNvdXJjZS92MTt0ZWFtcmVzb3VyY2V2MaICA1NUWKoCG1NwbGl0c2VjdXJlLlRlYW1yZXNvdXJjZS5WMcoCG1NwbGl0c2VjdXJlXFRlYW1yZXNvdXJjZVxWMeICJ1NwbGl0c2VjdXJlXFRlYW1yZXNvdXJjZVxWMVxHUEJNZXRhZGF0YeoCHVNwbGl0c2VjdXJlOjpUZWFtcmVzb3VyY2U6OlYxYgZwcm90bzM", [file_splitsecure_teamresource_v1_account_sensitivity, file_splitsecure_teamresource_v1_notification_policy]);
+  fileDesc("CjpzcGxpdHNlY3VyZS90ZWFtcmVzb3VyY2UvdjEvYmFzZV9yZXNvdXJjZV9hdHRyaWJ1dGVzLnByb3RvEhtzcGxpdHNlY3VyZS50ZWFtcmVzb3VyY2UudjEirAIKFkJhc2VSZXNvdXJjZUF0dHJpYnV0ZXMSDAoEbmFtZRgBIAEoCRITCgtkZXNjcmlwdGlvbhgCIAEoCRJMChNub3RpZmljYXRpb25fcG9saWN5GAMgASgOMi8uc3BsaXRzZWN1cmUudGVhbXJlc291cmNlLnYxLk5vdGlmaWNhdGlvblBvbGljeRJECgtzZW5zaXRpdml0eRgEIAEoCzIvLnNwbGl0c2VjdXJlLnRlYW1yZXNvdXJjZS52MS5BY2NvdW50U2Vuc2l0aXZpdHkSEwoLcHJvcG9zYWxfaWQYBSABKAwSIAoYcmVxdWVzdGVkX3BhcmVudF9ub2RlX2lkGAYgASgJEhIKCmxpbmVhZ2VfaWQYByABKAwSEAoIcmV2aXNpb24YCCABKA1CoQIKH2NvbS5zcGxpdHNlY3VyZS50ZWFtcmVzb3VyY2UudjFCG0Jhc2VSZXNvdXJjZUF0dHJpYnV0ZXNQcm90b1ABWlNnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL3RlYW1yZXNvdXJjZS92MTt0ZWFtcmVzb3VyY2V2MaICA1NUWKoCG1NwbGl0c2VjdXJlLlRlYW1yZXNvdXJjZS5WMcoCG1NwbGl0c2VjdXJlXFRlYW1yZXNvdXJjZVxWMeICJ1NwbGl0c2VjdXJlXFRlYW1yZXNvdXJjZVxWMVxHUEJNZXRhZGF0YeoCHVNwbGl0c2VjdXJlOjpUZWFtcmVzb3VyY2U6OlYxYgZwcm90bzM", [file_splitsecure_teamresource_v1_account_sensitivity, file_splitsecure_teamresource_v1_notification_policy]);
 
 /**
  * BaseResourceAttributes holds the common metadata shared by all managed resources.
@@ -77,13 +77,14 @@ export type BaseResourceAttributes = Message<"splitsecure.teamresource.v1.BaseRe
   lineageId: Uint8Array;
 
   /**
-   * revision counts supersessions within a lineage: 0 at genesis, and the
+   * revision counts supersessions within a lineage: 1 at genesis, and the
    * enclave stamps predecessor.revision + 1 into the signed bytes of each
-   * superseding CREATE. Callers never set this directly.
+   * superseding CREATE. Callers never set this directly. Never 0 — 0 is the
+   * "latest" sentinel the read lanes use to select a revision.
    *
-   * @generated from field: uint64 revision = 8;
+   * @generated from field: uint32 revision = 8;
    */
-  revision: bigint;
+  revision: number;
 };
 
 /**
