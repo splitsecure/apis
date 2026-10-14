@@ -1,0 +1,30 @@
+syntax = "proto3";
+package splitsecure.attestation.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/attestation/v1/measurement_endorsement.proto";
+import "splitsecure/hybridkeyset/v1/signature.proto";
+
+// AMDSEVSNPAttestation contains AMD Secure Encrypted Virtualization -
+// Secure Nested Paging (SEV-SNP) attestation data.
+message AMDSEVSNPAttestation {
+  // Raw SEV-SNP attestation report.
+  bytes report = 1;
+
+  // Certificate chain for the report signer: VCEK or VLEK, plus the
+  // intermediate ASK and root ARK certificates.
+  bytes vcek_chain = 2;
+
+  MeasurementEndorsement endorsement = 3;
+
+  // Timestamp bound into the report's REPORT_DATA. Verifiers derive the
+  // validity window from this value.
+  google.protobuf.Timestamp issued_at = 4;
+
+  // Instance-level HKS signature over (authenticated || separator || identity_vertex).
+  // Binds a virtual enclave's identity to the physically attested SEV-SNP instance.
+  splitsecure.hybridkeyset.v1.Signature instance_identity_binding_sig = 5;
+
+  // Full instance HKS public keys (serialized HybridKeySetWithDetachedKeys, public only).
+  bytes instance_hks_pub = 6;
+}

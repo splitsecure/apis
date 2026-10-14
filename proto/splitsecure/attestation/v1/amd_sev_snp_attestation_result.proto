@@ -1,0 +1,42 @@
+syntax = "proto3";
+package splitsecure.attestation.v1;
+
+// AMDSEVSNPAttestationResult contains the result of verifying an AMD
+// SEV-SNP attestation.
+message AMDSEVSNPAttestationResult {
+  // Equals the report's REPORT_DATA. This is a per-attestation commitment
+  // that rotates every attestation because a timestamp is folded into it;
+  // it is NOT a stable identifier.
+  bytes key_id = 1;
+
+  bytes measurement = 2;
+  bytes host_data = 3;
+  bytes id_key_digest = 4;
+  bytes author_key_digest = 5;
+
+  string endorsement_tier = 6;
+  string endorsement_deployment = 7;
+
+  string tcb_status = 8;
+
+  // SHA3-512 of instance_hks_pub. Stable across attestations from the same
+  // instance, for audit/dedup purposes.
+  bytes instance_id = 9;
+
+  // Lowercase-hex SHA-384 of the endorsement signing certificate's DER
+  // encoding, matched against the verifier's embedded trusted set.
+  string endorsement_cert = 10;
+
+  // TCB_VERSION SVNs matched to the VCEK/VLEK used to sign the report. This
+  // is SEV-SNP's rollback-floor primitive.
+  AMDSEVSNPTcbVersion tcb_version = 11;
+}
+
+// AMDSEVSNPTcbVersion holds the individual security version numbers that
+// make up an SEV-SNP TCB_VERSION.
+message AMDSEVSNPTcbVersion {
+  uint32 bootloader = 1;
+  uint32 tee = 2;
+  uint32 snp = 3;
+  uint32 microcode = 4;
+}

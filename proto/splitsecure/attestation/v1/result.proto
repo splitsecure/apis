@@ -2,9 +2,11 @@ syntax = "proto3";
 package splitsecure.attestation.v1;
 
 import "google/protobuf/timestamp.proto";
+import "splitsecure/attestation/v1/amd_sev_snp_attestation_result.proto";
 import "splitsecure/attestation/v1/android_key_attestation_result.proto";
 import "splitsecure/attestation/v1/apple_device_check_attestation_result.proto";
 import "splitsecure/attestation/v1/aws_nitro_attestation_result.proto";
+import "splitsecure/attestation/v1/intel_tdx_attestation_result.proto";
 
 // Result is the result of verifying an attestation.
 message Result {
@@ -18,6 +20,8 @@ message Result {
       AppleDeviceCheckAttestationResult apple_dc = 1;
       AWSNitroAttestationResult aws_nitro = 2;
       AndroidKeyAttestationResult android_key = 3;
+      IntelTDXAttestationResult intel_tdx = 4;
+      AMDSEVSNPAttestationResult amd_sev_snp = 5;
     }
   }
 }
