@@ -8,7 +8,7 @@ import "splitsecure/saml2/v2/providers/v1/gcp.proto";
 import "splitsecure/saml2/v2/providers/v1/google_workspace.proto";
 import "splitsecure/saml2/v2/providers/v1/google_workspace_legacy.proto";
 import "splitsecure/saml2/v2/providers/v1/ibm_cloud.proto";
-import "splitsecure/saml2/v2/providers/v1/kandji.proto";
+import "splitsecure/saml2/v2/providers/v1/iru.proto";
 import "splitsecure/saml2/v2/providers/v1/microsoft_entra_id.proto";
 import "splitsecure/saml2/v2/providers/v1/okta.proto";
 import "splitsecure/saml2/v2/providers/v1/oracle_cloud.proto";
@@ -31,7 +31,7 @@ message KnownProvider {
     GoogleWorkspace google_workspace = 5;
     GoogleWorkspaceLegacy google_workspace_legacy = 6;
     IBMCloud ibm_cloud = 7;
-    Kandji kandji = 8;
+    Iru iru = 8;
     MicrosoftEntraID microsoft_entra_id = 9;
     Okta okta = 10;
     OracleCloud oracle_cloud = 11;

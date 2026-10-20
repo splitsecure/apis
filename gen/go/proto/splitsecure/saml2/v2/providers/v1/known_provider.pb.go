@@ -35,7 +35,7 @@ type KnownProvider struct {
 	//	*KnownProvider_GoogleWorkspace
 	//	*KnownProvider_GoogleWorkspaceLegacy
 	//	*KnownProvider_IbmCloud
-	//	*KnownProvider_Kandji
+	//	*KnownProvider_Iru
 	//	*KnownProvider_MicrosoftEntraId
 	//	*KnownProvider_Okta
 	//	*KnownProvider_OracleCloud
@@ -150,10 +150,10 @@ func (x *KnownProvider) GetIbmCloud() *IBMCloud {
 	return nil
 }
 
-func (x *KnownProvider) GetKandji() *Kandji {
+func (x *KnownProvider) GetIru() *Iru {
 	if x != nil {
-		if x, ok := x.Union.(*KnownProvider_Kandji); ok {
-			return x.Kandji
+		if x, ok := x.Union.(*KnownProvider_Iru); ok {
+			return x.Iru
 		}
 	}
 	return nil
@@ -272,8 +272,8 @@ type KnownProvider_IbmCloud struct {
 	IbmCloud *IBMCloud `protobuf:"bytes,7,opt,name=ibm_cloud,json=ibmCloud,proto3,oneof"`
 }
 
-type KnownProvider_Kandji struct {
-	Kandji *Kandji `protobuf:"bytes,8,opt,name=kandji,proto3,oneof"`
+type KnownProvider_Iru struct {
+	Iru *Iru `protobuf:"bytes,8,opt,name=iru,proto3,oneof"`
 }
 
 type KnownProvider_MicrosoftEntraId struct {
@@ -326,7 +326,7 @@ func (*KnownProvider_GoogleWorkspaceLegacy) isKnownProvider_Union() {}
 
 func (*KnownProvider_IbmCloud) isKnownProvider_Union() {}
 
-func (*KnownProvider_Kandji) isKnownProvider_Union() {}
+func (*KnownProvider_Iru) isKnownProvider_Union() {}
 
 func (*KnownProvider_MicrosoftEntraId) isKnownProvider_Union() {}
 
@@ -350,7 +350,7 @@ var File_splitsecure_saml2_v2_providers_v1_known_provider_proto protoreflect.Fil
 
 const file_splitsecure_saml2_v2_providers_v1_known_provider_proto_rawDesc = "" +
 	"\n" +
-	"6splitsecure/saml2/v2/providers/v1/known_provider.proto\x12!splitsecure.saml2.v2.providers.v1\x1a+splitsecure/saml2/v2/providers/v1/aws.proto\x1a2splitsecure/saml2/v2/providers/v1/cloudflare.proto\x1a3splitsecure/saml2/v2/providers/v1/event_brite.proto\x1a+splitsecure/saml2/v2/providers/v1/gcp.proto\x1a8splitsecure/saml2/v2/providers/v1/google_workspace.proto\x1a?splitsecure/saml2/v2/providers/v1/google_workspace_legacy.proto\x1a1splitsecure/saml2/v2/providers/v1/ibm_cloud.proto\x1a.splitsecure/saml2/v2/providers/v1/kandji.proto\x1a:splitsecure/saml2/v2/providers/v1/microsoft_entra_id.proto\x1a,splitsecure/saml2/v2/providers/v1/okta.proto\x1a4splitsecure/saml2/v2/providers/v1/oracle_cloud.proto\x1a2splitsecure/saml2/v2/providers/v1/pager_duty.proto\x1a2splitsecure/saml2/v2/providers/v1/pitch_book.proto\x1a.splitsecure/saml2/v2/providers/v1/rapid7.proto\x1a.splitsecure/saml2/v2/providers/v1/stripe.proto\x1a-splitsecure/saml2/v2/providers/v1/veeam.proto\x1a/splitsecure/saml2/v2/providers/v1/workday.proto\"\xc4\n" +
+	"6splitsecure/saml2/v2/providers/v1/known_provider.proto\x12!splitsecure.saml2.v2.providers.v1\x1a+splitsecure/saml2/v2/providers/v1/aws.proto\x1a2splitsecure/saml2/v2/providers/v1/cloudflare.proto\x1a3splitsecure/saml2/v2/providers/v1/event_brite.proto\x1a+splitsecure/saml2/v2/providers/v1/gcp.proto\x1a8splitsecure/saml2/v2/providers/v1/google_workspace.proto\x1a?splitsecure/saml2/v2/providers/v1/google_workspace_legacy.proto\x1a1splitsecure/saml2/v2/providers/v1/ibm_cloud.proto\x1a+splitsecure/saml2/v2/providers/v1/iru.proto\x1a:splitsecure/saml2/v2/providers/v1/microsoft_entra_id.proto\x1a,splitsecure/saml2/v2/providers/v1/okta.proto\x1a4splitsecure/saml2/v2/providers/v1/oracle_cloud.proto\x1a2splitsecure/saml2/v2/providers/v1/pager_duty.proto\x1a2splitsecure/saml2/v2/providers/v1/pitch_book.proto\x1a.splitsecure/saml2/v2/providers/v1/rapid7.proto\x1a.splitsecure/saml2/v2/providers/v1/stripe.proto\x1a-splitsecure/saml2/v2/providers/v1/veeam.proto\x1a/splitsecure/saml2/v2/providers/v1/workday.proto\"\xbb\n" +
 	"\n" +
 	"\rKnownProvider\x12:\n" +
 	"\x03aws\x18\x01 \x01(\v2&.splitsecure.saml2.v2.providers.v1.AWSH\x00R\x03aws\x12O\n" +
@@ -362,8 +362,8 @@ const file_splitsecure_saml2_v2_providers_v1_known_provider_proto_rawDesc = "" +
 	"\x03gcp\x18\x04 \x01(\v2&.splitsecure.saml2.v2.providers.v1.GCPH\x00R\x03gcp\x12_\n" +
 	"\x10google_workspace\x18\x05 \x01(\v22.splitsecure.saml2.v2.providers.v1.GoogleWorkspaceH\x00R\x0fgoogleWorkspace\x12r\n" +
 	"\x17google_workspace_legacy\x18\x06 \x01(\v28.splitsecure.saml2.v2.providers.v1.GoogleWorkspaceLegacyH\x00R\x15googleWorkspaceLegacy\x12J\n" +
-	"\tibm_cloud\x18\a \x01(\v2+.splitsecure.saml2.v2.providers.v1.IBMCloudH\x00R\bibmCloud\x12C\n" +
-	"\x06kandji\x18\b \x01(\v2).splitsecure.saml2.v2.providers.v1.KandjiH\x00R\x06kandji\x12c\n" +
+	"\tibm_cloud\x18\a \x01(\v2+.splitsecure.saml2.v2.providers.v1.IBMCloudH\x00R\bibmCloud\x12:\n" +
+	"\x03iru\x18\b \x01(\v2&.splitsecure.saml2.v2.providers.v1.IruH\x00R\x03iru\x12c\n" +
 	"\x12microsoft_entra_id\x18\t \x01(\v23.splitsecure.saml2.v2.providers.v1.MicrosoftEntraIDH\x00R\x10microsoftEntraId\x12=\n" +
 	"\x04okta\x18\n" +
 	" \x01(\v2'.splitsecure.saml2.v2.providers.v1.OktaH\x00R\x04okta\x12S\n" +
@@ -401,7 +401,7 @@ var file_splitsecure_saml2_v2_providers_v1_known_provider_proto_goTypes = []any{
 	(*GoogleWorkspace)(nil),       // 5: splitsecure.saml2.v2.providers.v1.GoogleWorkspace
 	(*GoogleWorkspaceLegacy)(nil), // 6: splitsecure.saml2.v2.providers.v1.GoogleWorkspaceLegacy
 	(*IBMCloud)(nil),              // 7: splitsecure.saml2.v2.providers.v1.IBMCloud
-	(*Kandji)(nil),                // 8: splitsecure.saml2.v2.providers.v1.Kandji
+	(*Iru)(nil),                   // 8: splitsecure.saml2.v2.providers.v1.Iru
 	(*MicrosoftEntraID)(nil),      // 9: splitsecure.saml2.v2.providers.v1.MicrosoftEntraID
 	(*Okta)(nil),                  // 10: splitsecure.saml2.v2.providers.v1.Okta
 	(*OracleCloud)(nil),           // 11: splitsecure.saml2.v2.providers.v1.OracleCloud
@@ -420,7 +420,7 @@ var file_splitsecure_saml2_v2_providers_v1_known_provider_proto_depIdxs = []int3
 	5,  // 4: splitsecure.saml2.v2.providers.v1.KnownProvider.google_workspace:type_name -> splitsecure.saml2.v2.providers.v1.GoogleWorkspace
 	6,  // 5: splitsecure.saml2.v2.providers.v1.KnownProvider.google_workspace_legacy:type_name -> splitsecure.saml2.v2.providers.v1.GoogleWorkspaceLegacy
 	7,  // 6: splitsecure.saml2.v2.providers.v1.KnownProvider.ibm_cloud:type_name -> splitsecure.saml2.v2.providers.v1.IBMCloud
-	8,  // 7: splitsecure.saml2.v2.providers.v1.KnownProvider.kandji:type_name -> splitsecure.saml2.v2.providers.v1.Kandji
+	8,  // 7: splitsecure.saml2.v2.providers.v1.KnownProvider.iru:type_name -> splitsecure.saml2.v2.providers.v1.Iru
 	9,  // 8: splitsecure.saml2.v2.providers.v1.KnownProvider.microsoft_entra_id:type_name -> splitsecure.saml2.v2.providers.v1.MicrosoftEntraID
 	10, // 9: splitsecure.saml2.v2.providers.v1.KnownProvider.okta:type_name -> splitsecure.saml2.v2.providers.v1.Okta
 	11, // 10: splitsecure.saml2.v2.providers.v1.KnownProvider.oracle_cloud:type_name -> splitsecure.saml2.v2.providers.v1.OracleCloud
@@ -449,7 +449,7 @@ func file_splitsecure_saml2_v2_providers_v1_known_provider_proto_init() {
 	file_splitsecure_saml2_v2_providers_v1_google_workspace_proto_init()
 	file_splitsecure_saml2_v2_providers_v1_google_workspace_legacy_proto_init()
 	file_splitsecure_saml2_v2_providers_v1_ibm_cloud_proto_init()
-	file_splitsecure_saml2_v2_providers_v1_kandji_proto_init()
+	file_splitsecure_saml2_v2_providers_v1_iru_proto_init()
 	file_splitsecure_saml2_v2_providers_v1_microsoft_entra_id_proto_init()
 	file_splitsecure_saml2_v2_providers_v1_okta_proto_init()
 	file_splitsecure_saml2_v2_providers_v1_oracle_cloud_proto_init()
@@ -467,7 +467,7 @@ func file_splitsecure_saml2_v2_providers_v1_known_provider_proto_init() {
 		(*KnownProvider_GoogleWorkspace)(nil),
 		(*KnownProvider_GoogleWorkspaceLegacy)(nil),
 		(*KnownProvider_IbmCloud)(nil),
-		(*KnownProvider_Kandji)(nil),
+		(*KnownProvider_Iru)(nil),
 		(*KnownProvider_MicrosoftEntraId)(nil),
 		(*KnownProvider_Okta)(nil),
 		(*KnownProvider_OracleCloud)(nil),
