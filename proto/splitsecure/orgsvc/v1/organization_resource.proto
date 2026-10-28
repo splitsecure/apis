@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package splitsecure.orgsvc.v1;
 
+import "google/protobuf/timestamp.proto";
+import "splitsecure/orgsvc/v1/deactivation_reason.proto";
+
 message Organization {
   string id = 1;
   string name = 2;
@@ -16,11 +19,25 @@ message Organization {
     STATE_ACTIVE = 1;
     STATE_DEACTIVATED = 2;
     STATE_PENDING_DEACTIVATION = 3;
+    // Superseded by STATE_BAD_STANDING; existing orgs migrate to it.
     STATE_UNPAID = 4;
     // Deactivated org with a scheduled, reversible data purge.
     STATE_PENDING_DELETION = 6;
+    // A payment failed or the terms were breached (deactivation_reason).
+    // Access stays full until scheduled_suspension_at, when the org moves to
+    // STATE_PENDING_DELETION unless the owner pays first.
+    STATE_BAD_STANDING = 7;
     // 5 was STATE_TRIALING; premium trial is an org attribute, not a lifecycle state.
     reserved 5;
     reserved "STATE_TRIALING";
   }
+
+  // Why the org left STATE_ACTIVE. UNSPECIFIED on an active org.
+  DeactivationReason deactivation_reason = 8;
+
+  // When the org is deleted. Set in STATE_PENDING_DELETION only.
+  google.protobuf.Timestamp scheduled_deletion_at = 9;
+
+  // When the org loses access. Set in STATE_BAD_STANDING only.
+  google.protobuf.Timestamp scheduled_suspension_at = 10;
 }

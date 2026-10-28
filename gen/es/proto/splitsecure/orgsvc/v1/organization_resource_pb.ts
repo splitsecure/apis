@@ -4,13 +4,17 @@
 
 import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import type { DeactivationReason } from "./deactivation_reason_pb";
+import { file_splitsecure_orgsvc_v1_deactivation_reason } from "./deactivation_reason_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file splitsecure/orgsvc/v1/organization_resource.proto.
  */
 export const file_splitsecure_orgsvc_v1_organization_resource: GenFile = /*@__PURE__*/
-  fileDesc("CjFzcGxpdHNlY3VyZS9vcmdzdmMvdjEvb3JnYW5pemF0aW9uX3Jlc291cmNlLnByb3RvEhVzcGxpdHNlY3VyZS5vcmdzdmMudjEirAIKDE9yZ2FuaXphdGlvbhIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhoKEmV2ZXJ5b25lX2dyb3VwX3MychgGIAEoCRI4CgVzdGF0ZRgFIAEoDjIpLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MS5Pcmdhbml6YXRpb24uU3RhdGUiqwEKBVN0YXRlEhUKEVNUQVRFX1VOU1BFQ0lGSUVEEAASEAoMU1RBVEVfQUNUSVZFEAESFQoRU1RBVEVfREVBQ1RJVkFURUQQAhIeChpTVEFURV9QRU5ESU5HX0RFQUNUSVZBVElPThADEhAKDFNUQVRFX1VOUEFJRBAEEhoKFlNUQVRFX1BFTkRJTkdfREVMRVRJT04QBiIECAUQBSoOU1RBVEVfVFJJQUxJTkdC9QEKGWNvbS5zcGxpdHNlY3VyZS5vcmdzdmMudjFCGU9yZ2FuaXphdGlvblJlc291cmNlUHJvdG9QAVpHZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS9vcmdzdmMvdjE7b3Jnc3ZjdjGiAgNTT1iqAhVTcGxpdHNlY3VyZS5PcmdzdmMuVjHKAhVTcGxpdHNlY3VyZVxPcmdzdmNcVjHiAiFTcGxpdHNlY3VyZVxPcmdzdmNcVjFcR1BCTWV0YWRhdGHqAhdTcGxpdHNlY3VyZTo6T3Jnc3ZjOjpWMWIGcHJvdG8z");
+  fileDesc("CjFzcGxpdHNlY3VyZS9vcmdzdmMvdjEvb3JnYW5pemF0aW9uX3Jlc291cmNlLnByb3RvEhVzcGxpdHNlY3VyZS5vcmdzdmMudjEihAQKDE9yZ2FuaXphdGlvbhIKCgJpZBgBIAEoCRIMCgRuYW1lGAIgASgJEhoKEmV2ZXJ5b25lX2dyb3VwX3MychgGIAEoCRI4CgVzdGF0ZRgFIAEoDjIpLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MS5Pcmdhbml6YXRpb24uU3RhdGUSRgoTZGVhY3RpdmF0aW9uX3JlYXNvbhgIIAEoDjIpLnNwbGl0c2VjdXJlLm9yZ3N2Yy52MS5EZWFjdGl2YXRpb25SZWFzb24SOQoVc2NoZWR1bGVkX2RlbGV0aW9uX2F0GAkgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBI7ChdzY2hlZHVsZWRfc3VzcGVuc2lvbl9hdBgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiwwEKBVN0YXRlEhUKEVNUQVRFX1VOU1BFQ0lGSUVEEAASEAoMU1RBVEVfQUNUSVZFEAESFQoRU1RBVEVfREVBQ1RJVkFURUQQAhIeChpTVEFURV9QRU5ESU5HX0RFQUNUSVZBVElPThADEhAKDFNUQVRFX1VOUEFJRBAEEhoKFlNUQVRFX1BFTkRJTkdfREVMRVRJT04QBhIWChJTVEFURV9CQURfU1RBTkRJTkcQByIECAUQBSoOU1RBVEVfVFJJQUxJTkdC9QEKGWNvbS5zcGxpdHNlY3VyZS5vcmdzdmMudjFCGU9yZ2FuaXphdGlvblJlc291cmNlUHJvdG9QAVpHZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS9vcmdzdmMvdjE7b3Jnc3ZjdjGiAgNTT1iqAhVTcGxpdHNlY3VyZS5PcmdzdmMuVjHKAhVTcGxpdHNlY3VyZVxPcmdzdmNcVjHiAiFTcGxpdHNlY3VyZVxPcmdzdmNcVjFcR1BCTWV0YWRhdGHqAhdTcGxpdHNlY3VyZTo6T3Jnc3ZjOjpWMWIGcHJvdG8z", [file_google_protobuf_timestamp, file_splitsecure_orgsvc_v1_deactivation_reason]);
 
 /**
  * @generated from message splitsecure.orgsvc.v1.Organization
@@ -39,6 +43,27 @@ export type Organization = Message<"splitsecure.orgsvc.v1.Organization"> & {
    * @generated from field: splitsecure.orgsvc.v1.Organization.State state = 5;
    */
   state: Organization_State;
+
+  /**
+   * Why the org left STATE_ACTIVE. UNSPECIFIED on an active org.
+   *
+   * @generated from field: splitsecure.orgsvc.v1.DeactivationReason deactivation_reason = 8;
+   */
+  deactivationReason: DeactivationReason;
+
+  /**
+   * When the org is deleted. Set in STATE_PENDING_DELETION only.
+   *
+   * @generated from field: google.protobuf.Timestamp scheduled_deletion_at = 9;
+   */
+  scheduledDeletionAt?: Timestamp | undefined;
+
+  /**
+   * When the org loses access. Set in STATE_BAD_STANDING only.
+   *
+   * @generated from field: google.protobuf.Timestamp scheduled_suspension_at = 10;
+   */
+  scheduledSuspensionAt?: Timestamp | undefined;
 };
 
 /**
@@ -73,6 +98,8 @@ export enum Organization_State {
   PENDING_DEACTIVATION = 3,
 
   /**
+   * Superseded by STATE_BAD_STANDING; existing orgs migrate to it.
+   *
    * @generated from enum value: STATE_UNPAID = 4;
    */
   UNPAID = 4,
@@ -83,6 +110,15 @@ export enum Organization_State {
    * @generated from enum value: STATE_PENDING_DELETION = 6;
    */
   PENDING_DELETION = 6,
+
+  /**
+   * A payment failed or the terms were breached (deactivation_reason).
+   * Access stays full until scheduled_suspension_at, when the org moves to
+   * STATE_PENDING_DELETION unless the owner pays first.
+   *
+   * @generated from enum value: STATE_BAD_STANDING = 7;
+   */
+  BAD_STANDING = 7,
 }
 
 /**
