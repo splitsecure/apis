@@ -10,7 +10,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/proposals/v1/proposal_status.proto.
  */
 export const file_splitsecure_proposals_v1_proposal_status: GenFile = /*@__PURE__*/
-  fileDesc("Ci5zcGxpdHNlY3VyZS9wcm9wb3NhbHMvdjEvcHJvcG9zYWxfc3RhdHVzLnByb3RvEhhzcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEi9QIKDlByb3Bvc2FsU3RhdHVzEkoKC2luX3Byb2dyZXNzGAEgASgLMjMuc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxLlByb3Bvc2FsU3RhdHVzLkluUHJvZ3Jlc3NIABJHCgljb21wbGV0ZWQYAiABKAsyMi5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEuUHJvcG9zYWxTdGF0dXMuQ29tcGxldGVkSAASPwoFZXJyb3IYAyABKAsyLi5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEuUHJvcG9zYWxTdGF0dXMuRXJyb3JIABJDCgdleHBpcmVkGAQgASgLMjAuc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxLlByb3Bvc2FsU3RhdHVzLkV4cGlyZWRIABoMCgpJblByb2dyZXNzGgsKCUNvbXBsZXRlZBoYCgVFcnJvchIPCgdtZXNzYWdlGAEgASgJGgkKB0V4cGlyZWRCCAoGc3RhdHVzQoQCChxjb20uc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxQhNQcm9wb3NhbFN0YXR1c1Byb3RvUAFaTWdpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvcHJvcG9zYWxzL3YxO3Byb3Bvc2Fsc3YxogIDU1BYqgIYU3BsaXRzZWN1cmUuUHJvcG9zYWxzLlYxygIYU3BsaXRzZWN1cmVcUHJvcG9zYWxzXFYx4gIkU3BsaXRzZWN1cmVcUHJvcG9zYWxzXFYxXEdQQk1ldGFkYXRh6gIaU3BsaXRzZWN1cmU6OlByb3Bvc2Fsczo6VjFiBnByb3RvMw");
+  fileDesc("Ci5zcGxpdHNlY3VyZS9wcm9wb3NhbHMvdjEvcHJvcG9zYWxfc3RhdHVzLnByb3RvEhhzcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEiwgMKDlByb3Bvc2FsU3RhdHVzEkoKC2luX3Byb2dyZXNzGAEgASgLMjMuc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxLlByb3Bvc2FsU3RhdHVzLkluUHJvZ3Jlc3NIABJHCgljb21wbGV0ZWQYAiABKAsyMi5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEuUHJvcG9zYWxTdGF0dXMuQ29tcGxldGVkSAASPwoFZXJyb3IYAyABKAsyLi5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEuUHJvcG9zYWxTdGF0dXMuRXJyb3JIABJDCgdleHBpcmVkGAQgASgLMjAuc3BsaXRzZWN1cmUucHJvcG9zYWxzLnYxLlByb3Bvc2FsU3RhdHVzLkV4cGlyZWRIABJBCgZkZW5pZWQYBSABKAsyLy5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjEuUHJvcG9zYWxTdGF0dXMuRGVuaWVkSAAaDAoKSW5Qcm9ncmVzcxoLCglDb21wbGV0ZWQaGAoFRXJyb3ISDwoHbWVzc2FnZRgBIAEoCRoJCgdFeHBpcmVkGggKBkRlbmllZEIICgZzdGF0dXNChAIKHGNvbS5zcGxpdHNlY3VyZS5wcm9wb3NhbHMudjFCE1Byb3Bvc2FsU3RhdHVzUHJvdG9QAVpNZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS9wcm9wb3NhbHMvdjE7cHJvcG9zYWxzdjGiAgNTUFiqAhhTcGxpdHNlY3VyZS5Qcm9wb3NhbHMuVjHKAhhTcGxpdHNlY3VyZVxQcm9wb3NhbHNcVjHiAiRTcGxpdHNlY3VyZVxQcm9wb3NhbHNcVjFcR1BCTWV0YWRhdGHqAhpTcGxpdHNlY3VyZTo6UHJvcG9zYWxzOjpWMWIGcHJvdG8z");
 
 /**
  * @generated from message splitsecure.proposals.v1.ProposalStatus
@@ -43,6 +43,12 @@ export type ProposalStatus = Message<"splitsecure.proposals.v1.ProposalStatus"> 
      */
     value: ProposalStatus_Expired;
     case: "expired";
+  } | {
+    /**
+     * @generated from field: splitsecure.proposals.v1.ProposalStatus.Denied denied = 5;
+     */
+    value: ProposalStatus_Denied;
+    case: "denied";
   } | { case: undefined; value?: undefined };
 };
 
@@ -111,4 +117,20 @@ export type ProposalStatus_Expired = Message<"splitsecure.proposals.v1.ProposalS
  */
 export const ProposalStatus_ExpiredSchema: GenMessage<ProposalStatus_Expired> = /*@__PURE__*/
   messageDesc(file_splitsecure_proposals_v1_proposal_status, 0, 3);
+
+/**
+ * Denied is set when declines leave some required team unable to reach
+ * its threshold.
+ *
+ * @generated from message splitsecure.proposals.v1.ProposalStatus.Denied
+ */
+export type ProposalStatus_Denied = Message<"splitsecure.proposals.v1.ProposalStatus.Denied"> & {
+};
+
+/**
+ * Describes the message splitsecure.proposals.v1.ProposalStatus.Denied.
+ * Use `create(ProposalStatus_DeniedSchema)` to create a new message.
+ */
+export const ProposalStatus_DeniedSchema: GenMessage<ProposalStatus_Denied> = /*@__PURE__*/
+  messageDesc(file_splitsecure_proposals_v1_proposal_status, 0, 4);
 

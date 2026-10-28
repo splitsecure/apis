@@ -7,6 +7,7 @@ message ProposalStatus {
     Completed completed = 2;
     Error error = 3;
     Expired expired = 4;
+    Denied denied = 5;
   }
 
   message InProgress {}
@@ -17,4 +18,7 @@ message ProposalStatus {
   // Expired is set when a proposal passes its expire_at without reaching
   // execution. Recorded by the cleanup sweeper, not by the enclave.
   message Expired {}
+  // Denied is set when declines leave some required team unable to reach
+  // its threshold.
+  message Denied {}
 }
