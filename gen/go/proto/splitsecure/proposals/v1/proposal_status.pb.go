@@ -29,6 +29,7 @@ type ProposalStatus struct {
 	//	*ProposalStatus_Completed_
 	//	*ProposalStatus_Error_
 	//	*ProposalStatus_Expired_
+	//	*ProposalStatus_Denied_
 	Status        isProposalStatus_Status `protobuf_oneof:"status"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -107,6 +108,15 @@ func (x *ProposalStatus) GetExpired() *ProposalStatus_Expired {
 	return nil
 }
 
+func (x *ProposalStatus) GetDenied() *ProposalStatus_Denied {
+	if x != nil {
+		if x, ok := x.Status.(*ProposalStatus_Denied_); ok {
+			return x.Denied
+		}
+	}
+	return nil
+}
+
 type isProposalStatus_Status interface {
 	isProposalStatus_Status()
 }
@@ -127,6 +137,10 @@ type ProposalStatus_Expired_ struct {
 	Expired *ProposalStatus_Expired `protobuf:"bytes,4,opt,name=expired,proto3,oneof"`
 }
 
+type ProposalStatus_Denied_ struct {
+	Denied *ProposalStatus_Denied `protobuf:"bytes,5,opt,name=denied,proto3,oneof"`
+}
+
 func (*ProposalStatus_InProgress_) isProposalStatus_Status() {}
 
 func (*ProposalStatus_Completed_) isProposalStatus_Status() {}
@@ -134,6 +148,8 @@ func (*ProposalStatus_Completed_) isProposalStatus_Status() {}
 func (*ProposalStatus_Error_) isProposalStatus_Status() {}
 
 func (*ProposalStatus_Expired_) isProposalStatus_Status() {}
+
+func (*ProposalStatus_Denied_) isProposalStatus_Status() {}
 
 type ProposalStatus_InProgress struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -289,23 +305,63 @@ func (*ProposalStatus_Expired) Descriptor() ([]byte, []int) {
 	return file_splitsecure_proposals_v1_proposal_status_proto_rawDescGZIP(), []int{0, 3}
 }
 
+// Denied is set when declines leave some required team unable to reach
+// its threshold.
+type ProposalStatus_Denied struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProposalStatus_Denied) Reset() {
+	*x = ProposalStatus_Denied{}
+	mi := &file_splitsecure_proposals_v1_proposal_status_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProposalStatus_Denied) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProposalStatus_Denied) ProtoMessage() {}
+
+func (x *ProposalStatus_Denied) ProtoReflect() protoreflect.Message {
+	mi := &file_splitsecure_proposals_v1_proposal_status_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProposalStatus_Denied.ProtoReflect.Descriptor instead.
+func (*ProposalStatus_Denied) Descriptor() ([]byte, []int) {
+	return file_splitsecure_proposals_v1_proposal_status_proto_rawDescGZIP(), []int{0, 4}
+}
+
 var File_splitsecure_proposals_v1_proposal_status_proto protoreflect.FileDescriptor
 
 const file_splitsecure_proposals_v1_proposal_status_proto_rawDesc = "" +
 	"\n" +
-	".splitsecure/proposals/v1/proposal_status.proto\x12\x18splitsecure.proposals.v1\"\xa5\x03\n" +
+	".splitsecure/proposals/v1/proposal_status.proto\x12\x18splitsecure.proposals.v1\"\xfa\x03\n" +
 	"\x0eProposalStatus\x12V\n" +
 	"\vin_progress\x18\x01 \x01(\v23.splitsecure.proposals.v1.ProposalStatus.InProgressH\x00R\n" +
 	"inProgress\x12R\n" +
 	"\tcompleted\x18\x02 \x01(\v22.splitsecure.proposals.v1.ProposalStatus.CompletedH\x00R\tcompleted\x12F\n" +
 	"\x05error\x18\x03 \x01(\v2..splitsecure.proposals.v1.ProposalStatus.ErrorH\x00R\x05error\x12L\n" +
-	"\aexpired\x18\x04 \x01(\v20.splitsecure.proposals.v1.ProposalStatus.ExpiredH\x00R\aexpired\x1a\f\n" +
+	"\aexpired\x18\x04 \x01(\v20.splitsecure.proposals.v1.ProposalStatus.ExpiredH\x00R\aexpired\x12I\n" +
+	"\x06denied\x18\x05 \x01(\v2/.splitsecure.proposals.v1.ProposalStatus.DeniedH\x00R\x06denied\x1a\f\n" +
 	"\n" +
 	"InProgress\x1a\v\n" +
 	"\tCompleted\x1a!\n" +
 	"\x05Error\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x1a\t\n" +
-	"\aExpiredB\b\n" +
+	"\aExpired\x1a\b\n" +
+	"\x06DeniedB\b\n" +
 	"\x06statusB\x84\x02\n" +
 	"\x1ccom.splitsecure.proposals.v1B\x13ProposalStatusProtoP\x01ZMgithub.com/splitsecure/apis/gen/go/proto/splitsecure/proposals/v1;proposalsv1\xa2\x02\x03SPX\xaa\x02\x18Splitsecure.Proposals.V1\xca\x02\x18Splitsecure\\Proposals\\V1\xe2\x02$Splitsecure\\Proposals\\V1\\GPBMetadata\xea\x02\x1aSplitsecure::Proposals::V1b\x06proto3"
 
@@ -321,24 +377,26 @@ func file_splitsecure_proposals_v1_proposal_status_proto_rawDescGZIP() []byte {
 	return file_splitsecure_proposals_v1_proposal_status_proto_rawDescData
 }
 
-var file_splitsecure_proposals_v1_proposal_status_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_splitsecure_proposals_v1_proposal_status_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_splitsecure_proposals_v1_proposal_status_proto_goTypes = []any{
 	(*ProposalStatus)(nil),            // 0: splitsecure.proposals.v1.ProposalStatus
 	(*ProposalStatus_InProgress)(nil), // 1: splitsecure.proposals.v1.ProposalStatus.InProgress
 	(*ProposalStatus_Completed)(nil),  // 2: splitsecure.proposals.v1.ProposalStatus.Completed
 	(*ProposalStatus_Error)(nil),      // 3: splitsecure.proposals.v1.ProposalStatus.Error
 	(*ProposalStatus_Expired)(nil),    // 4: splitsecure.proposals.v1.ProposalStatus.Expired
+	(*ProposalStatus_Denied)(nil),     // 5: splitsecure.proposals.v1.ProposalStatus.Denied
 }
 var file_splitsecure_proposals_v1_proposal_status_proto_depIdxs = []int32{
 	1, // 0: splitsecure.proposals.v1.ProposalStatus.in_progress:type_name -> splitsecure.proposals.v1.ProposalStatus.InProgress
 	2, // 1: splitsecure.proposals.v1.ProposalStatus.completed:type_name -> splitsecure.proposals.v1.ProposalStatus.Completed
 	3, // 2: splitsecure.proposals.v1.ProposalStatus.error:type_name -> splitsecure.proposals.v1.ProposalStatus.Error
 	4, // 3: splitsecure.proposals.v1.ProposalStatus.expired:type_name -> splitsecure.proposals.v1.ProposalStatus.Expired
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5, // 4: splitsecure.proposals.v1.ProposalStatus.denied:type_name -> splitsecure.proposals.v1.ProposalStatus.Denied
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_proposals_v1_proposal_status_proto_init() }
@@ -351,6 +409,7 @@ func file_splitsecure_proposals_v1_proposal_status_proto_init() {
 		(*ProposalStatus_Completed_)(nil),
 		(*ProposalStatus_Error_)(nil),
 		(*ProposalStatus_Expired_)(nil),
+		(*ProposalStatus_Denied_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -358,7 +417,7 @@ func file_splitsecure_proposals_v1_proposal_status_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_splitsecure_proposals_v1_proposal_status_proto_rawDesc), len(file_splitsecure_proposals_v1_proposal_status_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
