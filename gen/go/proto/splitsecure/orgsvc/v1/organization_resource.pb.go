@@ -9,6 +9,7 @@ package orgsvcv1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -28,9 +29,14 @@ const (
 	Organization_STATE_ACTIVE               Organization_State = 1
 	Organization_STATE_DEACTIVATED          Organization_State = 2
 	Organization_STATE_PENDING_DEACTIVATION Organization_State = 3
-	Organization_STATE_UNPAID               Organization_State = 4
+	// Superseded by STATE_BAD_STANDING; existing orgs migrate to it.
+	Organization_STATE_UNPAID Organization_State = 4
 	// Deactivated org with a scheduled, reversible data purge.
 	Organization_STATE_PENDING_DELETION Organization_State = 6
+	// A payment failed or the terms were breached (deactivation_reason).
+	// Access stays full until scheduled_suspension_at, when the org moves to
+	// STATE_PENDING_DELETION unless the owner pays first.
+	Organization_STATE_BAD_STANDING Organization_State = 7
 )
 
 // Enum value maps for Organization_State.
@@ -42,6 +48,7 @@ var (
 		3: "STATE_PENDING_DEACTIVATION",
 		4: "STATE_UNPAID",
 		6: "STATE_PENDING_DELETION",
+		7: "STATE_BAD_STANDING",
 	}
 	Organization_State_value = map[string]int32{
 		"STATE_UNSPECIFIED":          0,
@@ -50,6 +57,7 @@ var (
 		"STATE_PENDING_DEACTIVATION": 3,
 		"STATE_UNPAID":               4,
 		"STATE_PENDING_DELETION":     6,
+		"STATE_BAD_STANDING":         7,
 	}
 )
 
@@ -89,8 +97,14 @@ type Organization struct {
 	// return system groups; this field is the way to obtain it.
 	EveryoneGroupS2R string             `protobuf:"bytes,6,opt,name=everyone_group_s2r,json=everyoneGroupS2r,proto3" json:"everyone_group_s2r,omitempty"`
 	State            Organization_State `protobuf:"varint,5,opt,name=state,proto3,enum=splitsecure.orgsvc.v1.Organization_State" json:"state,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	// Why the org left STATE_ACTIVE. UNSPECIFIED on an active org.
+	DeactivationReason DeactivationReason `protobuf:"varint,8,opt,name=deactivation_reason,json=deactivationReason,proto3,enum=splitsecure.orgsvc.v1.DeactivationReason" json:"deactivation_reason,omitempty"`
+	// When the org is deleted. Set in STATE_PENDING_DELETION only.
+	ScheduledDeletionAt *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=scheduled_deletion_at,json=scheduledDeletionAt,proto3" json:"scheduled_deletion_at,omitempty"`
+	// When the org loses access. Set in STATE_BAD_STANDING only.
+	ScheduledSuspensionAt *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=scheduled_suspension_at,json=scheduledSuspensionAt,proto3" json:"scheduled_suspension_at,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *Organization) Reset() {
@@ -151,23 +165,49 @@ func (x *Organization) GetState() Organization_State {
 	return Organization_STATE_UNSPECIFIED
 }
 
+func (x *Organization) GetDeactivationReason() DeactivationReason {
+	if x != nil {
+		return x.DeactivationReason
+	}
+	return DeactivationReason_DEACTIVATION_REASON_UNSPECIFIED
+}
+
+func (x *Organization) GetScheduledDeletionAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ScheduledDeletionAt
+	}
+	return nil
+}
+
+func (x *Organization) GetScheduledSuspensionAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ScheduledSuspensionAt
+	}
+	return nil
+}
+
 var File_splitsecure_orgsvc_v1_organization_resource_proto protoreflect.FileDescriptor
 
 const file_splitsecure_orgsvc_v1_organization_resource_proto_rawDesc = "" +
 	"\n" +
-	"1splitsecure/orgsvc/v1/organization_resource.proto\x12\x15splitsecure.orgsvc.v1\"\xcf\x02\n" +
+	"1splitsecure/orgsvc/v1/organization_resource.proto\x12\x15splitsecure.orgsvc.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a/splitsecure/orgsvc/v1/deactivation_reason.proto\"\xe7\x04\n" +
 	"\fOrganization\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12,\n" +
 	"\x12everyone_group_s2r\x18\x06 \x01(\tR\x10everyoneGroupS2r\x12?\n" +
-	"\x05state\x18\x05 \x01(\x0e2).splitsecure.orgsvc.v1.Organization.StateR\x05state\"\xab\x01\n" +
+	"\x05state\x18\x05 \x01(\x0e2).splitsecure.orgsvc.v1.Organization.StateR\x05state\x12Z\n" +
+	"\x13deactivation_reason\x18\b \x01(\x0e2).splitsecure.orgsvc.v1.DeactivationReasonR\x12deactivationReason\x12N\n" +
+	"\x15scheduled_deletion_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x13scheduledDeletionAt\x12R\n" +
+	"\x17scheduled_suspension_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\x15scheduledSuspensionAt\"\xc3\x01\n" +
 	"\x05State\x12\x15\n" +
 	"\x11STATE_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fSTATE_ACTIVE\x10\x01\x12\x15\n" +
 	"\x11STATE_DEACTIVATED\x10\x02\x12\x1e\n" +
 	"\x1aSTATE_PENDING_DEACTIVATION\x10\x03\x12\x10\n" +
 	"\fSTATE_UNPAID\x10\x04\x12\x1a\n" +
-	"\x16STATE_PENDING_DELETION\x10\x06\"\x04\b\x05\x10\x05*\x0eSTATE_TRIALINGB\xf5\x01\n" +
+	"\x16STATE_PENDING_DELETION\x10\x06\x12\x16\n" +
+	"\x12STATE_BAD_STANDING\x10\a\"\x04\b\x05\x10\x05*\x0eSTATE_TRIALINGB\xf5\x01\n" +
 	"\x19com.splitsecure.orgsvc.v1B\x19OrganizationResourceProtoP\x01ZGgithub.com/splitsecure/apis/gen/go/proto/splitsecure/orgsvc/v1;orgsvcv1\xa2\x02\x03SOX\xaa\x02\x15Splitsecure.Orgsvc.V1\xca\x02\x15Splitsecure\\Orgsvc\\V1\xe2\x02!Splitsecure\\Orgsvc\\V1\\GPBMetadata\xea\x02\x17Splitsecure::Orgsvc::V1b\x06proto3"
 
 var (
@@ -185,16 +225,21 @@ func file_splitsecure_orgsvc_v1_organization_resource_proto_rawDescGZIP() []byte
 var file_splitsecure_orgsvc_v1_organization_resource_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_splitsecure_orgsvc_v1_organization_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_splitsecure_orgsvc_v1_organization_resource_proto_goTypes = []any{
-	(Organization_State)(0), // 0: splitsecure.orgsvc.v1.Organization.State
-	(*Organization)(nil),    // 1: splitsecure.orgsvc.v1.Organization
+	(Organization_State)(0),       // 0: splitsecure.orgsvc.v1.Organization.State
+	(*Organization)(nil),          // 1: splitsecure.orgsvc.v1.Organization
+	(DeactivationReason)(0),       // 2: splitsecure.orgsvc.v1.DeactivationReason
+	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_splitsecure_orgsvc_v1_organization_resource_proto_depIdxs = []int32{
 	0, // 0: splitsecure.orgsvc.v1.Organization.state:type_name -> splitsecure.orgsvc.v1.Organization.State
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	2, // 1: splitsecure.orgsvc.v1.Organization.deactivation_reason:type_name -> splitsecure.orgsvc.v1.DeactivationReason
+	3, // 2: splitsecure.orgsvc.v1.Organization.scheduled_deletion_at:type_name -> google.protobuf.Timestamp
+	3, // 3: splitsecure.orgsvc.v1.Organization.scheduled_suspension_at:type_name -> google.protobuf.Timestamp
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_orgsvc_v1_organization_resource_proto_init() }
@@ -202,6 +247,7 @@ func file_splitsecure_orgsvc_v1_organization_resource_proto_init() {
 	if File_splitsecure_orgsvc_v1_organization_resource_proto != nil {
 		return
 	}
+	file_splitsecure_orgsvc_v1_deactivation_reason_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
