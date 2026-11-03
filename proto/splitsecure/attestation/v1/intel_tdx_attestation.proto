@@ -1,0 +1,31 @@
+syntax = "proto3";
+package splitsecure.attestation.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/attestation/v1/measurement_endorsement.proto";
+import "splitsecure/hybridkeyset/v1/signature.proto";
+
+// IntelTDXAttestation contains Intel Trust Domain Extensions (TDX)
+// attestation data.
+message IntelTDXAttestation {
+  // Raw TDX quote (v4 or v5). The PCK leaf and intermediate certificates
+  // ride in the quote's cert_data.
+  bytes quote = 1;
+
+  // Intel PCS collateral bundle for offline verification: TCB info and
+  // issuer chain, QE identity, and CRLs.
+  bytes collateral = 2;
+
+  MeasurementEndorsement endorsement = 3;
+
+  // Timestamp bound into the quote's REPORTDATA. Verifiers derive the
+  // validity window from this value.
+  google.protobuf.Timestamp issued_at = 4;
+
+  // Instance-level HKS signature over (authenticated || separator || identity_vertex).
+  // Binds a virtual enclave's identity to the physically attested TDX instance.
+  splitsecure.hybridkeyset.v1.Signature instance_identity_binding_sig = 5;
+
+  // Full instance HKS public keys (serialized HybridKeySetWithDetachedKeys, public only).
+  bytes instance_hks_pub = 6;
+}

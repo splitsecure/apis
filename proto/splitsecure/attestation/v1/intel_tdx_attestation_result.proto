@@ -1,0 +1,43 @@
+syntax = "proto3";
+package splitsecure.attestation.v1;
+
+// IntelTDXAttestationResult contains the result of verifying an Intel TDX
+// attestation.
+message IntelTDXAttestationResult {
+  // Equals the quote's REPORTDATA. This is a per-attestation commitment that
+  // rotates every attestation because a timestamp is folded into it; it is
+  // NOT a stable identifier.
+  bytes key_id = 1;
+
+  bytes mrtd = 2;
+  bytes rtmr0 = 3;
+  bytes rtmr1 = 4;
+  bytes rtmr2 = 5;
+  bytes rtmr3 = 6;
+  bytes mrowner = 7;
+  bytes mrconfigid = 8;
+
+  string endorsement_tier = 9;
+  string endorsement_deployment = 10;
+
+  string tcb_status = 11;
+
+  // SHA3-512 of instance_hks_pub. Stable across attestations from the same
+  // instance, for audit/dedup purposes.
+  bytes instance_id = 12;
+
+  // Lowercase-hex SHA-384 of the endorsement signing certificate's DER
+  // encoding, matched against the verifier's embedded trusted set.
+  string endorsement_cert = 13;
+
+  // TCB evaluation data number from the verified TCB info. Policy enforces a
+  // monotonic floor on this value as a defense against collateral rollback.
+  uint32 tcb_eval_number = 14;
+
+  // crlNumber of the verified PCK CA CRL. Policy enforces a monotonic floor
+  // as a defense against CRL rollback.
+  uint32 pck_crl_number = 15;
+
+  // crlNumber of the verified Root CA CRL.
+  uint32 root_crl_number = 16;
+}
