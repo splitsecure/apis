@@ -1,0 +1,33 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/teamresource/v1/account_sensitivity.proto";
+import "splitsecure/vaulttypes/v1/record_extras.proto";
+
+// RecordFacts are display facts taken from a record's signed issuance bytes.
+// They are for display only. Never use them for authorization. They carry no
+// signatures. To verify a record, fetch it with GetRecord. Absent on
+// directory nodes.
+message RecordFacts {
+  // Registry kind, for example "generic-secret" or "ssh-ca".
+  string kind = 1;
+
+  string name = 2;
+
+  string description = 3;
+
+  // Custody usages that the record's keys may serve.
+  repeated string usages = 4;
+
+  // 1 when the record is created. Each supersession adds 1.
+  uint32 revision = 5;
+
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp modified_at = 7;
+
+  // Absent for kinds with no extra facts.
+  RecordExtras extras = 8;
+
+  splitsecure.teamresource.v1.AccountSensitivity sensitivity = 9;
+}

@@ -1,0 +1,29 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+import "splitsecure/vaulttypes/v1/node_access.proto";
+import "splitsecure/vaulttypes/v1/record_facts.proto";
+
+message Node {
+  // The node's only identity on the wire. Every other RPC takes it. Ids are
+  // unique per vault, stable and opaque to clients.
+  string node_id = 1;
+
+  // Can change.
+  string label = 2;
+
+  // A directory has children and no record facts.
+  bool is_dir = 3;
+
+  // Set only for record nodes.
+  RecordFacts record = 4;
+
+  NodeAccess access = 5;
+
+  // Marks the vault's reserved lost+found directory, for display. The server
+  // blocks changes to that directory.
+  bool is_lost_found = 6;
+
+  // The caller's own star on this node.
+  bool starred = 7;
+}

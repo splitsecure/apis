@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/oidc_layout.proto";
+
+// OIDCCreateApp is the OIDC part of a create request. The issuer is the
+// presented record.
+message OIDCCreateApp {
+  // The published key of the issuer that signs every token.
+  bytes key_id = 1;
+  OIDCLayout layout = 2;
+}

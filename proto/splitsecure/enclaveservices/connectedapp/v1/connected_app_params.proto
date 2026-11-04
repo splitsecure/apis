@@ -1,0 +1,23 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/field.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/oidc_app.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/saml2_app.proto";
+
+// ConnectedAppParams is a connected app record. It holds the issuer binding,
+// the fields and the layout that builds the assertion or token. A field is
+// fixed at creation, modifiable by the requester at each sign-in, derived by
+// the enclave, or filled in by the backend from the requester. A reader
+// refuses a record with a field or enum value it does not know.
+message ConnectedAppParams {
+  oneof app {
+    SAML2App saml2 = 1;
+    OIDCApp oidc = 2;
+  }
+  // template is the catalog entry name, such as "saml2/aws". Display only.
+  string template = 3;
+  repeated Field fields = 4;
+  // title is the template display name, such as "Okta". Display only.
+  string title = 5;
+}

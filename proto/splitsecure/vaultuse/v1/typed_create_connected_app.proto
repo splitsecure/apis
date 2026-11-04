@@ -1,0 +1,30 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/create_app_params.proto";
+import "splitsecure/vaultuse/v1/create_common.proto";
+import "splitsecure/vaultuse/v1/create_outcome.proto";
+import "splitsecure/vaultuse/v1/write_options.proto";
+
+// CreateConnectedApp creates a connected app bound to an issuer record. The
+// issuer is a SAML2 identity provider (splitsecure.saml2/create-app) or an OIDC
+// issuer (splitsecure.wif/create-app). The app lands in the vault of the issuer.
+message CreateConnectedAppRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    // The vault of the issuer.
+    string vault_id = 1;
+    // The ID of the identity provider or OIDC issuer record.
+    string issuer_id = 2;
+    CreateCommon common = 3;
+    splitsecure.enclaveservices.connectedapp.v1.CreateAppParams app = 4;
+    WriteOptions options = 5;
+  }
+}
+
+message CreateConnectedAppResponse {
+  CreateOutcome outcome = 1;
+}

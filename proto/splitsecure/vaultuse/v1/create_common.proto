@@ -1,0 +1,59 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/teamresource/v1/account_sensitivity.proto";
+import "splitsecure/teamresource/v1/bottle_policies.proto";
+import "splitsecure/teamresource/v1/notification_policy.proto";
+
+// CreateCommon carries the fields every genesis create shares: display
+// metadata, vault-tree placement, birth custody usages and the record's own
+// policies. The record's custody is the vault it is created into. A
+// threshold vault resolves that to its owning team set. Superseding creates
+// do not carry this block. They keep the metadata, placement and custody of
+// the record they supersede.
+message CreateCommon {
+  string name = 1;
+  string description = 2;
+
+  // The vault-tree directory to file the record under, as a node_id from a
+  // browse response. It is sealed as sent into the quorum-signed
+  // BaseResourceAttributes. Empty means the vault root. The record also
+  // goes to the root when the requested parent no longer exists. It applies
+  // at creation only. Moves never re-file the record.
+  string requested_parent_node_id = 3;
+
+  // Usage ids ADDED to the kind's primary usage to form the record's birth
+  // custody set. The primary usage is always present. Each entry must name a
+  // usage declared by a publisher manifest, or the request is rejected. The
+  // server sorts and de-duplicates the final set.
+  repeated string additional_usages = 4;
+
+  // The record's OWN notification policy for future use operations. To
+  // narrow notifications for this request, use WriteOptions.threshold.
+  splitsecure.teamresource.v1.NotificationPolicy notification_policy = 5;
+
+  splitsecure.teamresource.v1.AccountSensitivity sensitivity = 6;
+
+  // The record's own authorization policy for future machine-caller use.
+  // If absent, no default is created and no machine can ever use the
+  // record. A superseding create keeps the predecessor's policy unchanged.
+  UsePolicyInput use_policy = 7;
+}
+
+// UsePolicyInput is the caller's input for a genesis create's use_policy.
+// basic holds structured targets that the server compiles to Rego.
+// rego_policy holds Rego directly. At submit time the server checks the
+// policy against the same floor as
+// splitsecure.issuance.v1.UsePolicy.rego_policy.
+message UsePolicyInput {
+  oneof union {
+    BasicTargets basic = 1;
+    string rego_policy = 2;
+  }
+
+  message BasicTargets {
+    // The machine callers the compiled policy admits, checked by
+    // is_caller_authorized.
+    repeated splitsecure.teamresource.v1.BottlePolicies.BasicPolicies.Targets targets = 1;
+  }
+}

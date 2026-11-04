@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+// UsePolicy is the record's own authorization policy for future USE
+// operations. The serving vault enforces it on every use of the record.
+message UsePolicy {
+  // Inline Rego that authorizes MACHINE callers. It runs over the caller's
+  // verified attestation input. It must declare `package splitsecure.user`,
+  // compile against the shared module set and define `is_caller_authorized`
+  // with `default is_caller_authorized := false`. The server checks this
+  // when the record is created and again at every evaluation, failing
+  // closed.
+  string rego_policy = 1;
+}

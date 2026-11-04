@@ -1,0 +1,19 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+import "splitsecure/teamresource/v1/base_resource_attributes.proto";
+
+// ResourceView holds the governance metadata of an issuance. It has no id.
+// The resource S2R is assigned after storage, outside the signed bytes.
+message ResourceView {
+  // Registry key of the resource type, for example "passkey".
+  string kind = 1;
+
+  // Name, description, sensitivity, notification policy and proposal
+  // provenance. proposal_id is set at attest time.
+  splitsecure.teamresource.v1.BaseResourceAttributes base_resource_attributes = 2;
+
+  // The record's step index in a batch proposal. Unset for a record of a
+  // single operation.
+  optional uint32 batch_step = 3;
+}

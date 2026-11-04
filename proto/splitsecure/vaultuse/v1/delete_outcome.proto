@@ -1,0 +1,19 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/vaultuse/v1/delete_result.proto";
+import "splitsecure/vaultuse/v1/ticket.proto";
+
+// DeleteOutcome is what every delete submit returns: the result, or a
+// ticket when the request needs approval. The server decides at submit
+// time. Clients must handle both arms.
+message DeleteOutcome {
+  oneof union {
+    // Set when the request is approved without deferral.
+    DeleteResult result = 1;
+
+    // Set when the request awaits approval. Follow it with PollTicket to get
+    // the result once it releases.
+    Ticket ticket = 2;
+  }
+}

@@ -1,0 +1,56 @@
+syntax = "proto3";
+package splitsecure.vaultcatalog.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/page/v1/page_params.proto";
+import "splitsecure/vaulttypes/v1/custody_class.proto";
+import "splitsecure/vaulttypes/v1/node_access.proto";
+import "splitsecure/vaulttypes/v1/vault_status.proto";
+
+// ListVaults lists the org's vaults for the rail. A member sees a vault only
+// when its root carries an effective grant for them. Team membership counts
+// as edit on the root. Grants lower in the tree show up as shared entry
+// points instead. Role-bypass callers see every vault.
+message ListVaultsRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    // Format: s2r:{deployment}:org:{id}.
+    string org_s2r = 1;
+
+    splitsecure.page.v1.PageParams page = 2;
+  }
+}
+
+// VaultSummary is one vault the caller can browse. An unnamed threshold
+// vault's label falls back to its owning team's current name.
+message VaultSummary {
+  string vault_id = 1;
+
+  string label = 2;
+
+  splitsecure.vaulttypes.v1.CustodyClass custody_class = 3;
+
+  // The caller's effective access on the vault root, which put the vault in
+  // their rail. It comes from a grant, or from membership in the owning
+  // team, which gives edit on the root. Owning-team membership gives
+  // effective_tier edit but can_manage_access false. A role-bypass caller
+  // gets its role baseline instead.
+  splitsecure.vaulttypes.v1.NodeAccess access = 4;
+
+  // Last known status for online vaults. Always ACTIVE for threshold vaults.
+  splitsecure.vaulttypes.v1.VaultStatus status = 5;
+
+  // Identity hashes of a threshold vault's attesting teams. Empty when the
+  // catalog cannot resolve them, and for other vaults. DescribeVault never
+  // returns them.
+  repeated bytes team_ids = 6;
+}
+
+message ListVaultsResponse {
+  // Ordered by vault id. Labels can repeat within an org.
+  repeated VaultSummary vaults = 1;
+
+  bytes next_cursor = 2;
+}

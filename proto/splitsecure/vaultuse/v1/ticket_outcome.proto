@@ -1,0 +1,31 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/vaultuse/v1/create_result.proto";
+import "splitsecure/vaultuse/v1/delete_result.proto";
+import "splitsecure/vaultuse/v1/release_result.proto";
+import "splitsecure/vaultuse/v1/ticket_status.proto";
+
+// TicketOutcome is how a followed ticket ended. A released ticket carries
+// the result in the arm that matches the submit's verb. Any other ticket
+// carries its terminal status.
+message TicketOutcome {
+  oneof outcome {
+    // The released result of a use submit. The principal that submitted
+    // the request can collect it through PollTicket until it
+    // expires.
+    ReleaseResult release_result = 1;
+
+    // The released result of a create submit. The same collection rules
+    // apply.
+    CreateResult create_result = 2;
+
+    // The released result of a delete submit. The same collection rules
+    // apply.
+    DeleteResult delete_result = 3;
+
+    // The terminal status of a ticket with no collectible result: denied,
+    // expired, cancelled or release-expired.
+    TicketStatus status = 4;
+  }
+}

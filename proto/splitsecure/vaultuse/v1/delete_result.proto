@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/audit_observation_receipt/v1/audit_observation_receipt.proto";
+
+message DeleteResult {
+  // The id of the tombstoned record.
+  string secret_id = 1;
+
+  // The hash-chained audit record of the operation. Every collection of
+  // this result returns the same receipt.
+  splitsecure.audit_observation_receipt.v1.AuditObservationReceipt receipt = 2;
+}

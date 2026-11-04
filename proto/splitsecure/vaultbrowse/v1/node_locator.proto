@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/vaultbrowse/v1/label_path.proto";
+
+message NodeLocator {
+  oneof union {
+    string parent_node_id = 3;
+    LabelPath label_path = 4;
+  }
+}

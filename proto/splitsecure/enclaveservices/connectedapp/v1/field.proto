@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/duration_field.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/json_object_field.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/string_field.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/string_list_field.proto";
+
+// Field is one setting of a connected app. Its name is unique in the app. A
+// field is fixed at creation, modifiable by the requester at each sign-in,
+// derived by the enclave, or filled in by the backend from the requester.
+message Field {
+  string name = 1;
+  oneof type {
+    StringField string_field = 2;
+    StringListField string_list_field = 3;
+    DurationField duration_field = 4;
+    JsonObjectField json_object_field = 5;
+  }
+  // label is the display name, such as "Role ARN". Display only.
+  string label = 6;
+}

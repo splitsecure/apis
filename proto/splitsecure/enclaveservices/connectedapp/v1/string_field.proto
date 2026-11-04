@@ -1,0 +1,24 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/derived.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/derived_text.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/requester_source.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/string_modifiable.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/string_value.proto";
+
+// StringField is a text setting: a NameID, an ARN, an audience, a subject.
+message StringField {
+  oneof source {
+    // Set at creation. Every sign-in uses it.
+    StringValue fixed = 1;
+    // Set by the requester at each sign-in.
+    StringModifiable modifiable = 2;
+    // Computed by the enclave at each sign-in, or at creation.
+    Derived derived = 3;
+    // Filled in by the backend from the authenticated requester.
+    RequesterSource requester = 4;
+    // A value the enclave derived at creation, as the record stores it.
+    DerivedText derived_text = 5;
+  }
+}

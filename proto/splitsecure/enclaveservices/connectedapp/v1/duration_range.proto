@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "google/protobuf/duration.proto";
+
+// DurationRange bounds a duration. Min and max are both inclusive.
+message DurationRange {
+  google.protobuf.Duration min = 1;
+  google.protobuf.Duration max = 2;
+}

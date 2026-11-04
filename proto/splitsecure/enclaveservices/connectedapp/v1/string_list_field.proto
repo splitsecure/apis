@@ -1,0 +1,15 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/string_list_modifiable.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/string_list_value.proto";
+
+// StringListField is a list of text values, such as a SAML attribute's.
+message StringListField {
+  oneof source {
+    // Set at creation. Every sign-in uses it.
+    StringListValue fixed = 1;
+    // Chosen by the requester at each sign-in.
+    StringListModifiable modifiable = 2;
+  }
+}

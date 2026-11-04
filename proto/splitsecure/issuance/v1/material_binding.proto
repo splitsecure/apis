@@ -1,0 +1,30 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+import "splitsecure/issuance/v1/material_form.proto";
+import "splitsecure/issuance/v1/sealed_derived_recipe.proto";
+import "splitsecure/issuance/v1/sealed_wrapped_recipe.proto";
+
+// MaterialBinding pairs a named slot with the material that fills it.
+message MaterialBinding {
+  // Slot name. It must match an input slot in the function's manifest.
+  string name = 1;
+
+  MaterialForm form = 2;
+
+  // No key-reproducing material appears here in the clear. The derivation
+  // label and any wrapped bytes are sealed with AES-256-GCM under a
+  // team-derived key. The associated data is the record's canonical usage
+  // set followed by its revision. A derived key uses sealed_derived. Generated and imported
+  // material use sealed_wrapped.
+  oneof recipe {
+    SealedDerivedRecipe sealed_derived = 3;
+    SealedWrappedRecipe sealed_wrapped = 4;
+  }
+
+  // 4-byte key id derived from the content and set at attest. Unique within
+  // a record. Shown as 8 hex characters. For a private key it is a hash of
+  // the spec and public key, truncated to 4 bytes. For a secret it is
+  // SHA3-256 of sealed_wrapped.wrapped_data, truncated to 4 bytes.
+  bytes key_id = 5;
+}

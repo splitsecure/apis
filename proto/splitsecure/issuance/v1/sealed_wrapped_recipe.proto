@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+import "splitsecure/keys/v1/spec.proto";
+
+// SealedWrappedRecipe holds a generated key's wrapped bytes and the sealed
+// derivation label of the wrapping key. Both use the record's canonical
+// usage set followed by its revision as AEAD associated data. Paired with
+// another set or revision, they fail to decrypt.
+message SealedWrappedRecipe {
+  // AEAD-sealed derivation label of the wrapping key. It is never a
+  // plaintext label.
+  bytes sealed_wrapping_derivation = 1;
+
+  // The generated key, encrypted under the wrapping key with AES-256-GCM.
+  // The AAD is the usage set and revision.
+  bytes wrapped_data = 2;
+
+  // Algorithm of the wrapping key, for example AES-256-GCM. It is not secret
+  // and cannot reproduce the key alone, so it is stored in the clear.
+  splitsecure.keys.v1.Spec wrapping_spec = 3;
+}

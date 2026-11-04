@@ -1,0 +1,36 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+import "splitsecure/authz/v1/tier.proto";
+
+// NodeAccess is the caller's effective navigation access to a node. The tier
+// is the highest tier among the grants on the node and its ancestors.
+// NodeAccess also says how that tier was reached and whether the caller may
+// manage the node's grants.
+//
+// On a threshold vault, owners, admins and auditors bypass grants. For them,
+// NodeAccess carries the role baseline instead of a grant: edit for owners
+// and admins, view for auditors. It is never unset for these roles.
+//
+// Tiers: view browses the subtree and reads grants. use adds move, rename
+// and create folder. edit adds delete. No tier gives access to secret
+// values. Only release policy does. Grant admin is separate from the tier,
+// and can_manage_access reports it.
+message NodeAccess {
+  splitsecure.authz.v1.Tier effective_tier = 1;
+
+  // True when the caller's own grant reaches the effective tier. Takes
+  // precedence over via_group_label.
+  bool via_direct = 2;
+
+  // Display name of the group whose grant reaches the effective tier, when
+  // no direct grant does. Empty when via_direct is true.
+  string via_group_label = 3;
+
+  // True when the caller may manage the node's grants. Owners and admins have this through their role. Anyone
+  // else needs a real grant that reaches edit on the node or an ancestor. It
+  // does not follow from effective_tier. A member of the vault's owning team
+  // has edit throughout the vault but cannot manage who else has access.
+  // Gate the manage-access control on this field, never on the tier.
+  bool can_manage_access = 4;
+}

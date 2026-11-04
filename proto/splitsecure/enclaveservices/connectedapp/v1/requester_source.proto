@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/requester.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/string_affix.proto";
+
+// RequesterSource is a text setting the backend fills from the authenticated
+// requester at each sign-in. The enclave checks only the format and the
+// constraint of the value.
+message RequesterSource {
+  Requester kind = 1;
+  // Optional bound on the value, such as an email suffix.
+  StringAffix constraint = 2;
+}

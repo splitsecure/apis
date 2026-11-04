@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+// VaultStatus is the vault's serving state. A threshold vault is always
+// ACTIVE. An online vault reports SEALED when its root is sealed. A sealed
+// vault can neither verify sessions nor release.
+enum VaultStatus {
+  VAULT_STATUS_UNSPECIFIED = 0;
+  VAULT_STATUS_ACTIVE = 1;
+  VAULT_STATUS_SEALED = 2;
+}

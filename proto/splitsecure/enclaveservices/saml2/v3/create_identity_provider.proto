@@ -1,0 +1,27 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.saml2.v3;
+
+import "google/protobuf/timestamp.proto";
+
+message CreateIdentityProviderParams {
+  string provider_id = 1;
+  string sso_url = 2;
+  string sso_url_post = 3;
+
+  google.protobuf.Timestamp not_before = 4;
+  google.protobuf.Timestamp not_after = 5;
+}
+
+// IdPParams are the params of a SAML2 IdP record, stored in Issuance.params.
+// They hold only the public certificate. The private key is never part of
+// them.
+message IdPParams {
+  bytes x509_certificate = 1;
+  string provider_id = 2;
+  string sso_url = 3;
+  string sso_url_post = 4;
+
+  // Random value set when the IdP is created. SPs bound to this IdP carry
+  // the same value. Signing a response rejects a mismatch.
+  uint64 idp_serial = 5;
+}

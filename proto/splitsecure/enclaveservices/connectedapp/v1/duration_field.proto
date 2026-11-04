@@ -1,0 +1,15 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/duration_modifiable.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/duration_value.proto";
+
+// DurationField is a length of time, such as a session or a token lifetime.
+message DurationField {
+  oneof source {
+    // Set at creation. Every sign-in uses it.
+    DurationValue fixed = 1;
+    // Set by the requester at each sign-in.
+    DurationModifiable modifiable = 2;
+  }
+}

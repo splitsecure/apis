@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/expr.proto";
+
+// OIDCClaimLayout places one value in the token. An empty path with a JSON
+// object value merges its members into the top level of the token.
+message OIDCClaimLayout {
+  // The claim name, then the names of the objects nested under it.
+  repeated string path = 1;
+  Expr value = 2;
+  // Carries a text value as a list of one item.
+  bool wrap_in_list = 3;
+}

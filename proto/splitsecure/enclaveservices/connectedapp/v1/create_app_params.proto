@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/field.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/oidc_create_app.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/saml2_create_app.proto";
+
+// CreateAppParams is the request to create a connected app. It is the
+// params_request of splitsecure.saml2/create-app and splitsecure.wif/create-app.
+message CreateAppParams {
+  // The arm must match the protocol of the presented issuer.
+  oneof app {
+    SAML2CreateApp saml2 = 1;
+    OIDCCreateApp oidc = 2;
+  }
+  // template is the catalog entry name. Display only.
+  string template = 3;
+  // A string field may use DERIVED_AT_CREATION_ID only in this request.
+  repeated Field fields = 4;
+  // title is the template display name. Display only.
+  string title = 5;
+}

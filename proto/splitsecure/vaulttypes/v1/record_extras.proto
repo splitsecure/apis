@@ -1,0 +1,25 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+import "splitsecure/secrets/v1/secret_params.proto";
+import "splitsecure/totp/v1/totp_params.proto";
+import "splitsecure/vaulttypes/v1/federated_identity_extras.proto";
+import "splitsecure/vaulttypes/v1/signing_extras.proto";
+import "splitsecure/vaulttypes/v1/wallet_extras.proto";
+
+// RecordExtras holds kind-specific facts from a record's params. List rows
+// and detail panels can show them without decoding the params.
+message RecordExtras {
+  oneof facts {
+    WalletExtras wallet = 1;
+    SigningKeyExtras signing_key = 2;
+    FederatedIdentityExtras federated = 3;
+
+    // A generic secret's params, unchanged. They carry its use case and
+    // metadata.
+    splitsecure.secrets.v1.SecretParams secret = 4;
+
+    // A totp record's params, unchanged.
+    splitsecure.totp.v1.TOTPParams totp = 5;
+  }
+}

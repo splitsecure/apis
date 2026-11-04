@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+// FieldRef names one field of the app.
+message FieldRef {
+  string name = 1;
+}

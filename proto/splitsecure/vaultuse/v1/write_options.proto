@@ -1,0 +1,28 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "google/protobuf/duration.proto";
+import "splitsecure/vaultuse/v1/use_options.proto";
+
+// WriteOptions is shared by every create and delete submit RPC. It is
+// UseOptions without envelope_recipient. A record write never releases
+// confidential material, so its result is never sealed. The ticket
+// lifecycle is the same as for use submits.
+message WriteOptions {
+  // Shortens how long the request may stay pending, below the server
+  // default. It can never lengthen it.
+  google.protobuf.Duration max_pending = 1;
+
+  // How long the server holds the response, up to a server maximum, in case
+  // the request resolves without deferral. Otherwise the same as submitting
+  // and then polling.
+  google.protobuf.Duration wait = 2;
+
+  // Optional free-form reason. It is shown to whoever decides the request
+  // and recorded with the operation.
+  string justification = 3;
+
+  // Options that exist only on threshold vaults. Setting it on any other
+  // vault kind fails with InvalidArgument.
+  ThresholdVaultOptions threshold = 4;
+}

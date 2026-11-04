@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/saml2_layout.proto";
+import "splitsecure/oasis/saml/v2/metadata.proto";
+
+// SAML2CreateApp is the SAML2 part of a create request. The identity provider
+// is the presented record.
+message SAML2CreateApp {
+  // The service provider metadata. The binding stores it as is.
+  splitsecure.oasis.saml.v2.Metadata sp_metadata = 1;
+  SAML2Layout layout = 2;
+}

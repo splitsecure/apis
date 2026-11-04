@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+// LabelPath walks folder labels down from the vault root. It resolves at
+// most one node. A segment that matches no child, or matches a node that is
+// not a directory, gives NotFound.
+message LabelPath {
+  repeated string segments = 1;
+}

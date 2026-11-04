@@ -1,0 +1,17 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/audit_observation_receipt/v1/audit_observation_receipt.proto";
+
+message CreateResult {
+  // The id of the minted record. Submits can target it at once.
+  string secret_id = 1;
+
+  // 1 for a genesis create. The predecessor's revision plus 1 for a
+  // supersession. Never 0, because 0 means "latest" on reads.
+  uint32 revision = 2;
+
+  // The hash-chained audit record of the operation. Every collection of
+  // this result returns the same receipt.
+  splitsecure.audit_observation_receipt.v1.AuditObservationReceipt receipt = 3;
+}

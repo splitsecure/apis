@@ -1,0 +1,24 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/expr.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/field_ref.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/oidc_claim_layout.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/oidc_lifetime.proto";
+
+// OIDCLayout is how a token is built from the fields. The enclave sets the
+// rest. The iat claim is the time of the final approval. The nbf claim is iat
+// minus ten seconds. The exp claim is iat plus the lifetime.
+message OIDCLayout {
+  // One text field.
+  Expr subject = 1;
+  // Fixed parts only.
+  Expr audience = 2;
+  OIDCLifetime lifetime = 3;
+  // A text field derived at each sign-in. It is the jti claim.
+  FieldRef token_id = 4;
+  repeated OIDCClaimLayout claims = 5;
+  // A duration field. It is the duration the client asks the cloud for when it
+  // exchanges the token. The token does not carry it.
+  FieldRef requested_client_duration = 6;
+}

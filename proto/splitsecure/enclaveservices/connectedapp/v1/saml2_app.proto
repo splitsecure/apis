@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/saml2_binding.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/saml2_layout.proto";
+
+// SAML2App is the binding and layout of a SAML2 connected app.
+message SAML2App {
+  SAML2Binding binding = 1;
+  SAML2Layout layout = 2;
+}

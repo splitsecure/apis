@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+// DerivedText is a value the enclave derived from the create proposal id.
+message DerivedText {
+  string value = 1;
+}

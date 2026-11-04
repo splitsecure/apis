@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.hybridkeyset.v1;
+
+import "splitsecure/hybridkeyset/v1/exchange_ephemeral_ciphertext.proto";
+import "splitsecure/keys/v1/symmetric_encryption_spec.proto";
+
+message IesCiphertext {
+  splitsecure.keys.v1.SymmetricEncryptionSpec symmetric_spec = 1;
+  bytes ciphertext = 2;
+  ExchangeEphemeralCiphertext exchange_ciphertext = 3;
+}

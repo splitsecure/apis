@@ -1,0 +1,18 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+import "splitsecure/issuance/v1/resource_view.proto";
+import "splitsecure/issuance/v1/use_view.proto";
+
+// Issuance is the signed record. It records that a quorum created a
+// resource for its consumers. Holding it grants nothing. The custody class
+// authorizes every use again, for example by quorum votes on a threshold
+// vault.
+message Issuance {
+  ResourceView resource = 1;
+
+  UseView use = 2;
+
+  // Serialized kind-specific params. The record kind sets the message type.
+  bytes params = 3;
+}

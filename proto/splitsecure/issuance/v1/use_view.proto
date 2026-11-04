@@ -1,0 +1,31 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+import "splitsecure/issuance/v1/material_binding.proto";
+import "splitsecure/issuance/v1/use_policy.proto";
+
+// UseView holds what the server needs to authorize and prepare a future
+// operation on the record.
+message UseView {
+  // Custody set: the usage ids this record's keys may ever serve. A USE is
+  // allowed only if its usage is in this set. The set is also AEAD
+  // associated data for every key recipe, so a recipe paired with another
+  // set fails to decrypt. The AEAD enforces the unique, sorted form, not the
+  // field order on the wire.
+  repeated string usages = 1;
+
+  // Declared signer set, the SHA3-512 of each team's base identity.
+  // Verifiers check that it matches the envelope's team_signatures in both
+  // directions.
+  repeated bytes team_ids = 2;
+
+  repeated MaterialBinding materials = 3;
+
+  reserved 4;
+  reserved "version";
+
+  // The record's machine-caller authorization policy. The serving vault
+  // enforces it before any lane releases the record. A record without one
+  // cannot be released to machine callers. Supply it at creation.
+  UsePolicy use_policy = 5;
+}

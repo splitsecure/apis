@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/expr.proto";
+
+// SAML2AttributeLayout is one attribute. A list field gives one value per
+// item. Any other value gives one value.
+message SAML2AttributeLayout {
+  string name = 1;
+  Expr value = 2;
+}

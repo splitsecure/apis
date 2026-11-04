@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/expr.proto";
+
+// SAML2NameIDLayout is the assertion's subject.
+message SAML2NameIDLayout {
+  // A NameID format URN. Fixed parts only.
+  Expr format = 1;
+  // One text field. An email or unspecified NameID may also join fixed text
+  // and the requester email. The enclave checks the result against the format.
+  Expr value = 2;
+}

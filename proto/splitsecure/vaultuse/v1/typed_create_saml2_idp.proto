@@ -1,0 +1,32 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultuse/v1/create_common.proto";
+import "splitsecure/vaultuse/v1/create_outcome.proto";
+import "splitsecure/vaultuse/v1/write_options.proto";
+
+// CreateSAML2IDP creates a SAML2 identity provider record. It runs
+// splitsecure.saml2/create-idp. The caller chooses only the IdP certificate
+// validity window. The server assigns the provider id, SSO URLs and signing
+// certificate from the deployment's origin.
+message CreateSAML2IDPRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    CreateCommon common = 2;
+
+    google.protobuf.Timestamp not_before = 3;
+    google.protobuf.Timestamp not_after = 4;
+
+    WriteOptions options = 5;
+  }
+}
+
+message CreateSAML2IDPResponse {
+  CreateOutcome outcome = 1;
+}

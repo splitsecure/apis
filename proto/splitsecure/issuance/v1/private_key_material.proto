@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+import "splitsecure/keys/v1/spec.proto";
+
+// PrivateKeyMaterial is a private key. It is used only through a handle and
+// is never released raw.
+message PrivateKeyMaterial {
+  splitsecure.keys.v1.Spec spec = 1;
+
+  // Public key, captured at attest time. At use time the operation is
+  // refused unless the key still has this public key.
+  bytes public_key = 2;
+}

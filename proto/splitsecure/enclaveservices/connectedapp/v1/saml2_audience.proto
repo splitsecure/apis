@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "google/protobuf/empty.proto";
+
+// SAML2Audience is the assertion's audience.
+message SAML2Audience {
+  oneof audience {
+    // The entity ID in the service provider metadata.
+    google.protobuf.Empty entity_id = 1;
+    // A fixed audience, such as the AWS sign-in endpoint.
+    string fixed = 2;
+  }
+}

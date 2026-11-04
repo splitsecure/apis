@@ -16,6 +16,9 @@ code generator.
 | `splitsecure.enclaveroundtrip.v1` | `EnclaveRoundtripService` | Companion-to-enclave request/response transport, with streaming and long-poll variants. |
 | `splitsecure.proposals.v1` | `ProposalsService` | Threshold-vote a proposal to completion; list, watch and inspect proposal state. |
 | `splitsecure.conveniencestore.v1` | `ConvenienceStoreService` | SAML2 identity-provider and service-provider resource management. |
+| `splitsecure.vaultuse.v1` | `VaultUseService` | Create SAML2 identity providers, OIDC issuers and connected apps, delete vault records, and follow a deferred request to its outcome. |
+| `splitsecure.vaultbrowse.v1` | `VaultBrowseService` | Describe one vault, list its nodes, read a record and create folders. |
+| `splitsecure.vaultcatalog.v1` | `VaultCatalogService` | List the vaults and shared nodes a principal can see. |
 
 The remaining packages (`bottle`, `delegationgraph`, `hybridkeyset`,
 `keys`, `saml2`, `teamresource`, `attestation`, `requestsigning`,
