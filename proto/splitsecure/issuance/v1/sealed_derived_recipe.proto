@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+// SealedDerivedRecipe holds the sealed derivation label of a derived key.
+// It has no wrapped payload. At use time the key is derived again from team
+// roots.
+message SealedDerivedRecipe {
+  // AEAD-sealed derivation label of the key. It is never a plaintext label.
+  bytes sealed_derivation = 1;
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/hybridkeyset/v1/hybrid_key_set_with_detached_keys.proto";
+
+// EnvelopeRecipient names the public keys that a request's result is
+// sealed to. Each class has its own verification rule. More classes may be
+// added.
+message EnvelopeRecipient {
+  oneof union {
+    // A bare public hybrid keyset. The server seals to it with no further
+    // checks. On a threshold vault the keyset is part of the intent that
+    // voters approve, so voter approval is what authorizes sealing to it.
+    splitsecure.hybridkeyset.v1.HybridKeySetWithDetachedKeys public_keyset = 1;
+  }
+}

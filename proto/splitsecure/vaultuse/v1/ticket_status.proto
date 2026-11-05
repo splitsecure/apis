@@ -1,0 +1,40 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// TicketStatus reports a ticket that ended without a collectible result:
+//
+//   PENDING --approved--> released --release_expire_at--> RELEASE_EXPIRED
+//      +--denied--------> DENIED
+//      +--expire_at-----> EXPIRED
+//      +--Cancel--------> CANCELLED
+//
+// Pending and released tickets never appear here. A pending ticket has no
+// outcome yet. A released ticket's outcome is the result itself until the
+// release expires. Ended tickets stay watchable for a retention window, so
+// a restarted client can learn the outcome. Watching an ended ticket
+// returns its status only, never the result.
+message TicketStatus {
+  oneof state {
+    Denied denied = 1;
+    Expired expired = 2;
+    Cancelled cancelled = 3;
+    ReleaseExpired release_expired = 4;
+  }
+
+  message Denied {
+    // Visible only to the principal the ticket is bound to.
+    string reason = 1;
+  }
+
+  message Expired {}
+
+  message Cancelled {
+    google.protobuf.Timestamp cancelled_at = 1;
+  }
+
+  // ReleaseExpired is a ticket that released, but whose result can no longer
+  // be collected.
+  message ReleaseExpired {}
+}

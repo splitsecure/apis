@@ -1,0 +1,8 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+// SigningKeyExtras holds the signature algorithm family, for example "ecdsa",
+// "eddsa", "rsa", "mldsa" or "slhdsa".
+message SigningKeyExtras {
+  string algorithm = 1;
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+// Requester names a value the backend fills from the authenticated requester.
+enum Requester {
+  REQUESTER_UNSPECIFIED = 0;
+  // A name that AWS accepts as a role session name or a source identity.
+  REQUESTER_SESSION_NAME = 1;
+  // The email address of the requester, at most 254 bytes. A requester with no
+  // address cannot sign in.
+  REQUESTER_EMAIL = 2;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+import "splitsecure/issuance/v1/private_key_material.proto";
+import "splitsecure/issuance/v1/secret_material.proto";
+
+// MaterialForm says whether the material is a private key, used only
+// through a handle, or a secret that can be revealed as raw bytes.
+message MaterialForm {
+  oneof form {
+    PrivateKeyMaterial private_key = 1;
+    SecretMaterial secret = 2;
+  }
+}

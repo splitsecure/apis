@@ -1,0 +1,38 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/keys/v1/signature_spec.proto";
+import "splitsecure/vaultuse/v1/create_common.proto";
+import "splitsecure/vaultuse/v1/create_outcome.proto";
+import "splitsecure/vaultuse/v1/write_options.proto";
+
+// CreateWIFAuthority creates an OIDC issuer record. It runs
+// splitsecure.wif/create-issuer. The server assigns the issuer, JWKS URL,
+// authority id and validity window. The caller chooses which signing
+// algorithms to publish and whether the issuer allows free-form tokens.
+message CreateWIFAuthorityRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    CreateCommon common = 2;
+
+    // Each entry becomes one minted and published key. Empty means seven
+    // algorithms: ES256, ES384, EdDSA/Ed25519, ML-DSA-44, ML-DSA-65, ML-DSA-87
+    // and RS256 with a 2048-bit key. RS256 takes a 2048, 3072 or 4096-bit key.
+    repeated splitsecure.keys.v1.SignatureSpec algs = 3;
+
+    WriteOptions options = 4;
+
+    // Lets a requester mint a token whose claims they choose. Unset
+    // refuses it. Fixed for the life of the issuer.
+    bool allow_free_form_tokens = 5;
+  }
+}
+
+message CreateWIFAuthorityResponse {
+  CreateOutcome outcome = 1;
+}

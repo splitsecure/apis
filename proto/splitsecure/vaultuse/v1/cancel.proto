@@ -1,0 +1,22 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+
+// Cancel moves a pending ticket to cancelled. A cancelled ticket never
+// produces a result.
+message CancelRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    bytes ticket_id = 2;
+
+    // Shown to approvers.
+    string reason = 3;
+  }
+}
+
+message CancelResponse {}

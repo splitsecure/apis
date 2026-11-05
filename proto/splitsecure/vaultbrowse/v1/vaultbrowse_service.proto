@@ -1,0 +1,49 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/vaultbrowse/v1/create_folder.proto";
+import "splitsecure/vaultbrowse/v1/delete_folder.proto";
+import "splitsecure/vaultbrowse/v1/delete_grant.proto";
+import "splitsecure/vaultbrowse/v1/describe_vault.proto";
+import "splitsecure/vaultbrowse/v1/get_node.proto";
+import "splitsecure/vaultbrowse/v1/get_record.proto";
+import "splitsecure/vaultbrowse/v1/list_grants.proto";
+import "splitsecure/vaultbrowse/v1/list_nodes.proto";
+import "splitsecure/vaultbrowse/v1/move_node.proto";
+import "splitsecure/vaultbrowse/v1/put_grants.proto";
+import "splitsecure/vaultbrowse/v1/rename_node.proto";
+
+// VaultBrowseService browses one vault: its tree, record metadata and
+// navigation grants.
+// Threshold vaults serve it through the coordination server. Online vaults
+// serve it directly. Every request names its vault by vault_id. Nothing
+// here is org-scoped.
+//
+// Navigation grants gate every read here. Only release policy gates secret
+// values. No tier gives access to secret material, and this service never
+// returns it. A node that does not exist and a node the caller may not see
+// return the same NotFound.
+//
+// Machine callers authenticate each request with envelope. This is a bottle
+// sealed by the caller, whose Authenticated.data is the request's Base. The
+// server verifies it against the ecosystem root and accepts it only for a
+// short time after PlatformData.sealed_at. People and workloads use session
+// tokens in request headers and leave envelope unset.
+service VaultBrowseService {
+  rpc DescribeVault(DescribeVaultRequest) returns (DescribeVaultResponse);
+
+  rpc ListNodes(ListNodesRequest) returns (ListNodesResponse);
+
+  rpc GetNode(GetNodeRequest) returns (GetNodeResponse);
+
+  rpc GetRecord(GetRecordRequest) returns (GetRecordResponse);
+
+  rpc CreateFolder(CreateFolderRequest) returns (CreateFolderResponse);
+  rpc MoveNode(MoveNodeRequest) returns (MoveNodeResponse);
+  rpc RenameNode(RenameNodeRequest) returns (RenameNodeResponse);
+  rpc DeleteFolder(DeleteFolderRequest) returns (DeleteFolderResponse);
+
+  rpc PutGrants(PutGrantsRequest) returns (PutGrantsResponse);
+  rpc DeleteGrant(DeleteGrantRequest) returns (DeleteGrantResponse);
+  rpc ListGrants(ListGrantsRequest) returns (ListGrantsResponse);
+}

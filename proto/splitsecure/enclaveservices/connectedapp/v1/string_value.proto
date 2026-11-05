@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+// StringValue is one text value.
+message StringValue {
+  string value = 1;
+}

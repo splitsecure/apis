@@ -1,0 +1,40 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaulttypes/v1/custody_class.proto";
+import "splitsecure/vaulttypes/v1/node_access.proto";
+import "splitsecure/vaulttypes/v1/vault_status.proto";
+
+// DescribeVault returns the vault's summary and the caller's access on its
+// root. It is the standalone client's entry point into a vault. If the
+// caller can see no node in the vault, it answers NotFound, the same as for
+// a vault that does not exist.
+message DescribeVaultRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+  }
+}
+
+message DescribeVaultResponse {
+  string vault_id = 1;
+
+  // The root node's label. Empty when the root has no label. Unlike
+  // ListVaults, it never falls back to the owning team's name.
+  string label = 2;
+
+  splitsecure.vaulttypes.v1.CustodyClass custody_class = 3;
+
+  // Use this id for the root. Do not hardcode it.
+  string root_node_id = 4;
+
+  // The caller's effective access on the root. Unset when the caller holds
+  // nothing on the root and reaches the vault only through a grant lower in
+  // the tree. Unset means no root access, not a zero tier.
+  splitsecure.vaulttypes.v1.NodeAccess access = 5;
+
+  splitsecure.vaulttypes.v1.VaultStatus status = 6;
+}

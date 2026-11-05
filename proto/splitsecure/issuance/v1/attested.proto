@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.issuance.v1;
+
+import "splitsecure/teamresource/v1/team_signature.proto";
+
+// Attested is a team-attested issuance: the signed bytes and the team
+// signatures over them. Verify the signatures over the exact issuance bytes
+// before you unmarshal them. Protobuf marshaling is not canonical, so never
+// re-marshal the bytes.
+message Attested {
+  // Serialized Issuance message, marshaled once at attest time.
+  bytes issuance = 1;
+
+  // One signature per team that protects the record.
+  repeated splitsecure.teamresource.v1.TeamSignature team_signatures = 2;
+}

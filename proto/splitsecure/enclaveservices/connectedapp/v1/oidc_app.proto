@@ -1,0 +1,11 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/oidc_binding.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/oidc_layout.proto";
+
+// OIDCApp is the binding and layout of an OIDC connected app.
+message OIDCApp {
+  OIDCBinding binding = 1;
+  OIDCLayout layout = 2;
+}

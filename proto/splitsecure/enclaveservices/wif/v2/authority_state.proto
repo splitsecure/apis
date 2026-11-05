@@ -1,0 +1,46 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.wif.v2;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/enclaveservices/wif/v2/free_form_mint.proto";
+import "splitsecure/keys/v1/serialized_key.proto";
+
+// WorkloadIdentityAuthorityState are the params of a workload identity
+// authority record. They hold only public facts. No private key material
+// appears here.
+message WorkloadIdentityAuthorityState {
+  // The `iss` claim of every minted JWT. The server sets it at creation from
+  // the authority id and the deployment's origin. Clients never supply it.
+  string issuer = 1;
+
+  // URL where the authority's public keys are published as a JWK Set. The
+  // server derives it from the issuer.
+  string jwks_uri = 2;
+
+  // Stable id of the authority. The issuer path uses a different
+  // <vault>-<authority> slug, so a JWKS resolver maps that slug back to
+  // this id instead of decoding the path.
+  string authority_id = 3;
+
+  // Published public signing keys, one per algorithm, in creation order.
+  repeated PublishedKey keys = 4;
+
+  google.protobuf.Timestamp not_before = 5;
+  google.protobuf.Timestamp not_after = 6;
+
+  // Random value set when the authority is created.
+  uint64 authority_serial = 7;
+
+  // Whether free-form tokens may be minted with this issuer's keys. Fixed at
+  // creation.
+  FreeFormMint free_form_mint = 8;
+}
+
+message PublishedKey {
+  // RFC 7638 JWK thumbprint of the key.
+  string kid = 1;
+
+  // The public key. Its embedded Spec is the only source of the key's
+  // algorithm. It equals the key's PrivateKeyMaterial.public_key.
+  splitsecure.keys.v1.SerializedKey public_key = 2;
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "google/protobuf/empty.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/field_ref.proto";
+
+// OIDCLifetime is the exp claim minus the iat claim.
+message OIDCLifetime {
+  oneof lifetime {
+    // A duration field.
+    FieldRef field = 1;
+    // Ten minutes, the time a client has to exchange the token with a cloud.
+    google.protobuf.Empty exchange_window = 2;
+  }
+}

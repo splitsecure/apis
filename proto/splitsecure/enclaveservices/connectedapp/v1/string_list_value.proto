@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+// StringListValue is a list of text values.
+message StringListValue {
+  repeated string values = 1;
+}

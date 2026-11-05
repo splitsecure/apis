@@ -1,0 +1,7 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+// StringChoices requires the value to be one of the listed values.
+message StringChoices {
+  repeated string values = 1;
+}

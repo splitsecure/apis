@@ -1,0 +1,17 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/string_affix.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/string_choices.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/string_value.proto";
+
+// StringModifiable is a text setting the requester chooses at each sign-in.
+message StringModifiable {
+  // Used when a sign-in sets none. If absent, every sign-in must set one.
+  StringValue default_value = 1;
+  // Bounds the value. Required.
+  oneof constraint {
+    StringChoices choices = 2;
+    StringAffix affix = 3;
+  }
+}

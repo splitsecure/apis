@@ -1,0 +1,44 @@
+syntax = "proto3";
+package splitsecure.vaultcatalog.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/page/v1/page_params.proto";
+import "splitsecure/vaulttypes/v1/node.proto";
+
+// ListSharedWithMeRequest is the org-wide "Shared with me" list. It returns
+// the non-root nodes granted to the caller across the org's vaults, directly,
+// through a group or through Everyone. It leaves out every vault the caller
+// reaches through own-team membership or a root grant. Those vaults appear
+// in ListVaults instead. A role-bypass caller already sees every vault, so
+// the list is empty for them.
+message ListSharedWithMeRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    // Format: s2r:{deployment}:org:{id}.
+    string org_s2r = 1;
+
+    splitsecure.page.v1.PageParams page = 2;
+  }
+}
+
+// SharedNode is one granted node where the caller can enter a tree. The
+// vault name is shown on purpose, for example as "from {vault}". It is not a
+// withheld ancestor label. The node's own label is the only path context
+// below it.
+message SharedNode {
+  string vault_id = 1;
+
+  // The root label, or the owning team's name when the root has no label.
+  string vault_label = 2;
+
+  // Its access reports the grant that made it an entry point.
+  splitsecure.vaulttypes.v1.Node node = 3;
+}
+
+message ListSharedWithMeResponse {
+  repeated SharedNode shared_nodes = 1;
+
+  bytes next_cursor = 2;
+}

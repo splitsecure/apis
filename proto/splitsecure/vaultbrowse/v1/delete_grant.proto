@@ -1,0 +1,27 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+
+// DeleteGrant removes one grantee's navigation grant from one node. The
+// caller needs grant admin on the node, as for PutGrants. Deleting an absent
+// grant does nothing.
+message DeleteGrantRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    string node_id = 2;
+
+    // A subject within idp_id.
+    string grantee_id = 3;
+
+    // Identity provider of grantee_id. Empty means the deployment directory
+    // on a threshold vault. A standalone vault rejects an empty value.
+    string idp_id = 4;
+  }
+}
+
+message DeleteGrantResponse {}

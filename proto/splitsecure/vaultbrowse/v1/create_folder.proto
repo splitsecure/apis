@@ -1,0 +1,51 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/authz/v1/tier.proto";
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultbrowse/v1/node_locator.proto";
+
+// CreateFolder creates an empty directory node. The caller needs effective
+// use on the parent. Setting initial_grants also needs grant admin on the
+// parent. The server checks this before it writes anything.
+message CreateFolderRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    // Must be unique among the parent's children. A collision is rejected
+    // with AlreadyExists.
+    string label = 2;
+
+    // Selects the parent directory. Unset creates under the tree root.
+    NodeLocator locator = 3;
+
+    // Navigation grants written on the new folder in the same request.
+    // Without them, the folder is reachable exactly like its parent. If the
+    // folder is created but the grants are not written, the RPC returns an
+    // error and the folder exists without them. Retry them through grant
+    // management.
+    repeated InitialGrant initial_grants = 5;
+  }
+
+  message InitialGrant {
+    // A subject within idp_id.
+    string grantee_id = 1;
+
+    splitsecure.authz.v1.Tier tier = 2;
+
+    // The identity provider of every grantee. Empty means the deployment's
+    // own directory. A standalone vault refuses an empty value.
+    string idp_id = 3;
+  }
+}
+
+message CreateFolderResponse {
+  // The new folder's id. It never changes.
+  string node_id = 1;
+
+  // The parent that the locator resolved to.
+  string parent_node_id = 2;
+}

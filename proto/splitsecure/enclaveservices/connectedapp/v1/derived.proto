@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+// Derived names a value the enclave computes.
+enum Derived {
+  DERIVED_UNSPECIFIED = 0;
+  // A new value at each sign-in, such as a transient NameID or a token id.
+  DERIVED_PER_SIGN_IN_ID = 1;
+  // Derived once at creation, such as a persistent NameID. Only a create
+  // request carries it. The record stores it as DerivedText.
+  DERIVED_AT_CREATION_ID = 2;
+}

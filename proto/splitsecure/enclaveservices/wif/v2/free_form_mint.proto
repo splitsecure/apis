@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.wif.v2;
+
+// FreeFormMint is whether an OIDC issuer signs free-form tokens with mint-jwt.
+// The requester chooses the subject, the audience, the lifetime and the claims.
+// It does not affect tokens built from a record, such as a connected app. It
+// never changes after creation.
+enum FreeFormMint {
+  // No setting. The issuer allows free-form tokens.
+  FREE_FORM_MINT_UNSPECIFIED = 0;
+  FREE_FORM_MINT_ALLOWED = 1;
+  FREE_FORM_MINT_REFUSED = 2;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultbrowse/v1/node_locator.proto";
+
+// DeleteFolder deletes a directory node. The server first moves every child
+// into the vault's lost+found directory and renames children whose labels
+// collide. Nothing is destroyed, so no vote is required. Record nodes cannot
+// be deleted here. Records are deleted through VaultUse. The root and the
+// lost+found directory can never be deleted. The caller needs effective edit
+// on the folder.
+message DeleteFolderRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    // Exactly one must be set.
+    NodeLocator locator = 2;
+  }
+}
+
+message DeleteFolderResponse {
+  // Children moved into lost+found. 0 when the folder was empty.
+  uint32 reparented_child_count = 1;
+
+  // Empty when no children were moved.
+  string lost_found_node_id = 2;
+}

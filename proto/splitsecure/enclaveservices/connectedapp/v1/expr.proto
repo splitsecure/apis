@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/expr_part.proto";
+
+// Expr is a value the layout builds from the fields. One field part gives the
+// field value as is. Several parts must all be text. They join in order.
+message Expr {
+  repeated ExprPart parts = 1;
+}

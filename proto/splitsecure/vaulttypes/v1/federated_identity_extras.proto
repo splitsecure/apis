@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+// FederatedIdentityExtras holds the entity id or issuer that the record
+// represents: a SAML IdP or SP entity id, or a WIF authority issuer.
+message FederatedIdentityExtras {
+  string entity_id = 1;
+
+  // Set on a WIF authority whose record refuses the free-form mint, so a
+  // listing can hide that action. Display only.
+  bool free_form_mint_refused = 2;
+}

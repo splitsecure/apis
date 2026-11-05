@@ -1,0 +1,39 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "google/protobuf/duration.proto";
+import "splitsecure/vaultuse/v1/envelope_recipient.proto";
+
+// UseOptions carries the options of a use request. Creates and deletes take
+// WriteOptions.
+message UseOptions {
+  // The public keys the result is sealed to. A threshold vault requires it
+  // for functions that release confidential material, and never returns
+  // those results in the clear. An online vault also accepts such a request
+  // without it and protects the result with the TLS channel.
+  EnvelopeRecipient envelope_recipient = 1;
+
+  // Shortens how long the request may stay pending, below the server
+  // default. It can never lengthen it.
+  google.protobuf.Duration max_pending = 2;
+
+  // How long the server holds the response, up to a server maximum, in case
+  // the request resolves without deferral. Otherwise the same as submitting
+  // and then polling.
+  google.protobuf.Duration wait = 3;
+
+  // Optional free-form reason. It is shown to whoever decides the request
+  // and recorded with the operation.
+  string justification = 4;
+
+  // Options that exist only on threshold vaults. Setting it on any other
+  // vault kind fails with InvalidArgument.
+  ThresholdVaultOptions threshold = 5;
+}
+
+message ThresholdVaultOptions {
+  // Notify only these devices about the request. It applies when the
+  // approver notifies people at all and the resource's policy allows a
+  // narrowed set. Empty notifies everyone eligible.
+  repeated bytes actively_notify_enclave_ids = 1;
+}

@@ -1,0 +1,52 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/page/v1/page_params.proto";
+import "splitsecure/vaultbrowse/v1/node_locator.proto";
+import "splitsecure/vaulttypes/v1/node.proto";
+import "splitsecure/vaulttypes/v1/node_access.proto";
+
+// ListNodes lists the children of one directory. Record nodes carry their
+// display facts. Every node carries the caller's effective access.
+//
+// A directory the caller cannot see returns NotFound. This covers a
+// directory that does not exist, one outside this vault, and one with no
+// reachable grant on it or an ancestor. The error is always the same.
+message ListNodesRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    // Unset lists the root.
+    NodeLocator locator = 2;
+
+    splitsecure.page.v1.PageParams page = 3;
+  }
+}
+
+message ListNodesResponse {
+  // The listed directory's id. Use it to grant on or star this directory.
+  string resolved_node_id = 1;
+
+  repeated splitsecure.vaulttypes.v1.Node children = 2;
+
+  // Root first, ending with the directory's own label. The root's empty
+  // label is left out, so the path is empty at the root. For a caller who
+  // browses through a navigation grant, the path starts at their governing
+  // granted node. Labels above that node are never returned.
+  repeated string label_path = 3;
+
+  // True when labels above the governing granted node were withheld.
+  bool path_truncated = 4;
+
+  // Empty on the last page.
+  bytes next_cursor = 5;
+
+  // The caller's access on the listed directory itself, not on its
+  // children. Gate the manage-access control for this directory on its
+  // can_manage_access. Unset only when there is no access to annotate.
+  splitsecure.vaulttypes.v1.NodeAccess resolved_node_access = 6;
+}

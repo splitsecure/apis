@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+// StringAffix requires the value to start with the prefix and end with the
+// suffix, when set. They must not overlap. Lengths are in bytes.
+message StringAffix {
+  string prefix = 1;
+  string suffix = 2;
+  // Optional bound on the value. It must be at least the length of the prefix
+  // and suffix together. Every text value is at most 1024 bytes.
+  uint32 max_length = 3;
+}

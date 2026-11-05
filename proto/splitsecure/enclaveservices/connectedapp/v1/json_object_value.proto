@@ -1,0 +1,31 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "google/protobuf/struct.proto";
+
+// JsonObjectValue is a JSON object kept as structure, not as text. Member names
+// are unique. The object is at most 8 levels deep and 4 KiB encoded.
+message JsonObjectValue {
+  repeated Member members = 1;
+  // Member is one member, such as one OIDC claim.
+  message Member {
+    string name = 1;
+    Value value = 2;
+  }
+  // Value is a JSON value. It has no floating-point numbers. An integer is
+  // between -(2^53-1) and 2^53-1.
+  message Value {
+    oneof kind {
+      string string_value = 1;
+      int64 integer_value = 2;
+      bool boolean_value = 3;
+      google.protobuf.NullValue null_value = 4;
+      JsonObjectValue object_value = 5;
+      List list_value = 6;
+    }
+  }
+  // List is a JSON array.
+  message List {
+    repeated Value values = 1;
+  }
+}

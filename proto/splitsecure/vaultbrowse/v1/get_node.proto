@@ -1,0 +1,32 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultbrowse/v1/node_locator.proto";
+import "splitsecure/vaulttypes/v1/node.proto";
+
+// GetNode resolves a deep link. Given a node id from a listing or a shared
+// entry point, it returns the node, the caller's access and the label
+// path, without a listing of the parent. NotFound works as in ListNodes.
+message GetNodeRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    // Exactly one must be set. There is no root default. Use
+    // DescribeVault.root_node_id for the root.
+    NodeLocator locator = 2;
+  }
+}
+
+message GetNodeResponse {
+  splitsecure.vaulttypes.v1.Node node = 1;
+
+  // Root first, ending with the node's own label. Truncated at the caller's
+  // governing granted node, as in ListNodes.
+  repeated string label_path = 2;
+
+  bool path_truncated = 3;
+}

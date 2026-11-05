@@ -1,0 +1,43 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/vaultuse/v1/cancel.proto";
+import "splitsecure/vaultuse/v1/delete.proto";
+import "splitsecure/vaultuse/v1/poll_ticket.proto";
+import "splitsecure/vaultuse/v1/typed_create_connected_app.proto";
+import "splitsecure/vaultuse/v1/typed_create_saml2_idp.proto";
+import "splitsecure/vaultuse/v1/typed_create_wif_authority.proto";
+
+// VaultUseService requests governed operations on vault records and
+// collects their results. Threshold vaults and online vaults serve the same
+// service with the same flow. On a threshold vault a guardian quorum
+// approves each request. On an online vault the vault's release policy
+// decides, at once or after a step-up authorization.
+//
+// Every submit RPC returns the result when the request is approved without
+// deferral. Otherwise it returns a Ticket. Follow the ticket with
+// PollTicket to get the result once it releases. Only the submit response
+// hands out a ticket. Tickets cannot be fetched again or listed. Approval
+// outcomes are ticket outcomes, never RPC errors. An RPC error means no
+// operation was created. A resource that does not exist and a resource the
+// caller may not see both return NotFound.
+//
+// Machine callers authenticate each request with envelope. It is a bottle
+// the caller seals, whose Authenticated.data is the request's Base. The
+// server verifies it against the ecosystem root, within a short window
+// after the bottle's PlatformData.sealed_at. Humans and workloads send
+// session tokens in request headers and leave envelope unset. Base carries
+// all request content in both cases.
+service VaultUseService {
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+
+  rpc PollTicket(PollTicketRequest) returns (PollTicketResponse);
+
+  rpc Cancel(CancelRequest) returns (CancelResponse);
+
+  rpc CreateSAML2IDP(CreateSAML2IDPRequest) returns (CreateSAML2IDPResponse);
+
+  rpc CreateConnectedApp(CreateConnectedAppRequest) returns (CreateConnectedAppResponse);
+
+  rpc CreateWIFAuthority(CreateWIFAuthorityRequest) returns (CreateWIFAuthorityResponse);
+}

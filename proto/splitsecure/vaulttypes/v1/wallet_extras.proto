@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+// WalletExtras holds a crypto-wallet record's on-chain address and a
+// human-readable network label.
+message WalletExtras {
+  string address = 1;
+  string network = 2;
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/json_object_value.proto";
+
+// JsonObjectField is a JSON object, such as an OIDC token's extra claims.
+message JsonObjectField {
+  oneof source {
+    // Set at creation. Every sign-in uses it.
+    JsonObjectValue fixed = 1;
+  }
+}

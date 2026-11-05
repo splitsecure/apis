@@ -1,0 +1,25 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "google/protobuf/timestamp.proto";
+import "splitsecure/authz/v1/tier.proto";
+
+// Grant is one navigation grant on a vault node. A node has at most one grant
+// per grantee. A grantee is the pair idp_id and grantee_id, never a bare id.
+// Groups are scoped to a provider too.
+message Grant {
+  string node_id = 1;
+
+  // A subject within idp_id.
+  string grantee_id = 2;
+
+  splitsecure.authz.v1.Tier tier = 3;
+
+  // Id of the principal who made the grant. For audit display only.
+  string granted_by = 4;
+
+  string idp_id = 7;
+
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}

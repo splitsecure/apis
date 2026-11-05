@@ -1,0 +1,15 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/oasis/saml/v2/metadata.proto";
+
+// SAML2Binding binds a connected app to the SAML2 identity provider whose key
+// signs every assertion. It also holds the service provider metadata. Both are
+// fixed for the life of the app. A change to either needs a new app.
+message SAML2Binding {
+  // The serial of the identity provider record presented at creation.
+  uint64 idp_serial = 1;
+  // The entity ID is the audience. An assertion is posted to one of the
+  // HTTP-POST ACS locations.
+  splitsecure.oasis.saml.v2.Metadata sp_metadata = 2;
+}

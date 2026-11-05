@@ -1,0 +1,31 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/audit_observation_receipt/v1/audit_observation_receipt.proto";
+import "splitsecure/hybridkeyset/v1/ies_ciphertext.proto";
+import "splitsecure/vaultuse/v1/secret_ref.proto";
+
+// ReleaseResult is the result of a use request. It is sealed to the request's
+// envelope recipient when the request names one.
+message ReleaseResult {
+  // The records the operation ran against, in the order presented. Each
+  // carries the version actually used.
+  repeated SecretRef secret_refs = 1;
+
+  // SHA3-512 hash of the envelope recipient keyset header. Empty when the
+  // request had no envelope_recipient.
+  bytes encryption_key_id = 2;
+
+  oneof value {
+    // The result, sealed to the envelope recipient.
+    splitsecure.hybridkeyset.v1.IesCiphertext envelope = 3;
+
+    // A result that is not sealed. Either it is not confidential, or it is
+    // an online-vault release that the TLS channel protects.
+    bytes clear_value = 4;
+  }
+
+  // The hash-chained audit record of the release. Every collection of this
+  // result returns the same receipt.
+  splitsecure.audit_observation_receipt.v1.AuditObservationReceipt receipt = 5;
+}

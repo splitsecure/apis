@@ -1,0 +1,24 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+
+// RenameNode changes a node's label. The node keeps its parent. The root and
+// the lost+found directory can never be renamed. The caller needs effective
+// use on the node. A rename never changes custody.
+message RenameNodeRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    string node_id = 2;
+
+    // Must be unique among the node's siblings. A collision is rejected with
+    // AlreadyExists.
+    string new_label = 3;
+  }
+}
+
+message RenameNodeResponse {}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultuse/v1/delete_outcome.proto";
+import "splitsecure/vaultuse/v1/write_options.proto";
+
+// Delete submits a record deletion. One lane serves every kind. The server
+// reads the kind from the record, so there is no function and no params.
+// The vault tombstones the record and removes its vault-tree leaf. Kinds
+// with a dependency guard refuse while dependents are live. For example,
+// an x509 CA with live sub-CAs returns FailedPrecondition. The caller needs
+// edit tier on the record. The approval flow, not the caller's tier, gates
+// the deletion.
+message DeleteRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    // The secret or issuance record to delete. Every version is tombstoned.
+    string secret_id = 2;
+
+    WriteOptions options = 3;
+  }
+}
+
+message DeleteResponse {
+  DeleteOutcome outcome = 1;
+}

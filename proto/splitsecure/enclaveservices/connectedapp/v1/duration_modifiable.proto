@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/duration_range.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/duration_value.proto";
+
+// DurationModifiable is a length of time the requester chooses at each
+// sign-in, within the range.
+message DurationModifiable {
+  // Used when a sign-in sets none. If absent, every sign-in must set one.
+  DurationValue default_value = 1;
+  // Required.
+  DurationRange range = 2;
+}

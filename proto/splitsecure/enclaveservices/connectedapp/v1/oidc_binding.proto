@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+// OIDCBinding binds a connected app to the OIDC issuer and the key that signs
+// every token. It is fixed for the life of the app. A new key needs a new app.
+message OIDCBinding {
+  uint64 authority_serial = 1;
+  string authority_id = 2;
+  // The iss claim of every token.
+  string issuer = 3;
+  // The published key of the issuer that signs every token.
+  bytes key_id = 4;
+}

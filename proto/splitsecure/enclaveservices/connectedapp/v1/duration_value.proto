@@ -1,0 +1,9 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "google/protobuf/duration.proto";
+
+// DurationValue is one length of time.
+message DurationValue {
+  google.protobuf.Duration value = 1;
+}

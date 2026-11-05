@@ -1,0 +1,20 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/saml2_attribute_layout.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/saml2_audience.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/saml2_name_id_layout.proto";
+
+// SAML2Layout is how an assertion is built from the fields. The enclave sets
+// the rest. The key of the binding signs the assertion, not the response. The
+// assertion is never encrypted. NotBefore and AuthnInstant are the time of the
+// final approval. NotOnOrAfter is ten minutes later.
+message SAML2Layout {
+  SAML2Audience audience = 1;
+  SAML2NameIDLayout name_id = 2;
+  repeated SAML2AttributeLayout attributes = 3;
+  // Empty, or one of these two values:
+  // urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport
+  // http://schemas.microsoft.com/claims/multipleauthn
+  string authn_context_class_ref = 4;
+}

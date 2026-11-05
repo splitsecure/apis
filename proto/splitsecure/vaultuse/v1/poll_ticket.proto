@@ -1,0 +1,29 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultuse/v1/ticket_outcome.proto";
+
+// PollTicket follows a ticket to its outcome. The call blocks up to a server-chosen time unless
+// no_block is set. It returns as soon as the ticket resolves. Polling a
+// resolved ticket returns the outcome at once. The same principal can
+// collect a released result again until it expires.
+message PollTicketRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  // Return at once, even if the ticket has not resolved. Useful as a
+  // connectivity check.
+  bool no_block = 3;
+
+  message Base {
+    string vault_id = 1;
+
+    bytes ticket_id = 2;
+  }
+}
+
+message PollTicketResponse {
+  // Unset when the wait ends with the ticket still pending.
+  TicketOutcome outcome = 1;
+}

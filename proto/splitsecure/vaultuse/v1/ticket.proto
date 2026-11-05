@@ -1,0 +1,17 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+// Ticket is the handle to a deferred request. Only the submit response
+// returns it, and only when the request awaits approval. It cannot be
+// fetched again or listed. Follow it with PollTicket.
+message Ticket {
+  // Opaque and server-assigned.
+  bytes ticket_id = 1;
+
+  // A stable URI for this ticket, usable for URL routing.
+  string flow_id = 2;
+
+  // The key of the journey approvers see the request in. Empty when the
+  // request raised no proposal.
+  string journey_key = 3;
+}

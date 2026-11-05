@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/string_choices.proto";
+import "splitsecure/enclaveservices/connectedapp/v1/string_list_value.proto";
+
+// StringListModifiable is a list the requester chooses at each sign-in. It is a
+// non-empty subset of the choices, in the order of the choices.
+message StringListModifiable {
+  // Used when a sign-in sets none. If absent, every sign-in must set one.
+  StringListValue default_value = 1;
+  // The only values the list may hold. Required.
+  StringChoices choices = 2;
+}

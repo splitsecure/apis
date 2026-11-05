@@ -1,0 +1,13 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+// CustodyClass says how a vault protects its records. A threshold vault
+// needs a quorum vote and is served by the coordination server. An online
+// vault is a standalone service gated by policy. Blind vaults, with
+// client-side release, are reserved.
+enum CustodyClass {
+  CUSTODY_CLASS_UNSPECIFIED = 0;
+  CUSTODY_CLASS_THRESHOLD = 1;
+  CUSTODY_CLASS_ONLINE = 2;
+  CUSTODY_CLASS_BLIND = 3;
+}

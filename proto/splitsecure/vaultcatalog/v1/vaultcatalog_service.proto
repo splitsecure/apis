@@ -1,0 +1,17 @@
+syntax = "proto3";
+package splitsecure.vaultcatalog.v1;
+
+import "splitsecure/vaultcatalog/v1/list_shared_with_me.proto";
+import "splitsecure/vaultcatalog/v1/list_vaults.proto";
+
+// VaultCatalogService reads across every vault the coordination server
+// knows: the vaults a caller belongs to and the nodes shared with it. Only
+// the coordination server serves it, never an individual vault. It does not
+// write.
+//
+// Authentication and NotFound work as in VaultBrowseService.
+service VaultCatalogService {
+  rpc ListVaults(ListVaultsRequest) returns (ListVaultsResponse);
+
+  rpc ListSharedWithMe(ListSharedWithMeRequest) returns (ListSharedWithMeResponse);
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.connectedapp.v1;
+
+import "splitsecure/enclaveservices/connectedapp/v1/field_ref.proto";
+
+// ExprPart is one part of an Expr.
+message ExprPart {
+  oneof part {
+    string text = 1;
+    // The value of a text, list or JSON object field.
+    FieldRef field = 2;
+    // The value of a duration field in whole seconds, as text.
+    FieldRef duration_seconds = 3;
+  }
+}

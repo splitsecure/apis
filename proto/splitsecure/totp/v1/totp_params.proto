@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.totp.v1;
+
+// TOTPParams are the cleartext params of a totp record, used for its label.
+// The seed, its algorithm, the code length and the period stay sealed in the
+// TOTPValue. A minted code carries its own window.
+message TOTPParams {
+  string issuer = 1;
+  string account_name = 2;
+
+  // Node id of the password record these codes serve, in the same vault.
+  // Empty for standalone codes.
+  string linked_login_node_id = 3;
+}

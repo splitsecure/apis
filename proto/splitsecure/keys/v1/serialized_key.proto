@@ -1,0 +1,10 @@
+syntax = "proto3";
+package splitsecure.keys.v1;
+
+import "splitsecure/keys/v1/spec.proto";
+
+message SerializedKey {
+  bytes data = 1;
+  Spec spec = 2;
+  bool is_public = 3;
+}
