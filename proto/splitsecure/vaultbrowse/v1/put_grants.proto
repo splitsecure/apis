@@ -1,0 +1,39 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/authz/v1/tier.proto";
+import "splitsecure/bottle/v1/bottle.proto";
+
+// PutGrants creates or replaces the grants of one or more grantees on one
+// node, all at one tier. The caller needs grant admin on the node. Owners
+// and admins have it through their role. Anyone else needs a real grant
+// that reaches edit on the node or an ancestor, so an edit grant on the root
+// passes down the tree. Owning-team membership is not a grant and does not
+// give grant admin. NodeAccess.can_manage_access reports the same check.
+//
+// The server validates all grantees before it writes. A threshold vault
+// checks that each grantee exists in the org directory. A standalone vault
+// checks only shape and org. There, a grantee that does not exist has no
+// effect, like the grant of a deleted principal.
+message PutGrantsRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    string node_id = 2;
+
+    // Each is a subject within idp_id.
+    repeated string grantee_ids = 3;
+
+    splitsecure.authz.v1.Tier tier = 4;
+
+    // Identity provider of every grantee_id. Empty means the deployment
+    // directory on a threshold vault. A standalone vault rejects an empty
+    // value.
+    string idp_id = 5;
+  }
+}
+
+message PutGrantsResponse {}

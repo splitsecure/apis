@@ -39,12 +39,33 @@ const (
 	// VaultBrowseServiceListNodesProcedure is the fully-qualified name of the VaultBrowseService's
 	// ListNodes RPC.
 	VaultBrowseServiceListNodesProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/ListNodes"
+	// VaultBrowseServiceGetNodeProcedure is the fully-qualified name of the VaultBrowseService's
+	// GetNode RPC.
+	VaultBrowseServiceGetNodeProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/GetNode"
 	// VaultBrowseServiceGetRecordProcedure is the fully-qualified name of the VaultBrowseService's
 	// GetRecord RPC.
 	VaultBrowseServiceGetRecordProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/GetRecord"
 	// VaultBrowseServiceCreateFolderProcedure is the fully-qualified name of the VaultBrowseService's
 	// CreateFolder RPC.
 	VaultBrowseServiceCreateFolderProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/CreateFolder"
+	// VaultBrowseServiceMoveNodeProcedure is the fully-qualified name of the VaultBrowseService's
+	// MoveNode RPC.
+	VaultBrowseServiceMoveNodeProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/MoveNode"
+	// VaultBrowseServiceRenameNodeProcedure is the fully-qualified name of the VaultBrowseService's
+	// RenameNode RPC.
+	VaultBrowseServiceRenameNodeProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/RenameNode"
+	// VaultBrowseServiceDeleteFolderProcedure is the fully-qualified name of the VaultBrowseService's
+	// DeleteFolder RPC.
+	VaultBrowseServiceDeleteFolderProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/DeleteFolder"
+	// VaultBrowseServicePutGrantsProcedure is the fully-qualified name of the VaultBrowseService's
+	// PutGrants RPC.
+	VaultBrowseServicePutGrantsProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/PutGrants"
+	// VaultBrowseServiceDeleteGrantProcedure is the fully-qualified name of the VaultBrowseService's
+	// DeleteGrant RPC.
+	VaultBrowseServiceDeleteGrantProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/DeleteGrant"
+	// VaultBrowseServiceListGrantsProcedure is the fully-qualified name of the VaultBrowseService's
+	// ListGrants RPC.
+	VaultBrowseServiceListGrantsProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/ListGrants"
 )
 
 // VaultBrowseServiceClient is a client for the splitsecure.vaultbrowse.v1.VaultBrowseService
@@ -52,8 +73,15 @@ const (
 type VaultBrowseServiceClient interface {
 	DescribeVault(context.Context, *connect.Request[v1.DescribeVaultRequest]) (*connect.Response[v1.DescribeVaultResponse], error)
 	ListNodes(context.Context, *connect.Request[v1.ListNodesRequest]) (*connect.Response[v1.ListNodesResponse], error)
+	GetNode(context.Context, *connect.Request[v1.GetNodeRequest]) (*connect.Response[v1.GetNodeResponse], error)
 	GetRecord(context.Context, *connect.Request[v1.GetRecordRequest]) (*connect.Response[v1.GetRecordResponse], error)
 	CreateFolder(context.Context, *connect.Request[v1.CreateFolderRequest]) (*connect.Response[v1.CreateFolderResponse], error)
+	MoveNode(context.Context, *connect.Request[v1.MoveNodeRequest]) (*connect.Response[v1.MoveNodeResponse], error)
+	RenameNode(context.Context, *connect.Request[v1.RenameNodeRequest]) (*connect.Response[v1.RenameNodeResponse], error)
+	DeleteFolder(context.Context, *connect.Request[v1.DeleteFolderRequest]) (*connect.Response[v1.DeleteFolderResponse], error)
+	PutGrants(context.Context, *connect.Request[v1.PutGrantsRequest]) (*connect.Response[v1.PutGrantsResponse], error)
+	DeleteGrant(context.Context, *connect.Request[v1.DeleteGrantRequest]) (*connect.Response[v1.DeleteGrantResponse], error)
+	ListGrants(context.Context, *connect.Request[v1.ListGrantsRequest]) (*connect.Response[v1.ListGrantsResponse], error)
 }
 
 // NewVaultBrowseServiceClient constructs a client for the
@@ -80,6 +108,12 @@ func NewVaultBrowseServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(vaultBrowseServiceMethods.ByName("ListNodes")),
 			connect.WithClientOptions(opts...),
 		),
+		getNode: connect.NewClient[v1.GetNodeRequest, v1.GetNodeResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceGetNodeProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("GetNode")),
+			connect.WithClientOptions(opts...),
+		),
 		getRecord: connect.NewClient[v1.GetRecordRequest, v1.GetRecordResponse](
 			httpClient,
 			baseURL+VaultBrowseServiceGetRecordProcedure,
@@ -92,6 +126,42 @@ func NewVaultBrowseServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(vaultBrowseServiceMethods.ByName("CreateFolder")),
 			connect.WithClientOptions(opts...),
 		),
+		moveNode: connect.NewClient[v1.MoveNodeRequest, v1.MoveNodeResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceMoveNodeProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("MoveNode")),
+			connect.WithClientOptions(opts...),
+		),
+		renameNode: connect.NewClient[v1.RenameNodeRequest, v1.RenameNodeResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceRenameNodeProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("RenameNode")),
+			connect.WithClientOptions(opts...),
+		),
+		deleteFolder: connect.NewClient[v1.DeleteFolderRequest, v1.DeleteFolderResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceDeleteFolderProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("DeleteFolder")),
+			connect.WithClientOptions(opts...),
+		),
+		putGrants: connect.NewClient[v1.PutGrantsRequest, v1.PutGrantsResponse](
+			httpClient,
+			baseURL+VaultBrowseServicePutGrantsProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("PutGrants")),
+			connect.WithClientOptions(opts...),
+		),
+		deleteGrant: connect.NewClient[v1.DeleteGrantRequest, v1.DeleteGrantResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceDeleteGrantProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("DeleteGrant")),
+			connect.WithClientOptions(opts...),
+		),
+		listGrants: connect.NewClient[v1.ListGrantsRequest, v1.ListGrantsResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceListGrantsProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("ListGrants")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -99,8 +169,15 @@ func NewVaultBrowseServiceClient(httpClient connect.HTTPClient, baseURL string, 
 type vaultBrowseServiceClient struct {
 	describeVault *connect.Client[v1.DescribeVaultRequest, v1.DescribeVaultResponse]
 	listNodes     *connect.Client[v1.ListNodesRequest, v1.ListNodesResponse]
+	getNode       *connect.Client[v1.GetNodeRequest, v1.GetNodeResponse]
 	getRecord     *connect.Client[v1.GetRecordRequest, v1.GetRecordResponse]
 	createFolder  *connect.Client[v1.CreateFolderRequest, v1.CreateFolderResponse]
+	moveNode      *connect.Client[v1.MoveNodeRequest, v1.MoveNodeResponse]
+	renameNode    *connect.Client[v1.RenameNodeRequest, v1.RenameNodeResponse]
+	deleteFolder  *connect.Client[v1.DeleteFolderRequest, v1.DeleteFolderResponse]
+	putGrants     *connect.Client[v1.PutGrantsRequest, v1.PutGrantsResponse]
+	deleteGrant   *connect.Client[v1.DeleteGrantRequest, v1.DeleteGrantResponse]
+	listGrants    *connect.Client[v1.ListGrantsRequest, v1.ListGrantsResponse]
 }
 
 // DescribeVault calls splitsecure.vaultbrowse.v1.VaultBrowseService.DescribeVault.
@@ -113,6 +190,11 @@ func (c *vaultBrowseServiceClient) ListNodes(ctx context.Context, req *connect.R
 	return c.listNodes.CallUnary(ctx, req)
 }
 
+// GetNode calls splitsecure.vaultbrowse.v1.VaultBrowseService.GetNode.
+func (c *vaultBrowseServiceClient) GetNode(ctx context.Context, req *connect.Request[v1.GetNodeRequest]) (*connect.Response[v1.GetNodeResponse], error) {
+	return c.getNode.CallUnary(ctx, req)
+}
+
 // GetRecord calls splitsecure.vaultbrowse.v1.VaultBrowseService.GetRecord.
 func (c *vaultBrowseServiceClient) GetRecord(ctx context.Context, req *connect.Request[v1.GetRecordRequest]) (*connect.Response[v1.GetRecordResponse], error) {
 	return c.getRecord.CallUnary(ctx, req)
@@ -123,13 +205,50 @@ func (c *vaultBrowseServiceClient) CreateFolder(ctx context.Context, req *connec
 	return c.createFolder.CallUnary(ctx, req)
 }
 
+// MoveNode calls splitsecure.vaultbrowse.v1.VaultBrowseService.MoveNode.
+func (c *vaultBrowseServiceClient) MoveNode(ctx context.Context, req *connect.Request[v1.MoveNodeRequest]) (*connect.Response[v1.MoveNodeResponse], error) {
+	return c.moveNode.CallUnary(ctx, req)
+}
+
+// RenameNode calls splitsecure.vaultbrowse.v1.VaultBrowseService.RenameNode.
+func (c *vaultBrowseServiceClient) RenameNode(ctx context.Context, req *connect.Request[v1.RenameNodeRequest]) (*connect.Response[v1.RenameNodeResponse], error) {
+	return c.renameNode.CallUnary(ctx, req)
+}
+
+// DeleteFolder calls splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteFolder.
+func (c *vaultBrowseServiceClient) DeleteFolder(ctx context.Context, req *connect.Request[v1.DeleteFolderRequest]) (*connect.Response[v1.DeleteFolderResponse], error) {
+	return c.deleteFolder.CallUnary(ctx, req)
+}
+
+// PutGrants calls splitsecure.vaultbrowse.v1.VaultBrowseService.PutGrants.
+func (c *vaultBrowseServiceClient) PutGrants(ctx context.Context, req *connect.Request[v1.PutGrantsRequest]) (*connect.Response[v1.PutGrantsResponse], error) {
+	return c.putGrants.CallUnary(ctx, req)
+}
+
+// DeleteGrant calls splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteGrant.
+func (c *vaultBrowseServiceClient) DeleteGrant(ctx context.Context, req *connect.Request[v1.DeleteGrantRequest]) (*connect.Response[v1.DeleteGrantResponse], error) {
+	return c.deleteGrant.CallUnary(ctx, req)
+}
+
+// ListGrants calls splitsecure.vaultbrowse.v1.VaultBrowseService.ListGrants.
+func (c *vaultBrowseServiceClient) ListGrants(ctx context.Context, req *connect.Request[v1.ListGrantsRequest]) (*connect.Response[v1.ListGrantsResponse], error) {
+	return c.listGrants.CallUnary(ctx, req)
+}
+
 // VaultBrowseServiceHandler is an implementation of the
 // splitsecure.vaultbrowse.v1.VaultBrowseService service.
 type VaultBrowseServiceHandler interface {
 	DescribeVault(context.Context, *connect.Request[v1.DescribeVaultRequest]) (*connect.Response[v1.DescribeVaultResponse], error)
 	ListNodes(context.Context, *connect.Request[v1.ListNodesRequest]) (*connect.Response[v1.ListNodesResponse], error)
+	GetNode(context.Context, *connect.Request[v1.GetNodeRequest]) (*connect.Response[v1.GetNodeResponse], error)
 	GetRecord(context.Context, *connect.Request[v1.GetRecordRequest]) (*connect.Response[v1.GetRecordResponse], error)
 	CreateFolder(context.Context, *connect.Request[v1.CreateFolderRequest]) (*connect.Response[v1.CreateFolderResponse], error)
+	MoveNode(context.Context, *connect.Request[v1.MoveNodeRequest]) (*connect.Response[v1.MoveNodeResponse], error)
+	RenameNode(context.Context, *connect.Request[v1.RenameNodeRequest]) (*connect.Response[v1.RenameNodeResponse], error)
+	DeleteFolder(context.Context, *connect.Request[v1.DeleteFolderRequest]) (*connect.Response[v1.DeleteFolderResponse], error)
+	PutGrants(context.Context, *connect.Request[v1.PutGrantsRequest]) (*connect.Response[v1.PutGrantsResponse], error)
+	DeleteGrant(context.Context, *connect.Request[v1.DeleteGrantRequest]) (*connect.Response[v1.DeleteGrantResponse], error)
+	ListGrants(context.Context, *connect.Request[v1.ListGrantsRequest]) (*connect.Response[v1.ListGrantsResponse], error)
 }
 
 // NewVaultBrowseServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -151,6 +270,12 @@ func NewVaultBrowseServiceHandler(svc VaultBrowseServiceHandler, opts ...connect
 		connect.WithSchema(vaultBrowseServiceMethods.ByName("ListNodes")),
 		connect.WithHandlerOptions(opts...),
 	)
+	vaultBrowseServiceGetNodeHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceGetNodeProcedure,
+		svc.GetNode,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("GetNode")),
+		connect.WithHandlerOptions(opts...),
+	)
 	vaultBrowseServiceGetRecordHandler := connect.NewUnaryHandler(
 		VaultBrowseServiceGetRecordProcedure,
 		svc.GetRecord,
@@ -163,16 +288,66 @@ func NewVaultBrowseServiceHandler(svc VaultBrowseServiceHandler, opts ...connect
 		connect.WithSchema(vaultBrowseServiceMethods.ByName("CreateFolder")),
 		connect.WithHandlerOptions(opts...),
 	)
+	vaultBrowseServiceMoveNodeHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceMoveNodeProcedure,
+		svc.MoveNode,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("MoveNode")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vaultBrowseServiceRenameNodeHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceRenameNodeProcedure,
+		svc.RenameNode,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("RenameNode")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vaultBrowseServiceDeleteFolderHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceDeleteFolderProcedure,
+		svc.DeleteFolder,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("DeleteFolder")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vaultBrowseServicePutGrantsHandler := connect.NewUnaryHandler(
+		VaultBrowseServicePutGrantsProcedure,
+		svc.PutGrants,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("PutGrants")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vaultBrowseServiceDeleteGrantHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceDeleteGrantProcedure,
+		svc.DeleteGrant,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("DeleteGrant")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vaultBrowseServiceListGrantsHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceListGrantsProcedure,
+		svc.ListGrants,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("ListGrants")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/splitsecure.vaultbrowse.v1.VaultBrowseService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VaultBrowseServiceDescribeVaultProcedure:
 			vaultBrowseServiceDescribeVaultHandler.ServeHTTP(w, r)
 		case VaultBrowseServiceListNodesProcedure:
 			vaultBrowseServiceListNodesHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceGetNodeProcedure:
+			vaultBrowseServiceGetNodeHandler.ServeHTTP(w, r)
 		case VaultBrowseServiceGetRecordProcedure:
 			vaultBrowseServiceGetRecordHandler.ServeHTTP(w, r)
 		case VaultBrowseServiceCreateFolderProcedure:
 			vaultBrowseServiceCreateFolderHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceMoveNodeProcedure:
+			vaultBrowseServiceMoveNodeHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceRenameNodeProcedure:
+			vaultBrowseServiceRenameNodeHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceDeleteFolderProcedure:
+			vaultBrowseServiceDeleteFolderHandler.ServeHTTP(w, r)
+		case VaultBrowseServicePutGrantsProcedure:
+			vaultBrowseServicePutGrantsHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceDeleteGrantProcedure:
+			vaultBrowseServiceDeleteGrantHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceListGrantsProcedure:
+			vaultBrowseServiceListGrantsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -190,10 +365,38 @@ func (UnimplementedVaultBrowseServiceHandler) ListNodes(context.Context, *connec
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.ListNodes is not implemented"))
 }
 
+func (UnimplementedVaultBrowseServiceHandler) GetNode(context.Context, *connect.Request[v1.GetNodeRequest]) (*connect.Response[v1.GetNodeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.GetNode is not implemented"))
+}
+
 func (UnimplementedVaultBrowseServiceHandler) GetRecord(context.Context, *connect.Request[v1.GetRecordRequest]) (*connect.Response[v1.GetRecordResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.GetRecord is not implemented"))
 }
 
 func (UnimplementedVaultBrowseServiceHandler) CreateFolder(context.Context, *connect.Request[v1.CreateFolderRequest]) (*connect.Response[v1.CreateFolderResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.CreateFolder is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) MoveNode(context.Context, *connect.Request[v1.MoveNodeRequest]) (*connect.Response[v1.MoveNodeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.MoveNode is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) RenameNode(context.Context, *connect.Request[v1.RenameNodeRequest]) (*connect.Response[v1.RenameNodeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.RenameNode is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) DeleteFolder(context.Context, *connect.Request[v1.DeleteFolderRequest]) (*connect.Response[v1.DeleteFolderResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteFolder is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) PutGrants(context.Context, *connect.Request[v1.PutGrantsRequest]) (*connect.Response[v1.PutGrantsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.PutGrants is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) DeleteGrant(context.Context, *connect.Request[v1.DeleteGrantRequest]) (*connect.Response[v1.DeleteGrantResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteGrant is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) ListGrants(context.Context, *connect.Request[v1.ListGrantsRequest]) (*connect.Response[v1.ListGrantsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.ListGrants is not implemented"))
 }

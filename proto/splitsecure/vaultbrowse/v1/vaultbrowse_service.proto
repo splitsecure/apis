@@ -2,11 +2,19 @@ syntax = "proto3";
 package splitsecure.vaultbrowse.v1;
 
 import "splitsecure/vaultbrowse/v1/create_folder.proto";
+import "splitsecure/vaultbrowse/v1/delete_folder.proto";
+import "splitsecure/vaultbrowse/v1/delete_grant.proto";
 import "splitsecure/vaultbrowse/v1/describe_vault.proto";
+import "splitsecure/vaultbrowse/v1/get_node.proto";
 import "splitsecure/vaultbrowse/v1/get_record.proto";
+import "splitsecure/vaultbrowse/v1/list_grants.proto";
 import "splitsecure/vaultbrowse/v1/list_nodes.proto";
+import "splitsecure/vaultbrowse/v1/move_node.proto";
+import "splitsecure/vaultbrowse/v1/put_grants.proto";
+import "splitsecure/vaultbrowse/v1/rename_node.proto";
 
-// VaultBrowseService browses one vault: its tree and record metadata.
+// VaultBrowseService browses one vault: its tree, record metadata and
+// navigation grants.
 // Threshold vaults serve it through the coordination server. Online vaults
 // serve it directly. Every request names its vault by vault_id. Nothing
 // here is org-scoped.
@@ -26,7 +34,16 @@ service VaultBrowseService {
 
   rpc ListNodes(ListNodesRequest) returns (ListNodesResponse);
 
+  rpc GetNode(GetNodeRequest) returns (GetNodeResponse);
+
   rpc GetRecord(GetRecordRequest) returns (GetRecordResponse);
 
   rpc CreateFolder(CreateFolderRequest) returns (CreateFolderResponse);
+  rpc MoveNode(MoveNodeRequest) returns (MoveNodeResponse);
+  rpc RenameNode(RenameNodeRequest) returns (RenameNodeResponse);
+  rpc DeleteFolder(DeleteFolderRequest) returns (DeleteFolderResponse);
+
+  rpc PutGrants(PutGrantsRequest) returns (PutGrantsResponse);
+  rpc DeleteGrant(DeleteGrantRequest) returns (DeleteGrantResponse);
+  rpc ListGrants(ListGrantsRequest) returns (ListGrantsResponse);
 }

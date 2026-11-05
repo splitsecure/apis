@@ -44,7 +44,8 @@ type NodeAccess struct {
 	// Display name of the group whose grant reaches the effective tier, when
 	// no direct grant does. Empty when via_direct is true.
 	ViaGroupLabel string `protobuf:"bytes,3,opt,name=via_group_label,json=viaGroupLabel,proto3" json:"via_group_label,omitempty"`
-	// True when the caller may manage the node's grants. Owners and admins have this through their role. Anyone
+	// True when the caller may manage the node's grants with PutGrants and
+	// DeleteGrant. Owners and admins have this through their role. Anyone
 	// else needs a real grant that reaches edit on the node or an ancestor. It
 	// does not follow from effective_tier. A member of the vault's owning team
 	// has edit throughout the vault but cannot manage who else has access.

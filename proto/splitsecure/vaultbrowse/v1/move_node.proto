@@ -1,0 +1,30 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultbrowse/v1/node_locator.proto";
+
+// MoveNode moves a node under a new parent directory. The node keeps its
+// label. The server rejects a move into the node itself or its subtree. It
+// rejects with AlreadyExists a move where the new parent already has a child
+// with this label. The root and the lost+found directory can never be moved.
+// The caller needs effective use on both the old and the new parent. A move
+// never changes what a record can do or who must approve its use.
+message MoveNodeRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    string node_id = 2;
+
+    // The new parent. Unset moves the node under the tree root.
+    NodeLocator locator = 3;
+  }
+}
+
+message MoveNodeResponse {
+  // The parent that the locator resolved to.
+  string parent_node_id = 1;
+}

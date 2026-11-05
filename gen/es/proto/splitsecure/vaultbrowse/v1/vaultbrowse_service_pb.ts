@@ -6,21 +6,36 @@ import type { GenFile, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import type { CreateFolderRequestSchema, CreateFolderResponseSchema } from "./create_folder_pb";
 import { file_splitsecure_vaultbrowse_v1_create_folder } from "./create_folder_pb";
+import type { DeleteFolderRequestSchema, DeleteFolderResponseSchema } from "./delete_folder_pb";
+import { file_splitsecure_vaultbrowse_v1_delete_folder } from "./delete_folder_pb";
+import type { DeleteGrantRequestSchema, DeleteGrantResponseSchema } from "./delete_grant_pb";
+import { file_splitsecure_vaultbrowse_v1_delete_grant } from "./delete_grant_pb";
 import type { DescribeVaultRequestSchema, DescribeVaultResponseSchema } from "./describe_vault_pb";
 import { file_splitsecure_vaultbrowse_v1_describe_vault } from "./describe_vault_pb";
+import type { GetNodeRequestSchema, GetNodeResponseSchema } from "./get_node_pb";
+import { file_splitsecure_vaultbrowse_v1_get_node } from "./get_node_pb";
 import type { GetRecordRequestSchema, GetRecordResponseSchema } from "./get_record_pb";
 import { file_splitsecure_vaultbrowse_v1_get_record } from "./get_record_pb";
+import type { ListGrantsRequestSchema, ListGrantsResponseSchema } from "./list_grants_pb";
+import { file_splitsecure_vaultbrowse_v1_list_grants } from "./list_grants_pb";
 import type { ListNodesRequestSchema, ListNodesResponseSchema } from "./list_nodes_pb";
 import { file_splitsecure_vaultbrowse_v1_list_nodes } from "./list_nodes_pb";
+import type { MoveNodeRequestSchema, MoveNodeResponseSchema } from "./move_node_pb";
+import { file_splitsecure_vaultbrowse_v1_move_node } from "./move_node_pb";
+import type { PutGrantsRequestSchema, PutGrantsResponseSchema } from "./put_grants_pb";
+import { file_splitsecure_vaultbrowse_v1_put_grants } from "./put_grants_pb";
+import type { RenameNodeRequestSchema, RenameNodeResponseSchema } from "./rename_node_pb";
+import { file_splitsecure_vaultbrowse_v1_rename_node } from "./rename_node_pb";
 
 /**
  * Describes the file splitsecure/vaultbrowse/v1/vaultbrowse_service.proto.
  */
 export const file_splitsecure_vaultbrowse_v1_vaultbrowse_service: GenFile = /*@__PURE__*/
-  fileDesc("CjRzcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MS92YXVsdGJyb3dzZV9zZXJ2aWNlLnByb3RvEhpzcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MTLRAwoSVmF1bHRCcm93c2VTZXJ2aWNlEnQKDURlc2NyaWJlVmF1bHQSMC5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5EZXNjcmliZVZhdWx0UmVxdWVzdBoxLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLkRlc2NyaWJlVmF1bHRSZXNwb25zZRJoCglMaXN0Tm9kZXMSLC5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5MaXN0Tm9kZXNSZXF1ZXN0Gi0uc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuTGlzdE5vZGVzUmVzcG9uc2USaAoJR2V0UmVjb3JkEiwuc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuR2V0UmVjb3JkUmVxdWVzdBotLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLkdldFJlY29yZFJlc3BvbnNlEnEKDENyZWF0ZUZvbGRlchIvLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLkNyZWF0ZUZvbGRlclJlcXVlc3QaMC5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5DcmVhdGVGb2xkZXJSZXNwb25zZUKWAgoeY29tLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxQhdWYXVsdGJyb3dzZVNlcnZpY2VQcm90b1ABWlFnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL3ZhdWx0YnJvd3NlL3YxO3ZhdWx0YnJvd3NldjGiAgNTVliqAhpTcGxpdHNlY3VyZS5WYXVsdGJyb3dzZS5WMcoCGlNwbGl0c2VjdXJlXFZhdWx0YnJvd3NlXFYx4gImU3BsaXRzZWN1cmVcVmF1bHRicm93c2VcVjFcR1BCTWV0YWRhdGHqAhxTcGxpdHNlY3VyZTo6VmF1bHRicm93c2U6OlYxYgZwcm90bzM", [file_splitsecure_vaultbrowse_v1_create_folder, file_splitsecure_vaultbrowse_v1_describe_vault, file_splitsecure_vaultbrowse_v1_get_record, file_splitsecure_vaultbrowse_v1_list_nodes]);
+  fileDesc("CjRzcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MS92YXVsdGJyb3dzZV9zZXJ2aWNlLnByb3RvEhpzcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MTLDCQoSVmF1bHRCcm93c2VTZXJ2aWNlEnQKDURlc2NyaWJlVmF1bHQSMC5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5EZXNjcmliZVZhdWx0UmVxdWVzdBoxLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLkRlc2NyaWJlVmF1bHRSZXNwb25zZRJoCglMaXN0Tm9kZXMSLC5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5MaXN0Tm9kZXNSZXF1ZXN0Gi0uc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuTGlzdE5vZGVzUmVzcG9uc2USYgoHR2V0Tm9kZRIqLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLkdldE5vZGVSZXF1ZXN0Gisuc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuR2V0Tm9kZVJlc3BvbnNlEmgKCUdldFJlY29yZBIsLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLkdldFJlY29yZFJlcXVlc3QaLS5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5HZXRSZWNvcmRSZXNwb25zZRJxCgxDcmVhdGVGb2xkZXISLy5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5DcmVhdGVGb2xkZXJSZXF1ZXN0GjAuc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuQ3JlYXRlRm9sZGVyUmVzcG9uc2USZQoITW92ZU5vZGUSKy5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5Nb3ZlTm9kZVJlcXVlc3QaLC5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5Nb3ZlTm9kZVJlc3BvbnNlEmsKClJlbmFtZU5vZGUSLS5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5SZW5hbWVOb2RlUmVxdWVzdBouLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLlJlbmFtZU5vZGVSZXNwb25zZRJxCgxEZWxldGVGb2xkZXISLy5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5EZWxldGVGb2xkZXJSZXF1ZXN0GjAuc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuRGVsZXRlRm9sZGVyUmVzcG9uc2USaAoJUHV0R3JhbnRzEiwuc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuUHV0R3JhbnRzUmVxdWVzdBotLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLlB1dEdyYW50c1Jlc3BvbnNlEm4KC0RlbGV0ZUdyYW50Ei4uc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuRGVsZXRlR3JhbnRSZXF1ZXN0Gi8uc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuRGVsZXRlR3JhbnRSZXNwb25zZRJrCgpMaXN0R3JhbnRzEi0uc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuTGlzdEdyYW50c1JlcXVlc3QaLi5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5MaXN0R3JhbnRzUmVzcG9uc2VClgIKHmNvbS5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MUIXVmF1bHRicm93c2VTZXJ2aWNlUHJvdG9QAVpRZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MTt2YXVsdGJyb3dzZXYxogIDU1ZYqgIaU3BsaXRzZWN1cmUuVmF1bHRicm93c2UuVjHKAhpTcGxpdHNlY3VyZVxWYXVsdGJyb3dzZVxWMeICJlNwbGl0c2VjdXJlXFZhdWx0YnJvd3NlXFYxXEdQQk1ldGFkYXRh6gIcU3BsaXRzZWN1cmU6OlZhdWx0YnJvd3NlOjpWMWIGcHJvdG8z", [file_splitsecure_vaultbrowse_v1_create_folder, file_splitsecure_vaultbrowse_v1_delete_folder, file_splitsecure_vaultbrowse_v1_delete_grant, file_splitsecure_vaultbrowse_v1_describe_vault, file_splitsecure_vaultbrowse_v1_get_node, file_splitsecure_vaultbrowse_v1_get_record, file_splitsecure_vaultbrowse_v1_list_grants, file_splitsecure_vaultbrowse_v1_list_nodes, file_splitsecure_vaultbrowse_v1_move_node, file_splitsecure_vaultbrowse_v1_put_grants, file_splitsecure_vaultbrowse_v1_rename_node]);
 
 /**
- * VaultBrowseService browses one vault: its tree and record metadata.
+ * VaultBrowseService browses one vault: its tree, record metadata and
+ * navigation grants.
  * Threshold vaults serve it through the coordination server. Online vaults
  * serve it directly. Every request names its vault by vault_id. Nothing
  * here is org-scoped.
@@ -56,6 +71,14 @@ export const VaultBrowseService: GenService<{
     output: typeof ListNodesResponseSchema;
   },
   /**
+   * @generated from rpc splitsecure.vaultbrowse.v1.VaultBrowseService.GetNode
+   */
+  getNode: {
+    methodKind: "unary";
+    input: typeof GetNodeRequestSchema;
+    output: typeof GetNodeResponseSchema;
+  },
+  /**
    * @generated from rpc splitsecure.vaultbrowse.v1.VaultBrowseService.GetRecord
    */
   getRecord: {
@@ -70,6 +93,54 @@ export const VaultBrowseService: GenService<{
     methodKind: "unary";
     input: typeof CreateFolderRequestSchema;
     output: typeof CreateFolderResponseSchema;
+  },
+  /**
+   * @generated from rpc splitsecure.vaultbrowse.v1.VaultBrowseService.MoveNode
+   */
+  moveNode: {
+    methodKind: "unary";
+    input: typeof MoveNodeRequestSchema;
+    output: typeof MoveNodeResponseSchema;
+  },
+  /**
+   * @generated from rpc splitsecure.vaultbrowse.v1.VaultBrowseService.RenameNode
+   */
+  renameNode: {
+    methodKind: "unary";
+    input: typeof RenameNodeRequestSchema;
+    output: typeof RenameNodeResponseSchema;
+  },
+  /**
+   * @generated from rpc splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteFolder
+   */
+  deleteFolder: {
+    methodKind: "unary";
+    input: typeof DeleteFolderRequestSchema;
+    output: typeof DeleteFolderResponseSchema;
+  },
+  /**
+   * @generated from rpc splitsecure.vaultbrowse.v1.VaultBrowseService.PutGrants
+   */
+  putGrants: {
+    methodKind: "unary";
+    input: typeof PutGrantsRequestSchema;
+    output: typeof PutGrantsResponseSchema;
+  },
+  /**
+   * @generated from rpc splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteGrant
+   */
+  deleteGrant: {
+    methodKind: "unary";
+    input: typeof DeleteGrantRequestSchema;
+    output: typeof DeleteGrantResponseSchema;
+  },
+  /**
+   * @generated from rpc splitsecure.vaultbrowse.v1.VaultBrowseService.ListGrants
+   */
+  listGrants: {
+    methodKind: "unary";
+    input: typeof ListGrantsRequestSchema;
+    output: typeof ListGrantsResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_splitsecure_vaultbrowse_v1_vaultbrowse_service, 0);

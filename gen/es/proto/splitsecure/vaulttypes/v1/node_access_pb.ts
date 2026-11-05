@@ -54,7 +54,8 @@ export type NodeAccess = Message<"splitsecure.vaulttypes.v1.NodeAccess"> & {
   viaGroupLabel: string;
 
   /**
-   * True when the caller may manage the node's grants. Owners and admins have this through their role. Anyone
+   * True when the caller may manage the node's grants with PutGrants and
+   * DeleteGrant. Owners and admins have this through their role. Anyone
    * else needs a real grant that reaches edit on the node or an ancestor. It
    * does not follow from effective_tier. A member of the vault's owning team
    * has edit throughout the vault but cannot manage who else has access.

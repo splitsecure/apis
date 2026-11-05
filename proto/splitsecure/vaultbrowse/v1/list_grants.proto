@@ -1,0 +1,27 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/page/v1/page_params.proto";
+import "splitsecure/vaultbrowse/v1/grant.proto";
+
+// ListGrants lists the grants on one node. The caller needs effective view
+// on the node. No weaker access can read grants.
+message ListGrantsRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    string node_id = 2;
+
+    splitsecure.page.v1.PageParams page_params = 3;
+  }
+}
+
+message ListGrantsResponse {
+  repeated Grant grants = 1;
+
+  bytes next_cursor = 2;
+}
