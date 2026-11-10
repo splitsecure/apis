@@ -1,0 +1,16 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/vaulttypes/v1/node.proto";
+import "splitsecure/vaulttypes/v1/resource_category.proto";
+
+// CategoryFolder is one category and the folder recommended for its new
+// resources.
+message CategoryFolder {
+  splitsecure.vaulttypes.v1.ResourceCategory category = 1;
+
+  // The recommended folder's path from the root, root excluded, ending with
+  // the folder itself. Empty means the vault root: no default is set, or the
+  // folder no longer exists.
+  repeated splitsecure.vaulttypes.v1.Node default_path = 2;
+}

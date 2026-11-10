@@ -4,6 +4,7 @@ package splitsecure.vaultbrowse.v1;
 import "splitsecure/bottle/v1/bottle.proto";
 import "splitsecure/vaultbrowse/v1/node_locator.proto";
 import "splitsecure/vaulttypes/v1/node.proto";
+import "splitsecure/vaulttypes/v1/resource_category.proto";
 
 // GetNode resolves a deep link. Given a node id from a listing or a shared
 // entry point, it returns the node, the caller's access and the label
@@ -29,4 +30,8 @@ message GetNodeResponse {
   repeated string label_path = 2;
 
   bool path_truncated = 3;
+
+  // One entry per label_path segment, in the same order: that folder's
+  // Node.category, unspecified for an ordinary folder.
+  repeated splitsecure.vaulttypes.v1.ResourceCategory label_path_categories = 4;
 }

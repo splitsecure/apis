@@ -17,8 +17,8 @@ code generator.
 | `splitsecure.proposals.v1` | `ProposalsService` | Threshold-vote a proposal to completion; list, watch and inspect proposal state. |
 | `splitsecure.conveniencestore.v1` | `ConvenienceStoreService` | SAML2 identity-provider and service-provider resource management. |
 | `splitsecure.vaultuse.v1` | `VaultUseService` | Create SAML2 identity providers, OIDC issuers and connected apps, delete vault records, and follow a deferred request to its outcome. |
-| `splitsecure.vaultbrowse.v1` | `VaultBrowseService` | Describe one vault, list its nodes, read a record, manage folders and grant access to nodes. |
-| `splitsecure.vaultcatalog.v1` | `VaultCatalogService` | List the vaults and shared nodes a principal can see. |
+| `splitsecure.vaultbrowse.v1` | `VaultBrowseService` | Describe one vault, list its nodes, read a record, manage folders and grant access to nodes. List the nodes shared with the caller, star nodes and set the default folder for each resource category. |
+| `splitsecure.vaultcatalog.v1` | `VaultCatalogService` | List the vaults, shared nodes and starred nodes a principal can see. |
 
 The remaining packages (`bottle`, `delegationgraph`, `hybridkeyset`,
 `keys`, `saml2`, `teamresource`, `attestation`, `requestsigning`,

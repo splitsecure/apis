@@ -24,26 +24,31 @@ var File_splitsecure_vaultcatalog_v1_vaultcatalog_service_proto protoreflect.Fil
 
 const file_splitsecure_vaultcatalog_v1_vaultcatalog_service_proto_rawDesc = "" +
 	"\n" +
-	"6splitsecure/vaultcatalog/v1/vaultcatalog_service.proto\x12\x1bsplitsecure.vaultcatalog.v1\x1a5splitsecure/vaultcatalog/v1/list_shared_with_me.proto\x1a-splitsecure/vaultcatalog/v1/list_vaults.proto2\x85\x02\n" +
+	"6splitsecure/vaultcatalog/v1/vaultcatalog_service.proto\x12\x1bsplitsecure.vaultcatalog.v1\x1a5splitsecure/vaultcatalog/v1/list_shared_with_me.proto\x1a4splitsecure/vaultcatalog/v1/list_starred_nodes.proto\x1a-splitsecure/vaultcatalog/v1/list_vaults.proto2\x86\x03\n" +
 	"\x13VaultCatalogService\x12m\n" +
 	"\n" +
 	"ListVaults\x12..splitsecure.vaultcatalog.v1.ListVaultsRequest\x1a/.splitsecure.vaultcatalog.v1.ListVaultsResponse\x12\x7f\n" +
-	"\x10ListSharedWithMe\x124.splitsecure.vaultcatalog.v1.ListSharedWithMeRequest\x1a5.splitsecure.vaultcatalog.v1.ListSharedWithMeResponseB\x9e\x02\n" +
+	"\x10ListSharedWithMe\x124.splitsecure.vaultcatalog.v1.ListSharedWithMeRequest\x1a5.splitsecure.vaultcatalog.v1.ListSharedWithMeResponse\x12\x7f\n" +
+	"\x10ListStarredNodes\x124.splitsecure.vaultcatalog.v1.ListStarredNodesRequest\x1a5.splitsecure.vaultcatalog.v1.ListStarredNodesResponseB\x9e\x02\n" +
 	"\x1fcom.splitsecure.vaultcatalog.v1B\x18VaultcatalogServiceProtoP\x01ZSgithub.com/splitsecure/apis/gen/go/proto/splitsecure/vaultcatalog/v1;vaultcatalogv1\xa2\x02\x03SVX\xaa\x02\x1bSplitsecure.Vaultcatalog.V1\xca\x02\x1bSplitsecure\\Vaultcatalog\\V1\xe2\x02'Splitsecure\\Vaultcatalog\\V1\\GPBMetadata\xea\x02\x1dSplitsecure::Vaultcatalog::V1b\x06proto3"
 
 var file_splitsecure_vaultcatalog_v1_vaultcatalog_service_proto_goTypes = []any{
 	(*ListVaultsRequest)(nil),        // 0: splitsecure.vaultcatalog.v1.ListVaultsRequest
 	(*ListSharedWithMeRequest)(nil),  // 1: splitsecure.vaultcatalog.v1.ListSharedWithMeRequest
-	(*ListVaultsResponse)(nil),       // 2: splitsecure.vaultcatalog.v1.ListVaultsResponse
-	(*ListSharedWithMeResponse)(nil), // 3: splitsecure.vaultcatalog.v1.ListSharedWithMeResponse
+	(*ListStarredNodesRequest)(nil),  // 2: splitsecure.vaultcatalog.v1.ListStarredNodesRequest
+	(*ListVaultsResponse)(nil),       // 3: splitsecure.vaultcatalog.v1.ListVaultsResponse
+	(*ListSharedWithMeResponse)(nil), // 4: splitsecure.vaultcatalog.v1.ListSharedWithMeResponse
+	(*ListStarredNodesResponse)(nil), // 5: splitsecure.vaultcatalog.v1.ListStarredNodesResponse
 }
 var file_splitsecure_vaultcatalog_v1_vaultcatalog_service_proto_depIdxs = []int32{
 	0, // 0: splitsecure.vaultcatalog.v1.VaultCatalogService.ListVaults:input_type -> splitsecure.vaultcatalog.v1.ListVaultsRequest
 	1, // 1: splitsecure.vaultcatalog.v1.VaultCatalogService.ListSharedWithMe:input_type -> splitsecure.vaultcatalog.v1.ListSharedWithMeRequest
-	2, // 2: splitsecure.vaultcatalog.v1.VaultCatalogService.ListVaults:output_type -> splitsecure.vaultcatalog.v1.ListVaultsResponse
-	3, // 3: splitsecure.vaultcatalog.v1.VaultCatalogService.ListSharedWithMe:output_type -> splitsecure.vaultcatalog.v1.ListSharedWithMeResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	2, // 2: splitsecure.vaultcatalog.v1.VaultCatalogService.ListStarredNodes:input_type -> splitsecure.vaultcatalog.v1.ListStarredNodesRequest
+	3, // 3: splitsecure.vaultcatalog.v1.VaultCatalogService.ListVaults:output_type -> splitsecure.vaultcatalog.v1.ListVaultsResponse
+	4, // 4: splitsecure.vaultcatalog.v1.VaultCatalogService.ListSharedWithMe:output_type -> splitsecure.vaultcatalog.v1.ListSharedWithMeResponse
+	5, // 5: splitsecure.vaultcatalog.v1.VaultCatalogService.ListStarredNodes:output_type -> splitsecure.vaultcatalog.v1.ListStarredNodesResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -55,6 +60,7 @@ func file_splitsecure_vaultcatalog_v1_vaultcatalog_service_proto_init() {
 		return
 	}
 	file_splitsecure_vaultcatalog_v1_list_shared_with_me_proto_init()
+	file_splitsecure_vaultcatalog_v1_list_starred_nodes_proto_init()
 	file_splitsecure_vaultcatalog_v1_list_vaults_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{

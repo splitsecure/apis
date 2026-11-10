@@ -6,6 +6,8 @@ import type { GenFile, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import type { ListSharedWithMeRequestSchema, ListSharedWithMeResponseSchema } from "./list_shared_with_me_pb";
 import { file_splitsecure_vaultcatalog_v1_list_shared_with_me } from "./list_shared_with_me_pb";
+import type { ListStarredNodesRequestSchema, ListStarredNodesResponseSchema } from "./list_starred_nodes_pb";
+import { file_splitsecure_vaultcatalog_v1_list_starred_nodes } from "./list_starred_nodes_pb";
 import type { ListVaultsRequestSchema, ListVaultsResponseSchema } from "./list_vaults_pb";
 import { file_splitsecure_vaultcatalog_v1_list_vaults } from "./list_vaults_pb";
 
@@ -13,13 +15,13 @@ import { file_splitsecure_vaultcatalog_v1_list_vaults } from "./list_vaults_pb";
  * Describes the file splitsecure/vaultcatalog/v1/vaultcatalog_service.proto.
  */
 export const file_splitsecure_vaultcatalog_v1_vaultcatalog_service: GenFile = /*@__PURE__*/
-  fileDesc("CjZzcGxpdHNlY3VyZS92YXVsdGNhdGFsb2cvdjEvdmF1bHRjYXRhbG9nX3NlcnZpY2UucHJvdG8SG3NwbGl0c2VjdXJlLnZhdWx0Y2F0YWxvZy52MTKFAgoTVmF1bHRDYXRhbG9nU2VydmljZRJtCgpMaXN0VmF1bHRzEi4uc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RWYXVsdHNSZXF1ZXN0Gi8uc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RWYXVsdHNSZXNwb25zZRJ/ChBMaXN0U2hhcmVkV2l0aE1lEjQuc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RTaGFyZWRXaXRoTWVSZXF1ZXN0GjUuc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RTaGFyZWRXaXRoTWVSZXNwb25zZUKeAgofY29tLnNwbGl0c2VjdXJlLnZhdWx0Y2F0YWxvZy52MUIYVmF1bHRjYXRhbG9nU2VydmljZVByb3RvUAFaU2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvdmF1bHRjYXRhbG9nL3YxO3ZhdWx0Y2F0YWxvZ3YxogIDU1ZYqgIbU3BsaXRzZWN1cmUuVmF1bHRjYXRhbG9nLlYxygIbU3BsaXRzZWN1cmVcVmF1bHRjYXRhbG9nXFYx4gInU3BsaXRzZWN1cmVcVmF1bHRjYXRhbG9nXFYxXEdQQk1ldGFkYXRh6gIdU3BsaXRzZWN1cmU6OlZhdWx0Y2F0YWxvZzo6VjFiBnByb3RvMw", [file_splitsecure_vaultcatalog_v1_list_shared_with_me, file_splitsecure_vaultcatalog_v1_list_vaults]);
+  fileDesc("CjZzcGxpdHNlY3VyZS92YXVsdGNhdGFsb2cvdjEvdmF1bHRjYXRhbG9nX3NlcnZpY2UucHJvdG8SG3NwbGl0c2VjdXJlLnZhdWx0Y2F0YWxvZy52MTKGAwoTVmF1bHRDYXRhbG9nU2VydmljZRJtCgpMaXN0VmF1bHRzEi4uc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RWYXVsdHNSZXF1ZXN0Gi8uc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RWYXVsdHNSZXNwb25zZRJ/ChBMaXN0U2hhcmVkV2l0aE1lEjQuc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RTaGFyZWRXaXRoTWVSZXF1ZXN0GjUuc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RTaGFyZWRXaXRoTWVSZXNwb25zZRJ/ChBMaXN0U3RhcnJlZE5vZGVzEjQuc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RTdGFycmVkTm9kZXNSZXF1ZXN0GjUuc3BsaXRzZWN1cmUudmF1bHRjYXRhbG9nLnYxLkxpc3RTdGFycmVkTm9kZXNSZXNwb25zZUKeAgofY29tLnNwbGl0c2VjdXJlLnZhdWx0Y2F0YWxvZy52MUIYVmF1bHRjYXRhbG9nU2VydmljZVByb3RvUAFaU2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvdmF1bHRjYXRhbG9nL3YxO3ZhdWx0Y2F0YWxvZ3YxogIDU1ZYqgIbU3BsaXRzZWN1cmUuVmF1bHRjYXRhbG9nLlYxygIbU3BsaXRzZWN1cmVcVmF1bHRjYXRhbG9nXFYx4gInU3BsaXRzZWN1cmVcVmF1bHRjYXRhbG9nXFYxXEdQQk1ldGFkYXRh6gIdU3BsaXRzZWN1cmU6OlZhdWx0Y2F0YWxvZzo6VjFiBnByb3RvMw", [file_splitsecure_vaultcatalog_v1_list_shared_with_me, file_splitsecure_vaultcatalog_v1_list_starred_nodes, file_splitsecure_vaultcatalog_v1_list_vaults]);
 
 /**
  * VaultCatalogService reads across every vault the coordination server
- * knows: the vaults a caller belongs to and the nodes shared with it. Only
- * the coordination server serves it, never an individual vault. It does not
- * write.
+ * knows: the vaults a caller belongs to, the nodes shared with it and its
+ * stars. Only the coordination server serves it, never an individual vault.
+ * It does not write.
  *
  * Authentication and NotFound work as in VaultBrowseService.
  *
@@ -41,6 +43,14 @@ export const VaultCatalogService: GenService<{
     methodKind: "unary";
     input: typeof ListSharedWithMeRequestSchema;
     output: typeof ListSharedWithMeResponseSchema;
+  },
+  /**
+   * @generated from rpc splitsecure.vaultcatalog.v1.VaultCatalogService.ListStarredNodes
+   */
+  listStarredNodes: {
+    methodKind: "unary";
+    input: typeof ListStarredNodesRequestSchema;
+    output: typeof ListStarredNodesResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_splitsecure_vaultcatalog_v1_vaultcatalog_service, 0);

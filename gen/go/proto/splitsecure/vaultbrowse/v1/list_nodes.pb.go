@@ -100,8 +100,12 @@ type ListNodesResponse struct {
 	// children. Gate the manage-access control for this directory on its
 	// can_manage_access. Unset only when there is no access to annotate.
 	ResolvedNodeAccess *v11.NodeAccess `protobuf:"bytes,6,opt,name=resolved_node_access,json=resolvedNodeAccess,proto3" json:"resolved_node_access,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	// One entry per label_path segment, in the same order: that folder's
+	// Node.category, unspecified for an ordinary folder. Use it to show a
+	// category folder's localized name in the breadcrumb.
+	LabelPathCategories []v11.ResourceCategory `protobuf:"varint,7,rep,packed,name=label_path_categories,json=labelPathCategories,proto3,enum=splitsecure.vaulttypes.v1.ResourceCategory" json:"label_path_categories,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ListNodesResponse) Reset() {
@@ -176,6 +180,13 @@ func (x *ListNodesResponse) GetResolvedNodeAccess() *v11.NodeAccess {
 	return nil
 }
 
+func (x *ListNodesResponse) GetLabelPathCategories() []v11.ResourceCategory {
+	if x != nil {
+		return x.LabelPathCategories
+	}
+	return nil
+}
+
 type ListNodesRequest_Base struct {
 	state   protoimpl.MessageState `protogen:"open.v1"`
 	VaultId string                 `protobuf:"bytes,1,opt,name=vault_id,json=vaultId,proto3" json:"vault_id,omitempty"`
@@ -241,14 +252,14 @@ var File_splitsecure_vaultbrowse_v1_list_nodes_proto protoreflect.FileDescriptor
 
 const file_splitsecure_vaultbrowse_v1_list_nodes_proto_rawDesc = "" +
 	"\n" +
-	"+splitsecure/vaultbrowse/v1/list_nodes.proto\x12\x1asplitsecure.vaultbrowse.v1\x1a\"splitsecure/bottle/v1/bottle.proto\x1a%splitsecure/page/v1/page_params.proto\x1a-splitsecure/vaultbrowse/v1/node_locator.proto\x1a$splitsecure/vaulttypes/v1/node.proto\x1a+splitsecure/vaulttypes/v1/node_access.proto\"\xb0\x02\n" +
+	"+splitsecure/vaultbrowse/v1/list_nodes.proto\x12\x1asplitsecure.vaultbrowse.v1\x1a\"splitsecure/bottle/v1/bottle.proto\x1a%splitsecure/page/v1/page_params.proto\x1a-splitsecure/vaultbrowse/v1/node_locator.proto\x1a$splitsecure/vaulttypes/v1/node.proto\x1a+splitsecure/vaulttypes/v1/node_access.proto\x1a1splitsecure/vaulttypes/v1/resource_category.proto\"\xb0\x02\n" +
 	"\x10ListNodesRequest\x129\n" +
 	"\benvelope\x18\x01 \x01(\v2\x1d.splitsecure.bottle.v1.BottleR\benvelope\x12E\n" +
 	"\x04base\x18\x02 \x01(\v21.splitsecure.vaultbrowse.v1.ListNodesRequest.BaseR\x04base\x1a\x99\x01\n" +
 	"\x04Base\x12\x19\n" +
 	"\bvault_id\x18\x01 \x01(\tR\avaultId\x12A\n" +
 	"\alocator\x18\x02 \x01(\v2'.splitsecure.vaultbrowse.v1.NodeLocatorR\alocator\x123\n" +
-	"\x04page\x18\x03 \x01(\v2\x1f.splitsecure.page.v1.PageParamsR\x04page\"\xba\x02\n" +
+	"\x04page\x18\x03 \x01(\v2\x1f.splitsecure.page.v1.PageParamsR\x04page\"\x9b\x03\n" +
 	"\x11ListNodesResponse\x12(\n" +
 	"\x10resolved_node_id\x18\x01 \x01(\tR\x0eresolvedNodeId\x12;\n" +
 	"\bchildren\x18\x02 \x03(\v2\x1f.splitsecure.vaulttypes.v1.NodeR\bchildren\x12\x1d\n" +
@@ -257,7 +268,8 @@ const file_splitsecure_vaultbrowse_v1_list_nodes_proto_rawDesc = "" +
 	"\x0epath_truncated\x18\x04 \x01(\bR\rpathTruncated\x12\x1f\n" +
 	"\vnext_cursor\x18\x05 \x01(\fR\n" +
 	"nextCursor\x12W\n" +
-	"\x14resolved_node_access\x18\x06 \x01(\v2%.splitsecure.vaulttypes.v1.NodeAccessR\x12resolvedNodeAccessB\x8d\x02\n" +
+	"\x14resolved_node_access\x18\x06 \x01(\v2%.splitsecure.vaulttypes.v1.NodeAccessR\x12resolvedNodeAccess\x12_\n" +
+	"\x15label_path_categories\x18\a \x03(\x0e2+.splitsecure.vaulttypes.v1.ResourceCategoryR\x13labelPathCategoriesB\x8d\x02\n" +
 	"\x1ecom.splitsecure.vaultbrowse.v1B\x0eListNodesProtoP\x01ZQgithub.com/splitsecure/apis/gen/go/proto/splitsecure/vaultbrowse/v1;vaultbrowsev1\xa2\x02\x03SVX\xaa\x02\x1aSplitsecure.Vaultbrowse.V1\xca\x02\x1aSplitsecure\\Vaultbrowse\\V1\xe2\x02&Splitsecure\\Vaultbrowse\\V1\\GPBMetadata\xea\x02\x1cSplitsecure::Vaultbrowse::V1b\x06proto3"
 
 var (
@@ -280,21 +292,23 @@ var file_splitsecure_vaultbrowse_v1_list_nodes_proto_goTypes = []any{
 	(*v1.Bottle)(nil),             // 3: splitsecure.bottle.v1.Bottle
 	(*v11.Node)(nil),              // 4: splitsecure.vaulttypes.v1.Node
 	(*v11.NodeAccess)(nil),        // 5: splitsecure.vaulttypes.v1.NodeAccess
-	(*NodeLocator)(nil),           // 6: splitsecure.vaultbrowse.v1.NodeLocator
-	(*v12.PageParams)(nil),        // 7: splitsecure.page.v1.PageParams
+	(v11.ResourceCategory)(0),     // 6: splitsecure.vaulttypes.v1.ResourceCategory
+	(*NodeLocator)(nil),           // 7: splitsecure.vaultbrowse.v1.NodeLocator
+	(*v12.PageParams)(nil),        // 8: splitsecure.page.v1.PageParams
 }
 var file_splitsecure_vaultbrowse_v1_list_nodes_proto_depIdxs = []int32{
 	3, // 0: splitsecure.vaultbrowse.v1.ListNodesRequest.envelope:type_name -> splitsecure.bottle.v1.Bottle
 	2, // 1: splitsecure.vaultbrowse.v1.ListNodesRequest.base:type_name -> splitsecure.vaultbrowse.v1.ListNodesRequest.Base
 	4, // 2: splitsecure.vaultbrowse.v1.ListNodesResponse.children:type_name -> splitsecure.vaulttypes.v1.Node
 	5, // 3: splitsecure.vaultbrowse.v1.ListNodesResponse.resolved_node_access:type_name -> splitsecure.vaulttypes.v1.NodeAccess
-	6, // 4: splitsecure.vaultbrowse.v1.ListNodesRequest.Base.locator:type_name -> splitsecure.vaultbrowse.v1.NodeLocator
-	7, // 5: splitsecure.vaultbrowse.v1.ListNodesRequest.Base.page:type_name -> splitsecure.page.v1.PageParams
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	6, // 4: splitsecure.vaultbrowse.v1.ListNodesResponse.label_path_categories:type_name -> splitsecure.vaulttypes.v1.ResourceCategory
+	7, // 5: splitsecure.vaultbrowse.v1.ListNodesRequest.Base.locator:type_name -> splitsecure.vaultbrowse.v1.NodeLocator
+	8, // 6: splitsecure.vaultbrowse.v1.ListNodesRequest.Base.page:type_name -> splitsecure.page.v1.PageParams
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_vaultbrowse_v1_list_nodes_proto_init() }

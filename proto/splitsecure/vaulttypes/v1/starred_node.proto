@@ -1,0 +1,19 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+import "splitsecure/vaulttypes/v1/node.proto";
+
+// StarredNode is one of the caller's stars, with its node and label path.
+message StarredNode {
+  // Set in VaultCatalogService.ListStarredNodes, which spans vaults. Empty in
+  // VaultBrowseService.ListStarredNodes, where the request names the vault.
+  string vault_id = 1;
+
+  Node node = 2;
+
+  // Root first, ending with the node's own label. Truncated at the caller's
+  // governing granted node, as in ListNodes.
+  repeated string label_path = 3;
+
+  bool path_truncated = 4;
+}

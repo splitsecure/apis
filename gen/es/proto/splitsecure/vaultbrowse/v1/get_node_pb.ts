@@ -10,13 +10,15 @@ import type { NodeLocator } from "./node_locator_pb";
 import { file_splitsecure_vaultbrowse_v1_node_locator } from "./node_locator_pb";
 import type { Node } from "../../vaulttypes/v1/node_pb";
 import { file_splitsecure_vaulttypes_v1_node } from "../../vaulttypes/v1/node_pb";
+import type { ResourceCategory } from "../../vaulttypes/v1/resource_category_pb";
+import { file_splitsecure_vaulttypes_v1_resource_category } from "../../vaulttypes/v1/resource_category_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file splitsecure/vaultbrowse/v1/get_node.proto.
  */
 export const file_splitsecure_vaultbrowse_v1_get_node: GenFile = /*@__PURE__*/
-  fileDesc("CilzcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MS9nZXRfbm9kZS5wcm90bxIac3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEi1AEKDkdldE5vZGVSZXF1ZXN0Ei8KCGVudmVsb3BlGAEgASgLMh0uc3BsaXRzZWN1cmUuYm90dGxlLnYxLkJvdHRsZRI9CgRiYXNlGAIgASgLMi8uc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuR2V0Tm9kZVJlcXVlc3QuQmFzZRpSCgRCYXNlEhAKCHZhdWx0X2lkGAEgASgJEjgKB2xvY2F0b3IYAiABKAsyJy5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5Ob2RlTG9jYXRvciJsCg9HZXROb2RlUmVzcG9uc2USLQoEbm9kZRgBIAEoCzIfLnNwbGl0c2VjdXJlLnZhdWx0dHlwZXMudjEuTm9kZRISCgpsYWJlbF9wYXRoGAIgAygJEhYKDnBhdGhfdHJ1bmNhdGVkGAMgASgIQosCCh5jb20uc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjFCDEdldE5vZGVQcm90b1ABWlFnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL3ZhdWx0YnJvd3NlL3YxO3ZhdWx0YnJvd3NldjGiAgNTVliqAhpTcGxpdHNlY3VyZS5WYXVsdGJyb3dzZS5WMcoCGlNwbGl0c2VjdXJlXFZhdWx0YnJvd3NlXFYx4gImU3BsaXRzZWN1cmVcVmF1bHRicm93c2VcVjFcR1BCTWV0YWRhdGHqAhxTcGxpdHNlY3VyZTo6VmF1bHRicm93c2U6OlYxYgZwcm90bzM", [file_splitsecure_bottle_v1_bottle, file_splitsecure_vaultbrowse_v1_node_locator, file_splitsecure_vaulttypes_v1_node]);
+  fileDesc("CilzcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MS9nZXRfbm9kZS5wcm90bxIac3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEi1AEKDkdldE5vZGVSZXF1ZXN0Ei8KCGVudmVsb3BlGAEgASgLMh0uc3BsaXRzZWN1cmUuYm90dGxlLnYxLkJvdHRsZRI9CgRiYXNlGAIgASgLMi8uc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuR2V0Tm9kZVJlcXVlc3QuQmFzZRpSCgRCYXNlEhAKCHZhdWx0X2lkGAEgASgJEjgKB2xvY2F0b3IYAiABKAsyJy5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MS5Ob2RlTG9jYXRvciK4AQoPR2V0Tm9kZVJlc3BvbnNlEi0KBG5vZGUYASABKAsyHy5zcGxpdHNlY3VyZS52YXVsdHR5cGVzLnYxLk5vZGUSEgoKbGFiZWxfcGF0aBgCIAMoCRIWCg5wYXRoX3RydW5jYXRlZBgDIAEoCBJKChVsYWJlbF9wYXRoX2NhdGVnb3JpZXMYBCADKA4yKy5zcGxpdHNlY3VyZS52YXVsdHR5cGVzLnYxLlJlc291cmNlQ2F0ZWdvcnlCiwIKHmNvbS5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MUIMR2V0Tm9kZVByb3RvUAFaUWdpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvdmF1bHRicm93c2UvdjE7dmF1bHRicm93c2V2MaICA1NWWKoCGlNwbGl0c2VjdXJlLlZhdWx0YnJvd3NlLlYxygIaU3BsaXRzZWN1cmVcVmF1bHRicm93c2VcVjHiAiZTcGxpdHNlY3VyZVxWYXVsdGJyb3dzZVxWMVxHUEJNZXRhZGF0YeoCHFNwbGl0c2VjdXJlOjpWYXVsdGJyb3dzZTo6VjFiBnByb3RvMw", [file_splitsecure_bottle_v1_bottle, file_splitsecure_vaultbrowse_v1_node_locator, file_splitsecure_vaulttypes_v1_node, file_splitsecure_vaulttypes_v1_resource_category]);
 
 /**
  * GetNode resolves a deep link. Given a node id from a listing or a shared
@@ -90,6 +92,14 @@ export type GetNodeResponse = Message<"splitsecure.vaultbrowse.v1.GetNodeRespons
    * @generated from field: bool path_truncated = 3;
    */
   pathTruncated: boolean;
+
+  /**
+   * One entry per label_path segment, in the same order: that folder's
+   * Node.category, unspecified for an ordinary folder.
+   *
+   * @generated from field: repeated splitsecure.vaulttypes.v1.ResourceCategory label_path_categories = 4;
+   */
+  labelPathCategories: ResourceCategory[];
 };
 
 /**

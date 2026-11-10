@@ -1,0 +1,30 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/page/v1/page_params.proto";
+import "splitsecure/vaulttypes/v1/node.proto";
+
+// ListSharedWithMe lists the non-root nodes of one vault granted to the
+// caller, where the caller can enter the tree. A root grant is not listed:
+// it makes the vault itself visible through DescribeVault. For the same
+// list across an org, use VaultCatalogService.ListSharedWithMe.
+message ListSharedWithMeRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    splitsecure.page.v1.PageParams page = 2;
+  }
+}
+
+message ListSharedWithMeResponse {
+  // Each node's access reports the grant that made it an entry point. Its
+  // label is the only path context. Labels above it are never returned.
+  repeated splitsecure.vaulttypes.v1.Node nodes = 1;
+
+  // Empty on the last page.
+  bytes next_cursor = 2;
+}

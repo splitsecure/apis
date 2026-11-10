@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.vaulttypes.v1;
+
+// ResourceCategory groups resource kinds. A new vault starts with one folder
+// per category.
+enum ResourceCategory {
+  RESOURCE_CATEGORY_UNSPECIFIED = 0;
+  RESOURCE_CATEGORY_SECRETS = 1;
+  RESOURCE_CATEGORY_CRYPTO_WALLETS = 2;
+  RESOURCE_CATEGORY_IDENTITY = 3;
+  RESOURCE_CATEGORY_SIGNING = 4;
+  RESOURCE_CATEGORY_INFRASTRUCTURE = 5;
+  RESOURCE_CATEGORY_CONNECTED_APPS = 6;
+}

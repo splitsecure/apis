@@ -45,6 +45,15 @@ const (
 	// VaultBrowseServiceGetRecordProcedure is the fully-qualified name of the VaultBrowseService's
 	// GetRecord RPC.
 	VaultBrowseServiceGetRecordProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/GetRecord"
+	// VaultBrowseServiceListSharedWithMeProcedure is the fully-qualified name of the
+	// VaultBrowseService's ListSharedWithMe RPC.
+	VaultBrowseServiceListSharedWithMeProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/ListSharedWithMe"
+	// VaultBrowseServiceSetNodeStarredProcedure is the fully-qualified name of the VaultBrowseService's
+	// SetNodeStarred RPC.
+	VaultBrowseServiceSetNodeStarredProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/SetNodeStarred"
+	// VaultBrowseServiceListStarredNodesProcedure is the fully-qualified name of the
+	// VaultBrowseService's ListStarredNodes RPC.
+	VaultBrowseServiceListStarredNodesProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/ListStarredNodes"
 	// VaultBrowseServiceCreateFolderProcedure is the fully-qualified name of the VaultBrowseService's
 	// CreateFolder RPC.
 	VaultBrowseServiceCreateFolderProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/CreateFolder"
@@ -66,6 +75,9 @@ const (
 	// VaultBrowseServiceListGrantsProcedure is the fully-qualified name of the VaultBrowseService's
 	// ListGrants RPC.
 	VaultBrowseServiceListGrantsProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/ListGrants"
+	// VaultBrowseServiceSetDefaultFolderProcedure is the fully-qualified name of the
+	// VaultBrowseService's SetDefaultFolder RPC.
+	VaultBrowseServiceSetDefaultFolderProcedure = "/splitsecure.vaultbrowse.v1.VaultBrowseService/SetDefaultFolder"
 )
 
 // VaultBrowseServiceClient is a client for the splitsecure.vaultbrowse.v1.VaultBrowseService
@@ -75,6 +87,9 @@ type VaultBrowseServiceClient interface {
 	ListNodes(context.Context, *connect.Request[v1.ListNodesRequest]) (*connect.Response[v1.ListNodesResponse], error)
 	GetNode(context.Context, *connect.Request[v1.GetNodeRequest]) (*connect.Response[v1.GetNodeResponse], error)
 	GetRecord(context.Context, *connect.Request[v1.GetRecordRequest]) (*connect.Response[v1.GetRecordResponse], error)
+	ListSharedWithMe(context.Context, *connect.Request[v1.ListSharedWithMeRequest]) (*connect.Response[v1.ListSharedWithMeResponse], error)
+	SetNodeStarred(context.Context, *connect.Request[v1.SetNodeStarredRequest]) (*connect.Response[v1.SetNodeStarredResponse], error)
+	ListStarredNodes(context.Context, *connect.Request[v1.ListStarredNodesRequest]) (*connect.Response[v1.ListStarredNodesResponse], error)
 	CreateFolder(context.Context, *connect.Request[v1.CreateFolderRequest]) (*connect.Response[v1.CreateFolderResponse], error)
 	MoveNode(context.Context, *connect.Request[v1.MoveNodeRequest]) (*connect.Response[v1.MoveNodeResponse], error)
 	RenameNode(context.Context, *connect.Request[v1.RenameNodeRequest]) (*connect.Response[v1.RenameNodeResponse], error)
@@ -82,6 +97,7 @@ type VaultBrowseServiceClient interface {
 	PutGrants(context.Context, *connect.Request[v1.PutGrantsRequest]) (*connect.Response[v1.PutGrantsResponse], error)
 	DeleteGrant(context.Context, *connect.Request[v1.DeleteGrantRequest]) (*connect.Response[v1.DeleteGrantResponse], error)
 	ListGrants(context.Context, *connect.Request[v1.ListGrantsRequest]) (*connect.Response[v1.ListGrantsResponse], error)
+	SetDefaultFolder(context.Context, *connect.Request[v1.SetDefaultFolderRequest]) (*connect.Response[v1.SetDefaultFolderResponse], error)
 }
 
 // NewVaultBrowseServiceClient constructs a client for the
@@ -118,6 +134,24 @@ func NewVaultBrowseServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			httpClient,
 			baseURL+VaultBrowseServiceGetRecordProcedure,
 			connect.WithSchema(vaultBrowseServiceMethods.ByName("GetRecord")),
+			connect.WithClientOptions(opts...),
+		),
+		listSharedWithMe: connect.NewClient[v1.ListSharedWithMeRequest, v1.ListSharedWithMeResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceListSharedWithMeProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("ListSharedWithMe")),
+			connect.WithClientOptions(opts...),
+		),
+		setNodeStarred: connect.NewClient[v1.SetNodeStarredRequest, v1.SetNodeStarredResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceSetNodeStarredProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("SetNodeStarred")),
+			connect.WithClientOptions(opts...),
+		),
+		listStarredNodes: connect.NewClient[v1.ListStarredNodesRequest, v1.ListStarredNodesResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceListStarredNodesProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("ListStarredNodes")),
 			connect.WithClientOptions(opts...),
 		),
 		createFolder: connect.NewClient[v1.CreateFolderRequest, v1.CreateFolderResponse](
@@ -162,22 +196,32 @@ func NewVaultBrowseServiceClient(httpClient connect.HTTPClient, baseURL string, 
 			connect.WithSchema(vaultBrowseServiceMethods.ByName("ListGrants")),
 			connect.WithClientOptions(opts...),
 		),
+		setDefaultFolder: connect.NewClient[v1.SetDefaultFolderRequest, v1.SetDefaultFolderResponse](
+			httpClient,
+			baseURL+VaultBrowseServiceSetDefaultFolderProcedure,
+			connect.WithSchema(vaultBrowseServiceMethods.ByName("SetDefaultFolder")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // vaultBrowseServiceClient implements VaultBrowseServiceClient.
 type vaultBrowseServiceClient struct {
-	describeVault *connect.Client[v1.DescribeVaultRequest, v1.DescribeVaultResponse]
-	listNodes     *connect.Client[v1.ListNodesRequest, v1.ListNodesResponse]
-	getNode       *connect.Client[v1.GetNodeRequest, v1.GetNodeResponse]
-	getRecord     *connect.Client[v1.GetRecordRequest, v1.GetRecordResponse]
-	createFolder  *connect.Client[v1.CreateFolderRequest, v1.CreateFolderResponse]
-	moveNode      *connect.Client[v1.MoveNodeRequest, v1.MoveNodeResponse]
-	renameNode    *connect.Client[v1.RenameNodeRequest, v1.RenameNodeResponse]
-	deleteFolder  *connect.Client[v1.DeleteFolderRequest, v1.DeleteFolderResponse]
-	putGrants     *connect.Client[v1.PutGrantsRequest, v1.PutGrantsResponse]
-	deleteGrant   *connect.Client[v1.DeleteGrantRequest, v1.DeleteGrantResponse]
-	listGrants    *connect.Client[v1.ListGrantsRequest, v1.ListGrantsResponse]
+	describeVault    *connect.Client[v1.DescribeVaultRequest, v1.DescribeVaultResponse]
+	listNodes        *connect.Client[v1.ListNodesRequest, v1.ListNodesResponse]
+	getNode          *connect.Client[v1.GetNodeRequest, v1.GetNodeResponse]
+	getRecord        *connect.Client[v1.GetRecordRequest, v1.GetRecordResponse]
+	listSharedWithMe *connect.Client[v1.ListSharedWithMeRequest, v1.ListSharedWithMeResponse]
+	setNodeStarred   *connect.Client[v1.SetNodeStarredRequest, v1.SetNodeStarredResponse]
+	listStarredNodes *connect.Client[v1.ListStarredNodesRequest, v1.ListStarredNodesResponse]
+	createFolder     *connect.Client[v1.CreateFolderRequest, v1.CreateFolderResponse]
+	moveNode         *connect.Client[v1.MoveNodeRequest, v1.MoveNodeResponse]
+	renameNode       *connect.Client[v1.RenameNodeRequest, v1.RenameNodeResponse]
+	deleteFolder     *connect.Client[v1.DeleteFolderRequest, v1.DeleteFolderResponse]
+	putGrants        *connect.Client[v1.PutGrantsRequest, v1.PutGrantsResponse]
+	deleteGrant      *connect.Client[v1.DeleteGrantRequest, v1.DeleteGrantResponse]
+	listGrants       *connect.Client[v1.ListGrantsRequest, v1.ListGrantsResponse]
+	setDefaultFolder *connect.Client[v1.SetDefaultFolderRequest, v1.SetDefaultFolderResponse]
 }
 
 // DescribeVault calls splitsecure.vaultbrowse.v1.VaultBrowseService.DescribeVault.
@@ -198,6 +242,21 @@ func (c *vaultBrowseServiceClient) GetNode(ctx context.Context, req *connect.Req
 // GetRecord calls splitsecure.vaultbrowse.v1.VaultBrowseService.GetRecord.
 func (c *vaultBrowseServiceClient) GetRecord(ctx context.Context, req *connect.Request[v1.GetRecordRequest]) (*connect.Response[v1.GetRecordResponse], error) {
 	return c.getRecord.CallUnary(ctx, req)
+}
+
+// ListSharedWithMe calls splitsecure.vaultbrowse.v1.VaultBrowseService.ListSharedWithMe.
+func (c *vaultBrowseServiceClient) ListSharedWithMe(ctx context.Context, req *connect.Request[v1.ListSharedWithMeRequest]) (*connect.Response[v1.ListSharedWithMeResponse], error) {
+	return c.listSharedWithMe.CallUnary(ctx, req)
+}
+
+// SetNodeStarred calls splitsecure.vaultbrowse.v1.VaultBrowseService.SetNodeStarred.
+func (c *vaultBrowseServiceClient) SetNodeStarred(ctx context.Context, req *connect.Request[v1.SetNodeStarredRequest]) (*connect.Response[v1.SetNodeStarredResponse], error) {
+	return c.setNodeStarred.CallUnary(ctx, req)
+}
+
+// ListStarredNodes calls splitsecure.vaultbrowse.v1.VaultBrowseService.ListStarredNodes.
+func (c *vaultBrowseServiceClient) ListStarredNodes(ctx context.Context, req *connect.Request[v1.ListStarredNodesRequest]) (*connect.Response[v1.ListStarredNodesResponse], error) {
+	return c.listStarredNodes.CallUnary(ctx, req)
 }
 
 // CreateFolder calls splitsecure.vaultbrowse.v1.VaultBrowseService.CreateFolder.
@@ -235,6 +294,11 @@ func (c *vaultBrowseServiceClient) ListGrants(ctx context.Context, req *connect.
 	return c.listGrants.CallUnary(ctx, req)
 }
 
+// SetDefaultFolder calls splitsecure.vaultbrowse.v1.VaultBrowseService.SetDefaultFolder.
+func (c *vaultBrowseServiceClient) SetDefaultFolder(ctx context.Context, req *connect.Request[v1.SetDefaultFolderRequest]) (*connect.Response[v1.SetDefaultFolderResponse], error) {
+	return c.setDefaultFolder.CallUnary(ctx, req)
+}
+
 // VaultBrowseServiceHandler is an implementation of the
 // splitsecure.vaultbrowse.v1.VaultBrowseService service.
 type VaultBrowseServiceHandler interface {
@@ -242,6 +306,9 @@ type VaultBrowseServiceHandler interface {
 	ListNodes(context.Context, *connect.Request[v1.ListNodesRequest]) (*connect.Response[v1.ListNodesResponse], error)
 	GetNode(context.Context, *connect.Request[v1.GetNodeRequest]) (*connect.Response[v1.GetNodeResponse], error)
 	GetRecord(context.Context, *connect.Request[v1.GetRecordRequest]) (*connect.Response[v1.GetRecordResponse], error)
+	ListSharedWithMe(context.Context, *connect.Request[v1.ListSharedWithMeRequest]) (*connect.Response[v1.ListSharedWithMeResponse], error)
+	SetNodeStarred(context.Context, *connect.Request[v1.SetNodeStarredRequest]) (*connect.Response[v1.SetNodeStarredResponse], error)
+	ListStarredNodes(context.Context, *connect.Request[v1.ListStarredNodesRequest]) (*connect.Response[v1.ListStarredNodesResponse], error)
 	CreateFolder(context.Context, *connect.Request[v1.CreateFolderRequest]) (*connect.Response[v1.CreateFolderResponse], error)
 	MoveNode(context.Context, *connect.Request[v1.MoveNodeRequest]) (*connect.Response[v1.MoveNodeResponse], error)
 	RenameNode(context.Context, *connect.Request[v1.RenameNodeRequest]) (*connect.Response[v1.RenameNodeResponse], error)
@@ -249,6 +316,7 @@ type VaultBrowseServiceHandler interface {
 	PutGrants(context.Context, *connect.Request[v1.PutGrantsRequest]) (*connect.Response[v1.PutGrantsResponse], error)
 	DeleteGrant(context.Context, *connect.Request[v1.DeleteGrantRequest]) (*connect.Response[v1.DeleteGrantResponse], error)
 	ListGrants(context.Context, *connect.Request[v1.ListGrantsRequest]) (*connect.Response[v1.ListGrantsResponse], error)
+	SetDefaultFolder(context.Context, *connect.Request[v1.SetDefaultFolderRequest]) (*connect.Response[v1.SetDefaultFolderResponse], error)
 }
 
 // NewVaultBrowseServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -280,6 +348,24 @@ func NewVaultBrowseServiceHandler(svc VaultBrowseServiceHandler, opts ...connect
 		VaultBrowseServiceGetRecordProcedure,
 		svc.GetRecord,
 		connect.WithSchema(vaultBrowseServiceMethods.ByName("GetRecord")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vaultBrowseServiceListSharedWithMeHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceListSharedWithMeProcedure,
+		svc.ListSharedWithMe,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("ListSharedWithMe")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vaultBrowseServiceSetNodeStarredHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceSetNodeStarredProcedure,
+		svc.SetNodeStarred,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("SetNodeStarred")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vaultBrowseServiceListStarredNodesHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceListStarredNodesProcedure,
+		svc.ListStarredNodes,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("ListStarredNodes")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vaultBrowseServiceCreateFolderHandler := connect.NewUnaryHandler(
@@ -324,6 +410,12 @@ func NewVaultBrowseServiceHandler(svc VaultBrowseServiceHandler, opts ...connect
 		connect.WithSchema(vaultBrowseServiceMethods.ByName("ListGrants")),
 		connect.WithHandlerOptions(opts...),
 	)
+	vaultBrowseServiceSetDefaultFolderHandler := connect.NewUnaryHandler(
+		VaultBrowseServiceSetDefaultFolderProcedure,
+		svc.SetDefaultFolder,
+		connect.WithSchema(vaultBrowseServiceMethods.ByName("SetDefaultFolder")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/splitsecure.vaultbrowse.v1.VaultBrowseService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VaultBrowseServiceDescribeVaultProcedure:
@@ -334,6 +426,12 @@ func NewVaultBrowseServiceHandler(svc VaultBrowseServiceHandler, opts ...connect
 			vaultBrowseServiceGetNodeHandler.ServeHTTP(w, r)
 		case VaultBrowseServiceGetRecordProcedure:
 			vaultBrowseServiceGetRecordHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceListSharedWithMeProcedure:
+			vaultBrowseServiceListSharedWithMeHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceSetNodeStarredProcedure:
+			vaultBrowseServiceSetNodeStarredHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceListStarredNodesProcedure:
+			vaultBrowseServiceListStarredNodesHandler.ServeHTTP(w, r)
 		case VaultBrowseServiceCreateFolderProcedure:
 			vaultBrowseServiceCreateFolderHandler.ServeHTTP(w, r)
 		case VaultBrowseServiceMoveNodeProcedure:
@@ -348,6 +446,8 @@ func NewVaultBrowseServiceHandler(svc VaultBrowseServiceHandler, opts ...connect
 			vaultBrowseServiceDeleteGrantHandler.ServeHTTP(w, r)
 		case VaultBrowseServiceListGrantsProcedure:
 			vaultBrowseServiceListGrantsHandler.ServeHTTP(w, r)
+		case VaultBrowseServiceSetDefaultFolderProcedure:
+			vaultBrowseServiceSetDefaultFolderHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -371,6 +471,18 @@ func (UnimplementedVaultBrowseServiceHandler) GetNode(context.Context, *connect.
 
 func (UnimplementedVaultBrowseServiceHandler) GetRecord(context.Context, *connect.Request[v1.GetRecordRequest]) (*connect.Response[v1.GetRecordResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.GetRecord is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) ListSharedWithMe(context.Context, *connect.Request[v1.ListSharedWithMeRequest]) (*connect.Response[v1.ListSharedWithMeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.ListSharedWithMe is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) SetNodeStarred(context.Context, *connect.Request[v1.SetNodeStarredRequest]) (*connect.Response[v1.SetNodeStarredResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.SetNodeStarred is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) ListStarredNodes(context.Context, *connect.Request[v1.ListStarredNodesRequest]) (*connect.Response[v1.ListStarredNodesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.ListStarredNodes is not implemented"))
 }
 
 func (UnimplementedVaultBrowseServiceHandler) CreateFolder(context.Context, *connect.Request[v1.CreateFolderRequest]) (*connect.Response[v1.CreateFolderResponse], error) {
@@ -399,4 +511,8 @@ func (UnimplementedVaultBrowseServiceHandler) DeleteGrant(context.Context, *conn
 
 func (UnimplementedVaultBrowseServiceHandler) ListGrants(context.Context, *connect.Request[v1.ListGrantsRequest]) (*connect.Response[v1.ListGrantsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.ListGrants is not implemented"))
+}
+
+func (UnimplementedVaultBrowseServiceHandler) SetDefaultFolder(context.Context, *connect.Request[v1.SetDefaultFolderRequest]) (*connect.Response[v1.SetDefaultFolderResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultbrowse.v1.VaultBrowseService.SetDefaultFolder is not implemented"))
 }

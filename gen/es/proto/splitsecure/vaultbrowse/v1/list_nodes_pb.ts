@@ -14,13 +14,15 @@ import type { Node } from "../../vaulttypes/v1/node_pb";
 import { file_splitsecure_vaulttypes_v1_node } from "../../vaulttypes/v1/node_pb";
 import type { NodeAccess } from "../../vaulttypes/v1/node_access_pb";
 import { file_splitsecure_vaulttypes_v1_node_access } from "../../vaulttypes/v1/node_access_pb";
+import type { ResourceCategory } from "../../vaulttypes/v1/resource_category_pb";
+import { file_splitsecure_vaulttypes_v1_resource_category } from "../../vaulttypes/v1/resource_category_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file splitsecure/vaultbrowse/v1/list_nodes.proto.
  */
 export const file_splitsecure_vaultbrowse_v1_list_nodes: GenFile = /*@__PURE__*/
-  fileDesc("CitzcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MS9saXN0X25vZGVzLnByb3RvEhpzcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MSKIAgoQTGlzdE5vZGVzUmVxdWVzdBIvCghlbnZlbG9wZRgBIAEoCzIdLnNwbGl0c2VjdXJlLmJvdHRsZS52MS5Cb3R0bGUSPwoEYmFzZRgCIAEoCzIxLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLkxpc3ROb2Rlc1JlcXVlc3QuQmFzZRqBAQoEQmFzZRIQCgh2YXVsdF9pZBgBIAEoCRI4Cgdsb2NhdG9yGAIgASgLMicuc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuTm9kZUxvY2F0b3ISLQoEcGFnZRgDIAEoCzIfLnNwbGl0c2VjdXJlLnBhZ2UudjEuUGFnZVBhcmFtcyLmAQoRTGlzdE5vZGVzUmVzcG9uc2USGAoQcmVzb2x2ZWRfbm9kZV9pZBgBIAEoCRIxCghjaGlsZHJlbhgCIAMoCzIfLnNwbGl0c2VjdXJlLnZhdWx0dHlwZXMudjEuTm9kZRISCgpsYWJlbF9wYXRoGAMgAygJEhYKDnBhdGhfdHJ1bmNhdGVkGAQgASgIEhMKC25leHRfY3Vyc29yGAUgASgMEkMKFHJlc29sdmVkX25vZGVfYWNjZXNzGAYgASgLMiUuc3BsaXRzZWN1cmUudmF1bHR0eXBlcy52MS5Ob2RlQWNjZXNzQo0CCh5jb20uc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjFCDkxpc3ROb2Rlc1Byb3RvUAFaUWdpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvdmF1bHRicm93c2UvdjE7dmF1bHRicm93c2V2MaICA1NWWKoCGlNwbGl0c2VjdXJlLlZhdWx0YnJvd3NlLlYxygIaU3BsaXRzZWN1cmVcVmF1bHRicm93c2VcVjHiAiZTcGxpdHNlY3VyZVxWYXVsdGJyb3dzZVxWMVxHUEJNZXRhZGF0YeoCHFNwbGl0c2VjdXJlOjpWYXVsdGJyb3dzZTo6VjFiBnByb3RvMw", [file_splitsecure_bottle_v1_bottle, file_splitsecure_page_v1_page_params, file_splitsecure_vaultbrowse_v1_node_locator, file_splitsecure_vaulttypes_v1_node, file_splitsecure_vaulttypes_v1_node_access]);
+  fileDesc("CitzcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MS9saXN0X25vZGVzLnByb3RvEhpzcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MSKIAgoQTGlzdE5vZGVzUmVxdWVzdBIvCghlbnZlbG9wZRgBIAEoCzIdLnNwbGl0c2VjdXJlLmJvdHRsZS52MS5Cb3R0bGUSPwoEYmFzZRgCIAEoCzIxLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxLkxpc3ROb2Rlc1JlcXVlc3QuQmFzZRqBAQoEQmFzZRIQCgh2YXVsdF9pZBgBIAEoCRI4Cgdsb2NhdG9yGAIgASgLMicuc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuTm9kZUxvY2F0b3ISLQoEcGFnZRgDIAEoCzIfLnNwbGl0c2VjdXJlLnBhZ2UudjEuUGFnZVBhcmFtcyKyAgoRTGlzdE5vZGVzUmVzcG9uc2USGAoQcmVzb2x2ZWRfbm9kZV9pZBgBIAEoCRIxCghjaGlsZHJlbhgCIAMoCzIfLnNwbGl0c2VjdXJlLnZhdWx0dHlwZXMudjEuTm9kZRISCgpsYWJlbF9wYXRoGAMgAygJEhYKDnBhdGhfdHJ1bmNhdGVkGAQgASgIEhMKC25leHRfY3Vyc29yGAUgASgMEkMKFHJlc29sdmVkX25vZGVfYWNjZXNzGAYgASgLMiUuc3BsaXRzZWN1cmUudmF1bHR0eXBlcy52MS5Ob2RlQWNjZXNzEkoKFWxhYmVsX3BhdGhfY2F0ZWdvcmllcxgHIAMoDjIrLnNwbGl0c2VjdXJlLnZhdWx0dHlwZXMudjEuUmVzb3VyY2VDYXRlZ29yeUKNAgoeY29tLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxQg5MaXN0Tm9kZXNQcm90b1ABWlFnaXRodWIuY29tL3NwbGl0c2VjdXJlL2FwaXMvZ2VuL2dvL3Byb3RvL3NwbGl0c2VjdXJlL3ZhdWx0YnJvd3NlL3YxO3ZhdWx0YnJvd3NldjGiAgNTVliqAhpTcGxpdHNlY3VyZS5WYXVsdGJyb3dzZS5WMcoCGlNwbGl0c2VjdXJlXFZhdWx0YnJvd3NlXFYx4gImU3BsaXRzZWN1cmVcVmF1bHRicm93c2VcVjFcR1BCTWV0YWRhdGHqAhxTcGxpdHNlY3VyZTo6VmF1bHRicm93c2U6OlYxYgZwcm90bzM", [file_splitsecure_bottle_v1_bottle, file_splitsecure_page_v1_page_params, file_splitsecure_vaultbrowse_v1_node_locator, file_splitsecure_vaulttypes_v1_node, file_splitsecure_vaulttypes_v1_node_access, file_splitsecure_vaulttypes_v1_resource_category]);
 
 /**
  * ListNodes lists the children of one directory. Record nodes carry their
@@ -128,6 +130,15 @@ export type ListNodesResponse = Message<"splitsecure.vaultbrowse.v1.ListNodesRes
    * @generated from field: splitsecure.vaulttypes.v1.NodeAccess resolved_node_access = 6;
    */
   resolvedNodeAccess?: NodeAccess | undefined;
+
+  /**
+   * One entry per label_path segment, in the same order: that folder's
+   * Node.category, unspecified for an ordinary folder. Use it to show a
+   * category folder's localized name in the breadcrumb.
+   *
+   * @generated from field: repeated splitsecure.vaulttypes.v1.ResourceCategory label_path_categories = 7;
+   */
+  labelPathCategories: ResourceCategory[];
 };
 
 /**

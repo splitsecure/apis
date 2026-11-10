@@ -37,7 +37,11 @@ type Node struct {
 	// blocks changes to that directory.
 	IsLostFound bool `protobuf:"varint,6,opt,name=is_lost_found,json=isLostFound,proto3" json:"is_lost_found,omitempty"`
 	// The caller's own star on this node.
-	Starred       bool `protobuf:"varint,7,opt,name=starred,proto3" json:"starred,omitempty"`
+	Starred bool `protobuf:"varint,7,opt,name=starred,proto3" json:"starred,omitempty"`
+	// Set on a folder the vault was created with for a category, while it
+	// keeps its original label. Show the category's localized name instead of
+	// the label. Renaming the folder clears it.
+	Category      ResourceCategory `protobuf:"varint,8,opt,name=category,proto3,enum=splitsecure.vaulttypes.v1.ResourceCategory" json:"category,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -121,11 +125,18 @@ func (x *Node) GetStarred() bool {
 	return false
 }
 
+func (x *Node) GetCategory() ResourceCategory {
+	if x != nil {
+		return x.Category
+	}
+	return ResourceCategory_RESOURCE_CATEGORY_UNSPECIFIED
+}
+
 var File_splitsecure_vaulttypes_v1_node_proto protoreflect.FileDescriptor
 
 const file_splitsecure_vaulttypes_v1_node_proto_rawDesc = "" +
 	"\n" +
-	"$splitsecure/vaulttypes/v1/node.proto\x12\x19splitsecure.vaulttypes.v1\x1a+splitsecure/vaulttypes/v1/node_access.proto\x1a,splitsecure/vaulttypes/v1/record_facts.proto\"\x89\x02\n" +
+	"$splitsecure/vaulttypes/v1/node.proto\x12\x19splitsecure.vaulttypes.v1\x1a+splitsecure/vaulttypes/v1/node_access.proto\x1a,splitsecure/vaulttypes/v1/record_facts.proto\x1a1splitsecure/vaulttypes/v1/resource_category.proto\"\xd2\x02\n" +
 	"\x04Node\x12\x17\n" +
 	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x12\x14\n" +
 	"\x05label\x18\x02 \x01(\tR\x05label\x12\x15\n" +
@@ -133,7 +144,8 @@ const file_splitsecure_vaulttypes_v1_node_proto_rawDesc = "" +
 	"\x06record\x18\x04 \x01(\v2&.splitsecure.vaulttypes.v1.RecordFactsR\x06record\x12=\n" +
 	"\x06access\x18\x05 \x01(\v2%.splitsecure.vaulttypes.v1.NodeAccessR\x06access\x12\"\n" +
 	"\ris_lost_found\x18\x06 \x01(\bR\visLostFound\x12\x18\n" +
-	"\astarred\x18\a \x01(\bR\astarredB\x81\x02\n" +
+	"\astarred\x18\a \x01(\bR\astarred\x12G\n" +
+	"\bcategory\x18\b \x01(\x0e2+.splitsecure.vaulttypes.v1.ResourceCategoryR\bcategoryB\x81\x02\n" +
 	"\x1dcom.splitsecure.vaulttypes.v1B\tNodeProtoP\x01ZOgithub.com/splitsecure/apis/gen/go/proto/splitsecure/vaulttypes/v1;vaulttypesv1\xa2\x02\x03SVX\xaa\x02\x19Splitsecure.Vaulttypes.V1\xca\x02\x19Splitsecure\\Vaulttypes\\V1\xe2\x02%Splitsecure\\Vaulttypes\\V1\\GPBMetadata\xea\x02\x1bSplitsecure::Vaulttypes::V1b\x06proto3"
 
 var (
@@ -150,18 +162,20 @@ func file_splitsecure_vaulttypes_v1_node_proto_rawDescGZIP() []byte {
 
 var file_splitsecure_vaulttypes_v1_node_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_splitsecure_vaulttypes_v1_node_proto_goTypes = []any{
-	(*Node)(nil),        // 0: splitsecure.vaulttypes.v1.Node
-	(*RecordFacts)(nil), // 1: splitsecure.vaulttypes.v1.RecordFacts
-	(*NodeAccess)(nil),  // 2: splitsecure.vaulttypes.v1.NodeAccess
+	(*Node)(nil),          // 0: splitsecure.vaulttypes.v1.Node
+	(*RecordFacts)(nil),   // 1: splitsecure.vaulttypes.v1.RecordFacts
+	(*NodeAccess)(nil),    // 2: splitsecure.vaulttypes.v1.NodeAccess
+	(ResourceCategory)(0), // 3: splitsecure.vaulttypes.v1.ResourceCategory
 }
 var file_splitsecure_vaulttypes_v1_node_proto_depIdxs = []int32{
 	1, // 0: splitsecure.vaulttypes.v1.Node.record:type_name -> splitsecure.vaulttypes.v1.RecordFacts
 	2, // 1: splitsecure.vaulttypes.v1.Node.access:type_name -> splitsecure.vaulttypes.v1.NodeAccess
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 2: splitsecure.vaulttypes.v1.Node.category:type_name -> splitsecure.vaulttypes.v1.ResourceCategory
+	3, // [3:3] is the sub-list for method output_type
+	3, // [3:3] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_vaulttypes_v1_node_proto_init() }
@@ -171,6 +185,7 @@ func file_splitsecure_vaulttypes_v1_node_proto_init() {
 	}
 	file_splitsecure_vaulttypes_v1_node_access_proto_init()
 	file_splitsecure_vaulttypes_v1_record_facts_proto_init()
+	file_splitsecure_vaulttypes_v1_resource_category_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
