@@ -2,6 +2,7 @@ syntax = "proto3";
 package splitsecure.vaultbrowse.v1;
 
 import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultbrowse/v1/category_folder.proto";
 import "splitsecure/vaulttypes/v1/custody_class.proto";
 import "splitsecure/vaulttypes/v1/node_access.proto";
 import "splitsecure/vaulttypes/v1/vault_status.proto";
@@ -37,4 +38,12 @@ message DescribeVaultResponse {
   splitsecure.vaulttypes.v1.NodeAccess access = 5;
 
   splitsecure.vaulttypes.v1.VaultStatus status = 6;
+
+  // Every category with the folder recommended for its new resources. Empty
+  // when the caller has no access on the root.
+  repeated CategoryFolder category_folders = 7;
+
+  // Whether the caller may change category_folders with SetDefaultFolder.
+  // True for a guardian of the vault's owning team.
+  bool can_set_default_folders = 8;
 }

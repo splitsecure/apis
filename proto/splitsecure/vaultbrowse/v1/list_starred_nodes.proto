@@ -1,0 +1,27 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/page/v1/page_params.proto";
+import "splitsecure/vaulttypes/v1/starred_node.proto";
+
+// ListStarredNodes lists the caller's stars in one vault. A star whose node
+// was deleted is dropped. A star on a node the caller can no longer see is
+// left out but kept, and returns if access does.
+message ListStarredNodesRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    splitsecure.page.v1.PageParams page = 2;
+  }
+}
+
+message ListStarredNodesResponse {
+  repeated splitsecure.vaulttypes.v1.StarredNode nodes = 1;
+
+  // Empty on the last page.
+  bytes next_cursor = 2;
+}

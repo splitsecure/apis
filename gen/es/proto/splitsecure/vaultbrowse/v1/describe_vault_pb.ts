@@ -6,6 +6,8 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Bottle } from "../../bottle/v1/bottle_pb";
 import { file_splitsecure_bottle_v1_bottle } from "../../bottle/v1/bottle_pb";
+import type { CategoryFolder } from "./category_folder_pb";
+import { file_splitsecure_vaultbrowse_v1_category_folder } from "./category_folder_pb";
 import type { CustodyClass } from "../../vaulttypes/v1/custody_class_pb";
 import { file_splitsecure_vaulttypes_v1_custody_class } from "../../vaulttypes/v1/custody_class_pb";
 import type { NodeAccess } from "../../vaulttypes/v1/node_access_pb";
@@ -18,7 +20,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file splitsecure/vaultbrowse/v1/describe_vault.proto.
  */
 export const file_splitsecure_vaultbrowse_v1_describe_vault: GenFile = /*@__PURE__*/
-  fileDesc("Ci9zcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MS9kZXNjcmliZV92YXVsdC5wcm90bxIac3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEipgEKFERlc2NyaWJlVmF1bHRSZXF1ZXN0Ei8KCGVudmVsb3BlGAEgASgLMh0uc3BsaXRzZWN1cmUuYm90dGxlLnYxLkJvdHRsZRJDCgRiYXNlGAIgASgLMjUuc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuRGVzY3JpYmVWYXVsdFJlcXVlc3QuQmFzZRoYCgRCYXNlEhAKCHZhdWx0X2lkGAEgASgJIv0BChVEZXNjcmliZVZhdWx0UmVzcG9uc2USEAoIdmF1bHRfaWQYASABKAkSDQoFbGFiZWwYAiABKAkSPgoNY3VzdG9keV9jbGFzcxgDIAEoDjInLnNwbGl0c2VjdXJlLnZhdWx0dHlwZXMudjEuQ3VzdG9keUNsYXNzEhQKDHJvb3Rfbm9kZV9pZBgEIAEoCRI1CgZhY2Nlc3MYBSABKAsyJS5zcGxpdHNlY3VyZS52YXVsdHR5cGVzLnYxLk5vZGVBY2Nlc3MSNgoGc3RhdHVzGAYgASgOMiYuc3BsaXRzZWN1cmUudmF1bHR0eXBlcy52MS5WYXVsdFN0YXR1c0KRAgoeY29tLnNwbGl0c2VjdXJlLnZhdWx0YnJvd3NlLnYxQhJEZXNjcmliZVZhdWx0UHJvdG9QAVpRZ2l0aHViLmNvbS9zcGxpdHNlY3VyZS9hcGlzL2dlbi9nby9wcm90by9zcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MTt2YXVsdGJyb3dzZXYxogIDU1ZYqgIaU3BsaXRzZWN1cmUuVmF1bHRicm93c2UuVjHKAhpTcGxpdHNlY3VyZVxWYXVsdGJyb3dzZVxWMeICJlNwbGl0c2VjdXJlXFZhdWx0YnJvd3NlXFYxXEdQQk1ldGFkYXRh6gIcU3BsaXRzZWN1cmU6OlZhdWx0YnJvd3NlOjpWMWIGcHJvdG8z", [file_splitsecure_bottle_v1_bottle, file_splitsecure_vaulttypes_v1_custody_class, file_splitsecure_vaulttypes_v1_node_access, file_splitsecure_vaulttypes_v1_vault_status]);
+  fileDesc("Ci9zcGxpdHNlY3VyZS92YXVsdGJyb3dzZS92MS9kZXNjcmliZV92YXVsdC5wcm90bxIac3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEipgEKFERlc2NyaWJlVmF1bHRSZXF1ZXN0Ei8KCGVudmVsb3BlGAEgASgLMh0uc3BsaXRzZWN1cmUuYm90dGxlLnYxLkJvdHRsZRJDCgRiYXNlGAIgASgLMjUuc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuRGVzY3JpYmVWYXVsdFJlcXVlc3QuQmFzZRoYCgRCYXNlEhAKCHZhdWx0X2lkGAEgASgJIuQCChVEZXNjcmliZVZhdWx0UmVzcG9uc2USEAoIdmF1bHRfaWQYASABKAkSDQoFbGFiZWwYAiABKAkSPgoNY3VzdG9keV9jbGFzcxgDIAEoDjInLnNwbGl0c2VjdXJlLnZhdWx0dHlwZXMudjEuQ3VzdG9keUNsYXNzEhQKDHJvb3Rfbm9kZV9pZBgEIAEoCRI1CgZhY2Nlc3MYBSABKAsyJS5zcGxpdHNlY3VyZS52YXVsdHR5cGVzLnYxLk5vZGVBY2Nlc3MSNgoGc3RhdHVzGAYgASgOMiYuc3BsaXRzZWN1cmUudmF1bHR0eXBlcy52MS5WYXVsdFN0YXR1cxJEChBjYXRlZ29yeV9mb2xkZXJzGAcgAygLMiouc3BsaXRzZWN1cmUudmF1bHRicm93c2UudjEuQ2F0ZWdvcnlGb2xkZXISHwoXY2FuX3NldF9kZWZhdWx0X2ZvbGRlcnMYCCABKAhCkQIKHmNvbS5zcGxpdHNlY3VyZS52YXVsdGJyb3dzZS52MUISRGVzY3JpYmVWYXVsdFByb3RvUAFaUWdpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvdmF1bHRicm93c2UvdjE7dmF1bHRicm93c2V2MaICA1NWWKoCGlNwbGl0c2VjdXJlLlZhdWx0YnJvd3NlLlYxygIaU3BsaXRzZWN1cmVcVmF1bHRicm93c2VcVjHiAiZTcGxpdHNlY3VyZVxWYXVsdGJyb3dzZVxWMVxHUEJNZXRhZGF0YeoCHFNwbGl0c2VjdXJlOjpWYXVsdGJyb3dzZTo6VjFiBnByb3RvMw", [file_splitsecure_bottle_v1_bottle, file_splitsecure_vaultbrowse_v1_category_folder, file_splitsecure_vaulttypes_v1_custody_class, file_splitsecure_vaulttypes_v1_node_access, file_splitsecure_vaulttypes_v1_vault_status]);
 
 /**
  * DescribeVault returns the vault's summary and the caller's access on its
@@ -106,6 +108,22 @@ export type DescribeVaultResponse = Message<"splitsecure.vaultbrowse.v1.Describe
    * @generated from field: splitsecure.vaulttypes.v1.VaultStatus status = 6;
    */
   status: VaultStatus;
+
+  /**
+   * Every category with the folder recommended for its new resources. Empty
+   * when the caller has no access on the root.
+   *
+   * @generated from field: repeated splitsecure.vaultbrowse.v1.CategoryFolder category_folders = 7;
+   */
+  categoryFolders: CategoryFolder[];
+
+  /**
+   * Whether the caller may change category_folders with SetDefaultFolder.
+   * True for a guardian of the vault's owning team.
+   *
+   * @generated from field: bool can_set_default_folders = 8;
+   */
+  canSetDefaultFolders: boolean;
 };
 
 /**

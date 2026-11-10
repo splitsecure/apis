@@ -6,6 +6,7 @@ import "splitsecure/page/v1/page_params.proto";
 import "splitsecure/vaultbrowse/v1/node_locator.proto";
 import "splitsecure/vaulttypes/v1/node.proto";
 import "splitsecure/vaulttypes/v1/node_access.proto";
+import "splitsecure/vaulttypes/v1/resource_category.proto";
 
 // ListNodes lists the children of one directory. Record nodes carry their
 // display facts. Every node carries the caller's effective access.
@@ -49,4 +50,9 @@ message ListNodesResponse {
   // children. Gate the manage-access control for this directory on its
   // can_manage_access. Unset only when there is no access to annotate.
   splitsecure.vaulttypes.v1.NodeAccess resolved_node_access = 6;
+
+  // One entry per label_path segment, in the same order: that folder's
+  // Node.category, unspecified for an ordinary folder. Use it to show a
+  // category folder's localized name in the breadcrumb.
+  repeated splitsecure.vaulttypes.v1.ResourceCategory label_path_categories = 7;
 }

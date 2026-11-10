@@ -1,0 +1,29 @@
+syntax = "proto3";
+package splitsecure.vaultcatalog.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/page/v1/page_params.proto";
+import "splitsecure/vaulttypes/v1/starred_node.proto";
+
+// ListStarredNodes lists the caller's stars across the org's vaults. Stars
+// are set per vault with VaultBrowseService.SetNodeStarred. Deleted and
+// hidden nodes are handled as in VaultBrowseService.ListStarredNodes.
+message ListStarredNodesRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    // Format: s2r:{deployment}:org:{id}.
+    string org_s2r = 1;
+
+    splitsecure.page.v1.PageParams page = 2;
+  }
+}
+
+message ListStarredNodesResponse {
+  // Each node carries its vault_id.
+  repeated splitsecure.vaulttypes.v1.StarredNode nodes = 1;
+
+  // Empty on the last page.
+  bytes next_cursor = 2;
+}

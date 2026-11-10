@@ -91,10 +91,16 @@ type DescribeVaultResponse struct {
 	// The caller's effective access on the root. Unset when the caller holds
 	// nothing on the root and reaches the vault only through a grant lower in
 	// the tree. Unset means no root access, not a zero tier.
-	Access        *v11.NodeAccess `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
-	Status        v11.VaultStatus `protobuf:"varint,6,opt,name=status,proto3,enum=splitsecure.vaulttypes.v1.VaultStatus" json:"status,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	Access *v11.NodeAccess `protobuf:"bytes,5,opt,name=access,proto3" json:"access,omitempty"`
+	Status v11.VaultStatus `protobuf:"varint,6,opt,name=status,proto3,enum=splitsecure.vaulttypes.v1.VaultStatus" json:"status,omitempty"`
+	// Every category with the folder recommended for its new resources. Empty
+	// when the caller has no access on the root.
+	CategoryFolders []*CategoryFolder `protobuf:"bytes,7,rep,name=category_folders,json=categoryFolders,proto3" json:"category_folders,omitempty"`
+	// Whether the caller may change category_folders with SetDefaultFolder.
+	// True for a guardian of the vault's owning team.
+	CanSetDefaultFolders bool `protobuf:"varint,8,opt,name=can_set_default_folders,json=canSetDefaultFolders,proto3" json:"can_set_default_folders,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *DescribeVaultResponse) Reset() {
@@ -169,6 +175,20 @@ func (x *DescribeVaultResponse) GetStatus() v11.VaultStatus {
 	return v11.VaultStatus(0)
 }
 
+func (x *DescribeVaultResponse) GetCategoryFolders() []*CategoryFolder {
+	if x != nil {
+		return x.CategoryFolders
+	}
+	return nil
+}
+
+func (x *DescribeVaultResponse) GetCanSetDefaultFolders() bool {
+	if x != nil {
+		return x.CanSetDefaultFolders
+	}
+	return false
+}
+
 type DescribeVaultRequest_Base struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	VaultId       string                 `protobuf:"bytes,1,opt,name=vault_id,json=vaultId,proto3" json:"vault_id,omitempty"`
@@ -217,12 +237,12 @@ var File_splitsecure_vaultbrowse_v1_describe_vault_proto protoreflect.FileDescri
 
 const file_splitsecure_vaultbrowse_v1_describe_vault_proto_rawDesc = "" +
 	"\n" +
-	"/splitsecure/vaultbrowse/v1/describe_vault.proto\x12\x1asplitsecure.vaultbrowse.v1\x1a\"splitsecure/bottle/v1/bottle.proto\x1a-splitsecure/vaulttypes/v1/custody_class.proto\x1a+splitsecure/vaulttypes/v1/node_access.proto\x1a,splitsecure/vaulttypes/v1/vault_status.proto\"\xbf\x01\n" +
+	"/splitsecure/vaultbrowse/v1/describe_vault.proto\x12\x1asplitsecure.vaultbrowse.v1\x1a\"splitsecure/bottle/v1/bottle.proto\x1a0splitsecure/vaultbrowse/v1/category_folder.proto\x1a-splitsecure/vaulttypes/v1/custody_class.proto\x1a+splitsecure/vaulttypes/v1/node_access.proto\x1a,splitsecure/vaulttypes/v1/vault_status.proto\"\xbf\x01\n" +
 	"\x14DescribeVaultRequest\x129\n" +
 	"\benvelope\x18\x01 \x01(\v2\x1d.splitsecure.bottle.v1.BottleR\benvelope\x12I\n" +
 	"\x04base\x18\x02 \x01(\v25.splitsecure.vaultbrowse.v1.DescribeVaultRequest.BaseR\x04base\x1a!\n" +
 	"\x04Base\x12\x19\n" +
-	"\bvault_id\x18\x01 \x01(\tR\avaultId\"\xb7\x02\n" +
+	"\bvault_id\x18\x01 \x01(\tR\avaultId\"\xc5\x03\n" +
 	"\x15DescribeVaultResponse\x12\x19\n" +
 	"\bvault_id\x18\x01 \x01(\tR\avaultId\x12\x14\n" +
 	"\x05label\x18\x02 \x01(\tR\x05label\x12L\n" +
@@ -230,7 +250,9 @@ const file_splitsecure_vaultbrowse_v1_describe_vault_proto_rawDesc = "" +
 	"\froot_node_id\x18\x04 \x01(\tR\n" +
 	"rootNodeId\x12=\n" +
 	"\x06access\x18\x05 \x01(\v2%.splitsecure.vaulttypes.v1.NodeAccessR\x06access\x12>\n" +
-	"\x06status\x18\x06 \x01(\x0e2&.splitsecure.vaulttypes.v1.VaultStatusR\x06statusB\x91\x02\n" +
+	"\x06status\x18\x06 \x01(\x0e2&.splitsecure.vaulttypes.v1.VaultStatusR\x06status\x12U\n" +
+	"\x10category_folders\x18\a \x03(\v2*.splitsecure.vaultbrowse.v1.CategoryFolderR\x0fcategoryFolders\x125\n" +
+	"\x17can_set_default_folders\x18\b \x01(\bR\x14canSetDefaultFoldersB\x91\x02\n" +
 	"\x1ecom.splitsecure.vaultbrowse.v1B\x12DescribeVaultProtoP\x01ZQgithub.com/splitsecure/apis/gen/go/proto/splitsecure/vaultbrowse/v1;vaultbrowsev1\xa2\x02\x03SVX\xaa\x02\x1aSplitsecure.Vaultbrowse.V1\xca\x02\x1aSplitsecure\\Vaultbrowse\\V1\xe2\x02&Splitsecure\\Vaultbrowse\\V1\\GPBMetadata\xea\x02\x1cSplitsecure::Vaultbrowse::V1b\x06proto3"
 
 var (
@@ -254,6 +276,7 @@ var file_splitsecure_vaultbrowse_v1_describe_vault_proto_goTypes = []any{
 	(v11.CustodyClass)(0),             // 4: splitsecure.vaulttypes.v1.CustodyClass
 	(*v11.NodeAccess)(nil),            // 5: splitsecure.vaulttypes.v1.NodeAccess
 	(v11.VaultStatus)(0),              // 6: splitsecure.vaulttypes.v1.VaultStatus
+	(*CategoryFolder)(nil),            // 7: splitsecure.vaultbrowse.v1.CategoryFolder
 }
 var file_splitsecure_vaultbrowse_v1_describe_vault_proto_depIdxs = []int32{
 	3, // 0: splitsecure.vaultbrowse.v1.DescribeVaultRequest.envelope:type_name -> splitsecure.bottle.v1.Bottle
@@ -261,11 +284,12 @@ var file_splitsecure_vaultbrowse_v1_describe_vault_proto_depIdxs = []int32{
 	4, // 2: splitsecure.vaultbrowse.v1.DescribeVaultResponse.custody_class:type_name -> splitsecure.vaulttypes.v1.CustodyClass
 	5, // 3: splitsecure.vaultbrowse.v1.DescribeVaultResponse.access:type_name -> splitsecure.vaulttypes.v1.NodeAccess
 	6, // 4: splitsecure.vaultbrowse.v1.DescribeVaultResponse.status:type_name -> splitsecure.vaulttypes.v1.VaultStatus
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	7, // 5: splitsecure.vaultbrowse.v1.DescribeVaultResponse.category_folders:type_name -> splitsecure.vaultbrowse.v1.CategoryFolder
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_splitsecure_vaultbrowse_v1_describe_vault_proto_init() }
@@ -273,6 +297,7 @@ func file_splitsecure_vaultbrowse_v1_describe_vault_proto_init() {
 	if File_splitsecure_vaultbrowse_v1_describe_vault_proto != nil {
 		return
 	}
+	file_splitsecure_vaultbrowse_v1_category_folder_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

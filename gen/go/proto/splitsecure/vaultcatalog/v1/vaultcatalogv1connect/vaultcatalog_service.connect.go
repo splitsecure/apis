@@ -39,6 +39,9 @@ const (
 	// VaultCatalogServiceListSharedWithMeProcedure is the fully-qualified name of the
 	// VaultCatalogService's ListSharedWithMe RPC.
 	VaultCatalogServiceListSharedWithMeProcedure = "/splitsecure.vaultcatalog.v1.VaultCatalogService/ListSharedWithMe"
+	// VaultCatalogServiceListStarredNodesProcedure is the fully-qualified name of the
+	// VaultCatalogService's ListStarredNodes RPC.
+	VaultCatalogServiceListStarredNodesProcedure = "/splitsecure.vaultcatalog.v1.VaultCatalogService/ListStarredNodes"
 )
 
 // VaultCatalogServiceClient is a client for the splitsecure.vaultcatalog.v1.VaultCatalogService
@@ -46,6 +49,7 @@ const (
 type VaultCatalogServiceClient interface {
 	ListVaults(context.Context, *connect.Request[v1.ListVaultsRequest]) (*connect.Response[v1.ListVaultsResponse], error)
 	ListSharedWithMe(context.Context, *connect.Request[v1.ListSharedWithMeRequest]) (*connect.Response[v1.ListSharedWithMeResponse], error)
+	ListStarredNodes(context.Context, *connect.Request[v1.ListStarredNodesRequest]) (*connect.Response[v1.ListStarredNodesResponse], error)
 }
 
 // NewVaultCatalogServiceClient constructs a client for the
@@ -72,6 +76,12 @@ func NewVaultCatalogServiceClient(httpClient connect.HTTPClient, baseURL string,
 			connect.WithSchema(vaultCatalogServiceMethods.ByName("ListSharedWithMe")),
 			connect.WithClientOptions(opts...),
 		),
+		listStarredNodes: connect.NewClient[v1.ListStarredNodesRequest, v1.ListStarredNodesResponse](
+			httpClient,
+			baseURL+VaultCatalogServiceListStarredNodesProcedure,
+			connect.WithSchema(vaultCatalogServiceMethods.ByName("ListStarredNodes")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -79,6 +89,7 @@ func NewVaultCatalogServiceClient(httpClient connect.HTTPClient, baseURL string,
 type vaultCatalogServiceClient struct {
 	listVaults       *connect.Client[v1.ListVaultsRequest, v1.ListVaultsResponse]
 	listSharedWithMe *connect.Client[v1.ListSharedWithMeRequest, v1.ListSharedWithMeResponse]
+	listStarredNodes *connect.Client[v1.ListStarredNodesRequest, v1.ListStarredNodesResponse]
 }
 
 // ListVaults calls splitsecure.vaultcatalog.v1.VaultCatalogService.ListVaults.
@@ -91,11 +102,17 @@ func (c *vaultCatalogServiceClient) ListSharedWithMe(ctx context.Context, req *c
 	return c.listSharedWithMe.CallUnary(ctx, req)
 }
 
+// ListStarredNodes calls splitsecure.vaultcatalog.v1.VaultCatalogService.ListStarredNodes.
+func (c *vaultCatalogServiceClient) ListStarredNodes(ctx context.Context, req *connect.Request[v1.ListStarredNodesRequest]) (*connect.Response[v1.ListStarredNodesResponse], error) {
+	return c.listStarredNodes.CallUnary(ctx, req)
+}
+
 // VaultCatalogServiceHandler is an implementation of the
 // splitsecure.vaultcatalog.v1.VaultCatalogService service.
 type VaultCatalogServiceHandler interface {
 	ListVaults(context.Context, *connect.Request[v1.ListVaultsRequest]) (*connect.Response[v1.ListVaultsResponse], error)
 	ListSharedWithMe(context.Context, *connect.Request[v1.ListSharedWithMeRequest]) (*connect.Response[v1.ListSharedWithMeResponse], error)
+	ListStarredNodes(context.Context, *connect.Request[v1.ListStarredNodesRequest]) (*connect.Response[v1.ListStarredNodesResponse], error)
 }
 
 // NewVaultCatalogServiceHandler builds an HTTP handler from the service implementation. It returns
@@ -117,12 +134,20 @@ func NewVaultCatalogServiceHandler(svc VaultCatalogServiceHandler, opts ...conne
 		connect.WithSchema(vaultCatalogServiceMethods.ByName("ListSharedWithMe")),
 		connect.WithHandlerOptions(opts...),
 	)
+	vaultCatalogServiceListStarredNodesHandler := connect.NewUnaryHandler(
+		VaultCatalogServiceListStarredNodesProcedure,
+		svc.ListStarredNodes,
+		connect.WithSchema(vaultCatalogServiceMethods.ByName("ListStarredNodes")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/splitsecure.vaultcatalog.v1.VaultCatalogService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VaultCatalogServiceListVaultsProcedure:
 			vaultCatalogServiceListVaultsHandler.ServeHTTP(w, r)
 		case VaultCatalogServiceListSharedWithMeProcedure:
 			vaultCatalogServiceListSharedWithMeHandler.ServeHTTP(w, r)
+		case VaultCatalogServiceListStarredNodesProcedure:
+			vaultCatalogServiceListStarredNodesHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -138,4 +163,8 @@ func (UnimplementedVaultCatalogServiceHandler) ListVaults(context.Context, *conn
 
 func (UnimplementedVaultCatalogServiceHandler) ListSharedWithMe(context.Context, *connect.Request[v1.ListSharedWithMeRequest]) (*connect.Response[v1.ListSharedWithMeResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultcatalog.v1.VaultCatalogService.ListSharedWithMe is not implemented"))
+}
+
+func (UnimplementedVaultCatalogServiceHandler) ListStarredNodes(context.Context, *connect.Request[v1.ListStarredNodesRequest]) (*connect.Response[v1.ListStarredNodesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultcatalog.v1.VaultCatalogService.ListStarredNodes is not implemented"))
 }

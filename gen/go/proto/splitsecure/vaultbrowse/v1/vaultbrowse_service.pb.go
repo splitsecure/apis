@@ -24,12 +24,15 @@ var File_splitsecure_vaultbrowse_v1_vaultbrowse_service_proto protoreflect.FileD
 
 const file_splitsecure_vaultbrowse_v1_vaultbrowse_service_proto_rawDesc = "" +
 	"\n" +
-	"4splitsecure/vaultbrowse/v1/vaultbrowse_service.proto\x12\x1asplitsecure.vaultbrowse.v1\x1a.splitsecure/vaultbrowse/v1/create_folder.proto\x1a.splitsecure/vaultbrowse/v1/delete_folder.proto\x1a-splitsecure/vaultbrowse/v1/delete_grant.proto\x1a/splitsecure/vaultbrowse/v1/describe_vault.proto\x1a)splitsecure/vaultbrowse/v1/get_node.proto\x1a+splitsecure/vaultbrowse/v1/get_record.proto\x1a,splitsecure/vaultbrowse/v1/list_grants.proto\x1a+splitsecure/vaultbrowse/v1/list_nodes.proto\x1a*splitsecure/vaultbrowse/v1/move_node.proto\x1a+splitsecure/vaultbrowse/v1/put_grants.proto\x1a,splitsecure/vaultbrowse/v1/rename_node.proto2\xc3\t\n" +
+	"4splitsecure/vaultbrowse/v1/vaultbrowse_service.proto\x12\x1asplitsecure.vaultbrowse.v1\x1a.splitsecure/vaultbrowse/v1/create_folder.proto\x1a.splitsecure/vaultbrowse/v1/delete_folder.proto\x1a-splitsecure/vaultbrowse/v1/delete_grant.proto\x1a/splitsecure/vaultbrowse/v1/describe_vault.proto\x1a)splitsecure/vaultbrowse/v1/get_node.proto\x1a+splitsecure/vaultbrowse/v1/get_record.proto\x1a,splitsecure/vaultbrowse/v1/list_grants.proto\x1a+splitsecure/vaultbrowse/v1/list_nodes.proto\x1a4splitsecure/vaultbrowse/v1/list_shared_with_me.proto\x1a3splitsecure/vaultbrowse/v1/list_starred_nodes.proto\x1a*splitsecure/vaultbrowse/v1/move_node.proto\x1a+splitsecure/vaultbrowse/v1/put_grants.proto\x1a,splitsecure/vaultbrowse/v1/rename_node.proto\x1a3splitsecure/vaultbrowse/v1/set_default_folder.proto\x1a1splitsecure/vaultbrowse/v1/set_node_starred.proto2\xb9\r\n" +
 	"\x12VaultBrowseService\x12t\n" +
 	"\rDescribeVault\x120.splitsecure.vaultbrowse.v1.DescribeVaultRequest\x1a1.splitsecure.vaultbrowse.v1.DescribeVaultResponse\x12h\n" +
 	"\tListNodes\x12,.splitsecure.vaultbrowse.v1.ListNodesRequest\x1a-.splitsecure.vaultbrowse.v1.ListNodesResponse\x12b\n" +
 	"\aGetNode\x12*.splitsecure.vaultbrowse.v1.GetNodeRequest\x1a+.splitsecure.vaultbrowse.v1.GetNodeResponse\x12h\n" +
-	"\tGetRecord\x12,.splitsecure.vaultbrowse.v1.GetRecordRequest\x1a-.splitsecure.vaultbrowse.v1.GetRecordResponse\x12q\n" +
+	"\tGetRecord\x12,.splitsecure.vaultbrowse.v1.GetRecordRequest\x1a-.splitsecure.vaultbrowse.v1.GetRecordResponse\x12}\n" +
+	"\x10ListSharedWithMe\x123.splitsecure.vaultbrowse.v1.ListSharedWithMeRequest\x1a4.splitsecure.vaultbrowse.v1.ListSharedWithMeResponse\x12w\n" +
+	"\x0eSetNodeStarred\x121.splitsecure.vaultbrowse.v1.SetNodeStarredRequest\x1a2.splitsecure.vaultbrowse.v1.SetNodeStarredResponse\x12}\n" +
+	"\x10ListStarredNodes\x123.splitsecure.vaultbrowse.v1.ListStarredNodesRequest\x1a4.splitsecure.vaultbrowse.v1.ListStarredNodesResponse\x12q\n" +
 	"\fCreateFolder\x12/.splitsecure.vaultbrowse.v1.CreateFolderRequest\x1a0.splitsecure.vaultbrowse.v1.CreateFolderResponse\x12e\n" +
 	"\bMoveNode\x12+.splitsecure.vaultbrowse.v1.MoveNodeRequest\x1a,.splitsecure.vaultbrowse.v1.MoveNodeResponse\x12k\n" +
 	"\n" +
@@ -38,58 +41,75 @@ const file_splitsecure_vaultbrowse_v1_vaultbrowse_service_proto_rawDesc = "" +
 	"\tPutGrants\x12,.splitsecure.vaultbrowse.v1.PutGrantsRequest\x1a-.splitsecure.vaultbrowse.v1.PutGrantsResponse\x12n\n" +
 	"\vDeleteGrant\x12..splitsecure.vaultbrowse.v1.DeleteGrantRequest\x1a/.splitsecure.vaultbrowse.v1.DeleteGrantResponse\x12k\n" +
 	"\n" +
-	"ListGrants\x12-.splitsecure.vaultbrowse.v1.ListGrantsRequest\x1a..splitsecure.vaultbrowse.v1.ListGrantsResponseB\x96\x02\n" +
+	"ListGrants\x12-.splitsecure.vaultbrowse.v1.ListGrantsRequest\x1a..splitsecure.vaultbrowse.v1.ListGrantsResponse\x12}\n" +
+	"\x10SetDefaultFolder\x123.splitsecure.vaultbrowse.v1.SetDefaultFolderRequest\x1a4.splitsecure.vaultbrowse.v1.SetDefaultFolderResponseB\x96\x02\n" +
 	"\x1ecom.splitsecure.vaultbrowse.v1B\x17VaultbrowseServiceProtoP\x01ZQgithub.com/splitsecure/apis/gen/go/proto/splitsecure/vaultbrowse/v1;vaultbrowsev1\xa2\x02\x03SVX\xaa\x02\x1aSplitsecure.Vaultbrowse.V1\xca\x02\x1aSplitsecure\\Vaultbrowse\\V1\xe2\x02&Splitsecure\\Vaultbrowse\\V1\\GPBMetadata\xea\x02\x1cSplitsecure::Vaultbrowse::V1b\x06proto3"
 
 var file_splitsecure_vaultbrowse_v1_vaultbrowse_service_proto_goTypes = []any{
-	(*DescribeVaultRequest)(nil),  // 0: splitsecure.vaultbrowse.v1.DescribeVaultRequest
-	(*ListNodesRequest)(nil),      // 1: splitsecure.vaultbrowse.v1.ListNodesRequest
-	(*GetNodeRequest)(nil),        // 2: splitsecure.vaultbrowse.v1.GetNodeRequest
-	(*GetRecordRequest)(nil),      // 3: splitsecure.vaultbrowse.v1.GetRecordRequest
-	(*CreateFolderRequest)(nil),   // 4: splitsecure.vaultbrowse.v1.CreateFolderRequest
-	(*MoveNodeRequest)(nil),       // 5: splitsecure.vaultbrowse.v1.MoveNodeRequest
-	(*RenameNodeRequest)(nil),     // 6: splitsecure.vaultbrowse.v1.RenameNodeRequest
-	(*DeleteFolderRequest)(nil),   // 7: splitsecure.vaultbrowse.v1.DeleteFolderRequest
-	(*PutGrantsRequest)(nil),      // 8: splitsecure.vaultbrowse.v1.PutGrantsRequest
-	(*DeleteGrantRequest)(nil),    // 9: splitsecure.vaultbrowse.v1.DeleteGrantRequest
-	(*ListGrantsRequest)(nil),     // 10: splitsecure.vaultbrowse.v1.ListGrantsRequest
-	(*DescribeVaultResponse)(nil), // 11: splitsecure.vaultbrowse.v1.DescribeVaultResponse
-	(*ListNodesResponse)(nil),     // 12: splitsecure.vaultbrowse.v1.ListNodesResponse
-	(*GetNodeResponse)(nil),       // 13: splitsecure.vaultbrowse.v1.GetNodeResponse
-	(*GetRecordResponse)(nil),     // 14: splitsecure.vaultbrowse.v1.GetRecordResponse
-	(*CreateFolderResponse)(nil),  // 15: splitsecure.vaultbrowse.v1.CreateFolderResponse
-	(*MoveNodeResponse)(nil),      // 16: splitsecure.vaultbrowse.v1.MoveNodeResponse
-	(*RenameNodeResponse)(nil),    // 17: splitsecure.vaultbrowse.v1.RenameNodeResponse
-	(*DeleteFolderResponse)(nil),  // 18: splitsecure.vaultbrowse.v1.DeleteFolderResponse
-	(*PutGrantsResponse)(nil),     // 19: splitsecure.vaultbrowse.v1.PutGrantsResponse
-	(*DeleteGrantResponse)(nil),   // 20: splitsecure.vaultbrowse.v1.DeleteGrantResponse
-	(*ListGrantsResponse)(nil),    // 21: splitsecure.vaultbrowse.v1.ListGrantsResponse
+	(*DescribeVaultRequest)(nil),     // 0: splitsecure.vaultbrowse.v1.DescribeVaultRequest
+	(*ListNodesRequest)(nil),         // 1: splitsecure.vaultbrowse.v1.ListNodesRequest
+	(*GetNodeRequest)(nil),           // 2: splitsecure.vaultbrowse.v1.GetNodeRequest
+	(*GetRecordRequest)(nil),         // 3: splitsecure.vaultbrowse.v1.GetRecordRequest
+	(*ListSharedWithMeRequest)(nil),  // 4: splitsecure.vaultbrowse.v1.ListSharedWithMeRequest
+	(*SetNodeStarredRequest)(nil),    // 5: splitsecure.vaultbrowse.v1.SetNodeStarredRequest
+	(*ListStarredNodesRequest)(nil),  // 6: splitsecure.vaultbrowse.v1.ListStarredNodesRequest
+	(*CreateFolderRequest)(nil),      // 7: splitsecure.vaultbrowse.v1.CreateFolderRequest
+	(*MoveNodeRequest)(nil),          // 8: splitsecure.vaultbrowse.v1.MoveNodeRequest
+	(*RenameNodeRequest)(nil),        // 9: splitsecure.vaultbrowse.v1.RenameNodeRequest
+	(*DeleteFolderRequest)(nil),      // 10: splitsecure.vaultbrowse.v1.DeleteFolderRequest
+	(*PutGrantsRequest)(nil),         // 11: splitsecure.vaultbrowse.v1.PutGrantsRequest
+	(*DeleteGrantRequest)(nil),       // 12: splitsecure.vaultbrowse.v1.DeleteGrantRequest
+	(*ListGrantsRequest)(nil),        // 13: splitsecure.vaultbrowse.v1.ListGrantsRequest
+	(*SetDefaultFolderRequest)(nil),  // 14: splitsecure.vaultbrowse.v1.SetDefaultFolderRequest
+	(*DescribeVaultResponse)(nil),    // 15: splitsecure.vaultbrowse.v1.DescribeVaultResponse
+	(*ListNodesResponse)(nil),        // 16: splitsecure.vaultbrowse.v1.ListNodesResponse
+	(*GetNodeResponse)(nil),          // 17: splitsecure.vaultbrowse.v1.GetNodeResponse
+	(*GetRecordResponse)(nil),        // 18: splitsecure.vaultbrowse.v1.GetRecordResponse
+	(*ListSharedWithMeResponse)(nil), // 19: splitsecure.vaultbrowse.v1.ListSharedWithMeResponse
+	(*SetNodeStarredResponse)(nil),   // 20: splitsecure.vaultbrowse.v1.SetNodeStarredResponse
+	(*ListStarredNodesResponse)(nil), // 21: splitsecure.vaultbrowse.v1.ListStarredNodesResponse
+	(*CreateFolderResponse)(nil),     // 22: splitsecure.vaultbrowse.v1.CreateFolderResponse
+	(*MoveNodeResponse)(nil),         // 23: splitsecure.vaultbrowse.v1.MoveNodeResponse
+	(*RenameNodeResponse)(nil),       // 24: splitsecure.vaultbrowse.v1.RenameNodeResponse
+	(*DeleteFolderResponse)(nil),     // 25: splitsecure.vaultbrowse.v1.DeleteFolderResponse
+	(*PutGrantsResponse)(nil),        // 26: splitsecure.vaultbrowse.v1.PutGrantsResponse
+	(*DeleteGrantResponse)(nil),      // 27: splitsecure.vaultbrowse.v1.DeleteGrantResponse
+	(*ListGrantsResponse)(nil),       // 28: splitsecure.vaultbrowse.v1.ListGrantsResponse
+	(*SetDefaultFolderResponse)(nil), // 29: splitsecure.vaultbrowse.v1.SetDefaultFolderResponse
 }
 var file_splitsecure_vaultbrowse_v1_vaultbrowse_service_proto_depIdxs = []int32{
 	0,  // 0: splitsecure.vaultbrowse.v1.VaultBrowseService.DescribeVault:input_type -> splitsecure.vaultbrowse.v1.DescribeVaultRequest
 	1,  // 1: splitsecure.vaultbrowse.v1.VaultBrowseService.ListNodes:input_type -> splitsecure.vaultbrowse.v1.ListNodesRequest
 	2,  // 2: splitsecure.vaultbrowse.v1.VaultBrowseService.GetNode:input_type -> splitsecure.vaultbrowse.v1.GetNodeRequest
 	3,  // 3: splitsecure.vaultbrowse.v1.VaultBrowseService.GetRecord:input_type -> splitsecure.vaultbrowse.v1.GetRecordRequest
-	4,  // 4: splitsecure.vaultbrowse.v1.VaultBrowseService.CreateFolder:input_type -> splitsecure.vaultbrowse.v1.CreateFolderRequest
-	5,  // 5: splitsecure.vaultbrowse.v1.VaultBrowseService.MoveNode:input_type -> splitsecure.vaultbrowse.v1.MoveNodeRequest
-	6,  // 6: splitsecure.vaultbrowse.v1.VaultBrowseService.RenameNode:input_type -> splitsecure.vaultbrowse.v1.RenameNodeRequest
-	7,  // 7: splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteFolder:input_type -> splitsecure.vaultbrowse.v1.DeleteFolderRequest
-	8,  // 8: splitsecure.vaultbrowse.v1.VaultBrowseService.PutGrants:input_type -> splitsecure.vaultbrowse.v1.PutGrantsRequest
-	9,  // 9: splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteGrant:input_type -> splitsecure.vaultbrowse.v1.DeleteGrantRequest
-	10, // 10: splitsecure.vaultbrowse.v1.VaultBrowseService.ListGrants:input_type -> splitsecure.vaultbrowse.v1.ListGrantsRequest
-	11, // 11: splitsecure.vaultbrowse.v1.VaultBrowseService.DescribeVault:output_type -> splitsecure.vaultbrowse.v1.DescribeVaultResponse
-	12, // 12: splitsecure.vaultbrowse.v1.VaultBrowseService.ListNodes:output_type -> splitsecure.vaultbrowse.v1.ListNodesResponse
-	13, // 13: splitsecure.vaultbrowse.v1.VaultBrowseService.GetNode:output_type -> splitsecure.vaultbrowse.v1.GetNodeResponse
-	14, // 14: splitsecure.vaultbrowse.v1.VaultBrowseService.GetRecord:output_type -> splitsecure.vaultbrowse.v1.GetRecordResponse
-	15, // 15: splitsecure.vaultbrowse.v1.VaultBrowseService.CreateFolder:output_type -> splitsecure.vaultbrowse.v1.CreateFolderResponse
-	16, // 16: splitsecure.vaultbrowse.v1.VaultBrowseService.MoveNode:output_type -> splitsecure.vaultbrowse.v1.MoveNodeResponse
-	17, // 17: splitsecure.vaultbrowse.v1.VaultBrowseService.RenameNode:output_type -> splitsecure.vaultbrowse.v1.RenameNodeResponse
-	18, // 18: splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteFolder:output_type -> splitsecure.vaultbrowse.v1.DeleteFolderResponse
-	19, // 19: splitsecure.vaultbrowse.v1.VaultBrowseService.PutGrants:output_type -> splitsecure.vaultbrowse.v1.PutGrantsResponse
-	20, // 20: splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteGrant:output_type -> splitsecure.vaultbrowse.v1.DeleteGrantResponse
-	21, // 21: splitsecure.vaultbrowse.v1.VaultBrowseService.ListGrants:output_type -> splitsecure.vaultbrowse.v1.ListGrantsResponse
-	11, // [11:22] is the sub-list for method output_type
-	0,  // [0:11] is the sub-list for method input_type
+	4,  // 4: splitsecure.vaultbrowse.v1.VaultBrowseService.ListSharedWithMe:input_type -> splitsecure.vaultbrowse.v1.ListSharedWithMeRequest
+	5,  // 5: splitsecure.vaultbrowse.v1.VaultBrowseService.SetNodeStarred:input_type -> splitsecure.vaultbrowse.v1.SetNodeStarredRequest
+	6,  // 6: splitsecure.vaultbrowse.v1.VaultBrowseService.ListStarredNodes:input_type -> splitsecure.vaultbrowse.v1.ListStarredNodesRequest
+	7,  // 7: splitsecure.vaultbrowse.v1.VaultBrowseService.CreateFolder:input_type -> splitsecure.vaultbrowse.v1.CreateFolderRequest
+	8,  // 8: splitsecure.vaultbrowse.v1.VaultBrowseService.MoveNode:input_type -> splitsecure.vaultbrowse.v1.MoveNodeRequest
+	9,  // 9: splitsecure.vaultbrowse.v1.VaultBrowseService.RenameNode:input_type -> splitsecure.vaultbrowse.v1.RenameNodeRequest
+	10, // 10: splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteFolder:input_type -> splitsecure.vaultbrowse.v1.DeleteFolderRequest
+	11, // 11: splitsecure.vaultbrowse.v1.VaultBrowseService.PutGrants:input_type -> splitsecure.vaultbrowse.v1.PutGrantsRequest
+	12, // 12: splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteGrant:input_type -> splitsecure.vaultbrowse.v1.DeleteGrantRequest
+	13, // 13: splitsecure.vaultbrowse.v1.VaultBrowseService.ListGrants:input_type -> splitsecure.vaultbrowse.v1.ListGrantsRequest
+	14, // 14: splitsecure.vaultbrowse.v1.VaultBrowseService.SetDefaultFolder:input_type -> splitsecure.vaultbrowse.v1.SetDefaultFolderRequest
+	15, // 15: splitsecure.vaultbrowse.v1.VaultBrowseService.DescribeVault:output_type -> splitsecure.vaultbrowse.v1.DescribeVaultResponse
+	16, // 16: splitsecure.vaultbrowse.v1.VaultBrowseService.ListNodes:output_type -> splitsecure.vaultbrowse.v1.ListNodesResponse
+	17, // 17: splitsecure.vaultbrowse.v1.VaultBrowseService.GetNode:output_type -> splitsecure.vaultbrowse.v1.GetNodeResponse
+	18, // 18: splitsecure.vaultbrowse.v1.VaultBrowseService.GetRecord:output_type -> splitsecure.vaultbrowse.v1.GetRecordResponse
+	19, // 19: splitsecure.vaultbrowse.v1.VaultBrowseService.ListSharedWithMe:output_type -> splitsecure.vaultbrowse.v1.ListSharedWithMeResponse
+	20, // 20: splitsecure.vaultbrowse.v1.VaultBrowseService.SetNodeStarred:output_type -> splitsecure.vaultbrowse.v1.SetNodeStarredResponse
+	21, // 21: splitsecure.vaultbrowse.v1.VaultBrowseService.ListStarredNodes:output_type -> splitsecure.vaultbrowse.v1.ListStarredNodesResponse
+	22, // 22: splitsecure.vaultbrowse.v1.VaultBrowseService.CreateFolder:output_type -> splitsecure.vaultbrowse.v1.CreateFolderResponse
+	23, // 23: splitsecure.vaultbrowse.v1.VaultBrowseService.MoveNode:output_type -> splitsecure.vaultbrowse.v1.MoveNodeResponse
+	24, // 24: splitsecure.vaultbrowse.v1.VaultBrowseService.RenameNode:output_type -> splitsecure.vaultbrowse.v1.RenameNodeResponse
+	25, // 25: splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteFolder:output_type -> splitsecure.vaultbrowse.v1.DeleteFolderResponse
+	26, // 26: splitsecure.vaultbrowse.v1.VaultBrowseService.PutGrants:output_type -> splitsecure.vaultbrowse.v1.PutGrantsResponse
+	27, // 27: splitsecure.vaultbrowse.v1.VaultBrowseService.DeleteGrant:output_type -> splitsecure.vaultbrowse.v1.DeleteGrantResponse
+	28, // 28: splitsecure.vaultbrowse.v1.VaultBrowseService.ListGrants:output_type -> splitsecure.vaultbrowse.v1.ListGrantsResponse
+	29, // 29: splitsecure.vaultbrowse.v1.VaultBrowseService.SetDefaultFolder:output_type -> splitsecure.vaultbrowse.v1.SetDefaultFolderResponse
+	15, // [15:30] is the sub-list for method output_type
+	0,  // [0:15] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -108,9 +128,13 @@ func file_splitsecure_vaultbrowse_v1_vaultbrowse_service_proto_init() {
 	file_splitsecure_vaultbrowse_v1_get_record_proto_init()
 	file_splitsecure_vaultbrowse_v1_list_grants_proto_init()
 	file_splitsecure_vaultbrowse_v1_list_nodes_proto_init()
+	file_splitsecure_vaultbrowse_v1_list_shared_with_me_proto_init()
+	file_splitsecure_vaultbrowse_v1_list_starred_nodes_proto_init()
 	file_splitsecure_vaultbrowse_v1_move_node_proto_init()
 	file_splitsecure_vaultbrowse_v1_put_grants_proto_init()
 	file_splitsecure_vaultbrowse_v1_rename_node_proto_init()
+	file_splitsecure_vaultbrowse_v1_set_default_folder_proto_init()
+	file_splitsecure_vaultbrowse_v1_set_node_starred_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

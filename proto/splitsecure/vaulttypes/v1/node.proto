@@ -3,6 +3,7 @@ package splitsecure.vaulttypes.v1;
 
 import "splitsecure/vaulttypes/v1/node_access.proto";
 import "splitsecure/vaulttypes/v1/record_facts.proto";
+import "splitsecure/vaulttypes/v1/resource_category.proto";
 
 message Node {
   // The node's only identity on the wire. Every other RPC takes it. Ids are
@@ -26,4 +27,9 @@ message Node {
 
   // The caller's own star on this node.
   bool starred = 7;
+
+  // Set on a folder the vault was created with for a category, while it
+  // keeps its original label. Show the category's localized name instead of
+  // the label. Renaming the folder clears it.
+  ResourceCategory category = 8;
 }

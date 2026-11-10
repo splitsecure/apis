@@ -1,0 +1,24 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaulttypes/v1/resource_category.proto";
+
+// SetDefaultFolder sets the folder recommended for new resources of one
+// category. Only a guardian of the vault's owning team may call it. The
+// folder must be a directory outside the lost+found.
+message SetDefaultFolderRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    splitsecure.vaulttypes.v1.ResourceCategory category = 2;
+
+    // Empty or DescribeVault.root_node_id recommends the vault root.
+    string node_id = 3;
+  }
+}
+
+message SetDefaultFolderResponse {}

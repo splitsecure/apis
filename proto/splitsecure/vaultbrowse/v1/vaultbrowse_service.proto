@@ -9,12 +9,16 @@ import "splitsecure/vaultbrowse/v1/get_node.proto";
 import "splitsecure/vaultbrowse/v1/get_record.proto";
 import "splitsecure/vaultbrowse/v1/list_grants.proto";
 import "splitsecure/vaultbrowse/v1/list_nodes.proto";
+import "splitsecure/vaultbrowse/v1/list_shared_with_me.proto";
+import "splitsecure/vaultbrowse/v1/list_starred_nodes.proto";
 import "splitsecure/vaultbrowse/v1/move_node.proto";
 import "splitsecure/vaultbrowse/v1/put_grants.proto";
 import "splitsecure/vaultbrowse/v1/rename_node.proto";
+import "splitsecure/vaultbrowse/v1/set_default_folder.proto";
+import "splitsecure/vaultbrowse/v1/set_node_starred.proto";
 
-// VaultBrowseService browses one vault: its tree, record metadata and
-// navigation grants.
+// VaultBrowseService browses one vault: its tree, record metadata,
+// navigation grants, stars and default folders.
 // Threshold vaults serve it through the coordination server. Online vaults
 // serve it directly. Every request names its vault by vault_id. Nothing
 // here is org-scoped.
@@ -38,6 +42,11 @@ service VaultBrowseService {
 
   rpc GetRecord(GetRecordRequest) returns (GetRecordResponse);
 
+  rpc ListSharedWithMe(ListSharedWithMeRequest) returns (ListSharedWithMeResponse);
+
+  rpc SetNodeStarred(SetNodeStarredRequest) returns (SetNodeStarredResponse);
+  rpc ListStarredNodes(ListStarredNodesRequest) returns (ListStarredNodesResponse);
+
   rpc CreateFolder(CreateFolderRequest) returns (CreateFolderResponse);
   rpc MoveNode(MoveNodeRequest) returns (MoveNodeResponse);
   rpc RenameNode(RenameNodeRequest) returns (RenameNodeResponse);
@@ -46,4 +55,6 @@ service VaultBrowseService {
   rpc PutGrants(PutGrantsRequest) returns (PutGrantsResponse);
   rpc DeleteGrant(DeleteGrantRequest) returns (DeleteGrantResponse);
   rpc ListGrants(ListGrantsRequest) returns (ListGrantsResponse);
+
+  rpc SetDefaultFolder(SetDefaultFolderRequest) returns (SetDefaultFolderResponse);
 }

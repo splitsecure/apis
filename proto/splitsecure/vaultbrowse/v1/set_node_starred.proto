@@ -1,0 +1,24 @@
+syntax = "proto3";
+package splitsecure.vaultbrowse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+
+// SetNodeStarred stars or unstars one node for the caller. Stars belong to
+// the caller alone. Starring needs a node the caller can see. Unstarring
+// always works, so a star can be removed after its grant is gone. Calling it
+// twice with the same value changes nothing.
+message SetNodeStarredRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    string node_id = 2;
+
+    // True stars the node, false unstars it.
+    bool starred = 3;
+  }
+}
+
+message SetNodeStarredResponse {}

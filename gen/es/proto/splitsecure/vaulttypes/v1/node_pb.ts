@@ -8,13 +8,15 @@ import type { NodeAccess } from "./node_access_pb";
 import { file_splitsecure_vaulttypes_v1_node_access } from "./node_access_pb";
 import type { RecordFacts } from "./record_facts_pb";
 import { file_splitsecure_vaulttypes_v1_record_facts } from "./record_facts_pb";
+import type { ResourceCategory } from "./resource_category_pb";
+import { file_splitsecure_vaulttypes_v1_resource_category } from "./resource_category_pb";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file splitsecure/vaulttypes/v1/node.proto.
  */
 export const file_splitsecure_vaulttypes_v1_node: GenFile = /*@__PURE__*/
-  fileDesc("CiRzcGxpdHNlY3VyZS92YXVsdHR5cGVzL3YxL25vZGUucHJvdG8SGXNwbGl0c2VjdXJlLnZhdWx0dHlwZXMudjEizQEKBE5vZGUSDwoHbm9kZV9pZBgBIAEoCRINCgVsYWJlbBgCIAEoCRIOCgZpc19kaXIYAyABKAgSNgoGcmVjb3JkGAQgASgLMiYuc3BsaXRzZWN1cmUudmF1bHR0eXBlcy52MS5SZWNvcmRGYWN0cxI1CgZhY2Nlc3MYBSABKAsyJS5zcGxpdHNlY3VyZS52YXVsdHR5cGVzLnYxLk5vZGVBY2Nlc3MSFQoNaXNfbG9zdF9mb3VuZBgGIAEoCBIPCgdzdGFycmVkGAcgASgIQoECCh1jb20uc3BsaXRzZWN1cmUudmF1bHR0eXBlcy52MUIJTm9kZVByb3RvUAFaT2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvdmF1bHR0eXBlcy92MTt2YXVsdHR5cGVzdjGiAgNTVliqAhlTcGxpdHNlY3VyZS5WYXVsdHR5cGVzLlYxygIZU3BsaXRzZWN1cmVcVmF1bHR0eXBlc1xWMeICJVNwbGl0c2VjdXJlXFZhdWx0dHlwZXNcVjFcR1BCTWV0YWRhdGHqAhtTcGxpdHNlY3VyZTo6VmF1bHR0eXBlczo6VjFiBnByb3RvMw", [file_splitsecure_vaulttypes_v1_node_access, file_splitsecure_vaulttypes_v1_record_facts]);
+  fileDesc("CiRzcGxpdHNlY3VyZS92YXVsdHR5cGVzL3YxL25vZGUucHJvdG8SGXNwbGl0c2VjdXJlLnZhdWx0dHlwZXMudjEijAIKBE5vZGUSDwoHbm9kZV9pZBgBIAEoCRINCgVsYWJlbBgCIAEoCRIOCgZpc19kaXIYAyABKAgSNgoGcmVjb3JkGAQgASgLMiYuc3BsaXRzZWN1cmUudmF1bHR0eXBlcy52MS5SZWNvcmRGYWN0cxI1CgZhY2Nlc3MYBSABKAsyJS5zcGxpdHNlY3VyZS52YXVsdHR5cGVzLnYxLk5vZGVBY2Nlc3MSFQoNaXNfbG9zdF9mb3VuZBgGIAEoCBIPCgdzdGFycmVkGAcgASgIEj0KCGNhdGVnb3J5GAggASgOMisuc3BsaXRzZWN1cmUudmF1bHR0eXBlcy52MS5SZXNvdXJjZUNhdGVnb3J5QoECCh1jb20uc3BsaXRzZWN1cmUudmF1bHR0eXBlcy52MUIJTm9kZVByb3RvUAFaT2dpdGh1Yi5jb20vc3BsaXRzZWN1cmUvYXBpcy9nZW4vZ28vcHJvdG8vc3BsaXRzZWN1cmUvdmF1bHR0eXBlcy92MTt2YXVsdHR5cGVzdjGiAgNTVliqAhlTcGxpdHNlY3VyZS5WYXVsdHR5cGVzLlYxygIZU3BsaXRzZWN1cmVcVmF1bHR0eXBlc1xWMeICJVNwbGl0c2VjdXJlXFZhdWx0dHlwZXNcVjFcR1BCTWV0YWRhdGHqAhtTcGxpdHNlY3VyZTo6VmF1bHR0eXBlczo6VjFiBnByb3RvMw", [file_splitsecure_vaulttypes_v1_node_access, file_splitsecure_vaulttypes_v1_record_facts, file_splitsecure_vaulttypes_v1_resource_category]);
 
 /**
  * @generated from message splitsecure.vaulttypes.v1.Node
@@ -68,6 +70,15 @@ export type Node = Message<"splitsecure.vaulttypes.v1.Node"> & {
    * @generated from field: bool starred = 7;
    */
   starred: boolean;
+
+  /**
+   * Set on a folder the vault was created with for a category, while it
+   * keeps its original label. Show the category's localized name instead of
+   * the label. Renaming the folder clears it.
+   *
+   * @generated from field: splitsecure.vaulttypes.v1.ResourceCategory category = 8;
+   */
+  category: ResourceCategory;
 };
 
 /**
