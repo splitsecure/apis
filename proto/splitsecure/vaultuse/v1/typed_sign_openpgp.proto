@@ -1,0 +1,34 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultuse/v1/release_outcome.proto";
+import "splitsecure/vaultuse/v1/use_options.proto";
+
+// SignOpenPGPRequest asks an openpgp-key record's primary key for one
+// detached OpenPGP signature over a document. Approvers see the document.
+message SignOpenPGPRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    // The openpgp-key record that signs.
+    string key_id = 2;
+
+    // The whole document. The server computes the digest.
+    bytes document = 3;
+
+    // 0x00 for a binary document, 0x01 for a canonical text document.
+    uint32 sig_type = 4;
+
+    UseOptions options = 5;
+  }
+}
+
+// SignOpenPGPResponse returns the signature packet, in the clear, in the
+// result's clear_value.
+message SignOpenPGPResponse {
+  ReleaseOutcome outcome = 1;
+}

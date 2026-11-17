@@ -24,7 +24,7 @@ var File_splitsecure_vaultuse_v1_vaultuse_service_proto protoreflect.FileDescrip
 
 const file_splitsecure_vaultuse_v1_vaultuse_service_proto_rawDesc = "" +
 	"\n" +
-	".splitsecure/vaultuse/v1/vaultuse_service.proto\x12\x17splitsecure.vaultuse.v1\x1a$splitsecure/vaultuse/v1/cancel.proto\x1a$splitsecure/vaultuse/v1/delete.proto\x1a)splitsecure/vaultuse/v1/poll_ticket.proto\x1a8splitsecure/vaultuse/v1/typed_create_connected_app.proto\x1a4splitsecure/vaultuse/v1/typed_create_saml2_idp.proto\x1a8splitsecure/vaultuse/v1/typed_create_wif_authority.proto2\x9f\x05\n" +
+	".splitsecure/vaultuse/v1/vaultuse_service.proto\x12\x17splitsecure.vaultuse.v1\x1a$splitsecure/vaultuse/v1/cancel.proto\x1a$splitsecure/vaultuse/v1/delete.proto\x1a)splitsecure/vaultuse/v1/poll_ticket.proto\x1a8splitsecure/vaultuse/v1/typed_create_connected_app.proto\x1a4splitsecure/vaultuse/v1/typed_create_saml2_idp.proto\x1a8splitsecure/vaultuse/v1/typed_create_wif_authority.proto\x1a2splitsecure/vaultuse/v1/typed_sign_nitro_eif.proto\x1a0splitsecure/vaultuse/v1/typed_sign_openpgp.proto2\xf6\x06\n" +
 	"\x0fVaultUseService\x12Y\n" +
 	"\x06Delete\x12&.splitsecure.vaultuse.v1.DeleteRequest\x1a'.splitsecure.vaultuse.v1.DeleteResponse\x12e\n" +
 	"\n" +
@@ -32,7 +32,9 @@ const file_splitsecure_vaultuse_v1_vaultuse_service_proto_rawDesc = "" +
 	"\x06Cancel\x12&.splitsecure.vaultuse.v1.CancelRequest\x1a'.splitsecure.vaultuse.v1.CancelResponse\x12q\n" +
 	"\x0eCreateSAML2IDP\x12..splitsecure.vaultuse.v1.CreateSAML2IDPRequest\x1a/.splitsecure.vaultuse.v1.CreateSAML2IDPResponse\x12}\n" +
 	"\x12CreateConnectedApp\x122.splitsecure.vaultuse.v1.CreateConnectedAppRequest\x1a3.splitsecure.vaultuse.v1.CreateConnectedAppResponse\x12}\n" +
-	"\x12CreateWIFAuthority\x122.splitsecure.vaultuse.v1.CreateWIFAuthorityRequest\x1a3.splitsecure.vaultuse.v1.CreateWIFAuthorityResponseB\xfe\x01\n" +
+	"\x12CreateWIFAuthority\x122.splitsecure.vaultuse.v1.CreateWIFAuthorityRequest\x1a3.splitsecure.vaultuse.v1.CreateWIFAuthorityResponse\x12h\n" +
+	"\vSignOpenPGP\x12+.splitsecure.vaultuse.v1.SignOpenPGPRequest\x1a,.splitsecure.vaultuse.v1.SignOpenPGPResponse\x12k\n" +
+	"\fSignNitroEIF\x12,.splitsecure.vaultuse.v1.SignNitroEIFRequest\x1a-.splitsecure.vaultuse.v1.SignNitroEIFResponseB\xfe\x01\n" +
 	"\x1bcom.splitsecure.vaultuse.v1B\x14VaultuseServiceProtoP\x01ZKgithub.com/splitsecure/apis/gen/go/proto/splitsecure/vaultuse/v1;vaultusev1\xa2\x02\x03SVX\xaa\x02\x17Splitsecure.Vaultuse.V1\xca\x02\x17Splitsecure\\Vaultuse\\V1\xe2\x02#Splitsecure\\Vaultuse\\V1\\GPBMetadata\xea\x02\x19Splitsecure::Vaultuse::V1b\x06proto3"
 
 var file_splitsecure_vaultuse_v1_vaultuse_service_proto_goTypes = []any{
@@ -42,12 +44,16 @@ var file_splitsecure_vaultuse_v1_vaultuse_service_proto_goTypes = []any{
 	(*CreateSAML2IDPRequest)(nil),      // 3: splitsecure.vaultuse.v1.CreateSAML2IDPRequest
 	(*CreateConnectedAppRequest)(nil),  // 4: splitsecure.vaultuse.v1.CreateConnectedAppRequest
 	(*CreateWIFAuthorityRequest)(nil),  // 5: splitsecure.vaultuse.v1.CreateWIFAuthorityRequest
-	(*DeleteResponse)(nil),             // 6: splitsecure.vaultuse.v1.DeleteResponse
-	(*PollTicketResponse)(nil),         // 7: splitsecure.vaultuse.v1.PollTicketResponse
-	(*CancelResponse)(nil),             // 8: splitsecure.vaultuse.v1.CancelResponse
-	(*CreateSAML2IDPResponse)(nil),     // 9: splitsecure.vaultuse.v1.CreateSAML2IDPResponse
-	(*CreateConnectedAppResponse)(nil), // 10: splitsecure.vaultuse.v1.CreateConnectedAppResponse
-	(*CreateWIFAuthorityResponse)(nil), // 11: splitsecure.vaultuse.v1.CreateWIFAuthorityResponse
+	(*SignOpenPGPRequest)(nil),         // 6: splitsecure.vaultuse.v1.SignOpenPGPRequest
+	(*SignNitroEIFRequest)(nil),        // 7: splitsecure.vaultuse.v1.SignNitroEIFRequest
+	(*DeleteResponse)(nil),             // 8: splitsecure.vaultuse.v1.DeleteResponse
+	(*PollTicketResponse)(nil),         // 9: splitsecure.vaultuse.v1.PollTicketResponse
+	(*CancelResponse)(nil),             // 10: splitsecure.vaultuse.v1.CancelResponse
+	(*CreateSAML2IDPResponse)(nil),     // 11: splitsecure.vaultuse.v1.CreateSAML2IDPResponse
+	(*CreateConnectedAppResponse)(nil), // 12: splitsecure.vaultuse.v1.CreateConnectedAppResponse
+	(*CreateWIFAuthorityResponse)(nil), // 13: splitsecure.vaultuse.v1.CreateWIFAuthorityResponse
+	(*SignOpenPGPResponse)(nil),        // 14: splitsecure.vaultuse.v1.SignOpenPGPResponse
+	(*SignNitroEIFResponse)(nil),       // 15: splitsecure.vaultuse.v1.SignNitroEIFResponse
 }
 var file_splitsecure_vaultuse_v1_vaultuse_service_proto_depIdxs = []int32{
 	0,  // 0: splitsecure.vaultuse.v1.VaultUseService.Delete:input_type -> splitsecure.vaultuse.v1.DeleteRequest
@@ -56,14 +62,18 @@ var file_splitsecure_vaultuse_v1_vaultuse_service_proto_depIdxs = []int32{
 	3,  // 3: splitsecure.vaultuse.v1.VaultUseService.CreateSAML2IDP:input_type -> splitsecure.vaultuse.v1.CreateSAML2IDPRequest
 	4,  // 4: splitsecure.vaultuse.v1.VaultUseService.CreateConnectedApp:input_type -> splitsecure.vaultuse.v1.CreateConnectedAppRequest
 	5,  // 5: splitsecure.vaultuse.v1.VaultUseService.CreateWIFAuthority:input_type -> splitsecure.vaultuse.v1.CreateWIFAuthorityRequest
-	6,  // 6: splitsecure.vaultuse.v1.VaultUseService.Delete:output_type -> splitsecure.vaultuse.v1.DeleteResponse
-	7,  // 7: splitsecure.vaultuse.v1.VaultUseService.PollTicket:output_type -> splitsecure.vaultuse.v1.PollTicketResponse
-	8,  // 8: splitsecure.vaultuse.v1.VaultUseService.Cancel:output_type -> splitsecure.vaultuse.v1.CancelResponse
-	9,  // 9: splitsecure.vaultuse.v1.VaultUseService.CreateSAML2IDP:output_type -> splitsecure.vaultuse.v1.CreateSAML2IDPResponse
-	10, // 10: splitsecure.vaultuse.v1.VaultUseService.CreateConnectedApp:output_type -> splitsecure.vaultuse.v1.CreateConnectedAppResponse
-	11, // 11: splitsecure.vaultuse.v1.VaultUseService.CreateWIFAuthority:output_type -> splitsecure.vaultuse.v1.CreateWIFAuthorityResponse
-	6,  // [6:12] is the sub-list for method output_type
-	0,  // [0:6] is the sub-list for method input_type
+	6,  // 6: splitsecure.vaultuse.v1.VaultUseService.SignOpenPGP:input_type -> splitsecure.vaultuse.v1.SignOpenPGPRequest
+	7,  // 7: splitsecure.vaultuse.v1.VaultUseService.SignNitroEIF:input_type -> splitsecure.vaultuse.v1.SignNitroEIFRequest
+	8,  // 8: splitsecure.vaultuse.v1.VaultUseService.Delete:output_type -> splitsecure.vaultuse.v1.DeleteResponse
+	9,  // 9: splitsecure.vaultuse.v1.VaultUseService.PollTicket:output_type -> splitsecure.vaultuse.v1.PollTicketResponse
+	10, // 10: splitsecure.vaultuse.v1.VaultUseService.Cancel:output_type -> splitsecure.vaultuse.v1.CancelResponse
+	11, // 11: splitsecure.vaultuse.v1.VaultUseService.CreateSAML2IDP:output_type -> splitsecure.vaultuse.v1.CreateSAML2IDPResponse
+	12, // 12: splitsecure.vaultuse.v1.VaultUseService.CreateConnectedApp:output_type -> splitsecure.vaultuse.v1.CreateConnectedAppResponse
+	13, // 13: splitsecure.vaultuse.v1.VaultUseService.CreateWIFAuthority:output_type -> splitsecure.vaultuse.v1.CreateWIFAuthorityResponse
+	14, // 14: splitsecure.vaultuse.v1.VaultUseService.SignOpenPGP:output_type -> splitsecure.vaultuse.v1.SignOpenPGPResponse
+	15, // 15: splitsecure.vaultuse.v1.VaultUseService.SignNitroEIF:output_type -> splitsecure.vaultuse.v1.SignNitroEIFResponse
+	8,  // [8:16] is the sub-list for method output_type
+	0,  // [0:8] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -80,6 +90,8 @@ func file_splitsecure_vaultuse_v1_vaultuse_service_proto_init() {
 	file_splitsecure_vaultuse_v1_typed_create_connected_app_proto_init()
 	file_splitsecure_vaultuse_v1_typed_create_saml2_idp_proto_init()
 	file_splitsecure_vaultuse_v1_typed_create_wif_authority_proto_init()
+	file_splitsecure_vaultuse_v1_typed_sign_nitro_eif_proto_init()
+	file_splitsecure_vaultuse_v1_typed_sign_openpgp_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
