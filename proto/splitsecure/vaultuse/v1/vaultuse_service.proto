@@ -7,6 +7,8 @@ import "splitsecure/vaultuse/v1/poll_ticket.proto";
 import "splitsecure/vaultuse/v1/typed_create_connected_app.proto";
 import "splitsecure/vaultuse/v1/typed_create_saml2_idp.proto";
 import "splitsecure/vaultuse/v1/typed_create_wif_authority.proto";
+import "splitsecure/vaultuse/v1/typed_sign_nitro_eif.proto";
+import "splitsecure/vaultuse/v1/typed_sign_openpgp.proto";
 
 // VaultUseService requests governed operations on vault records and
 // collects their results. Threshold vaults and online vaults serve the same
@@ -40,4 +42,8 @@ service VaultUseService {
   rpc CreateConnectedApp(CreateConnectedAppRequest) returns (CreateConnectedAppResponse);
 
   rpc CreateWIFAuthority(CreateWIFAuthorityRequest) returns (CreateWIFAuthorityResponse);
+
+  rpc SignOpenPGP(SignOpenPGPRequest) returns (SignOpenPGPResponse);
+
+  rpc SignNitroEIF(SignNitroEIFRequest) returns (SignNitroEIFResponse);
 }

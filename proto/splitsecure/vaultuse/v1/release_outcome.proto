@@ -1,0 +1,14 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/vaultuse/v1/release_result.proto";
+import "splitsecure/vaultuse/v1/ticket.proto";
+
+// ReleaseOutcome is the result, or a ticket to follow with PollTicket when
+// the request needs approval.
+message ReleaseOutcome {
+  oneof union {
+    ReleaseResult result = 1;
+    Ticket ticket = 2;
+  }
+}

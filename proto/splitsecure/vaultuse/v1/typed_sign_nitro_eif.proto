@@ -1,0 +1,32 @@
+syntax = "proto3";
+package splitsecure.vaultuse.v1;
+
+import "splitsecure/bottle/v1/bottle.proto";
+import "splitsecure/vaultuse/v1/release_outcome.proto";
+import "splitsecure/vaultuse/v1/use_options.proto";
+
+// SignNitroEIFRequest asks a nitro-eif-signer record's key to sign one AWS
+// Nitro Enclave image measurement.
+message SignNitroEIFRequest {
+  splitsecure.bottle.v1.Bottle envelope = 1;
+  Base base = 2;
+
+  message Base {
+    string vault_id = 1;
+
+    // The nitro-eif-signer record that signs.
+    string key_id = 2;
+
+    // The COSE Sig_structure ("Signature1") whose payload is the image's
+    // pcr_info map. Anything else is rejected.
+    bytes tbs = 3;
+
+    UseOptions options = 4;
+  }
+}
+
+// SignNitroEIFResponse returns the signature, in the clear, in the result's
+// clear_value.
+message SignNitroEIFResponse {
+  ReleaseOutcome outcome = 1;
+}

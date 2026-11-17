@@ -49,6 +49,12 @@ const (
 	// VaultUseServiceCreateWIFAuthorityProcedure is the fully-qualified name of the VaultUseService's
 	// CreateWIFAuthority RPC.
 	VaultUseServiceCreateWIFAuthorityProcedure = "/splitsecure.vaultuse.v1.VaultUseService/CreateWIFAuthority"
+	// VaultUseServiceSignOpenPGPProcedure is the fully-qualified name of the VaultUseService's
+	// SignOpenPGP RPC.
+	VaultUseServiceSignOpenPGPProcedure = "/splitsecure.vaultuse.v1.VaultUseService/SignOpenPGP"
+	// VaultUseServiceSignNitroEIFProcedure is the fully-qualified name of the VaultUseService's
+	// SignNitroEIF RPC.
+	VaultUseServiceSignNitroEIFProcedure = "/splitsecure.vaultuse.v1.VaultUseService/SignNitroEIF"
 )
 
 // VaultUseServiceClient is a client for the splitsecure.vaultuse.v1.VaultUseService service.
@@ -59,6 +65,8 @@ type VaultUseServiceClient interface {
 	CreateSAML2IDP(context.Context, *connect.Request[v1.CreateSAML2IDPRequest]) (*connect.Response[v1.CreateSAML2IDPResponse], error)
 	CreateConnectedApp(context.Context, *connect.Request[v1.CreateConnectedAppRequest]) (*connect.Response[v1.CreateConnectedAppResponse], error)
 	CreateWIFAuthority(context.Context, *connect.Request[v1.CreateWIFAuthorityRequest]) (*connect.Response[v1.CreateWIFAuthorityResponse], error)
+	SignOpenPGP(context.Context, *connect.Request[v1.SignOpenPGPRequest]) (*connect.Response[v1.SignOpenPGPResponse], error)
+	SignNitroEIF(context.Context, *connect.Request[v1.SignNitroEIFRequest]) (*connect.Response[v1.SignNitroEIFResponse], error)
 }
 
 // NewVaultUseServiceClient constructs a client for the splitsecure.vaultuse.v1.VaultUseService
@@ -108,6 +116,18 @@ func NewVaultUseServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(vaultUseServiceMethods.ByName("CreateWIFAuthority")),
 			connect.WithClientOptions(opts...),
 		),
+		signOpenPGP: connect.NewClient[v1.SignOpenPGPRequest, v1.SignOpenPGPResponse](
+			httpClient,
+			baseURL+VaultUseServiceSignOpenPGPProcedure,
+			connect.WithSchema(vaultUseServiceMethods.ByName("SignOpenPGP")),
+			connect.WithClientOptions(opts...),
+		),
+		signNitroEIF: connect.NewClient[v1.SignNitroEIFRequest, v1.SignNitroEIFResponse](
+			httpClient,
+			baseURL+VaultUseServiceSignNitroEIFProcedure,
+			connect.WithSchema(vaultUseServiceMethods.ByName("SignNitroEIF")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -119,6 +139,8 @@ type vaultUseServiceClient struct {
 	createSAML2IDP     *connect.Client[v1.CreateSAML2IDPRequest, v1.CreateSAML2IDPResponse]
 	createConnectedApp *connect.Client[v1.CreateConnectedAppRequest, v1.CreateConnectedAppResponse]
 	createWIFAuthority *connect.Client[v1.CreateWIFAuthorityRequest, v1.CreateWIFAuthorityResponse]
+	signOpenPGP        *connect.Client[v1.SignOpenPGPRequest, v1.SignOpenPGPResponse]
+	signNitroEIF       *connect.Client[v1.SignNitroEIFRequest, v1.SignNitroEIFResponse]
 }
 
 // Delete calls splitsecure.vaultuse.v1.VaultUseService.Delete.
@@ -151,6 +173,16 @@ func (c *vaultUseServiceClient) CreateWIFAuthority(ctx context.Context, req *con
 	return c.createWIFAuthority.CallUnary(ctx, req)
 }
 
+// SignOpenPGP calls splitsecure.vaultuse.v1.VaultUseService.SignOpenPGP.
+func (c *vaultUseServiceClient) SignOpenPGP(ctx context.Context, req *connect.Request[v1.SignOpenPGPRequest]) (*connect.Response[v1.SignOpenPGPResponse], error) {
+	return c.signOpenPGP.CallUnary(ctx, req)
+}
+
+// SignNitroEIF calls splitsecure.vaultuse.v1.VaultUseService.SignNitroEIF.
+func (c *vaultUseServiceClient) SignNitroEIF(ctx context.Context, req *connect.Request[v1.SignNitroEIFRequest]) (*connect.Response[v1.SignNitroEIFResponse], error) {
+	return c.signNitroEIF.CallUnary(ctx, req)
+}
+
 // VaultUseServiceHandler is an implementation of the splitsecure.vaultuse.v1.VaultUseService
 // service.
 type VaultUseServiceHandler interface {
@@ -160,6 +192,8 @@ type VaultUseServiceHandler interface {
 	CreateSAML2IDP(context.Context, *connect.Request[v1.CreateSAML2IDPRequest]) (*connect.Response[v1.CreateSAML2IDPResponse], error)
 	CreateConnectedApp(context.Context, *connect.Request[v1.CreateConnectedAppRequest]) (*connect.Response[v1.CreateConnectedAppResponse], error)
 	CreateWIFAuthority(context.Context, *connect.Request[v1.CreateWIFAuthorityRequest]) (*connect.Response[v1.CreateWIFAuthorityResponse], error)
+	SignOpenPGP(context.Context, *connect.Request[v1.SignOpenPGPRequest]) (*connect.Response[v1.SignOpenPGPResponse], error)
+	SignNitroEIF(context.Context, *connect.Request[v1.SignNitroEIFRequest]) (*connect.Response[v1.SignNitroEIFResponse], error)
 }
 
 // NewVaultUseServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -205,6 +239,18 @@ func NewVaultUseServiceHandler(svc VaultUseServiceHandler, opts ...connect.Handl
 		connect.WithSchema(vaultUseServiceMethods.ByName("CreateWIFAuthority")),
 		connect.WithHandlerOptions(opts...),
 	)
+	vaultUseServiceSignOpenPGPHandler := connect.NewUnaryHandler(
+		VaultUseServiceSignOpenPGPProcedure,
+		svc.SignOpenPGP,
+		connect.WithSchema(vaultUseServiceMethods.ByName("SignOpenPGP")),
+		connect.WithHandlerOptions(opts...),
+	)
+	vaultUseServiceSignNitroEIFHandler := connect.NewUnaryHandler(
+		VaultUseServiceSignNitroEIFProcedure,
+		svc.SignNitroEIF,
+		connect.WithSchema(vaultUseServiceMethods.ByName("SignNitroEIF")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/splitsecure.vaultuse.v1.VaultUseService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VaultUseServiceDeleteProcedure:
@@ -219,6 +265,10 @@ func NewVaultUseServiceHandler(svc VaultUseServiceHandler, opts ...connect.Handl
 			vaultUseServiceCreateConnectedAppHandler.ServeHTTP(w, r)
 		case VaultUseServiceCreateWIFAuthorityProcedure:
 			vaultUseServiceCreateWIFAuthorityHandler.ServeHTTP(w, r)
+		case VaultUseServiceSignOpenPGPProcedure:
+			vaultUseServiceSignOpenPGPHandler.ServeHTTP(w, r)
+		case VaultUseServiceSignNitroEIFProcedure:
+			vaultUseServiceSignNitroEIFHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -250,4 +300,12 @@ func (UnimplementedVaultUseServiceHandler) CreateConnectedApp(context.Context, *
 
 func (UnimplementedVaultUseServiceHandler) CreateWIFAuthority(context.Context, *connect.Request[v1.CreateWIFAuthorityRequest]) (*connect.Response[v1.CreateWIFAuthorityResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultuse.v1.VaultUseService.CreateWIFAuthority is not implemented"))
+}
+
+func (UnimplementedVaultUseServiceHandler) SignOpenPGP(context.Context, *connect.Request[v1.SignOpenPGPRequest]) (*connect.Response[v1.SignOpenPGPResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultuse.v1.VaultUseService.SignOpenPGP is not implemented"))
+}
+
+func (UnimplementedVaultUseServiceHandler) SignNitroEIF(context.Context, *connect.Request[v1.SignNitroEIFRequest]) (*connect.Response[v1.SignNitroEIFResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("splitsecure.vaultuse.v1.VaultUseService.SignNitroEIF is not implemented"))
 }
