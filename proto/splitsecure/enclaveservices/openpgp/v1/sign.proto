@@ -1,0 +1,20 @@
+syntax = "proto3";
+package splitsecure.enclaveservices.openpgp.v1;
+
+// SignParams asks an openpgp-key record's primary key for one detached
+// signature over a document.
+message SignParams {
+  // The record's primary key id.
+  bytes key_id = 1;
+
+  bytes document = 2;
+
+  // 0x00 for a binary document, 0x01 for a canonical text document.
+  uint32 sig_type = 3;
+}
+
+// SignResult carries one detached OpenPGP signature packet, ready to write
+// as a binary .sig file or to armor.
+message SignResult {
+  bytes signature_packet = 1;
+}

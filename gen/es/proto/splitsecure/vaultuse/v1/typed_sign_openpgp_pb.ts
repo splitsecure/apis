@@ -87,8 +87,8 @@ export const SignOpenPGPRequest_BaseSchema: GenMessage<SignOpenPGPRequest_Base> 
   messageDesc(file_splitsecure_vaultuse_v1_typed_sign_openpgp, 0, 0);
 
 /**
- * SignOpenPGPResponse returns the signature packet, in the clear, in the
- * result's clear_value.
+ * SignOpenPGPResponse returns, in the result's clear_value, an encoded
+ * splitsecure.enclaveservices.openpgp.v1.SignResult.
  *
  * @generated from message splitsecure.vaultuse.v1.SignOpenPGPResponse
  */

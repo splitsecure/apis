@@ -76,8 +76,8 @@ func (x *SignNitroEIFRequest) GetBase() *SignNitroEIFRequest_Base {
 	return nil
 }
 
-// SignNitroEIFResponse returns the signature, in the clear, in the result's
-// clear_value.
+// SignNitroEIFResponse returns, in the result's clear_value, an encoded
+// message whose field 1 holds the signature bytes.
 type SignNitroEIFResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Outcome       *ReleaseOutcome        `protobuf:"bytes,1,opt,name=outcome,proto3" json:"outcome,omitempty"`
