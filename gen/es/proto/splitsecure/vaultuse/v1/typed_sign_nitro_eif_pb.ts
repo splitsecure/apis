@@ -81,8 +81,8 @@ export const SignNitroEIFRequest_BaseSchema: GenMessage<SignNitroEIFRequest_Base
   messageDesc(file_splitsecure_vaultuse_v1_typed_sign_nitro_eif, 0, 0);
 
 /**
- * SignNitroEIFResponse returns the signature, in the clear, in the result's
- * clear_value.
+ * SignNitroEIFResponse returns, in the result's clear_value, an encoded
+ * message whose field 1 holds the signature bytes.
  *
  * @generated from message splitsecure.vaultuse.v1.SignNitroEIFResponse
  */

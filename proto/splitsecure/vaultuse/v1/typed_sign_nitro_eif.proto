@@ -25,8 +25,8 @@ message SignNitroEIFRequest {
   }
 }
 
-// SignNitroEIFResponse returns the signature, in the clear, in the result's
-// clear_value.
+// SignNitroEIFResponse returns, in the result's clear_value, an encoded
+// message whose field 1 holds the signature bytes.
 message SignNitroEIFResponse {
   ReleaseOutcome outcome = 1;
 }

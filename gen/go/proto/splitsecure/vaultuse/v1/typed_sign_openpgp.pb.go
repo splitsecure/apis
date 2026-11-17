@@ -76,8 +76,8 @@ func (x *SignOpenPGPRequest) GetBase() *SignOpenPGPRequest_Base {
 	return nil
 }
 
-// SignOpenPGPResponse returns the signature packet, in the clear, in the
-// result's clear_value.
+// SignOpenPGPResponse returns, in the result's clear_value, an encoded
+// splitsecure.enclaveservices.openpgp.v1.SignResult.
 type SignOpenPGPResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Outcome       *ReleaseOutcome        `protobuf:"bytes,1,opt,name=outcome,proto3" json:"outcome,omitempty"`
